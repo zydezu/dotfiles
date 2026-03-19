@@ -41,6 +41,7 @@ tooltip {
 #clock,
 #upower,
 #network,
+#bluetooth,
 #tray,
 #cava,
 #custom-power,
@@ -198,6 +199,11 @@ tooltip {
 
 #cava {
     margin-left: 4px;
+}
+
+#bluetooth {
+    margin-right: 4px;
+    padding: 0px 6px;
 }
 
 #clock {
