@@ -11,13 +11,23 @@ input_path = "~/.config/matugen/templates/waybar.css"
 output_path = "~/.config/mango/waybar/colors.css"
 post_hook = "pkill -SIGUSR2 waybar"
 
+[templates.btop]
+input_path = "~/.config/matugen/templates/btop.theme"
+output_path = '~/.config/btop/themes/matugen.theme'
+post_hook = 'pkill -USR2 btop || true'
+
 [templates.alacritty]
 input_path = "~/.config/matugen/templates/alacritty.toml"
 output_path = "~/.config/alacritty/colors.toml"
 
+[templates.equibop]
+input_path = '~/.config/matugen/templates/midnight-discord.css'
+output_path = '~/.config/equibop/themes/midnight-discord.css'
+
 [templates.gtk3]
 input_path = "~/.config/matugen/templates/gtk-colors.css"
 output_path = "~/.config/gtk-3.0/colors.css"
+post_hook = 'gsettings set org.gnome.desktop.interface gtk-theme ""; gsettings set org.gnome.desktop.interface gtk-theme adw-gtk3-{{mode}}'
 
 [templates.gtk4]
 input_path = "~/.config/matugen/templates/gtk-colors.css"

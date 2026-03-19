@@ -21,20 +21,25 @@
 
   "modules-right": [
     "tray",
-    //"power-profiles-daemon",
+    "group/system",
     "network",
+    "group/audio",
     "bluetooth",
-    "group/hardware",
-    //"upower",
     "clock",
     "custom/power"
   ],
 
-  "group/hardware": {
+  "group/audio": {
     "orientation": "horizontal",
     "modules": [
       "pulseaudio",
-      "pulseaudio#microphone",
+      "pulseaudio#microphone"
+    ]
+  },
+
+  "group/system": {
+    "orientation": "horizontal",
+    "modules": [
       "cpu",
       "memory",
       "backlight"
@@ -44,7 +49,6 @@
   "dwl/tags": {
     "num-tags": 9,
     "hide-vacant": true
-    // "tag-labels": ["一", "二", "三", "四", "五", "六", "七", "八", "九"]
   },
 
   "dwl/window": {
@@ -52,7 +56,9 @@
     "max-length": 35,
     "ellipsis": true,
     "tooltip": true,
-    "tooltip-format": "{title}"  
+    "tooltip-format": "{title}",
+    "on-click": "grim -g \"$(slurp)\" - | wl-copy || true",
+    "on-click-right": "grim -g \"$(slurp)\" - | swappy -f - || true"
   },
 
   "cpu": {
@@ -110,16 +116,14 @@
   "clock": {
     "format": "{:%H:%M %d/%m/%Y} ",
     "format-alt": "{:%A %b %d} 󰃭",
-    "tooltip-format": "{:%Y}",
+    "tooltip-format": "{calendar}",
     "calendar": {
       "mode": "year",
       "mode-mon-col": 3,
-      "weeks-pos": "right",
       "on-scroll": 1,
       "format": {
         "months": "<span color='#ffead3'><b>{}</b></span>",
         "days": "<span color='#ecc6d9'><b>{}</b></span>",
-        "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
         "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
         "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
       }
@@ -127,20 +131,20 @@
   },
 
   "bluetooth": {
-    "format": "󰂯",
-    "format-disabled": "󰂲", 
+    "format": "󰂯 On",
+    "format-disabled": "󰂲 Off", 
     "format-connected": "󰂱 Connected",
     "format-connected-battery": "󰂱 Connected ({device_battery_percentage}%)",
     "tooltip-format": "{controller_alias}\t{controller_address}",
     "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-    "on-click": "alacritty -e bluetui",
+    "on-click": "alacritty -e bluetui"
   },
 
   "pulseaudio": {
     "format": "{icon} {volume}%",
     "tooltip": false,
-    "format-muted": " Muted",
+    "format-muted": "  ",
     "format-bluetooth": " {volume}%",
     "format-bluetooth-muted": " Muted",
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
@@ -163,7 +167,7 @@
     "format": "{format_source}",
     "format-source": " {volume}%",
     "tooltip": false,
-    "format-source-muted": " Muted",
+    "format-source-muted": " ",
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
     "on-scroll-up": "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SOURCE@ 2%+",
     "on-scroll-down": "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SOURCE@ 2%-",

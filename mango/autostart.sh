@@ -5,18 +5,20 @@ WALLPAPER="/home/zy/Pictures/archive/wallpapers/FlowerMoonV_1920x1080.png"
 LOCK_ARGS="--clock \
 --effect-blur 10x6 \
 --effect-scale 0.5 \
---timestr "%H:%M" \
---datestr "%d/%m/%Y"
+--timestr \"%H:%M\" \
+--datestr \"%d/%m/%Y\""
 
 LOCK_CMD="swaylock -f -c 000000 --image \"$WALLPAPER\" $LOCK_ARGS"
 
 swaybg -i "$WALLPAPER" &
 
 fc-cache -f &
-gtk-update-icon-cache -q &
+nautilus &
 
 wl-clip-persist --clipboard regular &
 gnome-keyring-daemon --start --components=secrets,ssh,pkcs11 &
+
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 /usr/lib/xdg-desktop-portal-wlr &
 waybar -c ~/.config/mango/waybar/config.jsonc -s ~/.config/mango/waybar/style.css &
 
