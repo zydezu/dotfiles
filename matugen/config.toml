@@ -1,0 +1,38 @@
+[config]
+version_check = false
+
+[templates.mango]
+input_path = '~/.config/matugen/templates/mango.conf'
+output_path = '~/.config/mango/mango-colors.conf'
+post_hook = 'mmsg -d reload_config'
+
+[templates.waybar]
+input_path = "~/.config/matugen/templates/waybar.css"
+output_path = "~/.config/mango/waybar/colors.css"
+post_hook = "pkill -SIGUSR2 waybar"
+
+[templates.alacritty]
+input_path = "~/.config/matugen/templates/alacritty.toml"
+output_path = "~/.config/alacritty/colors.toml"
+
+[templates.gtk3]
+input_path = "~/.config/matugen/templates/gtk-colors.css"
+output_path = "~/.config/gtk-3.0/colors.css"
+
+[templates.gtk4]
+input_path = "~/.config/matugen/templates/gtk-colors.css"
+output_path = "~/.config/gtk-4.0/colors.css"
+
+[templates.rofi]
+input_path = "~/.config/matugen/templates/rofi.rasi"
+output_path = "~/.config/rofi/shared/colors.rasi"
+post_hook = "pkill -f rofi"
+
+[templates.neovim]
+input_path = "~/.config/matugen/templates/neovim.lua"
+output_path = "~/.config/nvim/lua/plugins/matugen-colors.lua"
+
+[templates.dunst]
+input_path = "~/.config/matugen/templates/dunstrc"
+output_path = "~/.config/dunst/dunstrc.d/colors.conf"
+post_hook = "dunstctl reload"

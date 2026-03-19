@@ -1,3 +1,6 @@
 [window.dimensions]
 columns = 150
 lines = 35
+
+[general]
+import = ["colors.toml"]
