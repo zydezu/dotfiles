@@ -1,0 +1,230 @@
+{
+  "output": "DP-2",
+  "layer": "top",
+  "position": "top",
+  "exclusive": true,
+  "passthrough": false,
+  "gtk-layer-shell": true,
+  "ipc": false,
+  "reload_style_on_change": true,
+  "height": 35,
+
+  "modules-left": [
+    "dwl/tags",
+    "wlr/taskbar",
+    "dwl/window"
+  ],
+
+  "modules-center": [
+    "mpris"
+  ],
+
+  "modules-right": [
+    "tray",
+    "power-profiles-daemon",
+    "network",
+    //"bluetooth",
+    "group/hardware",
+    //"upower",
+    "clock",
+    "custom/power"
+  ],
+
+  "group/hardware": {
+    "orientation": "horizontal",
+    "modules": [
+      "pulseaudio",
+      "pulseaudio#microphone",
+      "cpu",
+      "memory",
+      "backlight"
+    ]
+  },
+
+  "dwl/tags": {
+    "num-tags": 9,
+    "hide-vacant": true
+    // "tag-labels": ["一", "二", "三", "四", "五", "六", "七", "八", "九"]
+  },
+
+  "dwl/window": {
+    "format": "{title}",
+    "max-length": 35,
+    "ellipsis": true,
+    "tooltip": true,
+    "tooltip-format": "{title}"  
+  },
+
+  "cpu": {
+    "interval": 2,
+    "format": " {load}%"
+  },
+
+  "memory": {
+    "interval": 2,
+    "format": " {used:0.1f}G",
+    "tooltip": true,
+    "tooltip-format": "RAM: {used:0.1f}G/{total:0.1f}G\nSwap: {swapUsed:0.1f}G/{swapTotal:0.1f}G"
+  },
+
+  "wlr/taskbar": {
+    "format": "{icon}",
+    "icon-size": 22,
+    "all-outputs": false,
+    "tooltip-format": "{title}",
+    "markup": true,
+    "on-click": "activate",
+    "on-click-right": "close",
+    "ignore-list": [
+      "Rofi",
+      "wofi"
+    ]
+  },
+
+  "backlight": {
+    "interval": 2,
+    "format": "{icon} {percent}%",
+    "format-icons": ["󰖔", "󰖨"],
+    "on-scroll-up": "brightnessctl set +1%",
+    "on-scroll-down": "brightnessctl set 1%-",
+    "smooth-scrolling-threshold": 1
+  },
+
+  "tray": {
+    "interval": 1,
+    "icon-size": 21,
+    "spacing": 10
+  },
+
+  "network": {
+    "interval": 2,
+    "format-wifi": "󰖩  {essid} ({signalStrength}%)",
+    "format-linked": " No IP ({ifname})",
+    "format-disconnected": " Disconnected",
+    "tooltip-format": "{ifname} {ipaddr}/{cidr} via {gwaddr}",
+    "format": "↓{bandwidthDownBytes} ↑{bandwidthUpBytes}",
+    "format-alt": "↓{bandwidthDownBits} ↑{bandwidthUpBits}"
+  },
+
+  "clock": {
+    "format": "{:%H:%M %d/%m/%Y} ",
+    "format-alt": "{:%A %b %d} 󰃭",
+    "tooltip-format": "{:%Y}",
+    "calendar": {
+      "mode": "year",
+      "mode-mon-col": 3,
+      "weeks-pos": "right",
+      "on-scroll": 1,
+      "format": {
+        "months": "<span color='#ffead3'><b>{}</b></span>",
+        "days": "<span color='#ecc6d9'><b>{}</b></span>",
+        "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+        "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+        "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+      }
+    }
+  },
+
+  "bluetooth": {
+    "format": "󰂯",
+    "format-disabled": "󰂲", 
+    "format-connected": "󰂱 {num_connections}",
+    "format-connected-battery": "󰂱 {num_connections} ({device_battery_percentage}%)",
+    "tooltip-format": "{controller_alias}\t{controller_address}",
+    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+    "on-click": "bluetui",
+  },
+
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "tooltip": false,
+    "format-muted": " Muted",
+    "format-bluetooth": " {volume}%",
+    "format-bluetooth-muted": " Muted",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "on-scroll-up": "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 2%+",
+    "on-scroll-down": "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 2%-",
+    "scroll-step": 5,
+    "format-icons": {
+      "headphone": "󰋋",
+      "hands-free": "󰋋",
+      "headset": "󰋋",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["", "", " "]
+    },
+    "ignored-sinks": ["Easy Effects Sink"]
+  },
+
+  "pulseaudio#microphone": {
+    "format": "{format_source}",
+    "format-source": " {volume}%",
+    "tooltip": false,
+    "format-source-muted": " Muted",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+    "on-scroll-up": "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SOURCE@ 2%+",
+    "on-scroll-down": "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SOURCE@ 2%-",
+    "scroll-step": 5
+  },
+
+  "custom/power": {
+    "format": "",
+    "tooltip": false,
+    "on-click": "rofi -show power-menu -modi power-menu:rofi-power-menu"
+  },
+
+  "power-profiles-daemon": {
+    "format": "{icon}",
+    "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+    "tooltip": true,
+    "format-icons": {
+      "default": "",
+      "performance": "PERF",
+      "balanced": "BAL",
+      "power-saver": "LOW"
+    }
+  },
+
+  "mpris": {
+    "format": "{player_icon} {title} - {artist} ({position}/{length})",
+    "format-paused": "{status_icon} {title} - {artist} ({position}/{length})",
+    "format-stopped": "",
+    "interval": 0.5,
+    "max-length": 60,
+    "ellipsis": true,
+    "tooltip": true,
+    "tooltip-format": "{player}\n{title} - {album}\n{artist}\n{position}/{length}",
+    "playerctld": false,
+    "player-icons": {
+      "default": "",
+      "spotify": "",
+      "firefox": "",
+      "mpv": ""
+    },
+    "status-icons": {
+      "paused": "",
+      "playing": ""
+    },
+    "ignored-players": [
+      "chromium",
+      "chromium.instance",
+      "firefox",
+      "firefox.instance"
+    ],
+    "on-click": "playerctl play-pause",
+    "on-click-right": "playerctl next",
+    "on-click-middle": "playerctl previous",
+    "on-scroll-up": "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 2%+",
+    "on-scroll-down": "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 2%-"
+  },
+
+  "upower": {
+    "icon-size": 18,
+    "hide-if-empty": true,
+    "tooltip": true,
+    "tooltip-spacing": 20,
+    "format": "{percentage}"
+  }
+}

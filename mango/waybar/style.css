@@ -1,0 +1,231 @@
+* {
+    border: none;
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-weight: 700;
+    font-size: 14px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+@define-color bg_panel rgba(19, 19, 19, 0.9);
+@define-color bg_base transparent;
+@define-color border_color #ffffff;
+@define-color text_main #ffffff;
+@define-color text_muted #ffffff;
+@define-color text_dim #ffffff;
+@define-color text_accent #ffffff;
+@define-color text_dark #353535;
+@define-color alert_urgent #ffb4ab;
+@define-color alert_minimized #93000a;
+@define-color alert_critical #ffdad6;
+
+tooltip {
+    background: @bg_panel;
+    border-radius: 0px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: @border_color;
+    color: @text_main;
+}
+
+#window,
+#taskbar,
+#tags,
+#workspaces,
+#mpris,
+#clock,
+#upower,
+#network,
+#tray,
+#cava,
+#custom-power,
+#power-profiles-daemon,
+#hardware {
+    background: @bg_panel;
+    color: @text_main;
+    padding: 0px 8px;
+    margin: 0px;
+    margin-top: 1px;
+    margin-bottom: 0px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: @border_color;
+    border-radius: 0px;
+}
+
+#workspaces button,
+#tags button {
+    border: none;
+    background: none;
+    box-shadow: inherit;
+    text-shadow: inherit;
+    padding: 1px 3px;
+}
+
+#workspaces button:hover,
+#tags button:hover {
+    color: @text_main;
+}
+
+
+#workspaces button.active,
+#tags button.focused,
+#taskbar button.active {
+    background-color: @text_main;
+}
+
+#workspaces button.urgent,
+#tags button.urgent {
+    background-color: @alert_urgent;
+}
+
+#taskbar button.urgent {
+    background-color: @alert_critical;
+}
+
+#taskbar button.minimized {
+    background-color: @alert_minimized;
+}
+
+#taskbar button.active,
+#taskbar button.urgent,
+#taskbar button.minimized {
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+#hardware {
+    padding: 0px;
+    margin-right: 4px;
+}
+
+#hardware>widget>* {
+    padding: 0px 8px;
+}
+
+#workspaces {
+    margin-left: 4px;
+    padding-left: 10px;
+    padding-right: 6px;
+}
+
+#workspaces button {
+    color: @text_main;
+    margin-right: 2px;
+    margin-left: 2px;
+}
+
+#workspaces button.hidden {
+    color: @text_main;
+    background-color: transparent;
+}
+
+#workspaces button.visible {
+    color: @text_main;
+}
+
+#tags {
+    margin-left: 5px;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+#taskbar button {
+    color: @text_main;
+    margin: 2px;
+    padding: 0px 3px;
+    border-radius: 0px;
+    background: transparent;
+}
+
+#tags button:not(.occupied):not(.focused):not(.overview):not(.urgent) {
+    font-size: 0;
+    min-width: 0;
+    min-height: 0;
+    margin: -17px;
+    padding: 0;
+    color: transparent;
+    background-color: transparent;
+}
+
+#tags button.occupied,
+#tags button.overview {
+    color: @text_main;
+}
+
+#tray {
+    margin-right: 4px;
+    margin-left: 4px;
+    padding: 0px 9px 0px 9px;
+}
+
+#power-profiles-daemon,
+#network {
+    margin-right: 4px;
+    padding: 0px 8px 0px 9px;
+}
+
+#window {
+    margin-right: 10px;
+}
+
+#taskbar {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#taskbar.empty {
+    margin: 0px;
+    padding-left: 10px;
+    padding-right: 0px;
+    border-color: transparent;
+    border: none;
+    background-color: transparent;
+}
+
+#taskbar button {
+    margin-right: 3px;
+}
+
+#mpris {
+    margin-left: 4px;
+}
+
+#cava {
+    margin-left: 4px;
+}
+
+#clock {
+    border-right: 2px;
+}
+
+#upower {
+    margin-right: 4px;
+}
+
+#custom-power {
+    border-left: 0px;
+    margin-left: 0px;
+    margin-right: 5px;
+    padding-right: 14px;
+}
+
+#workspaces button.active,
+#workspaces button.urgent,
+#tags button.focused,
+#tags button.urgent,
+#taskbar button.active,
+#taskbar button.urgent,
+#taskbar button.minimized {
+    color: @text_dark;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    border-radius: 0px;
+}
