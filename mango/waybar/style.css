@@ -2,7 +2,7 @@
 
 * {
     border: none;
-    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-family: "JetBrainsMono Nerd Font", "Hiragino Kaku Gothic Pro W3", monospace;
     font-weight: 500;
     font-size: 14px;
     min-height: 0;
@@ -23,6 +23,11 @@ tooltip {
     color: @text_main;
 }
 
+menu {
+    background: @bg_panel;
+    color: @text_main;
+}
+
 #window,
 #taskbar,
 #tags,
@@ -36,6 +41,7 @@ tooltip {
 #cava,
 #system,
 #audio,
+#custom-notifications,
 #custom-power,
 #power-profiles-daemon,
 #hardware {
@@ -202,6 +208,12 @@ tooltip {
 }
 
 #upower {
+    margin-right: 4px;
+}
+
+#custom-notifications {
+    padding-left: 8px;
+    padding-right: 12px;
     margin-right: 4px;
 }
 
