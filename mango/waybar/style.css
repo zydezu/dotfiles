@@ -24,8 +24,26 @@ tooltip {
 }
 
 menu {
-    background: @bg_panel;
-    color: @text_main;
+   background: @bg_panel; 
+   color: @text_main;
+   border: 1px solid @accent;
+   border-radius: 0;
+}
+
+menu menuitem:hover {
+    background: @border_color;
+    color: @text_on_accent;
+}
+
+menu separator {
+    background: @border_color;
+    margin: 4px 0;
+    min-height: 1px;
+}
+
+menu menuitem:disabled {
+    opacity: 0.5;
+    color: @text_disabled;
 }
 
 #window,
