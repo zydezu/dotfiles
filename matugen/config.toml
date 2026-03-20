@@ -50,6 +50,10 @@ output_path = '~/.config/Code/User/settings.json'
 input_path = "~/.config/matugen/templates/neovim.lua"
 output_path = "~/.config/nvim/lua/plugins/matugen-colors.lua"
 
+[templates.zed]
+input_path = '~/.config/matugen/templates/zed.json'
+output_path = '~/.config/zed/themes/matugen.json'
+
 [templates.gtk3]
 input_path = "~/.config/matugen/templates/gtk-colors.css"
 output_path = "~/.config/gtk-3.0/colors.css"
