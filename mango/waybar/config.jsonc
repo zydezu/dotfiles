@@ -64,7 +64,8 @@
 
   "cpu": {
     "interval": 2,
-    "format": " {usage}%"
+    "format": " {usage}%",
+    "on-click": "alacritty --title 'btop' -e btop"
   },
 
   "memory": {
@@ -110,8 +111,8 @@
     "format-linked": " No IP ({ifname})",
     "format-disconnected": " Disconnected",
     "tooltip-format": "{ifname} {ipaddr}/{cidr} via {gwaddr}",
-    "format": "↓{bandwidthDownBytes} ↑{bandwidthUpBytes}",
-    "format-alt": "↓{bandwidthDownBits} ↑{bandwidthUpBits}"
+    "format": "󰈀 ↓{bandwidthDownBits} ↑{bandwidthUpBits}",
+    "format-alt": "󰈀 ↓{bandwidthDownBytes} ↑{bandwidthUpBytes}"
   },
 
   "clock": {
@@ -223,6 +224,7 @@
     "ellipsis": true,
     "tooltip": true,
     "tooltip-format": "{player}\n{title} - {album}\n{artist}\n{position}/{length}",
+    "player": "strawberry",
     "playerctld": false,
     "player-icons": {
       "default": "",

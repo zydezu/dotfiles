@@ -13,7 +13,7 @@ LOCK_CMD="swaylock -f -c 000000 --image \"$WALLPAPER\" $LOCK_ARGS"
 swaybg -i "$WALLPAPER" &
 
 fc-cache -f &
-nautilus &
+nautilus --gapplication-service &
 
 wl-clip-persist --clipboard regular &
 gnome-keyring-daemon --start --components=secrets,ssh,pkcs11 &
@@ -37,5 +37,5 @@ done
 
 swayidle -w \
   lock "$LOCK_CMD" \
-  timeout 300 "$LOCK_CMD" \
+  timeout 3000 "$LOCK_CMD" \
   before-sleep "$LOCK_CMD" &
