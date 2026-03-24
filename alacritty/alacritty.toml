@@ -9,5 +9,6 @@ import = ["colors.toml"]
 [keyboard]
 bindings = [
     { key = "C", mods = "Control", action = "Copy"},
-    { key = "V", mods = "Control", action = "Paste"}
+    { key = "V", mods = "Control", action = "Paste"},
+    { key = "C", mods = "Control|Shift", chars = "\u0003"}
 ]
