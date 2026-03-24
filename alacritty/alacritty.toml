@@ -4,3 +4,10 @@ lines = 35
 
 [general]
 import = ["colors.toml"]
+
+# Copy
+[keyboard]
+bindings = [
+    { key = "C", mods = "Control", action = "Copy"},
+    { key = "V", mods = "Control", action = "Paste"}
+]

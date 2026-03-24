@@ -15,13 +15,18 @@ swaybg -i "$WALLPAPER" &
 fc-cache -f &
 nautilus --gapplication-service &
 
-wl-clip-persist --clipboard regular &
-gnome-keyring-daemon --start --components=secrets,ssh,pkcs11 &
-
-/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 /usr/lib/xdg-desktop-portal-wlr &
+
+# Keep clipboard content after app closes
+wl-clip-persist --clipboard regular --reconnect-tries 0 &
+
+# Watch clipboard and store history
+wl-paste --type text --watch cliphist store &
+
+# load waybar
 waybar -c ~/.config/mango/waybar/config.jsonc -s ~/.config/mango/waybar/style.css &
 
+# load autostart programs
 for desktop_file in ~/.config/autostart/*.desktop; do
     if [ -f "$desktop_file" ]; then
         # Extract the Exec line
