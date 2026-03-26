@@ -31,10 +31,10 @@ for desktop_file in ~/.config/autostart/*.desktop; do
     if [ -f "$desktop_file" ]; then
         # Extract the Exec line
         exec_line=$(grep -E "^Exec=" "$desktop_file" | head -1 | sed 's/^Exec=//')
-        
+
         # Remove field codes like %U, %F, etc. (simplified)
         clean_exec=$(echo "$exec_line" | sed 's/%[a-zA-Z]//g')
-        
+
         # Execute the command in background
         eval "$clean_exec" &
     fi
@@ -42,5 +42,5 @@ done
 
 swayidle -w \
   lock "$LOCK_CMD" \
-  timeout 3000 "$LOCK_CMD" \
+  timeout 600 "$LOCK_CMD" \
   before-sleep "$LOCK_CMD" &
