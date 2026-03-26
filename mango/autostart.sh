@@ -15,6 +15,13 @@ swaybg -i "$WALLPAPER" &
 fc-cache -f &
 nautilus --gapplication-service &
 
+# Start ssh-agent if not already running
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+    eval "$(ssh-agent -s)"
+fi
+eval $(gnome-keyring-daemon --start --components=ssh)
+export SSH_AUTH_SOCK
+
 /usr/lib/xdg-desktop-portal-wlr &
 
 # Keep clipboard content after app closes
