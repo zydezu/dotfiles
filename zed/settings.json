@@ -1,0 +1,86 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "languages": {
+    "JavaScript": {
+      "tab_size": 4,
+    },
+  },
+  "diagnostics": {
+    "inline": {
+      "enabled": false,
+    },
+  },
+  "prettier": {
+    "allowed": false,
+  },
+  "tab_bar": {
+    "show": true,
+  },
+  "tabs": {
+    "file_icons": false,
+    "git_status": true,
+  },
+  "title_bar": {
+    "show_menus": false,
+    "show_branch_icon": false,
+  },
+  "project_panel": {
+    "hide_hidden": false,
+    "hide_root": false,
+    "diagnostic_badges": false,
+    "bold_folder_labels": false,
+    "entry_spacing": "standard",
+  },
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false,
+  },
+  "session": {
+    "trust_all_worktrees": true,
+  },
+  "toolbar": {
+    "code_actions": false,
+  },
+  "minimap": {
+    "show": "never",
+  },
+  "sticky_scroll": {
+    "enabled": true,
+  },
+  "agent_servers": {
+    "opencode": {
+      "type": "registry",
+    },
+  },
+  "icon_theme": "Catppuccin Frappé",
+  "git_panel": {
+    "collapse_untracked_diff": false,
+    "tree_view": true,
+    "sort_by_path": false,
+    "dock": "left",
+  },
+  "git": {
+    "inline_blame": {
+      "show_commit_summary": true,
+    },
+  },
+  "autosave": "off",
+  "agent_ui_font_size": 16.0,
+  "ui_font_weight": 300.0,
+  "ui_font_family": "Hiragino Kaku Gothic Pro",
+  "buffer_font_family": "JetBrainsMono Nerd Font",
+  "ui_font_size": 16.0,
+  "buffer_font_size": 15,
+  "theme": {
+    "mode": "system",
+    "light": "Matugen Light",
+    "dark": "Matugen Dark",
+  },
+}
