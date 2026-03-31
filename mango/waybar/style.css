@@ -3,7 +3,6 @@
 * {
     border: none;
     font-family: "JetBrainsMono Nerd Font", "Hiragino Kaku Gothic Pro W3", monospace;
-    font-weight: 500;
     font-size: 14px;
     min-height: 0;
 }
@@ -24,10 +23,10 @@ tooltip {
 }
 
 menu {
-   background: @bg_panel; 
-   color: @text_main;
-   border: 1px solid @accent;
-   border-radius: 0;
+    background: @bg_panel;
+    color: @text_main;
+    border: 1px solid @accent;
+    border-radius: 0;
 }
 
 menu menuitem:hover {
@@ -115,12 +114,14 @@ menu menuitem:disabled {
     padding-right: 3px;
 }
 
-#system, #audio {
+#system,
+#audio {
     padding: 0px;
     margin-right: 4px;
 }
 
-#system>widget>*, #audio>widget>* {
+#system>widget>*,
+#audio>widget>* {
     padding: 0px 8px;
 }
 

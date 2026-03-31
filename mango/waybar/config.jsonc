@@ -8,17 +8,14 @@
   "ipc": false,
   "reload_style_on_change": true,
   "height": 35,
-
   "modules-left": [
     "dwl/tags",
     "wlr/taskbar",
     "dwl/window"
   ],
-
   "modules-center": [
     "mpris"
   ],
-
   "modules-right": [
     "tray",
     "group/system",
@@ -29,7 +26,6 @@
     "clock",
     "custom/power"
   ],
-
   "group/audio": {
     "orientation": "horizontal",
     "modules": [
@@ -37,7 +33,6 @@
       "pulseaudio#microphone"
     ]
   },
-
   "group/system": {
     "orientation": "horizontal",
     "modules": [
@@ -46,12 +41,10 @@
       "backlight"
     ]
   },
-
   "dwl/tags": {
     "num-tags": 9,
     "hide-vacant": true
   },
-
   "dwl/window": {
     "format": "{title}",
     "max-length": 35,
@@ -61,13 +54,11 @@
     "on-click": "grim -g \"$(slurp)\" - | wl-copy || true",
     "on-click-right": "grim -g \"$(slurp)\" - | swappy -f - || true"
   },
-
   "cpu": {
     "interval": 2,
     "format": " {usage}%",
     "on-click": "alacritty --title 'btop' -e btop"
   },
-
   "memory": {
     "interval": 2,
     "format": " {used:0.1f}G",
@@ -75,7 +66,6 @@
     "tooltip": true,
     "tooltip-format": "RAM: {used:0.1f}G/{total:0.1f}G\nSwap: {swapUsed:0.1f}G/{swapTotal:0.1f}G"
   },
-
   "wlr/taskbar": {
     "format": "{icon}",
     "icon-size": 22,
@@ -89,22 +79,22 @@
       "wofi"
     ]
   },
-
   "backlight": {
     "interval": 2,
     "format": "{icon} {percent}%",
-    "format-icons": ["󰖔", "󰖨"],
+    "format-icons": [
+      "󰖔",
+      "󰖨"
+    ],
     "on-scroll-up": "brightnessctl set +1%",
     "on-scroll-down": "brightnessctl set 1%-",
     "smooth-scrolling-threshold": 1
   },
-
   "tray": {
     "interval": 1,
     "icon-size": 21,
     "spacing": 10
   },
-
   "network": {
     "interval": 2,
     "format-wifi": "󰖩  {essid} ({signalStrength}%)",
@@ -114,7 +104,6 @@
     "format": "󰈀 ↓{bandwidthDownBits} ↑{bandwidthUpBits}",
     "format-alt": "󰈀 ↓{bandwidthDownBytes} ↑{bandwidthUpBytes}"
   },
-
   "clock": {
     "format": "{:%H:%M %d/%m/%Y} ",
     "format-alt": "{:%A %b %d} 󰃭",
@@ -131,10 +120,9 @@
       }
     }
   },
-
   "bluetooth": {
     "format": "󰂯 On",
-    "format-disabled": "󰂲 Off", 
+    "format-disabled": "󰂲 Off",
     "format-connected": "󰂱 Connected",
     "format-connected-battery": "󰂱 Connected ({device_battery_percentage}%)",
     "tooltip-format": "{controller_alias}\t{controller_address}",
@@ -142,7 +130,6 @@
     "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
     "on-click": "alacritty --title 'bluetui' -e bluetui"
   },
-
   "pulseaudio": {
     "format": "{icon} {volume}%",
     "tooltip": false,
@@ -160,11 +147,16 @@
       "phone": "",
       "portable": "",
       "car": "",
-      "default": ["", "", " "]
+      "default": [
+        "",
+        "",
+        " "
+      ]
     },
-    "ignored-sinks": ["Easy Effects Sink"]
+    "ignored-sinks": [
+      "Easy Effects Sink"
+    ]
   },
-
   "pulseaudio#microphone": {
     "format": "{format_source}",
     "format-source": " {volume}%",
@@ -175,19 +167,18 @@
     "on-scroll-down": "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SOURCE@ 2%-",
     "scroll-step": 5
   },
-
   "custom/notifications": {
     "tooltip": false,
     "format": "{icon}",
     "format-icons": {
-        "notification": "󱅫",
-        "none": "󰂚",
-        "dnd-notification": "󰂛",
-        "dnd-none": "󰂛",
-        "inhibited-notification": "󱅫",
-        "inhibited-none": "󰂚",
-        "dnd-inhibited-notification": "󰂛",
-        "dnd-inhibited-none": "󰂛"
+      "notification": "󱅫",
+      "none": "󰂚",
+      "dnd-notification": "󰂛",
+      "dnd-none": "󰂛",
+      "inhibited-notification": "󱅫",
+      "inhibited-none": "󰂚",
+      "dnd-inhibited-notification": "󰂛",
+      "dnd-inhibited-none": "󰂛"
     },
     "return-type": "json",
     "exec-if": "which swaync-client",
@@ -196,13 +187,11 @@
     "on-click-right": "swaync-client -d -sw",
     "escape": true
   },
-
   "custom/power": {
     "format": "",
     "tooltip": false,
     "on-click": "rofi -show power-menu -modi power-menu:rofi-power-menu"
   },
-
   "power-profiles-daemon": {
     "format": "{icon}",
     "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
@@ -214,7 +203,6 @@
       "power-saver": "LOW"
     }
   },
-
   "mpris": {
     "format": "{player_icon} {title} - {artist}",
     "format-paused": "{status_icon} {title} - {artist}",
@@ -248,7 +236,6 @@
     "on-scroll-up": "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 2%+",
     "on-scroll-down": "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 2%-"
   },
-
   "upower": {
     "icon-size": 18,
     "hide-if-empty": true,

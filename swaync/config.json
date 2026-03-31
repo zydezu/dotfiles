@@ -1,6 +1,43 @@
 {
   "$schema": "/etc/xdg/swaync/configSchema.json",
-  "ignore-gtk-theme": false,
   "control-center-preferred-output": "DP-2",
-  "fit-to-screen": true
+  "fit-to-screen": true,
+  "widgets": [
+    "mpris",
+    "title",
+    "notifications",
+    "buttons-grid"
+  ],
+  "notification-window-width": 400,
+  "notification-icon-size": 48,
+  "notification-body-image-height": 160,
+  "notification-body-image-width": 200,
+  "timeout": 4,
+  "timeout-low": 2,
+  "timeout-critical": 6,
+  "widget-config": {
+    "title": {
+      "text": "Notifications",
+      "clear-all-button": true,
+      "button-text": "Clear"
+    },
+    "mpris": {
+      "image-size": 96
+    },
+    "buttons-grid": {
+      "actions": [
+        {
+          "label": "󰂛",
+          "command": "swaync-client -d -sw",
+          "type": "toggle",
+          "tooltip": "DND"
+        },
+        {
+          "label": "⏻",
+          "command": "rofi -show power-menu -modi power-menu:rofi-power-menu",
+          "tooltip": "Shutdown Menu"
+        }
+      ]
+    }
+  }
 }
