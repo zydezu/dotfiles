@@ -1,5 +1,11 @@
+configuration {
+     show-icons: true;
+     kb-accept-custom: "";
+}
+
 @import "~/.config/rofi/shared/colors.rasi"
 
 * {
+     font: "JetBrainsMono Nerd Font 12";
      background-color: @primary-container;
 }

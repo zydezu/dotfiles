@@ -27,8 +27,7 @@
             "custom": {
               "name": "OpenCode",
               "command": {
-                "command": "opencode",
-                "args": ["acp"],
+                "command": "opencode"
               },
             },
           },

@@ -15,12 +15,6 @@ swaybg -i "$WALLPAPER" &
 fc-cache -f &
 nautilus --gapplication-service &
 
-# Start ssh-agent
-if [ -z "$SSH_AUTH_SOCK" ]; then
-    eval "$(ssh-agent -s)"
-    ssh-add ~/.ssh/id_ed25519
-fi
-
 /usr/lib/xdg-desktop-portal-wlr &
 
 # Watch clipboard and store history

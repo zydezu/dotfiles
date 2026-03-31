@@ -1,0 +1,6 @@
+@import "colors.css";
+
+.notification-group {
+  background-color: transparent;
+  outline: none;
+}
