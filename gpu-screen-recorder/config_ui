@@ -11,7 +11,7 @@ record.container mp4
 record.pause_unpause_hotkey 0 0
 record.record_options.advanced_view true
 record.record_options.application_audio_invert false
-record.record_options.audio_codec aac
+record.record_options.audio_codec opus
 record.record_options.audio_track_item false [add_audio_track]
 record.record_options.audio_track_item false device:default_output
 record.record_options.change_video_resolution false
