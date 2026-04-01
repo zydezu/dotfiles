@@ -1,6 +1,17 @@
 /* import theme modules */
 @import url("https://refact0r.github.io/system24/build/system24.css");
 
+@import url("https://raw.githubusercontent.com/Krammeth/css-snippets/refs/heads/main/CompactTabs.css");
+@import url("https://mwittrien.github.io/BetterDiscordAddons/Themes/EmojiReplace/base/Apple.css");
+
+/* revert the input/output dropdowns */
+[class*="buttons"] [role="switch"] {
+    border-radius: var(--radius-sm);
+    ~ button:not([aria-label="User Settings"]) {
+      display: none;
+    }
+}
+
 body {
     /* font options */
     --font: "Hiragino Kaku Gothic Pro W3";
@@ -82,8 +93,10 @@ rect {
     rx: 0 !important;
 }
 
-/* color options */
 :root {
+    --server-tabs: true;
+    --dms-tabs: true;
+    
     --colors: on;
 
     /* text colors */
