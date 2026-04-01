@@ -29,9 +29,9 @@ output_path = "~/.config/rofi/shared/colors.rasi"
 input_path = "~/.config/matugen/templates/alacritty.toml"
 output_path = "~/.config/alacritty/colors.toml"
 
-[templates.equibop]
+[templates.discord]
 input_path = '~/.config/matugen/templates/midnight-discord.css'
-output_path = '~/.config/equibop/themes/midnight-discord.css'
+output_path = '~/.config/Equicord/themes/midnight-discord.css'
 
 [templates.steam]
 input_path = '~/.config/matugen/templates/steam.css'
