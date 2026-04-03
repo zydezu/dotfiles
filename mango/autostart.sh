@@ -10,20 +10,33 @@ LOCK_ARGS="--clock \
 
 LOCK_CMD="swaylock -f -c 000000 --image \"$WALLPAPER\" $LOCK_ARGS"
 
-swaybg -i "$WALLPAPER" &
+# Run the desktop portal (URI/screenshare)
+/usr/lib/xdg-desktop-portal-wlr >/dev/null 2>&1 &
 
-fc-cache -f &
-nautilus --gapplication-service &
-
-/usr/lib/xdg-desktop-portal-wlr &
+fc-cache -f >/dev/null 2>&1 &
+nautilus --gapplication-service >/dev/null 2>&1 &
 
 # Watch clipboard and store history
-wl-clip-persist --clipboard regular --reconnect-tries 0 &
-wl-paste --type text --watch cliphist store &
-clipse -listen &
+wl-clip-persist --clipboard regular --reconnect-tries 0 >/dev/null 2>&1 &
+wl-paste --type text --watch cliphist store >/dev/null 2>&1 &
+clipse -listen >/dev/null 2>&1 &
 
-# load waybar
-waybar -c ~/.config/mango/waybar/config.jsonc -s ~/.config/mango/waybar/style.css &
+# top bar
+waybar -c ~/.config/mango/waybar/config.jsonc -s ~/.config/mango/waybar/style.css >/dev/null 2>&1 &
+
+# wallpaper
+swaybg -i "$WALLPAPER" >/dev/null 2>&1 &
+
+swayidle -w \
+  lock "$LOCK_CMD" \
+  timeout 600 "$LOCK_CMD" \
+  before-sleep "$LOCK_CMD" >/dev/null 2>&1 &
+
+# Permission authentication
+/usr/lib/xfce-polkit/xfce-polkit >/dev/null 2>&1 &
+
+# Inhibit locking by audio
+sway-audio-idle-inhibit >/dev/null 2>&1 &
 
 # load autostart programs
 for desktop_file in ~/.config/autostart/*.desktop; do
@@ -38,8 +51,3 @@ for desktop_file in ~/.config/autostart/*.desktop; do
         eval "$clean_exec" &
     fi
 done
-
-swayidle -w \
-  lock "$LOCK_CMD" \
-  timeout 600 "$LOCK_CMD" \
-  before-sleep "$LOCK_CMD" &
