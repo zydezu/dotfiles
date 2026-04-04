@@ -1,6 +1,6 @@
 #! /bin/bash
 # set wallpaper
-WALLPAPER="/home/zy/wallpaper.jpg"
+WALLPAPER="/home/zy/Pictures/archive/wallpapers/wallpaper.jpg"
 
 LOCK_ARGS="--clock \
 --effect-blur 10x6 \

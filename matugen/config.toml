@@ -46,6 +46,10 @@ output_path = '~/.config/Equicord/themes/midnight-discord.css'
 input_path = '~/.config/matugen/templates/steam.css'
 output_path = '~/.config/AdwSteamGtk/custom.css'
 
+[templates.prismlauncher]
+input_path = '~/.config/matugen/templates/prismlauncher.json'
+output_path = '~/.local/share/PrismLauncher/themes/Matugen/theme.json'
+
 [templates.opencode]
 input_path = '~/.config/matugen/templates/opencode.json'
 output_path = '~/.config/opencode/themes/matugen.json'
