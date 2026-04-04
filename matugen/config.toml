@@ -29,6 +29,15 @@ output_path = "~/.config/rofi/shared/colors.rasi"
 input_path = "~/.config/matugen/templates/alacritty.toml"
 output_path = "~/.config/alacritty/colors.toml"
 
+[templates.kitty]
+input_path = '~/.config/matugen/templates/kitty.conf'
+output_path = '~/.config/kitty/themes/Matugen.conf'
+post_hook = "kitty +kitten themes --reload-in=all Matugen"
+
+[templates.clipse]
+input_path = '~/.config/matugen/templates/clipse.json'
+output_path = '~/.config/clipse/custom_theme.json'
+
 [templates.discord]
 input_path = '~/.config/matugen/templates/midnight-discord.css'
 output_path = '~/.config/Equicord/themes/midnight-discord.css'
@@ -36,7 +45,6 @@ output_path = '~/.config/Equicord/themes/midnight-discord.css'
 [templates.steam]
 input_path = '~/.config/matugen/templates/steam.css'
 output_path = '~/.config/AdwSteamGtk/custom.css'
-post_hook =  'adwaita-steam-gtk -i'
 
 [templates.opencode]
 input_path = '~/.config/matugen/templates/opencode.json'
@@ -46,19 +54,15 @@ output_path = '~/.config/opencode/themes/matugen.json'
 input_path = '~/.config/matugen/templates/vscode.json'
 output_path = '~/.config/Code/User/settings.json'
 
-[templates.neovim]
-input_path = "~/.config/matugen/templates/neovim.lua"
-output_path = "~/.config/nvim/lua/plugins/matugen-colors.lua"
-
 [templates.zed]
 input_path = '~/.config/matugen/templates/zed.json'
 output_path = '~/.config/zed/themes/matugen.json'
 
 [templates.gtk3]
-input_path = "~/.config/matugen/templates/gtk-colors.css"
+input_path = "~/.config/matugen/templates/gtk.css"
 output_path = "~/.config/gtk-3.0/colors.css"
 post_hook = 'gsettings set org.gnome.desktop.interface gtk-theme ""; gsettings set org.gnome.desktop.interface gtk-theme adw-gtk3-{{mode}}'
 
 [templates.gtk4]
-input_path = "~/.config/matugen/templates/gtk-colors.css"
+input_path = "~/.config/matugen/templates/gtk.css"
 output_path = "~/.config/gtk-4.0/colors.css"

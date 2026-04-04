@@ -107,8 +107,8 @@ screenshot.save_screenshot_in_game_folder false
 screenshot.save_screenshot_to_clipboard false
 screenshot.save_screenshot_to_disk true
 screenshot.show_notifications false
-screenshot.take_screenshot_hotkey 102 0
-screenshot.take_screenshot_region_hotkey 102 4
+screenshot.take_screenshot_hotkey 0 0
+screenshot.take_screenshot_region_hotkey 0 0
 screenshot.take_screenshot_window_hotkey 0 0
 screenshot.use_led_indicator true
 streaming.custom.container flv

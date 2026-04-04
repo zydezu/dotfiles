@@ -1,6 +1,6 @@
 #! /bin/bash
 # set wallpaper
-WALLPAPER="/home/zy/Pictures/archive/wallpapers/FlowerMoonV_1920x1080.png"
+WALLPAPER="/home/zy/wallpaper.jpg"
 
 LOCK_ARGS="--clock \
 --effect-blur 10x6 \
@@ -16,10 +16,10 @@ LOCK_CMD="swaylock -f -c 000000 --image \"$WALLPAPER\" $LOCK_ARGS"
 fc-cache -f >/dev/null 2>&1 &
 nautilus --gapplication-service >/dev/null 2>&1 &
 
-# Watch clipboard and store history
+# keep clipboard content
 wl-clip-persist --clipboard regular --reconnect-tries 0 >/dev/null 2>&1 &
 wl-paste --type text --watch cliphist store >/dev/null 2>&1 &
-clipse -listen >/dev/null 2>&1 &
+clipse -listen
 
 # top bar
 waybar -c ~/.config/mango/waybar/config.jsonc -s ~/.config/mango/waybar/style.css >/dev/null 2>&1 &
