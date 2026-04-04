@@ -1,7 +1,4 @@
 #! /bin/bash
-# set wallpaper
-WALLPAPER="/home/zy/Pictures/archive/wallpapers/wallpaper.jpg"
-
 LOCK_ARGS="--clock \
 --effect-blur 10x6 \
 --effect-scale 0.5 \
@@ -25,7 +22,7 @@ clipse -listen
 waybar -c ~/.config/mango/waybar/config.jsonc -s ~/.config/mango/waybar/style.css >/dev/null 2>&1 &
 
 # wallpaper
-swaybg -i "$WALLPAPER" >/dev/null 2>&1 &
+waypaper --restore >/dev/null 2>&1 &
 
 swayidle -w \
   lock "$LOCK_CMD" \
