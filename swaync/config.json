@@ -2,18 +2,15 @@
   "$schema": "/etc/xdg/swaync/configSchema.json",
   "positionX": "right",
   "positionY": "top",
-  "cssPriority": "user",
   "control-center-preferred-output": "DP-2",
+  "notification-window-preferred-output": "DP-2",
+  "notification-grouping": false,
   "timeout": 3,
   "timeout-low": 2,
   "timeout-critical": 0,
   "fit-to-screen": true,
   "notification-window-width": 440,
-  "keyboard-shortcuts": true,
-  "image-visibility": "when-available",
   "transition-time": 200,
-  "hide-on-clear": true,
-  "hide-on-action": true,
   "script-fail-notify": true,
   "widgets": [
     "title",
@@ -34,7 +31,7 @@
     },
     "label": {
       "max-lines": 1,
-      "text": "Notification Center"
+      "text": "Notifications"
     },
     "volume": {
       "label": "󰕾",
@@ -43,40 +40,32 @@
     "buttons-grid": {
       "actions": [
         {
-          "label": "󰐥",
-          "command": "systemctl poweroff"
-        },
-        {
-          "label": "󰜉",
-          "command": "systemctl reboot"
-        },
-        {
-          "label": "󰌾",
-          "command": "$HOME/.config/hypr/scripts/lock-session.sh"
-        },
-        {
-          "label": "󰍃",
-          "command": "hyprctl dispatch exit"
-        },
-        {
-          "label": "󰤄",
-          "command": "systemctl suspend"
-        },
-        {
-          "label": "󰕾",
-          "command": "swayosd-client --output-volume mute-toggle"
-        },
-        {
-          "label": "󰍬",
-          "command": "swayosd-client --input-volume mute-toggle"
-        },
-        {
           "label": "󰖩",
-          "command": "alacritty --title wifitui -e wifitui"
+          "command": "alacritty --title impala -e impala"
         },
         {
           "label": "󰂯",
           "command": "alacritty --title bluetui -e bluetui"
+        },
+        {
+          "label": "󰕾",
+          "command": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        },
+        {
+          "label": "󰍬",
+          "command": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+        },
+        {
+          "label": "󰐥",
+          "command": "rofi -show power-menu -modi power-menu:rofi-power-menu"
+        },
+        {
+          "label": "󰌾",
+          "command": "loginctl lock-session"
+        },
+        {
+          "label": "󰤄",
+          "command": "systemctl suspend"
         }
       ]
     }

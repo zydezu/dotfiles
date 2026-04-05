@@ -1,12 +1,26 @@
 @import url('colors.css');
 
 :root {
+    --cc-bg: var(--background);
+    --noti-border-color: 2px solid var(--primary);
+    --border-radius: 0;
+    --noti-bg: var(--cc-bg);
+    --noti-bg-alpha: 1;
+    --bg-selected: var(--primary);
     --notification-icon-size: 64px;
     --mpris-album-art-icon-size: 96px;
+    --mpris-album-art-overlay: var(--cc-bg);
+    --mpris-album-art-shadow: var(--cc-bg);
 }
 
 * {
     font-family: "Hiragino Kaku Gothic Pro";
-    border-radius: 0;
-    font-size: 14px;
+}
+
+.control-center {
+    border: var(--noti-border-color);
+}
+
+.widget-mpris .widget-mpris-player .mpris-overlay {
+    border: var(--noti-border-color);
 }

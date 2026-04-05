@@ -18,13 +18,12 @@
   ],
   "modules-right": [
     "tray",
+    "group/audio",
     "group/system",
     "network",
-    "group/audio",
     "bluetooth",
-    "custom/notifications",
     "clock",
-    "custom/power"
+    "custom/notifications"
   ],
   "group/audio": {
     "orientation": "horizontal",
@@ -105,8 +104,8 @@
     "on-click": "alacritty --title 'impala' -e impala"
   },
   "clock": {
-    "format": "{:%H:%M %d/%m/%Y} ",
-    "format-alt": "{:%A %b %d} 󰃭",
+    "format": "{:%R %F} ",
+    "format-alt": "{:%A} {ordinal_date} {:%B} 󰃭",
     "tooltip-format": "{calendar}",
     "calendar": {
       "mode": "year",
