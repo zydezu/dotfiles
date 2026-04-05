@@ -101,7 +101,7 @@
     "format-disconnected": " Disconnected",
     "tooltip-format": "{ifname} {ipaddr}/{cidr} via {gwaddr}",
     "format": "󰈀 ↓{bandwidthDownBits} ↑{bandwidthUpBits}",
-    "on-click": "alacritty --title 'impala' -e impala"
+    "on-click": "alacritty --title 'impala' -e sudo impala"
   },
   "clock": {
     "format": "{:%R %F} ",

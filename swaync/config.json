@@ -5,8 +5,8 @@
   "control-center-preferred-output": "DP-2",
   "notification-window-preferred-output": "DP-2",
   "notification-grouping": false,
-  "timeout": 3,
-  "timeout-low": 2,
+  "timeout": 5,
+  "timeout-low": 4,
   "timeout-critical": 0,
   "fit-to-screen": true,
   "notification-window-width": 440,
@@ -24,7 +24,7 @@
     "title": {
       "text": "Notifications",
       "clear-all-button": true,
-      "button-text": "Clear"
+      "button-text": "Clear all"
     },
     "dnd": {
       "text": "Do Not Disturb"

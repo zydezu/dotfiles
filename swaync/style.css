@@ -2,25 +2,67 @@
 
 :root {
     --cc-bg: var(--background);
-    --noti-border-color: 2px solid var(--primary);
-    --border-radius: 0;
+    --noti-border: 2px solid var(--primary);
     --noti-bg: var(--cc-bg);
-    --noti-bg-alpha: 1;
-    --bg-selected: var(--primary);
-    --notification-icon-size: 64px;
+    --noti-bg-alpha: 0.8;
+    --notification-icon-size: 54px;
     --mpris-album-art-icon-size: 96px;
-    --mpris-album-art-overlay: var(--cc-bg);
-    --mpris-album-art-shadow: var(--cc-bg);
+    --hover-tranistion: background 0.1s ease-out;
+    --group-collapse-transition: opacity 0.1s ease-out;
 }
 
 * {
     font-family: "Hiragino Kaku Gothic Pro";
+    font-weight: 400;
 }
 
-.control-center {
-    border: var(--noti-border-color);
+.control-center { border: var(--noti-border); }
+
+.notification-row .notification-background .notification {
+    background: var(--noti-bg);
+    outline: 2px solid var(--outline);
+    transition: outline 0.2s;
 }
+
+.notification-row .notification-background .notification:hover {
+    outline: var(--noti-border);
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content .image,
+.notification-row .notification-background .notification .notification-default-action .notification-content .text-box .time {
+    margin-right: 8px;
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content .inline-reply .inline-reply-button {
+    background: var(--noti-bg);
+}
+
+.notification-row .notification-background .notification .notification-action { font-size: 14px; }
+
+.notification-group.collapsed .notification-row .notification {
+    background-color: var(--noti-bg);
+    opacity: 0.9;
+}
+
+.control-center .widget-title button,
+.control-center .control-center-list-placeholder,
+.widget-volume { font-size: 14px; }
+
+.close-button {
+    margin: 2px;
+    min-width: 14px;
+    min-height: 14px;
+}
+
+.widget-buttons-grid flowboxchild>button { font-size: 18px; }
+
+.widget-buttons-grid flowboxchild>button.toggle:checked { background-color: var(--primary); }
+
+.widget-mpris .widget-mpris-player .mpris-background { filter: none; }
 
 .widget-mpris .widget-mpris-player .mpris-overlay {
-    border: var(--noti-border-color);
+    border: 2px solid var(--outline);
+    transition: border 0.2s;
 }
+
+.widget-mpris .widget-mpris-player .mpris-overlay:hover { border: var(--noti-border); }
