@@ -1,2 +1,3 @@
-clipboard_history.json
 *.log
+clipboard_history.json
+tmp_files/
