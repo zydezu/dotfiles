@@ -1,6 +1,12 @@
 @import url('colors.css');
 
+:root {
+    --notification-icon-size: 64px;
+    --mpris-album-art-icon-size: 96px;
+}
+
 * {
     font-family: "Hiragino Kaku Gothic Pro";
     border-radius: 0;
+    font-size: 14px;
 }
