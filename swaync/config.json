@@ -56,16 +56,16 @@
           "command": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
         },
         {
-          "label": "󰐥",
-          "command": "rofi -show power-menu -modi power-menu:rofi-power-menu"
-        },
-        {
           "label": "󰌾",
           "command": "loginctl lock-session"
         },
         {
           "label": "󰤄",
           "command": "systemctl suspend"
+        },
+        {
+          "label": "󰐥",
+          "command": "rofi -show power-menu -modi power-menu:rofi-power-menu"
         }
       ]
     }

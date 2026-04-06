@@ -105,7 +105,7 @@
   },
   "clock": {
     "format": "{:%R %F} ",
-    "format-alt": "{:%A} {ordinal_date} {:%B} 󰃭",
+    "format-alt": "{:%A %d %B} 󰃭",
     "tooltip-format": "{calendar}",
     "calendar": {
       "mode": "year",
