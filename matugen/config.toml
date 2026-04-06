@@ -23,7 +23,7 @@ post_hook = "swaync-client -rs"
 
 [templates.rofi]
 input_path = "~/.config/matugen/templates/rofi.rasi"
-output_path = "~/.config/rofi/shared/colors.rasi"
+output_path = "~/.config/rofi/colors.rasi"
 
 [templates.alacritty]
 input_path = "~/.config/matugen/templates/alacritty.toml"

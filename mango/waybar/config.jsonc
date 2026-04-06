@@ -20,8 +20,7 @@
     "tray",
     "group/audio",
     "group/system",
-    "network",
-    "bluetooth",
+    "group/connectivity",
     "clock",
     "custom/notifications"
   ],
@@ -38,6 +37,13 @@
       "cpu",
       "memory",
       "backlight"
+    ]
+  },
+  "group/connectivity": {
+    "orientation": "horizontal",
+    "modules": [
+      "network",
+      "bluetooth"
     ]
   },
   "dwl/tags": {
@@ -68,7 +74,7 @@
   "wlr/taskbar": {
     "format": "{icon}",
     "icon-size": 22,
-    "all-outputs": false,
+    "all-outputs": true,
     "tooltip-format": "{title}",
     "markup": true,
     "on-click": "activate",
@@ -91,7 +97,7 @@
   },
   "tray": {
     "interval": 1,
-    "icon-size": 21,
+    "icon-size": 18,
     "spacing": 10
   },
   "network": {
@@ -120,8 +126,8 @@
     }
   },
   "bluetooth": {
-    "format": "󰂯 On",
-    "format-disabled": "󰂲 Off",
+    "format": "󰂯 Enabled",
+    "format-disabled": "󰂲 Disabled",
     "format-connected": "󰂱 Connected",
     "format-connected-battery": "󰂱 Connected ({device_battery_percentage}%)",
     "tooltip-format": "{controller_alias}\t{controller_address}",

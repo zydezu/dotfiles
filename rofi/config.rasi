@@ -1,11 +1,61 @@
+@import "colors.rasi"
+
 configuration {
-     show-icons: true;
-     kb-accept-custom: "";
+    font: "JetBrainsMono Nerd Font 12";
+    icon-theme: "Adwaita";
+    show-icons: true;
+    sort: true;    
+    sorting-method: "fzf";
+    kb-accept-custom: "";
 }
 
-@import "~/.config/rofi/shared/colors.rasi"
-
 * {
-     font: "JetBrainsMono Nerd Font 12";
-     background-color: @primary-container;
+    background-color: @surface-container;
+    border-color: @on-secondary;
+    text-color: @on-surface;
+    selected-background-color: @primary-container;
+    selected-text-color: @on-primary-container;
+    urgent-background-color: @error-container;
+    urgent-text-color: @on-error-container;
+}
+
+window {
+    background-color: @surface-container;
+    padding: 10px;
+}
+
+mainbox {
+    background-color: @surface-container;
+}
+
+prompt, textbox-prompt-colon {
+    enabled: false;
+}
+
+entry {
+    text-color: @on-surface;
+    placeholder: "Search programs:";
+    padding: 5px;
+}
+
+listview {
+    lines: 12;       /* number of visible entries */
+}
+
+element {
+    padding: 2px 10px;
+}
+
+element selected {
+    background-color: @primary-container;
+    text-color: @on-primary-container;
+}
+
+element urgent {
+    background-color: @error-container;
+    text-color: @on-error-container;
+}
+
+scrollbar {
+    handle-color: @on-surface;
 }

@@ -52,12 +52,11 @@ menu menuitem:disabled {
 #mpris,
 #clock,
 #upower,
-#network,
-#bluetooth,
 #tray,
 #cava,
 #system,
 #audio,
+#connectivity,
 #custom-notifications,
 #custom-power,
 #power-profiles-daemon,
@@ -115,13 +114,15 @@ menu menuitem:disabled {
 }
 
 #system,
-#audio {
+#audio,
+#connectivity {
     padding: 0px;
     margin-right: 4px;
 }
 
 #system>widget>*,
-#audio>widget>* {
+#audio>widget>*,
+#connectivity>widget>* {
     padding: 0px 8px;
 }
 
@@ -180,8 +181,7 @@ menu menuitem:disabled {
     padding: 0px 9px 0px 9px;
 }
 
-#power-profiles-daemon,
-#network {
+#power-profiles-daemon {
     margin-right: 4px;
     padding: 0px 8px 0px 9px;
 }
@@ -212,13 +212,9 @@ menu menuitem:disabled {
     margin-left: 4px;
 }
 
-#cava {
-    margin-left: 4px;
-}
-
 #bluetooth {
+    padding: 0px;
     margin-right: 4px;
-    padding: 0px 6px;
 }
 
 #clock {
