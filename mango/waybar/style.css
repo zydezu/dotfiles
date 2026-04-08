@@ -73,9 +73,11 @@ menu menuitem:disabled {
 }
 
 #workspaces button,
-#tags button {
+#tags button,
+#taskbar button {
     border: none;
     background: none;
+    border-radius: 0;
     box-shadow: inherit;
     text-shadow: inherit;
     padding: 1px 3px;
@@ -92,6 +94,10 @@ menu menuitem:disabled {
     background-color: @text_main;
 }
 
+#taskbar button:hover {
+    background-color: @text_main;
+}
+
 #workspaces button.urgent,
 #tags button.urgent {
     background-color: @alert_urgent;
@@ -102,7 +108,7 @@ menu menuitem:disabled {
 }
 
 #taskbar button.minimized {
-    background-color: @alert_minimized;
+    background-color: @text_dark;
 }
 
 #taskbar button.active,
