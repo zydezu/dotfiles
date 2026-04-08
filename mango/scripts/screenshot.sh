@@ -2,7 +2,7 @@
 
 # Screenshot mode: "full" or "select"
 MODE="$1"
-DIR="$HOME/Pictures/Screenshots"
+DIR="$HOME/Pictures/screenshots"
 mkdir -p "$DIR"
 
 # Create timestamped file
