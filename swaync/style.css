@@ -2,8 +2,6 @@
 
 :root {
     --cc-bg: var(--background);
-    --noti-border-color: 2px solid var(--primary);
-    --border-radius: 0;
     --noti-bg: var(--cc-bg);
     --noti-bg-alpha: 0.8;
     --noti-bg-darker: var(--cc-bg);
@@ -11,7 +9,9 @@
     --noti-bg-focus: var(--cc-bg);
     --noti-close-bg: var(--cc-bg);
     --noti-close-bg-hover: var(--outline);
+    --noti-border-color: 2px solid var(--primary);
     --bg-selected: var(--primary);
+    --border-radius: 0;
     --notification-icon-size: 54px;
     --mpris-album-art-icon-size: 96px;
     --mpris-album-art-overlay: var(--cc-bg);
@@ -30,15 +30,13 @@
     border: var(--noti-border-color);
 }
 
-.notification-row .notification-background .notification .notification-default-action .notification-content .image {
-    margin-right: 8px;
+.control-center .control-center-list-placeholder {
+    font-size: 14px;
 }
 
-
-.notification-row .notification-background .notification .notification-default-action .notification-content .text-box .time {
-    margin-right: 8px;
+.control-center .widget-title button {
+    font-size: 14px;
 }
-
 
 .notification-row .notification-background .notification {
     background: var(--noti-bg);
@@ -46,17 +44,29 @@
     transition: outline 0.2s;
 }
 
+.notification-row .notification-background .notification .notification-default-action .notification-content {
+    padding: 5px;
+}
+
 .notification-row .notification-background .notification:hover {
     background: var(--noti-bg);
     outline: var(--noti-border-color);
 }
 
-.notification-row .notification-background .notification .notification-default-action .notification-content .inline-reply .inline-reply-button {
-    background: var(--noti-bg);
-}
-
 .notification-row .notification-background .notification .notification-action {
     font-size: 14px;
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content .image {
+    margin-right: 8px;
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content .text-box .time {
+    margin-right: 8px;
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content .inline-reply .inline-reply-button {
+    background: var(--noti-bg);
 }
 
 .notification-group.collapsed .notification-row .notification {
@@ -64,19 +74,11 @@
     opacity: 0.9;
 }
 
-.control-center .widget-title button {
-    font-size: 14px;
-}
-
 .close-button {
     margin-top: 2px;
     margin-right: 2px;
     min-width: 14px;
     min-height: 14px;
-}
-
-.control-center .control-center-list-placeholder {
-    font-size: 14px;
 }
 
 .widget-buttons-grid flowboxchild>button {
