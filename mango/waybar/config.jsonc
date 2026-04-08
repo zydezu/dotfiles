@@ -150,7 +150,7 @@
     "format-linked": " No IP ({ifname})",
     "format-disconnected": " Disconnected",
     "format-disabled": "󰖪 Off",
-    "tooltip-format": "{ifname} {ipaddr}/via {gwaddr}\nBandwidth: ↓{bandwidthDownBytes} ↑{bandwidthUpBytes}",
+    "tooltip-format": "{ifname} {ipaddr}/via {gwaddr}\nBandwidth: ↓{bandwidthDownBits} ↑{bandwidthUpBits}",
     "on-click": "alacritty --title 'impala' -e sudo impala"
   },
   "bluetooth": {

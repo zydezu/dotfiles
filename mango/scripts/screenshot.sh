@@ -43,11 +43,13 @@ if [ ! -f "$CROPPED_FILE" ]; then
     CROPPED_FILE="$FILE"
 fi
 
-# Send notification with actions
-ACTION=$(dunstify -i "$CROPPED_FILE" "Screenshot taken and copied to clipboard" "$CROPPED_FILE" \
-    -A open,"Open" \
-    -A edit,"Edit" \
-    -A delete,"Delete")
+# Send notification with "Edit" action to open in Swappy (timeout after 10 seconds)
+ACTION=$(dunstify "Screenshot has been saved" \
+    -i "$CROPPED_FILE" \
+    -t 10000 \
+    -A open,"Open in Files" \
+    -A edit,"Edit Image" \
+    -A delete,"Delete File")
 
 if [ "$ACTION" = "edit" ]; then
     swappy -f "$FILE" &

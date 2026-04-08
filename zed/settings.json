@@ -7,6 +7,20 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "scrollbar": {
+    "axes": {
+      "vertical": true
+    },
+    "diagnostics": "all",
+    "selected_symbol": true,
+    "selected_text": true,
+    "search_results": true,
+    "cursors": true,
+    "git_diff": true
+  },
+  "edit_predictions": {
+    "provider": "zed"
+  },
   "search": {
     "center_on_match": true
   },
@@ -52,6 +66,7 @@
     "code_actions": false,
   },
   "minimap": {
+    "thumb_border": "left_open",
     "show": "never",
   },
   "sticky_scroll": {
