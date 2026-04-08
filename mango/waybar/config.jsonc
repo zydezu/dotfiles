@@ -150,7 +150,7 @@
     "format-linked": " No IP ({ifname})",
     "format-disconnected": " Disconnected",
     "format-disabled": "󰖪 Off",
-    "tooltip-format": "{ifname} {ipaddr}/via {gwaddr}\nBandwidth: ↓{bandwidthDownBits} ↑{bandwidthUpBits}",
+    "tooltip-format": "{ifname} {ipaddr}/via {gwaddr}\nBandwidth: ↓{bandwidthDownBytes} ↑{bandwidthUpBytes}",
     "on-click": "alacritty --title 'impala' -e sudo impala"
   },
   "bluetooth": {
@@ -221,20 +221,20 @@
     }
   },
   "mpris": {
-    "format": "{player_icon} {title} - {artist}",
-    "format-paused": "{status_icon} {title} - {artist}",
+    "format": "{player_icon} {title} - {artist} ({position}/{length})",
+    "format-paused": "{status_icon} {title} - {artist} ({position}/{length})",
     "format-stopped": "",
+    "max-length": 80,
     "interval": 1,
-    "max-length": 60,
     "ellipsis": true,
-    "tooltip": true,
-    "tooltip-format": "{player}\n{title} - {album}\n{artist}\n{position}/{length}",
+    "tooltip-format": "{title}\n{album}\n{artist}\n{position}/{length}",
     "player": "strawberry",
-    "playerctld": false,
+    "expand": true,
     "player-icons": {
-      "default": "",
+      "default": "󰎇",
       "spotify": "",
       "firefox": "",
+      "chrome": "",
       "mpv": ""
     },
     "status-icons": {
@@ -247,9 +247,9 @@
       "firefox",
       "firefox.instance"
     ],
-    "on-click": "playerctl play-pause",
-    "on-click-right": "playerctl next",
-    "on-click-middle": "playerctl previous",
+    "on-click": "playerctl play-pause -p strawberry",
+    "on-click-right": "playerctl next -p strawberry",
+    "on-click-middle": "playerctl previous -p strawberry",
     "on-scroll-up": "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 2%+",
     "on-scroll-down": "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 2%-"
   },

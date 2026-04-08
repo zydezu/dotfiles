@@ -1,25 +1,50 @@
 #!/usr/bin/env bash
 
-# Screenshot mode: "full" or "select"
 MODE="$1"
 DIR="$HOME/Pictures/screenshots"
 mkdir -p "$DIR"
+
+# Create temp directory for processed images
+TMPDIR=$(mktemp -d)
 
 # Create timestamped file
 FILE="$DIR/$(date +'%Y-%m-%d_%H-%M-%S').png"
 
 # Take screenshot
 if [ "$MODE" = "select" ]; then
-    grim -g "$(slurp)" "$FILE"
+    GEOMETRY=$(slurp) || { echo "Selection cancelled"; exit 1; }
+    # Check if geometry is empty (user cancelled)
+    if [ -z "$GEOMETRY" ]; then
+        echo "Selection cancelled"
+        exit 1
+    fi
+    grim -g "$GEOMETRY" "$FILE" || { echo "Screenshot failed"; exit 1; }
 else
-    grim "$FILE"
+    grim "$FILE" || { echo "Screenshot failed"; exit 1; }
+fi
+
+# Verify screenshot was created
+if [ ! -f "$FILE" ]; then
+    echo "Screenshot file not created: $FILE"
+    exit 1
 fi
 
 # Copy to clipboard
 wl-copy --type image/png < "$FILE"
 
-# Send notification with "Edit" action to open in Swappy
-ACTION=$(dunstify "Screenshot taken and copied to clipboard" \
+# Create a temporary 1:1 image for the notification
+CROPPED_FILE="$TMPDIR/cropped.png"
+# Get image dimensions and crop to square from center, then resize for preview
+magick "$FILE" -gravity center -crop '%[fx:min(w,h)]x%[fx:min(w,h)]+0+0' -resize 128x128 +repage "$CROPPED_FILE"
+
+# Verify cropped file was created
+if [ ! -f "$CROPPED_FILE" ]; then
+    # Fallback to original file
+    CROPPED_FILE="$FILE"
+fi
+
+# Send notification with actions
+ACTION=$(dunstify -i "$CROPPED_FILE" "Screenshot taken and copied to clipboard" "$CROPPED_FILE" \
     -A open,"Open" \
     -A edit,"Edit" \
     -A delete,"Delete")
@@ -31,3 +56,6 @@ elif [ "$ACTION" = "open" ]; then
 elif [ "$ACTION" = "delete" ]; then
     rm "$FILE"
 fi
+
+# Clean up temp directory after a short delay to allow notification to be displayed
+(sleep 3 && rm -rf "$TMPDIR") &
