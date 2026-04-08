@@ -17,22 +17,5 @@
     "bindings": {
       // "j k": "vim::NormalBefore"
     },
-  },
-  {
-    "bindings": {
-      "ctrl-alt-o": [
-        "agent::NewExternalAgentThread",
-        {
-          "agent": {
-            "custom": {
-              "name": "OpenCode",
-              "command": {
-                "command": "opencode"
-              },
-            },
-          },
-        },
-      ],
-    },
-  },
+  }
 ]

@@ -1,3 +1,4 @@
 [Default]
 save_dir=$HOME/Pictures/screenshots
+save_filename_format=%Y-%m-%d_%H-%M-%S.png
 text_font=Hiragino Kaku Gothic Pro W3
