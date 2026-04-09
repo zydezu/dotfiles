@@ -57,6 +57,8 @@ menu menuitem:disabled {
 #system,
 #audio,
 #connectivity,
+#custom-updates,
+#custom-weather,
 #custom-notifications,
 #custom-power,
 #hardware {
@@ -221,7 +223,9 @@ menu menuitem:disabled {
     margin-right: 4px;
 }
 
-#custom-notifications {
+#custom-notifications,
+#custom-updates,
+#custom-weather {
     margin-right: 4px;
     padding-left: 10px;
     padding-right: 14px;

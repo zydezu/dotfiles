@@ -17,5 +17,29 @@
     "bindings": {
       // "j k": "vim::NormalBefore"
     },
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-alt-up": "editor::DuplicateLineUp"
+    }
+  },
+  {
+    "context": "Editor",
+    "unbind": {
+      "ctrl-alt-shift-up": "editor::DuplicateLineUp"
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-alt-down": "editor::DuplicateLineDown"
+    }
+  },
+  {
+    "context": "Editor",
+    "unbind": {
+      "ctrl-alt-shift-down": "editor::DuplicateLineDown"
+    }
   }
 ]

@@ -21,6 +21,8 @@
     "group/audio",
     "group/system",
     "group/connectivity",
+    "custom/updates",
+    "custom/weather",
     "clock",
     "custom/notifications",
     "custom/power"
@@ -168,6 +170,24 @@
     "tooltip": true,
     "exec": "~/.config/mango/waybar/scripts/ps_controller_battery.sh",
     "interval": 30
+  },
+  "custom/updatewos": {
+    "format": "{icon} {}",
+    "return-type": "json",
+    "format-icons": {
+      "has-updates": "",
+      "updated": "󰂪"
+    },
+    "interval": 30,
+    "on-click": "alacritty --title 'cachy-update' -e cachy-update",
+    "exec": "waybar-module-pacman-updates --interval-seconds 30 --network-interval-seconds 300"
+  },
+  "custom/weather": {
+    "format": "{}°",
+    "tooltip": true,
+    "interval": 3600,
+    "exec": "wttrbar",
+    "return-type": "json"
   },
   "clock": {
     "format": "{:%R %F} ",
