@@ -9,7 +9,7 @@
   "reload_style_on_change": true,
   "height": 35,
   "modules-left": [
-    "dwl/tags",
+    "ext/workspaces",
     "wlr/taskbar",
     "dwl/window"
   ],
@@ -22,7 +22,6 @@
     "group/system",
     "group/connectivity",
     "custom/updates",
-    "custom/weather",
     "clock",
     "custom/notifications",
     "custom/power"
@@ -39,6 +38,7 @@
     "modules": [
       "cpu",
       "memory",
+      "custom/gpu-usage",
       "backlight"
       //"power-profiles-daemon"
     ]
@@ -51,9 +51,12 @@
       "custom/ps_controller"
     ]
   },
-  "dwl/tags": {
-    "num-tags": 9,
-    "hide-vacant": true
+  "ext/workspaces": {
+    "format": "{icon}",
+    "ignore-hidden": true,
+    "on-click": "activate",
+    "on-click-right": "deactivate",
+    "sort-by-id": true
   },
   "dwl/window": {
     "format": "{title}",
@@ -134,6 +137,12 @@
     "tooltip": true,
     "tooltip-format": "RAM: {used:0.1f}G/{total:0.1f}G\nSwap: {swapUsed:0.1f}G/{swapTotal:0.1f}G"
   },
+  "custom/gpu-usage": {
+    "format": "󰾲 {text}",
+    "exec": "/home/zy/.cargo/bin/gpu-usage-waybar",
+    "return-type": "json",
+    "on-click": "alacritty --title 'nvtop' -e nvtop",
+  },
   "backlight": {
     "interval": 2,
     "format": "{icon} {percent}%",
@@ -171,23 +180,16 @@
     "exec": "~/.config/mango/waybar/scripts/ps_controller_battery.sh",
     "interval": 30
   },
-  "custom/updatewos": {
+  "custom/updates": {
     "format": "{icon} {}",
     "return-type": "json",
     "format-icons": {
       "has-updates": "",
       "updated": "󰂪"
     },
-    "interval": 30,
+    "interval": 1,
     "on-click": "alacritty --title 'cachy-update' -e cachy-update",
-    "exec": "waybar-module-pacman-updates --interval-seconds 30 --network-interval-seconds 300"
-  },
-  "custom/weather": {
-    "format": "{}°",
-    "tooltip": true,
-    "interval": 3600,
-    "exec": "wttrbar",
-    "return-type": "json"
+    "exec": "waybar-module-pacman-updates --interval-seconds 1 --network-interval-seconds 1"
   },
   "clock": {
     "format": "{:%R %F} ",

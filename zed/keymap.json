@@ -21,7 +21,7 @@
   {
     "context": "Editor",
     "bindings": {
-      "ctrl-alt-up": "editor::DuplicateLineUp"
+      "alt-shift-up": "editor::DuplicateLineUp"
     }
   },
   {
@@ -33,13 +33,57 @@
   {
     "context": "Editor",
     "bindings": {
-      "ctrl-alt-down": "editor::DuplicateLineDown"
+      "alt-shift-down": "editor::DuplicateLineDown"
     }
   },
   {
     "context": "Editor",
     "unbind": {
       "ctrl-alt-shift-down": "editor::DuplicateLineDown"
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-alt-down": [
+        "editor::AddSelectionBelow",
+        {
+          "skip_soft_wrap": true
+        }
+      ]
+    }
+  },
+  {
+    "context": "Editor",
+    "unbind": {
+      "alt-shift-down": [
+        "editor::AddSelectionBelow",
+        {
+          "skip_soft_wrap": true
+        }
+      ]
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-alt-up": [
+        "editor::AddSelectionAbove",
+        {
+          "skip_soft_wrap": true
+        }
+      ]
+    }
+  },
+  {
+    "context": "Editor",
+    "unbind": {
+      "alt-shift-up": [
+        "editor::AddSelectionAbove",
+        {
+          "skip_soft_wrap": true
+        }
+      ]
     }
   }
 ]

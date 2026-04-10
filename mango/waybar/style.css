@@ -133,12 +133,6 @@ menu menuitem:disabled {
     padding: 0px 8px;
 }
 
-#workspaces {
-    margin-left: 4px;
-    padding-left: 6px;
-    padding-right: 6px;
-}
-
 #workspaces button {
     color: @text_main;
     margin-right: 2px;
@@ -154,7 +148,8 @@ menu menuitem:disabled {
     color: @text_main;
 }
 
-#tags {
+#tags,
+#workspaces {
     margin-left: 5px;
     padding-left: 6px;
     padding-right: 6px;
