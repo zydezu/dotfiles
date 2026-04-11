@@ -21,7 +21,6 @@
     "group/audio",
     "group/system",
     "group/connectivity",
-    "custom/updates",
     "clock",
     "custom/notifications",
     "custom/power"
@@ -38,9 +37,9 @@
     "modules": [
       "cpu",
       "memory",
-      "custom/gpu-usage",
+      // "custom/gpu-usage",
+      // "power-profiles-daemon",
       "backlight"
-      //"power-profiles-daemon"
     ]
   },
   "group/connectivity": {
@@ -179,17 +178,6 @@
     "tooltip": true,
     "exec": "~/.config/mango/waybar/scripts/ps_controller_battery.sh",
     "interval": 30
-  },
-  "custom/updates": {
-    "format": "{icon} {}",
-    "return-type": "json",
-    "format-icons": {
-      "has-updates": "",
-      "updated": "󰂪"
-    },
-    "interval": 1,
-    "on-click": "alacritty --title 'cachy-update' -e cachy-update",
-    "exec": "waybar-module-pacman-updates --interval-seconds 1 --network-interval-seconds 1"
   },
   "clock": {
     "format": "{:%R %F} ",
