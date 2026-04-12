@@ -114,7 +114,7 @@ rect {
     --accent-3: {{colors.primary.default.hex}};
     --accent-4: {{colors.primary_container.default.hex}};
     --accent-5: {{colors.primary_fixed_dim.default.hex}};
-    --accent-new: {{colors.error.default.hex}};
+    --accent-new: {{colors.primary.default.hex}};
 
     /* gradients */
     --mention: linear-gradient(
