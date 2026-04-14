@@ -9,7 +9,6 @@ FILE="$DIR/$(date +'%Y-%m-%d_%H-%M-%S').png"
 
 # Take screenshot
 if [ "$MODE" = "select" ]; then
-    dunstify "select"
     GEOMETRY=$(slurp) || { echo "Selection cancelled"; exit 1; }
     if [ -z "$GEOMETRY" ]; then
         echo "Selection cancelled"
@@ -44,7 +43,7 @@ fi
 ACTION=$(dunstify "Screenshot has been saved" \
     -i "$CROPPED_FILE" \
     -t 10000 \
-    -A open,"Open in Files" \
+    -A open,"Open Folder" \
     -A edit,"Edit Image" \
     -A delete,"Delete File")
 
