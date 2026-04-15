@@ -155,13 +155,13 @@
   },
   "network": {
     "interval": 2,
-    "format-wifi": "󰖩 {essid} ({signalStrength}%)",
+    "format-wifi": "󰖩 {signalStrength}%",
     "format-ethernet": "󰈀 Wired",
     "format-linked": " No IP ({ifname})",
     "format-disconnected": " Disconnected",
     "format-disabled": "󰖪 Off",
     "tooltip-format": "{ifname} {ipaddr}/via {gwaddr}\nBandwidth: ↓{bandwidthDownBits} ↑{bandwidthUpBits}",
-    "on-click": "alacritty --title 'impala' -e sudo impala"
+    "on-click": "alacritty --title 'wlctl' -e sudo wlctl"
   },
   "bluetooth": {
     "format": "󰂯 On",

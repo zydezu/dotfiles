@@ -1,103 +1,103 @@
 :root {
 
-    --background: #191119;
+    --background: #210e0b;
 
     --error: #ffb4ab;
 
     --error_container: #93000a;
 
-    --inverse_on_surface: #372d37;
+    --inverse_on_surface: #422b27;
 
-    --inverse_primary: #4758a9;
+    --inverse_primary: #c00000;
 
-    --inverse_surface: #eedeeb;
+    --inverse_surface: #ffdad4;
 
-    --on_background: #eedeeb;
+    --on_background: #ffdad4;
 
     --on_error: #690005;
 
     --on_error_container: #ffdad6;
 
-    --on_primary: #122878;
+    --on_primary: #690000;
 
-    --on_primary_container: #dde1ff;
+    --on_primary_container: #000000;
 
-    --on_primary_fixed: #001356;
+    --on_primary_fixed: #410000;
 
-    --on_primary_fixed_variant: #2d4090;
+    --on_primary_fixed_variant: #930000;
 
-    --on_secondary: #202c61;
+    --on_secondary: #690000;
 
-    --on_secondary_container: #dde1ff;
+    --on_secondary_container: #ffdcd7;
 
-    --on_secondary_fixed: #08164b;
+    --on_secondary_fixed: #410000;
 
-    --on_secondary_fixed_variant: #384379;
+    --on_secondary_fixed_variant: #910904;
 
-    --on_surface: #eedeeb;
+    --on_surface: #ffdad4;
 
-    --on_surface_variant: #d7bfd5;
+    --on_surface_variant: #eabcb4;
 
-    --on_tertiary: #48204e;
+    --on_tertiary: #452b00;
 
-    --on_tertiary_container: #ffd5ff;
+    --on_tertiary_container: #000000;
 
-    --on_tertiary_fixed: #310938;
+    --on_tertiary_fixed: #291800;
 
-    --on_tertiary_fixed_variant: #613766;
+    --on_tertiary_fixed_variant: #633f00;
 
-    --outline: #9f8a9e;
+    --outline: #b08780;
 
-    --outline_variant: #524153;
+    --outline_variant: #5f3e39;
 
-    --primary: #b9c3ff;
+    --primary: #ffb4a8;
 
-    --primary_container: #2d4090;
+    --primary_container: #ff5541;
 
-    --primary_fixed: #dde1ff;
+    --primary_fixed: #ffdad4;
 
-    --primary_fixed_dim: #b9c3ff;
+    --primary_fixed_dim: #ffb4a8;
 
     --scrim: #000000;
 
-    --secondary: #b9c3ff;
+    --secondary: #ffb4a8;
 
-    --secondary_container: #384379;
+    --secondary_container: #950d06;
 
-    --secondary_fixed: #dde1ff;
+    --secondary_fixed: #ffdad4;
 
-    --secondary_fixed_dim: #b9c3ff;
+    --secondary_fixed_dim: #ffb4a8;
 
     --shadow: #000000;
 
-    --source_color: #c630e3;
+    --source_color: #f10503;
 
-    --surface: #191119;
+    --surface: #210e0b;
 
-    --surface_bright: #403640;
+    --surface_bright: #4b332f;
 
-    --surface_container: #261d26;
+    --surface_container: #2f1a17;
 
-    --surface_container_high: #302730;
+    --surface_container_high: #3a2421;
 
-    --surface_container_highest: #3c323b;
+    --surface_container_highest: #462f2b;
 
-    --surface_container_low: #211922;
+    --surface_container_low: #2a1613;
 
-    --surface_container_lowest: #130b14;
+    --surface_container_lowest: #1b0907;
 
-    --surface_dim: #191119;
+    --surface_dim: #210e0b;
 
-    --surface_tint: #b9c3ff;
+    --surface_tint: #ffb4a8;
 
-    --surface_variant: #524153;
+    --surface_variant: #5f3e39;
 
-    --tertiary: #ebb5ed;
+    --tertiary: #ffb954;
 
-    --tertiary_container: #613766;
+    --tertiary_container: #c28421;
 
-    --tertiary_fixed: #ffd5ff;
+    --tertiary_fixed: #ffddb4;
 
-    --tertiary_fixed_dim: #ebb5ed;
+    --tertiary_fixed_dim: #ffb954;
 
 }
