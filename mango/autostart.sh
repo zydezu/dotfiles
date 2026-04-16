@@ -1,11 +1,9 @@
 #! /bin/bash
-LOCK_ARGS="--clock \
---effect-blur 10x6 \
---effect-scale 0.5 \
---timestr \"%H:%M\" \
---datestr \"%d/%m/%Y\""
+# Lock screen
+hypridle >/dev/null 2>&1 &
 
-LOCK_CMD="swaylock -f -c 000000 --image \"$WALLPAPER\" $LOCK_ARGS"
+# Inhibit locking by audio
+sway-audio-idle-inhibit >/dev/null 2>&1 &
 
 # Run the desktop portal (URI/screenshare)
 /usr/lib/xdg-desktop-portal-wlr >/dev/null 2>&1 &
@@ -24,16 +22,8 @@ waybar -c ~/.config/mango/waybar/config.jsonc -s ~/.config/mango/waybar/style.cs
 # wallpaper
 waypaper --restore >/dev/null 2>&1 &
 
-swayidle -w \
-  lock "$LOCK_CMD" \
-  timeout 600 "$LOCK_CMD" \
-  before-sleep "$LOCK_CMD" >/dev/null 2>&1 &
-
 # Permission authentication
 /usr/lib/xfce-polkit/xfce-polkit >/dev/null 2>&1 &
-
-# Inhibit locking by audio
-sway-audio-idle-inhibit >/dev/null 2>&1 &
 
 # load autostart programs
 for desktop_file in ~/.config/autostart/*.desktop; do
