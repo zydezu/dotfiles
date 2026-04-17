@@ -12,6 +12,7 @@ allowed_dirs=(
   fastfetch
   fish
   gpu-screen-recorder
+  hypr
   impala
   mango
   matugen
