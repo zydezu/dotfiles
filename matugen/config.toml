@@ -21,6 +21,10 @@ input_path = "~/.config/matugen/templates/swaync.css"
 output_path = "~/.config/swaync/colors.css"
 post_hook = "swaync-client -rs"
 
+[templates.hyprlock]
+input_path = '~/.config/matugen/templates/hyprlock.conf'
+output_path = '~/.config/hypr/colors.conf'
+
 [templates.rofi]
 input_path = "~/.config/matugen/templates/rofi.rasi"
 output_path = "~/.config/rofi/colors.rasi"
