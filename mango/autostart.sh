@@ -31,7 +31,7 @@ for desktop_file in ~/.config/autostart/*.desktop; do
         # Extract the Exec line
         exec_line=$(grep -E "^Exec=" "$desktop_file" | head -1 | sed 's/^Exec=//')
 
-        # Remove field codes like %U, %F, etc. (simplified)
+        # Remove field codes like %U
         clean_exec=$(echo "$exec_line" | sed 's/%[a-zA-Z]//g')
 
         # Execute the command in background

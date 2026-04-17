@@ -51,6 +51,7 @@ if [ -f "$PIDFILE" ]; then
                 -A open,"Open Folder")
         fi
         [ "$ACTION" = "open" ] && xdg-open "$(dirname "$FILE")"
+        # Clean up temp directory after a short delay to allow notification to be displayed
         (sleep 3 && rm -rf "$TMPDIR") &
         exit 0
     else

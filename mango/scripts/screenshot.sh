@@ -1,11 +1,36 @@
 #!/usr/bin/env bash
-
 MODE="$1"
-DIR="$HOME/Pictures/screenshots"
+BASE_DIR="$HOME/Pictures/screenshots"
+DATE_DIR="$(date +'%Y-%m-%d')"
+DIR="$BASE_DIR/$DATE_DIR"
 mkdir -p "$DIR"
-
 TMPDIR=$(mktemp -d)
-FILE="$DIR/$(date +'%Y-%m-%d_%H-%M-%S').png"
+
+# Get window names on current workspace for filename
+get_workspace_name() {
+    MONITOR=$(mmsg -g -o | grep 'selmon 1' | awk '{print $1}')
+
+    BORING_APPIDS="org.gnome.Nautilus|thunar|org.kde.dolphin|pcmanfm|nemo"
+
+    mmsg -g -c 2>/dev/null | awk -v mon="$MONITOR" -v boring="$BORING_APPIDS" '
+        $1 == mon && $2 == "title"  { $1=$2=""; sub(/^ +/,""); title=$0 }
+        $1 == mon && $2 == "appid"  {
+            appid = $3
+            n = split(appid, parts, ".")
+            shortapp = parts[n]
+
+            if (appid ~ boring) print shortapp
+            else print shortapp " " title
+            exit
+        }
+    ' \
+    | tr -cs 'a-zA-Z0-9-' '_' \
+    | sed 's/__*/_/g; s/^_//; s/_$//' \
+    | tr '[:upper:]' '[:lower:]'
+}
+
+WORKSPACE_NAME=$(get_workspace_name)
+FILE="$DIR/$(date +'%Y-%m-%d_%H-%M-%S')_${WORKSPACE_NAME}.png"
 
 # Take screenshot
 if [ "$MODE" = "select" ]; then
@@ -55,5 +80,5 @@ elif [ "$ACTION" = "delete" ]; then
     rm "$FILE"
 fi
 
-# Clean up temp directory after a short delay to allow notification to be displayed
+# Clean up temp directory to allow notification to be displayed
 (sleep 3 && rm -rf "$TMPDIR") &
