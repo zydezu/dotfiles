@@ -7,6 +7,8 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "ui_font_size": 15.5,
+  "ui_font_family": "Hiragino Kaku Gothic Pro",
   "scrollbar": {
     "axes": {
       "vertical": true
@@ -91,10 +93,7 @@
   },
   "autosave": "off",
   "agent_ui_font_size": 16.0,
-  "ui_font_weight": 300.0,
-  "ui_font_family": "Hiragino Kaku Gothic Pro",
   "buffer_font_family": "JetBrainsMono Nerd Font",
-  "ui_font_size": 16.0,
   "buffer_font_size": 15,
   "theme": {
     "mode": "system",

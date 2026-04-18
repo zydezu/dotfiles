@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+# Record in a certain codec, such as h264, hevc or av1 - refer to man gpu-screen-recorder for more details
+CODEC="hevc"
+FPS=60
+
 MODE="$1"
 BASE_DIR="$HOME/Videos/recordings"
 DATE_DIR="$(date +'%Y-%m-%d')"
@@ -51,7 +55,7 @@ if [ -f "$PIDFILE" ]; then
                 -A open,"Open Folder")
         fi
         [ "$ACTION" = "open" ] && xdg-open "$(dirname "$FILE")"
-        # Clean up temp directory after a short delay to allow notification to be displayed
+        # Clean up temp directory to allow notification to be displayed
         (sleep 3 && rm -rf "$TMPDIR") &
         exit 0
     else
@@ -71,9 +75,9 @@ if [ "$MODE" = "select" ]; then
         -w "region" \
         -region "$GEOMETRY" \
         -c mp4 \
-        -f 60 \
+        -f "$FPS" \
         -a default_output \
-        -k h264 \
+        -k "$CODEC" \
         -q medium \
         -fm vfr \
         -o "$FILE" &
@@ -81,9 +85,9 @@ else
     gpu-screen-recorder \
         -w "$MONITOR" \
         -c mp4 \
-        -f 60 \
+        -f "$FPS" \
         -a default_output \
-        -k h264 \
+        -k "$CODEC" \
         -q medium \
         -fm vfr \
         -o "$FILE" &
