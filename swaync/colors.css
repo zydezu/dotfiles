@@ -8,69 +8,69 @@
 
     --inverse_on_surface: #2e303a;
 
-    --inverse_primary: #006781;
+    --inverse_primary: #006782;
 
-    --inverse_surface: #e1e1ef;
+    --inverse_surface: #e2e1ef;
 
-    --on_background: #e1e1ef;
+    --on_background: #e2e1ef;
 
     --on_error: #690005;
 
     --on_error_container: #ffdad6;
 
-    --on_primary: #003544;
+    --on_primary: #003545;
 
-    --on_primary_container: #b9eaff;
+    --on_primary_container: #bbe9ff;
 
     --on_primary_fixed: #001f29;
 
-    --on_primary_fixed_variant: #004d62;
+    --on_primary_fixed_variant: #004d63;
 
-    --on_secondary: #003544;
+    --on_secondary: #003545;
 
-    --on_secondary_container: #b9eaff;
+    --on_secondary_container: #bbe9ff;
 
     --on_secondary_fixed: #001f29;
 
-    --on_secondary_fixed_variant: #004d62;
+    --on_secondary_fixed_variant: #004d63;
 
-    --on_surface: #e1e1ef;
+    --on_surface: #e2e1ef;
 
-    --on_surface_variant: #c2c5dd;
+    --on_surface_variant: #c3c5dd;
 
-    --on_tertiary: #1e2d61;
+    --on_tertiary: #202c61;
 
-    --on_tertiary_container: #dce1ff;
+    --on_tertiary_container: #dde1ff;
 
-    --on_tertiary_fixed: #05164b;
+    --on_tertiary_fixed: #07164b;
 
-    --on_tertiary_fixed_variant: #364479;
+    --on_tertiary_fixed_variant: #374379;
 
-    --outline: #8c90a6;
+    --outline: #8d8fa6;
 
     --outline_variant: #424659;
 
-    --primary: #5fd4fd;
+    --primary: #61d4ff;
 
-    --primary_container: #004d62;
+    --primary_container: #004d63;
 
-    --primary_fixed: #b9eaff;
+    --primary_fixed: #bbe9ff;
 
-    --primary_fixed_dim: #5fd4fd;
+    --primary_fixed_dim: #61d4ff;
 
     --scrim: #000000;
 
-    --secondary: #89d0ed;
+    --secondary: #8ad0ee;
 
-    --secondary_container: #004d62;
+    --secondary_container: #004d63;
 
-    --secondary_fixed: #b9eaff;
+    --secondary_fixed: #bbe9ff;
 
-    --secondary_fixed_dim: #89d0ed;
+    --secondary_fixed_dim: #8ad0ee;
 
     --shadow: #000000;
 
-    --source_color: #0d56fe;
+    --source_color: #1b1d28;
 
     --surface: #11131c;
 
@@ -78,9 +78,9 @@
 
     --surface_container: #1d1f29;
 
-    --surface_container_high: #272934;
+    --surface_container_high: #282934;
 
-    --surface_container_highest: #32343f;
+    --surface_container_highest: #33343f;
 
     --surface_container_low: #191b25;
 
@@ -88,16 +88,16 @@
 
     --surface_dim: #11131c;
 
-    --surface_tint: #5fd4fd;
+    --surface_tint: #61d4ff;
 
     --surface_variant: #424659;
 
-    --tertiary: #b7c4ff;
+    --tertiary: #b8c3ff;
 
-    --tertiary_container: #364479;
+    --tertiary_container: #374379;
 
-    --tertiary_fixed: #dce1ff;
+    --tertiary_fixed: #dde1ff;
 
-    --tertiary_fixed_dim: #b7c4ff;
+    --tertiary_fixed_dim: #b8c3ff;
 
 }

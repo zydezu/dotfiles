@@ -7,7 +7,7 @@
   "gtk-layer-shell": true,
   "ipc": false,
   "reload_style_on_change": true,
-  "height": 35,
+  "height": 34,
   "modules-left": [
     "ext/workspaces",
     "wlr/taskbar",
@@ -64,7 +64,10 @@
     "tooltip": true,
     "tooltip-format": "{title}",
     "on-click": "~/.config/mango/scripts/screenshot.sh",
-    "on-click-right": "~/.config/mango/scripts/screenshot.sh select"
+    "on-click-right": "~/.config/mango/scripts/screenshot.sh select",
+    "rewrite": {
+      "^(.*)[𐙚](.*)$": "$1✦$2"
+    }
   },
   "wlr/taskbar": {
     "format": "{icon}",

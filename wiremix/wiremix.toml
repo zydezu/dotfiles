@@ -1,0 +1,6 @@
+fps = 0.0
+tab = "output"
+tabs = [ "output", "input", "playback", "recording", "configuration" ]
+keybindings = [
+    { key = "Esc", action = "Exit" },
+]

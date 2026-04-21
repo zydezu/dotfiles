@@ -7,13 +7,13 @@ DEST="$SCRIPT_DIR"
 allowed_dirs=(
   actions-for-nautilus
   alacritty
+  bluetui
   clipse
   environment.d
   fastfetch
   fish
   gpu-screen-recorder
   hypr
-  impala
   mango
   matugen
   mprisence
@@ -22,6 +22,8 @@ allowed_dirs=(
   swappy
   swaync
   waypaper
+  wiremix
+  wlctl
   xdg-desktop-portal
   zed
 )

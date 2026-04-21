@@ -3,7 +3,6 @@
 * {
     border: none;
     font-family: "JetBrainsMono Nerd Font", "Hiragino Kaku Gothic Pro W3", monospace;
-    font-size: 14px;
     min-height: 0;
 }
 
@@ -11,6 +10,7 @@ window#waybar {
     background: none;
     margin: 0px;
     padding: 0px;
+    min-height: 34px;
 }
 
 tooltip {
