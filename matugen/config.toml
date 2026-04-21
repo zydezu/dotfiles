@@ -46,6 +46,10 @@ output_path = '~/.config/clipse/custom_theme.json'
 input_path = '~/.config/matugen/templates/midnight-discord.css'
 output_path = '~/.config/Equicord/themes/midnight-discord.css'
 
+[templates.equibop]
+input_path = '~/.config/matugen/templates/midnight-discord.css'
+output_path = '~/.config/equibop/themes/midnight-discord.css'
+
 [templates.steam]
 input_path = '~/.config/matugen/templates/steam.css'
 output_path = '~/.config/AdwSteamGtk/custom.css'
