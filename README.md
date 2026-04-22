@@ -1,14 +1,13 @@
 # Dotfiles
 
-Personal dotfiles for mangowc on Arch Linux.
+Personal dotfiles for mangowc on Arch Linux (my personal system uses CachyOS, which is based on Arch).
 
 ## Overview
 
 - **WM**: mangowc (Wayland)
 - **Shell**: Fish
 - **Terminal**: Alacritty
-- **Editor**: Zed / VS Code
-- **Theme**: Material You generated via [Matugen](https://github.com/InioX/matugen)
+- **Theme**: Material You theme generated via [Matugen](https://github.com/InioX/matugen)
 
 ## Structure
 
