@@ -40,7 +40,9 @@ copy.sh                     # Script to copy selected folders from ~/.config
 
 ## Installation
 
-`Packages to install on Arch`
+### Installation on Arch
+
+`yay -S alacritty fish mpv rofi pipewire wireplumber xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-wlr wl-clipboard grim slurp`
 
 `yay -S alacritty brightnessctl bluetui cliphist clipse fastfetch fish gpu-screen-recorder hyprlock hypridle matugen-bin mprisence mpv rofi swappy sway-audio-idle-inhibit-git swaybg swaync waypaper wlctl zed networkmanager actions-for-nautilus nautilus pipewire wireplumber polkit-gnome grim slurp wl-clipboard wl-clip-persist ttf-jetbrains-mono-nerd noto-fonts xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-wlr xfce-polkit`
 
