@@ -34,20 +34,15 @@ Personal dotfiles for mangowc on Arch Linux.
 ├── wlctl/                  # [TUI Wi-Fi manager](https://github.com/aashish-thapa/wlctl)
 ├── xdg-desktop-portal/     # [Portal config](https://github.com/flatpak/xdg-desktop-portal)
 ├── zed/                    # [Code editor](https://github.com/zed-industries/zed)
-
-copy.sh                     # Script to copy selected folders from ~/.config
 ```
 
 ## Installation
 
 ### Installation on Arch
 
-```
-`yay -S alacritty fish mpv rofi pipewire wireplumber xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-wlr wl-clipboard grim slurp`
-```
 
 ```
-`yay -S alacritty brightnessctl bluetui cliphist clipse fastfetch fish gpu-screen-recorder hyprlock hypridle matugen-bin mprisence mpv rofi swappy sway-audio-idle-inhibit-git swaybg swaync waypaper wlctl zed networkmanager actions-for-nautilus nautilus pipewire wireplumber polkit-gnome grim slurp wl-clipboard wl-clip-persist ttf-jetbrains-mono-nerd noto-fonts xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-wlr xfce-polkit`
+yay -S mango xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-wlr swaybg swaync sway-audio-idle-inhibit-git hyprlock hypridle rofi waypaper grim slurp swappy gpu-screen-recorder alacritty fish zed nautilus actions-for-nautilus-git mpv mprisence pipewire wireplumber clipse cliphist wl-clipboard wl-clip-persist networkmanager brightnessctl fastfetch bluetui wlctl matugen-bin ttf-jetbrains-mono-nerd noto-fonts
 ```
 
 ### Fonts
@@ -62,15 +57,11 @@ pacman -S ttf-jetbrains-mono noto-fonts
 ./copy.sh
 ```
 
-This copies all configs from `~/.config` to the dotfiles repo.
+Run this script to copy the specified configs from `~/.config` to the dotfiles repo.
 
 ### Apply Theme
 
-```bash
-matugen
-```
-
-Generate colors from your wallpaper and apply to all configured apps.
+Use waypaper to change the wallpaper and generate the corresponding matugen theme from it, applying to all configured applications.
 
 ## Keybinds
 
@@ -83,11 +74,14 @@ Generate colors from your wallpaper and apply to all configured apps.
 | `Super + Z` | Zed |
 | `Super + V` | Clipse |
 | `Super + B` | Helium Browser |
-| `Print` | Screenshot |
-| `Shift + Print` | Screen Record |
+| `Print` | Screenshot the currently focused screen |
+| `Alt + Print` | Screenshot all screens |
+| `Ctrl + Print` | Screenshot a region |
+| `Shift + Print` | Record the currently focused screen |
+| `Ctrl + Shift + Print` | Screenshot |
 | `Super + 1-9` | Switch tags |
 | `Super + Shift + 1-9` | Move window to tag |
 
-See `mango/binds.conf` for full list.
+See `mango/binds.conf` for the full list.
 
 Before starting mangowm, make sure `monitor.conf` is configured for your display setup to ensure the desktop loads correctly.
