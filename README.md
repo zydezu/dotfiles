@@ -12,8 +12,6 @@ Personal dotfiles for mangowc on Arch Linux.
 
 ## Structure
 
-```
-.
 ├── actions-for-nautilus/   # [Configurable right click for nautilus](https://github.com/bassmanitram/actions-for-nautilus)
 ├── alacritty/              # [Terminal](https://github.com/alacritty/alacritty)
 ├── bluetui/                # [TUI bluetooth manager](https://github.com/pythops/bluetui)
@@ -34,7 +32,6 @@ Personal dotfiles for mangowc on Arch Linux.
 ├── wlctl/                  # [TUI Wi-Fi manager](https://github.com/aashish-thapa/wlctl)
 ├── xdg-desktop-portal/     # [Portal config](https://github.com/flatpak/xdg-desktop-portal)
 ├── zed/                    # [Code editor](https://github.com/zed-industries/zed)
-```
 
 ## Installation
 
