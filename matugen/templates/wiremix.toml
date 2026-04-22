@@ -1,0 +1,53 @@
+tab = "output"
+tabs = [ "output", "input", "playback", "recording", "configuration" ]
+keybindings = [
+    { key = "Esc", action = "Exit" },
+]
+
+theme = "matugen"
+
+[themes.matugen]
+inherit = "default"
+
+# Selection indicators
+selector = { fg = "{{colors.primary.default.hex}}" }
+
+# Tab styling
+tab = { fg = "{{colors.on_surface_variant.default.hex}}" }
+tab_selected = { fg = "{{colors.primary.default.hex}}" }
+tab_marker = { fg = "{{colors.tertiary.default.hex}}" }
+
+# List overflow indicators
+list_more = { fg = "{{colors.outline.default.hex}}" }
+
+# Node info
+node_title = { fg = "{{colors.on_surface.default.hex}}" }
+node_target = { fg = "{{colors.on_surface_variant.default.hex}}" }
+
+# Volume
+volume = { fg = "{{colors.on_surface.default.hex}}" }
+volume_empty = { fg = "{{colors.outline_variant.default.hex}}" }
+volume_filled = { fg = "{{colors.secondary.default.hex}}" }
+
+# Peak meter
+meter_inactive = { fg = "{{colors.outline_variant.default.hex}}" }
+meter_active = { fg = "{{colors.tertiary.default.hex}}" }
+meter_overload = { fg = "{{colors.error.default.hex}}" }
+meter_center_inactive = { fg = "{{colors.outline.default.hex}}" }
+meter_center_active = { fg = "{{colors.tertiary_container.default.hex}}" }
+
+# Config tab
+config_device = { fg = "{{colors.on_surface.default.hex}}" }
+config_profile = { fg = "{{colors.secondary.default.hex}}" }
+
+# Dropdowns
+dropdown_icon = { fg = "{{colors.primary.default.hex}}" }
+dropdown_border = { fg = "{{colors.outline.default.hex}}" }
+dropdown_item = { fg = "{{colors.on_surface.default.hex}}" }
+dropdown_selected = { fg = "{{colors.on_primary.default.hex}}", bg = "{{colors.primary.default.hex}}" }
+dropdown_more = { fg = "{{colors.outline.default.hex}}" }
+
+# Help menu
+help_border = { fg = "{{colors.outline.default.hex}}" }
+help_item = { fg = "{{colors.on_surface_variant.default.hex}}" }
+help_more = { fg = "{{colors.outline.default.hex}}" }

@@ -78,3 +78,7 @@ post_hook = 'gsettings set org.gnome.desktop.interface gtk-theme ""; gsettings s
 [templates.gtk4]
 input_path = "~/.config/matugen/templates/gtk.css"
 output_path = "~/.config/gtk-4.0/colors.css"
+
+[templates.wiremix]
+input_path = "~/.config/matugen/templates/wiremix.toml"
+output_path = "~/.config/wiremix/wiremix.toml"
