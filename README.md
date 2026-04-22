@@ -12,26 +12,30 @@ Personal dotfiles for mangowc on Arch Linux.
 
 ## Structure
 
-├── actions-for-nautilus/   # [Configurable right click for nautilus](https://github.com/bassmanitram/actions-for-nautilus)
-├── alacritty/              # [Terminal](https://github.com/alacritty/alacritty)
-├── bluetui/                # [TUI bluetooth manager](https://github.com/pythops/bluetui)
-├── clipse/                 # [Clipboard manager](https://github.com/savedra1/clipse)
-├── environment.d/          # Environment variables
-├── fastfetch/              # [System info](https://github.com/fastfetch-cli/fastfetch)
-├── fish/                   # [Shell](https://github.com/fish-shell/fish-shell)
-├── gpu-screen-recorder/    # [Screen recording](https://github.com/BrycensRanch/gpu-screen-recorder-git-copr)
-├── hypr/                   # [Hyprlock & hypridle](https://github.com/hyprwm/hyprlock)
-├── mango/                  # [Wayland compositor](https://github.com/mangowm/mango)
-├── matugen/                # [Color theming](https://github.com/InioX/matugen)
-├── mprisence/              # [Discord rich presence](https://github.com/lazykern/mprisence)
-├── mpv/                    # [Video player](https://github.com/mpv-player/mpv)
-├── rofi/                   # [App launcher](https://github.com/davatorium/rofi)
-├── swappy/                 # [Screenshot markup](https://github.com/jtheoof/swappy)
-├── swaync/                 # [Notification center](https://github.com/ErikReider/SwayNotificationCenter)
-├── waypaper/               # [Wallpaper](https://github.com/anufrievroman/waypaper)
-├── wlctl/                  # [TUI Wi-Fi manager](https://github.com/aashish-thapa/wlctl)
-├── xdg-desktop-portal/     # [Portal config](https://github.com/flatpak/xdg-desktop-portal)
-├── zed/                    # [Code editor](https://github.com/zed-industries/zed)
+```
+| Directory | Description |
+|-----------|-------------|
+| `actions-for-nautilus/` | [Configurable right click for nautilus](https://github.com/bassmanitram/actions-for-nautilus) |
+| `alacritty/` | [Terminal](https://github.com/alacritty/alacritty) |
+| `bluetui/` | [TUI bluetooth manager](https://github.com/pythops/bluetui) |
+| `clipse/` | [Clipboard manager](https://github.com/savedra1/clipse) |
+| `environment.d/` | Environment variables |
+| `fastfetch/` | [System info](https://github.com/fastfetch-cli/fastfetch) |
+| `fish/` | [Shell](https://github.com/fish-shell/fish-shell) |
+| `gpu-screen-recorder/` | [Screen recording](https://github.com/BrycensRanch/gpu-screen-recorder-git-copr) |
+| `hypr/` | [Hyprlock & hypridle](https://github.com/hyprwm/hyprlock) |
+| `mango/` | [Wayland compositor](https://github.com/mangowm/mango) |
+| `matugen/` | [Color theming](https://github.com/InioX/matugen) |
+| `mprisence/` | [Discord rich presence](https://github.com/lazykern/mprisence) |
+| `mpv/` | [Video player](https://github.com/mpv-player/mpv) |
+| `rofi/` | [App launcher](https://github.com/davatorium/rofi) |
+| `swappy/` | [Screenshot markup](https://github.com/jtheoof/swappy) |
+| `swaync/` | [Notification center](https://github.com/ErikReider/SwayNotificationCenter) |
+| `waypaper/` | [Wallpaper](https://github.com/anufrievroman/waypaper) |
+| `wlctl/` | [TUI Wi-Fi manager](https://github.com/aashish-thapa/wlctl) |
+| `xdg-desktop-portal/` | [Portal config](https://github.com/flatpak/xdg-desktop-portal) |
+| `zed/` | [Code editor](https://github.com/zed-industries/zed) |
+```
 
 ## Installation
 
