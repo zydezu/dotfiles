@@ -12,7 +12,8 @@ Personal dotfiles for mangowc on Arch Linux.
 
 ## Structure
 
-```
+Right, remove the codeblock — just paste the raw markdown directly into your README:
+
 | Directory | Description |
 |-----------|-------------|
 | `actions-for-nautilus/` | [Configurable right click for nautilus](https://github.com/bassmanitram/actions-for-nautilus) |
@@ -35,7 +36,6 @@ Personal dotfiles for mangowc on Arch Linux.
 | `wlctl/` | [TUI Wi-Fi manager](https://github.com/aashish-thapa/wlctl) |
 | `xdg-desktop-portal/` | [Portal config](https://github.com/flatpak/xdg-desktop-portal) |
 | `zed/` | [Code editor](https://github.com/zed-industries/zed) |
-```
 
 ## Installation
 
