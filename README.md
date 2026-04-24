@@ -80,3 +80,7 @@ Use waypaper to change the wallpaper and generate the corresponding matugen them
 See `mango/binds.conf` for the full list.
 
 Before starting mangowm, make sure `monitor.conf` is configured for your display setup to ensure the desktop loads correctly.
+
+## Things To Check
+
+When applying these dotfiles and logging into mango from your login manager, it may seem like things are not working. Check the configuration files in `mango/monitor.conf`, `mango/waybar/config.jsonc` and `hypr/hyprlock.conf`  specifically for setting a monitor output (you may need to change or remove lines like `DP-1`).
