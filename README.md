@@ -43,7 +43,7 @@ Right, remove the codeblock — just paste the raw markdown directly into your R
 ### Installation on Arch
 
 ```
-yay -S mangowm xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-wlr swaybg swaync sway-audio-idle-inhibit-git hyprlock hypridle rofi rofi-power-menu waypaper grim slurp swappy gpu-screen-recorder alacritty fish zed nautilus actions-for-nautilus-git mpv mprisence pipewire wireplumber clipse cliphist wl-clipboard wl-clip-persist networkmanager dunst brightnessctl fastfetch bluetui wlctl matugen ttf-jetbrains-mono-nerd noto-fonts
+yay -S mangowm xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-wlr swaybg swaync sway-audio-idle-inhibit-git hyprlock hypridle rofi rofi-power-menu waypaper grim slurp swappy gpu-screen-recorder alacritty fish zed nautilus actions-for-nautilus-git mpv mprisence pipewire wireplumber wiremix clipse cliphist wl-clipboard wl-clip-persist networkmanager dunst brightnessctl fastfetch bluetui wlctl matugen ttf-jetbrains-mono-nerd noto-fonts
 ```
 
 ### Copy Configs
