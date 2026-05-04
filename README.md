@@ -13,8 +13,6 @@ Personal dotfiles for mangowc on Arch Linux (my personal system uses CachyOS, wh
 
 ## Structure
 
-Right, remove the codeblock — just paste the raw markdown directly into your README:
-
 | Directory | Description |
 |-----------|-------------|
 | `actions-for-nautilus/` | [Configurable right click for nautilus](https://github.com/bassmanitram/actions-for-nautilus) |
