@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
-# Record in a certain codec, such as h264, hevc or av1 - refer to man gpu-screen-recorder for more details
-CODEC="hevc"
-FPS=60
+# Refer to 'man gpu-screen-recorder' for more details about these options
+FPS=60 # The frame rate to record at
+VIDEO_CODEC="hevc" # Recording codec, such as h264, hevc or av1
+AUDIO_CODEC="opus" # The audio codec to use, it can be opus or aac
+QUALITY="ultra" # Can be medium, high, very_high, ultra
 
 MODE="$1"
 BASE_DIR="$HOME/Videos/recordings"
@@ -33,7 +35,7 @@ get_workspace_name() {
     | tr '[:upper:]' '[:lower:]'
 }
 
-# STOP RECORDING
+# Stop and save recording
 if [ -f "$PIDFILE" ]; then
     PID=$(cat "$PIDFILE" | head -1)
     FILE=$(cat "$PIDFILE" | tail -1)
@@ -44,7 +46,6 @@ if [ -f "$PIDFILE" ]; then
         TMPDIR=$(mktemp -d)
         THUMB_FILE="$TMPDIR/thumb.png"
         ffmpeg -i "$FILE" -vframes 1 -vf "scale=128:128" -y "$THUMB_FILE" 2>/dev/null
-        sleep 1
         echo "file://$FILE" | wl-copy --type text/uri-list
 
         if [ -f "$THUMB_FILE" ]; then
@@ -71,7 +72,7 @@ if [ -f "$PIDFILE" ]; then
     fi
 fi
 
-# START RECORDING
+# Start recording
 WORKSPACE_NAME=$(get_workspace_name)
 FILE="$DIR/$(date +'%Y-%m-%d_%H-%M-%S')_${WORKSPACE_NAME}.mp4"
 MONITOR=$(mmsg -g -o | grep 'selmon 1' | awk '{print $1}')
@@ -85,9 +86,9 @@ if [ "$MODE" = "select" ]; then
         -c mp4 \
         -f "$FPS" \
         -a default_output \
-        -k "$CODEC" \
-        -q medium \
-        -fm vfr \
+        -ac "$AUDIO_CODEC" \
+        -k "$VIDEO_CODEC" \
+        -q "$QUALITY" \
         -o "$FILE" &
 else
     gpu-screen-recorder \
@@ -95,18 +96,11 @@ else
         -c mp4 \
         -f "$FPS" \
         -a default_output \
-        -k "$CODEC" \
-        -q medium \
-        -fm vfr \
+        -ac "$AUDIO_CODEC" \
+        -k "$VIDEO_CODEC" \
+        -q "$QUALITY" \
         -o "$FILE" &
 fi
 
 PID=$!
 echo -e "$PID\n$FILE" > "$PIDFILE"
-ACTION=$(dunstify "Screen recording started" \
-    -t 1000 \
-    -A stop,"Stop Recording")
-if [ "$ACTION" = "stop" ]; then
-    kill -INT "$(cat "$PIDFILE" | head -1)"
-    rm -f "$PIDFILE"
-fi
