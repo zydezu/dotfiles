@@ -44,17 +44,25 @@ if [ -f "$PIDFILE" ]; then
         TMPDIR=$(mktemp -d)
         THUMB_FILE="$TMPDIR/thumb.png"
         ffmpeg -i "$FILE" -vframes 1 -vf "scale=128:128" -y "$THUMB_FILE" 2>/dev/null
+        sleep 1
+        echo "file://$FILE" | wl-copy --type text/uri-list
+
         if [ -f "$THUMB_FILE" ]; then
-            ACTION=$(dunstify "Recording has been saved" \
+            ACTION=$(dunstify "Screen recording has been saved" \
                 -i "$THUMB_FILE" \
-                -t 2000 \
+                -t 4000 \
+                -A view,"View Recording" \
                 -A open,"Open Folder")
         else
-            ACTION=$(dunstify "Recording has been saved" \
-                -t 2000 \
+            ACTION=$(dunstify "Screen recording has been saved" \
+                -t 4000 \
+                -A view,"View Recording" \
                 -A open,"Open Folder")
         fi
+
+        [ "$ACTION" = "view" ] && xdg-open "$FILE"
         [ "$ACTION" = "open" ] && xdg-open "$(dirname "$FILE")"
+
         # Clean up temp directory to allow notification to be displayed
         (sleep 3 && rm -rf "$TMPDIR") &
         exit 0
@@ -95,8 +103,8 @@ fi
 
 PID=$!
 echo -e "$PID\n$FILE" > "$PIDFILE"
-ACTION=$(dunstify "Recording started" \
-    -t 2000 \
+ACTION=$(dunstify "Screen recording started" \
+    -t 1000 \
     -A stop,"Stop Recording")
 if [ "$ACTION" = "stop" ]; then
     kill -INT "$(cat "$PIDFILE" | head -1)"

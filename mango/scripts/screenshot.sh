@@ -67,18 +67,14 @@ fi
 
 ACTION=$(dunstify "Screenshot has been saved" \
     -i "$CROPPED_FILE" \
-    -t 10000 \
-    -A open,"Open Folder" \
-    -A edit,"Edit Image" \
-    -A delete,"Delete File")
+    -t 4000 \
+    -A view,"View Image" \
+    -A edit,"Annotate" \
+    -A open,"Open Folder")
 
-if [ "$ACTION" = "edit" ]; then
-    swappy -f "$FILE" &
-elif [ "$ACTION" = "open" ]; then
-    xdg-open "$(dirname "$FILE")" &
-elif [ "$ACTION" = "delete" ]; then
-    rm "$FILE"
-fi
+[ "$ACTION" = "view" ] && xdg-open "$FILE" &
+[ "$ACTION" = "open" ] && xdg-open "$(dirname "$FILE")" &
+[ "$ACTION" = "edit" ] && swappy -f "$FILE" &
 
 # Clean up temp directory to allow notification to be displayed
 (sleep 3 && rm -rf "$TMPDIR") &
