@@ -10,7 +10,6 @@ window#waybar {
     background: none;
     margin: 0px;
     padding: 0px;
-    min-height: 34px;
 }
 
 tooltip {
@@ -57,6 +56,7 @@ menu menuitem:disabled {
 #system,
 #audio,
 #connectivity,
+#custom-tray-icon,
 #custom-updates,
 #custom-weather,
 #custom-notifications,
@@ -202,34 +202,35 @@ menu menuitem:disabled {
 }
 
 #taskbar button {
-    margin-right: 3px;
-}
-
-#mpris {
-    margin-left: 4px;
-}
-
-#clock {
     margin-right: 4px;
-    padding-right: 16px;
 }
 
+#clock,
 #upower {
     margin-right: 4px;
 }
 
 #custom-notifications,
 #custom-updates,
-#custom-weather {
+#custom-weather,
+#custom-power,
+#custom-tray-icon {
     margin-right: 4px;
+    padding-left: 8px;
+    padding-right: 12px;
+}
+
+#custom-notifications {
     padding-left: 10px;
-    padding-right: 14px;
+    margin-right: 5px;
 }
 
 #custom-power {
     margin-right: 5px;
-    padding-left: 10px;
-    padding-right: 14px;
+}
+
+#custom-tray-icon {
+    padding-right: 10px;
 }
 
 #workspaces button.active,
@@ -245,4 +246,12 @@ menu menuitem:disabled {
     padding-top: 0px;
     padding-bottom: 0px;
     border-radius: 0px;
+}
+
+#battery.warning {
+    color: @alert_critical;
+}
+
+#battery.critical {
+    color: @alert_urgent;
 }

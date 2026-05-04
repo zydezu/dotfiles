@@ -1,5 +1,4 @@
 {
-  "output": "DP-1",
   "layer": "top",
   "position": "top",
   "exclusive": true,
@@ -19,8 +18,8 @@
   "modules-right": [
     "group/tray-group",
     "group/audio",
-    "group/system",
     "group/connectivity",
+    "group/system",
     "clock",
     "custom/notifications"
     // "custom/power"
@@ -35,11 +34,12 @@
   "group/system": {
     "orientation": "horizontal",
     "modules": [
-      "cpu",
-      "memory",
+      // "cpu",
+      // "memory",
       // "custom/gpu-usage",
       // "power-profiles-daemon",
-      "backlight"
+      "backlight",
+      "battery"
     ]
   },
   "group/connectivity": {
@@ -205,7 +205,7 @@
     "format-disconnected": " Disconnected",
     "format-disabled": "󰖪 Off",
     "tooltip-format": "{ifname} {ipaddr}/via {gwaddr} ({frequency}GHz)\nBandwidth: ↓{bandwidthDownBits} ↑{bandwidthUpBits}",
-    "on-click": "alacritty --title 'wlctl' -e sudo wlctl"
+    "on-click": "alacritty --title 'wlctl' -e wlctl"
   },
   "bluetooth": {
     "format": "󰂯 On",
