@@ -5,6 +5,9 @@ hypridle >/dev/null 2>&1 &
 # Inhibit locking by audio
 sway-audio-idle-inhibit >/dev/null 2>&1 &
 
+# Suppress notifications in fullscreen
+~/.config/mango/scripts/fullscreen-dnd.sh >/dev/null 2>&1 &
+
 # Run the desktop portal (URI/screenshare)
 /usr/lib/xdg-desktop-portal-wlr >/dev/null 2>&1 &
 

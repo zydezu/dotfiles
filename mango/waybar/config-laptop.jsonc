@@ -107,14 +107,14 @@
   },
   "pulseaudio": {
     "format": "{icon} {volume}%",
-    "format-muted": "  ",
-    "format-bluetooth": " {volume}%",
-    "format-bluetooth-muted": " Muted",
+    "format-muted": "  Muted",
+    "format-bluetooth": "{icon} {volume}%",
     "tooltip-format": "{desc}",
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
     "on-click-right": "alacritty --title 'wiremix' -e wiremix",
     "on-scroll-up": "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 2%+",
     "on-scroll-down": "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 2%-",
+    "max-volume": 150,
     "scroll-step": 5,
     "format-icons": {
       "headphone": "󰋋",
@@ -211,10 +211,11 @@
     "format": "󰂯 On",
     "format-disabled": "󰂲 Off",
     "format-connected": "󰂱 {num_connections}",
-    "format-connected-battery": "󰂱 Connected ({device_battery_percentage}%)",
+    "format-connected-battery": "󰂱 {device_battery_percentage}%",
     "tooltip-format": "{controller_alias}\t{controller_address}",
     "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
-    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
     "on-click": "alacritty --title 'bluetui' -e bluetui"
   },
   "custom/ps_controller": {
