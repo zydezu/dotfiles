@@ -1,20 +1,47 @@
-#!/bin/sh
+#!/bin/bash
 
-prev_state=$(mmsg -g -m | awk '{print $NF}')
+declare -A monitor_state
 
-mmsg -w -m | while read -r line; do
-    state=$(echo "$line" | awk '{print $NF}')
+while IFS= read -r line; do
+    monitor_state[${line%% *}]=${line##* }
+done < <(mmsg -g -m)
 
-    if [ "$state" = "$prev_state" ]; then
-        continue
-    fi
-    prev_state="$state"
+any_fullscreen() {
+    for state in "${monitor_state[@]}"; do
+        [[ "$state" == "1" ]] && return 0
+    done
+    return 1
+}
 
-    if [ "$state" = "1" ]; then
-        swaync-client --inhibitor-add "fullscreen"
-        swaync-client --dnd-on
+is_dnd() {
+    [[ "$(swaync-client --get-dnd 2>/dev/null)" == "true" ]]
+}
+
+dnd_active=0
+was_manual_dnd=0
+
+while IFS= read -r line; do
+    monitor_state[${line%% *}]=${line##* }
+
+    if any_fullscreen; then
+        if (( dnd_active == 0 )); then
+            if is_dnd; then
+                was_manual_dnd=1
+            else
+                was_manual_dnd=0
+                swaync-client --inhibitor-add "fullscreen"
+                swaync-client --dnd-on
+            fi
+            dnd_active=1
+        fi
     else
-        swaync-client --inhibitor-remove "fullscreen"
-        swaync-client --dnd-off
+        if (( dnd_active == 1 )); then
+            if (( was_manual_dnd == 0 )); then
+                swaync-client --inhibitor-remove "fullscreen"
+                swaync-client --dnd-off
+            fi
+            dnd_active=0
+            was_manual_dnd=0
+        fi
     fi
-done
+done < <(mmsg -w -m)
