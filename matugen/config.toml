@@ -58,6 +58,10 @@ output_path = '~/.config/AdwSteamGtk/custom.css'
 input_path = '~/.config/matugen/templates/prismlauncher.json'
 output_path = '~/.local/share/PrismLauncher/themes/Matugen/theme.json'
 
+[templates.obsidian]
+input_path = '~/.config/matugen/templates/obsidian.css'
+output_path = '/home/zy/Documents/Obsidian Vault/.obsidian/snippets/matugen.css'
+
 [templates.opencode]
 input_path = '~/.config/matugen/templates/opencode.json'
 output_path = '~/.config/opencode/themes/matugen.json'
