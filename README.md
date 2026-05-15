@@ -2,7 +2,7 @@
 
 Personal dotfiles for mangowc on Arch Linux (my personal system uses CachyOS, which is based on Arch).
 
-<img width="2560" height="1440" alt="image" src="https://github.com/user-attachments/assets/9e6099c8-d5f8-461a-84ca-52f1cc18ad6f" />
+<img width="2560" height="1440" alt="image" src="https://raw.githubusercontent.com/zydezu/dotfiles/main/screenshot.png" />
 
 ## Overview
 
