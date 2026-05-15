@@ -4,12 +4,12 @@
   "positionY": "top",
   "control-center-preferred-output": "DP-1",
   "notification-window-preferred-output": "DP-1",
-  "notification-grouping": false,
+  "notification-grouping": true,
   "timeout": 5,
   "timeout-low": 4,
   "timeout-critical": 0,
   "fit-to-screen": true,
-  "notification-window-width": 440,
+  "notification-window-width": 480,
   "transition-time": 200,
   "script-fail-notify": true,
   "widgets": [
@@ -41,7 +41,7 @@
       "actions": [
         {
           "label": "󰖩",
-          "command": "alacritty --title impala -e impala"
+          "command": "alacritty --title wlctl -e wlctl"
         },
         {
           "label": "󰂯",

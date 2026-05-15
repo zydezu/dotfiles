@@ -26,8 +26,14 @@
     font-weight: 400;
 }
 
+.floating-notifications {
+    margin-right: 0px;
+    margin-top: 6px;
+}
+
 .control-center {
     border: var(--noti-border-color);
+    margin: 5px;
 }
 
 .control-center .control-center-list-placeholder {
