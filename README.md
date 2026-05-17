@@ -60,6 +60,8 @@ Use waypaper to change the wallpaper and generate the corresponding matugen them
 
 ### Apps
 
+Binds to launch various applications.
+
 | Key | Action |
 |-----|--------|
 | <kbd>Super</kbd> + <kbd>Return</kbd> | Launch alacritty |
@@ -68,30 +70,34 @@ Use waypaper to change the wallpaper and generate the corresponding matugen them
 | <kbd>Super</kbd> + <kbd>b</kbd> | Launch Helium browser |
 | <kbd>Super</kbd> + <kbd>e</kbd> | Launch Nautilus |
 | <kbd>Super</kbd> + <kbd>z</kbd> | Launch Zeditor |
-| <kbd>Super</kbd> + <kbd>v</kbd> | Launch alacritty (clipse) |
-| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Esc</kbd> | Launch alacritty (btop) |
+| <kbd>Super</kbd> + <kbd>v</kbd> | Launch clipse |
+| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Esc</kbd> | Launch btop |
 | <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>c</kbd> | Hyprpicker (color picker) |
 
 ### Screenshotting
 
+Screenshots use grim and wl-copy, whilst screenrecording uses gpu-screen-recorder.
+
 | Key | Action |
 |-----|--------|
-| <kbd>Print</kbd> | Screenshot |
-| <kbd>Alt</kbd> + <kbd>Print</kbd> | Screenshot (both screens) |
-| <kbd>Ctrl</kbd> + <kbd>Print</kbd> | Screenshot (select area) |
-| <kbd>Shift</kbd> + <kbd>Print</kbd> | Screen record |
-| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Print</kbd> | Screen record (select area) |
+| <kbd>Print</kbd> | Screenshot (active screen) |
+| <kbd>Alt</kbd> + <kbd>Print</kbd> | Screenshot (all screens) |
+| <kbd>Ctrl</kbd> + <kbd>Print</kbd> | Screenshot (select region) |
+| <kbd>Shift</kbd> + <kbd>Print</kbd> | Screen record (active screen) |
+| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Print</kbd> | Screen record (select region) |
 
 ### Tags
 
+Tags are numbered from 1 to 9, they act like separate workspaces.
+
 | Key | Action |
 |-----|--------|
-| <kbd>Super</kbd> + <kbd>Left</kbd> | View to left tag |
-| <kbd>Super</kbd> + <kbd>Right</kbd> | View to right tag |
-| <kbd>Super</kbd> + <kbd>Ctrl</kbd> + <kbd>Left</kbd> | Tag to left |
-| <kbd>Super</kbd> + <kbd>Ctrl</kbd> + <kbd>Right</kbd> | Tag to right |
-| <kbd>Super</kbd> + <kbd>1-9</kbd> | Switch to tag N |
-| <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>1-9</kbd> | Send window to tag N (silent) |
+| <kbd>Super</kbd> + <kbd>Left</kbd> | Switch tags to the left |
+| <kbd>Super</kbd> + <kbd>Right</kbd> | Switch tags to the right |
+| <kbd>Super</kbd> + <kbd>Ctrl</kbd> + <kbd>Left</kbd> | Move window to the left tag |
+| <kbd>Super</kbd> + <kbd>Ctrl</kbd> + <kbd>Right</kbd> | Move window to the right tag |
+| <kbd>Super</kbd> + <kbd>1-9</kbd> | Switch to numbered tag (follow the window) |
+| <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>1-9</kbd> | Send window to numbered tag (don't follow the window) |
 
 ### Window Management
 
