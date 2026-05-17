@@ -58,22 +58,112 @@ Use waypaper to change the wallpaper and generate the corresponding matugen them
 
 ## Keybinds
 
+### Apps
+
 | Key | Action |
 |-----|--------|
-| `Super + Return` | Alacritty |
-| `Super + Space` | Rofi |
-| `Super + L` | Lock |
-| `Super + E` | Nautilus |
-| `Super + Z` | Zed |
-| `Super + V` | Clipse |
-| `Super + B` | Helium Browser |
-| `Print` | Screenshot the currently focused screen |
-| `Alt + Print` | Screenshot all screens |
-| `Ctrl + Print` | Screenshot a region |
-| `Shift + Print` | Record the currently focused screen |
-| `Ctrl + Shift + Print` | Screenshot |
-| `Super + 1-9` | Switch tags |
-| `Super + Shift + 1-9` | Move window to tag |
+| <kbd>Super</kbd> + <kbd>Return</kbd> | Launch alacritty |
+| <kbd>Super</kbd> + <kbd>Space</kbd> | Launch rofi (app launcher) |
+| <kbd>Super</kbd> + <kbd>l</kbd> | Lock session |
+| <kbd>Super</kbd> + <kbd>b</kbd> | Launch Helium browser |
+| <kbd>Super</kbd> + <kbd>e</kbd> | Launch Nautilus |
+| <kbd>Super</kbd> + <kbd>z</kbd> | Launch Zeditor |
+| <kbd>Super</kbd> + <kbd>v</kbd> | Launch alacritty (clipse) |
+| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Esc</kbd> | Launch alacritty (btop) |
+| <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>c</kbd> | Hyprpicker (color picker) |
+
+### Screenshotting
+
+| Key | Action |
+|-----|--------|
+| <kbd>Print</kbd> | Screenshot |
+| <kbd>Alt</kbd> + <kbd>Print</kbd> | Screenshot (both screens) |
+| <kbd>Ctrl</kbd> + <kbd>Print</kbd> | Screenshot (select area) |
+| <kbd>Shift</kbd> + <kbd>Print</kbd> | Screen record |
+| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Print</kbd> | Screen record (select area) |
+
+### Tags
+
+| Key | Action |
+|-----|--------|
+| <kbd>Super</kbd> + <kbd>Left</kbd> | View to left tag |
+| <kbd>Super</kbd> + <kbd>Right</kbd> | View to right tag |
+| <kbd>Super</kbd> + <kbd>Ctrl</kbd> + <kbd>Left</kbd> | Tag to left |
+| <kbd>Super</kbd> + <kbd>Ctrl</kbd> + <kbd>Right</kbd> | Tag to right |
+| <kbd>Super</kbd> + <kbd>1-9</kbd> | Switch to tag N |
+| <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>1-9</kbd> | Send window to tag N (silent) |
+
+### Window Management
+
+| Key | Action |
+|-----|--------|
+| <kbd>Super</kbd> + <kbd>q</kbd> | Kill focused client |
+| <kbd>Alt</kbd> + <kbd>Tab</kbd> | Toggle overview |
+| <kbd>Super</kbd> + <kbd>Tab</kbd> | Focus next window |
+| <kbd>Super</kbd> + <kbd>g</kbd> | Toggle global |
+| <kbd>Super</kbd> + <kbd>o</kbd> | Toggle overlay |
+| <kbd>Super</kbd> + <kbd>f</kbd> | Toggle floating |
+| <kbd>Super</kbd> + <kbd>t</kbd> | Switch layout |
+| <kbd>Super</kbd> + <kbd>m</kbd> | Minimize window |
+| <kbd>Super</kbd> + <kbd>Ctrl</kbd> + <kbd>m</kbd> | Restore minimized |
+| <kbd>Super</kbd> + <kbd>Alt</kbd> + <kbd>m</kbd> | Toggle scratchpad |
+
+### Window Movement / Swap
+
+| Key | Action |
+|-----|--------|
+| <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>←↑↓→</kbd> | Exchange client with neighbour |
+| <kbd>Super</kbd> + <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Left</kbd> | Send window to left monitor |
+| <kbd>Super</kbd> + <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Right</kbd> | Send window to right monitor |
+| <kbd>Super</kbd> + <kbd>Left click</kbd> | Move window |
+| <kbd>Super</kbd> + <kbd>Right click</kbd> | Resize window |
+
+### Misc
+
+| Key | Action |
+|-----|--------|
+| <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>r</kbd> | Reload config |
+| <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>w</kbd> | Reload waybar |
+
+### Gaps
+
+| Key | Action |
+|-----|--------|
+| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>x</kbd> | Increase gaps |
+| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>z</kbd> | Decrease gaps |
+| <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>r</kbd> | Toggle gaps |
+
+### Volume / Media Keys
+
+| Key | Action |
+|-----|--------|
+| <kbd>XF86AudioRaiseVolume</kbd> | Volume +5% |
+| <kbd>XF86AudioLowerVolume</kbd> | Volume -5% |
+| <kbd>XF86AudioMute</kbd> | Toggle mute |
+| <kbd>XF86AudioPlay</kbd> | Play / pause |
+| <kbd>XF86AudioNext</kbd> | Next track |
+| <kbd>XF86AudioPrev</kbd> | Previous track |
+| <kbd>XF86AudioStop</kbd> | Stop |
+| <kbd>XF86MonBrightnessUp</kbd> | Brightness +5% |
+| <kbd>XF86MonBrightnessDown</kbd> | Brightness -5% |
+
+### Gestures (3-finger)
+
+| Gesture | Action |
+|---------|--------|
+| Swipe right | View to left |
+| Swipe left | View to right |
+| Swipe up | Toggle overview |
+| Swipe down | Toggle overview |
+
+### Settings
+
+| Setting | Value |
+|---------|-------|
+| Keyboard layout | gb (compose on Menu) |
+| Mouse natural scroll | Off |
+| Trackpad natural scroll | On |
+| Disable while typing | Off |
 
 See `mango/binds.conf` for the full list.
 
