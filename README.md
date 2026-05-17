@@ -72,7 +72,7 @@ Binds to launch various applications.
 | <kbd>Super</kbd> + <kbd>z</kbd> | Launch Zeditor |
 | <kbd>Super</kbd> + <kbd>v</kbd> | Launch clipse |
 | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Esc</kbd> | Launch btop |
-| <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>c</kbd> | Hyprpicker (color picker) |
+| <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>c</kbd> | Launch color picker |
 
 ### Screenshotting
 
