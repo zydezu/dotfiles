@@ -3,8 +3,8 @@
 FPS=60 # The frame rate to record at
 VIDEO_CODEC="hevc" # Recording codec, such as h264, hevc or av1
 AUDIO_CODEC="opus" # The audio codec to use, it can be opus or aac
-QUALITY="medium" # Can be medium, high, very_high, ultra
-
+QUALITY="high" # Can be medium, high, very_high, ultra
+ob
 MODE="$1"
 BASE_DIR="$HOME/Videos/recordings"
 DATE_DIR="$(date +'%Y-%m-%d')"
@@ -45,7 +45,7 @@ if [ -f "$PIDFILE" ]; then
         rm -f "$PIDFILE"
         TMPDIR=$(mktemp -d)
         THUMB_FILE="$TMPDIR/thumb.png"
-        ffmpeg -i "$FILE" -vframes 1 -vf "scale=128:128" -y "$THUMB_FILE" 2>/dev/null
+        ffmpeg -i "$FILE" -vframes 1 -vf "scale=128:128:force_original_aspect_ratio=increase,crop=128:128" -y "$THUMB_FILE" 2>/dev/null
         echo "file://$FILE" | wl-copy --type text/uri-list
 
         if [ -f "$THUMB_FILE" ]; then
