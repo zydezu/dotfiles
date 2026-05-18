@@ -3,7 +3,7 @@
 FPS=60 # The frame rate to record at
 VIDEO_CODEC="hevc" # Recording codec, such as h264, hevc or av1
 AUDIO_CODEC="opus" # The audio codec to use, it can be opus or aac
-QUALITY="ultra" # Can be medium, high, very_high, ultra
+QUALITY="medium" # Can be medium, high, very_high, ultra
 
 MODE="$1"
 BASE_DIR="$HOME/Videos/recordings"
