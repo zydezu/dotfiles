@@ -28,6 +28,10 @@ menu {
     border-radius: 0;
 }
 
+menu menuitem {
+    border-radius: 0;
+}
+
 menu menuitem:hover {
     background: @border_color;
     color: @text_on_accent;
@@ -71,7 +75,7 @@ menu menuitem:disabled {
     border-width: 2px;
     border-style: solid;
     border-color: @border_color;
-    border-radius: 0px;
+    border-radius: 0;
 }
 
 #workspaces button,
@@ -82,7 +86,7 @@ menu menuitem:disabled {
     border-radius: 0;
     box-shadow: inherit;
     text-shadow: inherit;
-    padding: 1px 3px;
+    padding: 1px;
 }
 
 #workspaces button:hover,
@@ -190,6 +194,7 @@ menu menuitem:disabled {
 #taskbar {
     margin-left: 4px;
     margin-right: 4px;
+    padding-right: 4px;
 }
 
 #taskbar.empty {
