@@ -41,7 +41,7 @@ Personal dotfiles for mangowc on Arch Linux (my personal system uses CachyOS, wh
 ### Installation on Arch
 
 ```
-yay -S mangowm xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-wlr swaybg swaync sway-audio-idle-inhibit-git hyprlock hypridle rofi rofi-power-menu waypaper grim slurp swappy gpu-screen-recorder alacritty fish zed nautilus actions-for-nautilus-git mpv mprisence pipewire wireplumber wiremix clipse cliphist wl-clipboard wl-clip-persist networkmanager dunst brightnessctl fastfetch bluetui wlctl matugen ttf-jetbrains-mono-nerd noto-fonts
+yay -S mangowm xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-wlr swaybg swaync sway-audio-idle-inhibit-git hyprlock hypridle wlopm rofi rofi-power-menu waypaper grim slurp swappy gpu-screen-recorder alacritty fish zed nautilus actions-for-nautilus-git mpv mprisence pipewire wireplumber wiremix clipse cliphist wl-clipboard wl-clip-persist networkmanager dunst brightnessctl fastfetch bluetui wlctl matugen ttf-jetbrains-mono-nerd noto-fonts
 ```
 
 ### Copy Configs
