@@ -1,4 +1,7 @@
 #! /bin/bash
+# Screen locking and sleeping
+hypridle >/dev/null 2>&1 &
+
 # Inhibit locking by audio
 sway-audio-idle-inhibit >/dev/null 2>&1 &
 
