@@ -217,7 +217,7 @@
       "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
       "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
       "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
-      "on-click": "alacritty --title 'bluetui' -e bluetui"
+      "on-click": "alacritty --title 'bluetui' -e ~/.config/mango/waybar/scripts/openbluetui.sh"
     },
     "custom/ps_controller": {
       "format": "{}",
