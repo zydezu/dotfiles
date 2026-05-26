@@ -19,7 +19,7 @@ get_workspace_name() {
     BORING_APPIDS="org.gnome.Nautilus|thunar|org.kde.dolphin|pcmanfm|nemo"
 
     mmsg -g -c 2>/dev/null | awk -v mon="$MONITOR" -v boring="$BORING_APPIDS" '
-        $1 == mon && $2 == "title"  { $1=$2=""; sub(/^ +/,""); title=$0 }
+        $1 == mon && $2 == "title"  { $1=$2=""; sub(/^ +/,""); title=substr($0,1,30) }
         $1 == mon && $2 == "appid"  {
             appid = $3
             n = split(appid, parts, ".")
