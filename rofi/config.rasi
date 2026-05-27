@@ -4,24 +4,21 @@ configuration {
     font: "JetBrainsMono Nerd Font 12";
     icon-theme: "Adwaita";
     show-icons: true;
-    sort: true;    
+    sort: true;
     sorting-method: "fzf";
     kb-accept-custom: "";
 }
 
 * {
-    background-color: @surface-container;
-    border-color: @on-secondary;
+    background-color: transparent;
     text-color: @on-surface;
-    selected-background-color: @primary-container;
-    selected-text-color: @on-primary-container;
-    urgent-background-color: @error-container;
-    urgent-text-color: @on-error-container;
 }
 
 window {
     background-color: @surface-container;
-    padding: 10px;
+    border-color: @primary;
+    border: 1px;
+    padding: 5px;
 }
 
 mainbox {
@@ -32,18 +29,32 @@ prompt, textbox-prompt-colon {
     enabled: false;
 }
 
+inputbar {
+    background-color: @surface-container-highest;
+    padding: 10px 12px;
+    children: [ prompt, entry ];
+}
+
 entry {
     text-color: @on-surface;
     placeholder: "Search programs:";
-    padding: 5px;
+    placeholder-color: @on-surface-variant;
 }
 
 listview {
-    lines: 12;       /* number of visible entries */
+    lines: 12;
 }
 
 element {
     padding: 2px 10px;
+}
+
+element normal {
+    background-color: @surface-container;
+}
+
+element alternate {
+    background-color: @surface-container-high;
 }
 
 element selected {
@@ -56,6 +67,7 @@ element urgent {
     text-color: @on-error-container;
 }
 
-scrollbar {
-    handle-color: @on-surface;
+element-icon {
+    size: 0.9em;
+    padding: 0 5px 0 0;
 }

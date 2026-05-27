@@ -38,6 +38,7 @@
       "modules": [
         "cpu",
         "memory",
+        "custom/disks",
         // "custom/gpu-usage",
         // "power-profiles-daemon",
         "backlight"
@@ -156,6 +157,13 @@
       "format-alt": " {percentage}%",
       "tooltip-format": "RAM: {used:0.1f}G/{total:0.1f}G\nSwap: {swapUsed:0.1f}G/{swapTotal:0.1f}G"
     },
+    "custom/disks": {
+      "interval": 30,
+      "format": "{}",
+      "return-type": "json",
+      "exec": "~/.config/mango/waybar/scripts/disks.sh",
+      "tooltip": true
+    },
     "custom/gpu-usage": {
       "format": "󰾲 {text}",
       "exec": "/home/zy/.cargo/bin/gpu-usage-waybar",
@@ -205,7 +213,7 @@
       "format-linked": " No IP ({ifname})",
       "format-disconnected": " Disconnected",
       "format-disabled": "󰖪 Off",
-      "tooltip-format": "{ifname} {ipaddr}/via {gwaddr} ({frequency}GHz)\nBandwidth: ↓{bandwidthDownBits} ↑{bandwidthUpBits}",
+      "tooltip-format": "{ifname} {ipaddr}/via {gwaddr}\nBandwidth: ↓{bandwidthDownBits} ↑{bandwidthUpBits}",
       "on-click": "alacritty --title 'wlctl' -e sudo wlctl"
     },
     "bluetooth": {
@@ -227,7 +235,7 @@
     },
     "clock": {
       "format": "󱑌 {:%R}",
-      "format-alt": "󰃭 {:%R %F}",
+      "format-alt": "󰃭 {:%F %R}",
       "tooltip-format": "{calendar}",
       "calendar": {
         "mode": "year",
