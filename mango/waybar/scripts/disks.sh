@@ -1,10 +1,12 @@
 #!/bin/bash
 
-main=$(df -h / | awk 'NR==2 {print $5}')
+disks=$(df -x tmpfs -x devtmpfs -x squashfs -x efivarfs -x overlay \
+  --output=source,used,size,pcent \
+  | awk 'NR>1 && /^\/dev\// && $3 > 2097152 && !seen[$1]++ {gsub(/%/,"",$4); printf "%s{\"dev\":\"%s\",\"used\":%s,\"total\":%s,\"pct\":%s}", \
+    (count++>0?",":""), $1,$2,$3,$4}')
 
-tooltip=$(df -h --output=target,used,size,pcent -x tmpfs -x devtmpfs -x efivarfs \
-  | tail -n +2 \
-  | awk '{printf "%s  %s / %s  (%s)\n", $1, $2, $3, $4}' \
-  | sed 's/&/&amp;/g')
+tooltip=$(echo "[${disks}]" | jq -r '.[] | "\(.dev)  \(.used / 1024 / 1024 | floor)G / \(.total / 1024 / 1024 | floor)G  (\(.pct)%)"' | paste -sd '\n')
 
-echo "{\"text\": \"󰋊 $main\", \"tooltip\": \"$tooltip\"}"
+main=$(echo "[${disks}]" | jq -r '[.[] | .pct] | max')
+
+printf '{"text":"󰋊 %s%%","tooltip":"%s"}' "$main" "${tooltip//$'\n'/'\n'}"

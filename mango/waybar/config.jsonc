@@ -162,6 +162,7 @@
       "format": "{}",
       "return-type": "json",
       "exec": "~/.config/mango/waybar/scripts/disks.sh",
+      "on-click": "baobab",
       "tooltip": true
     },
     "custom/gpu-usage": {
