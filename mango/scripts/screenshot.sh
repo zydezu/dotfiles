@@ -34,12 +34,20 @@ FILE="$DIR/$(date +'%Y-%m-%d_%H-%M-%S')_${WORKSPACE_NAME}.png"
 
 # Take screenshot
 if [ "$MODE" = "select" ]; then
-    GEOMETRY=$(slurp) || { echo "Selection cancelled"; exit 1; }
+    PIPE=$(mktemp -u)
+    mkfifo "$PIPE"
+    wayfreeze --hide-cursor --after-freeze-cmd "echo > $PIPE" &
+    WAYFREEZE_PID=$!
+    read -r < "$PIPE"
+    GEOMETRY=$(slurp) || { kill "$WAYFREEZE_PID" 2>/dev/null; rm -f "$PIPE"; exit 1; }
+    rm -f "$PIPE"
     if [ -z "$GEOMETRY" ]; then
+        kill "$WAYFREEZE_PID" 2>/dev/null
         echo "Selection cancelled"
         exit 1
     fi
-    grim -g "$GEOMETRY" "$FILE" || { echo "Screenshot failed"; exit 1; }
+    grim -g "$GEOMETRY" "$FILE" || { echo "Screenshot failed"; kill "$WAYFREEZE_PID" 2>/dev/null; exit 1; }
+    kill "$WAYFREEZE_PID" 2>/dev/null
 elif [ "$MODE" = "both" ]; then
     grim "$FILE" || { echo "Screenshot failed"; exit 1; }
 else
