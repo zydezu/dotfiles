@@ -23,8 +23,9 @@ while IFS= read -r entry; do
   [ -z "$label" ] && label="$mount"
   [ "$mount" = "/" ] && label="$(hostname)"
 
-  tooltip+="${label}  ${used_h} / ${total_h}  (${pct}%)\n"
+  line=$(printf "%-12s  %6s / %-4s  %3s%%" "$label" "$used_h" "$total_h" "$pct")
+  tooltip+="${line}\n"
 done < <(jq -c '.[]' <<< "[${disks}]")
 
 main=$(jq -r '[.[] | .pct] | max' <<< "[${disks}]")
-printf '{"text":"󰋊 %s%%","tooltip":"%s"}' "$main" "${tooltip%\\n}"
+printf '{"text":"󰋊 %s%%","tooltip":"<tt>%s</tt>"}' "$main" "${tooltip%\\n}"
