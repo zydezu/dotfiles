@@ -38,25 +38,13 @@ def get_location_from_ip():
     raise RuntimeError("All IP geolocation services failed")
 
 
-def is_on_ethernet():
-    net = "/sys/class/net"
-    for iface in os.listdir(net):
-        # Match common ethernet interface naming patterns
-        if not any(iface.startswith(p) for p in ("eth", "en", "eno", "enp", "ens")):
-            continue
-        # Skip wireless interfaces (they have a 'wireless' or 'phy80211' subdir)
-        iface_path = os.path.join(net, iface)
-        if os.path.exists(os.path.join(iface_path, "wireless")) or os.path.exists(
-            os.path.join(iface_path, "phy80211")
-        ):
-            continue
-        # Check interface is up and has a carrier
-        operstate = os.path.join(iface_path, "operstate")
-        carrier = os.path.join(iface_path, "carrier")
+def is_portable():
+    ps = "/sys/class/power_supply"
+    if not os.path.exists(ps):
+        return False
+    for supply in os.listdir(ps):
         try:
-            up = open(operstate).read().strip() == "up"
-            has_carrier = open(carrier).read().strip() == "1"
-            if up and has_carrier:
+            if open(os.path.join(ps, supply, "type")).read().strip() == "Battery":
                 return True
         except OSError:
             continue
@@ -144,7 +132,7 @@ def get_description(code):
 
 
 config = os.path.expanduser("~/.config/hypr/location.conf")
-on_ethernet = is_on_ethernet()
+portable = is_portable()
 if os.path.exists(config):
     with open(config) as f:
         parts = [x.strip() for x in f.read().strip().split(",")]
@@ -168,5 +156,5 @@ unit = data["current_units"]["temperature_2m"]
 icon = get_icon(code, is_day)
 desc = get_description(code)
 
-location_str = f"{city} · " if (city and not on_ethernet) else ""
+location_str = f"{city} · " if (city and portable) else ""
 print(f"{location_str}{icon} {temp}{unit} · {desc}")
