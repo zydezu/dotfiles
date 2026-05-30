@@ -12,24 +12,41 @@ DIR="$BASE_DIR/$DATE_DIR"
 mkdir -p "$DIR"
 PIDFILE="/tmp/gpu-screen-recorder.pid"
 
+if mmsg get version >/dev/null 2>&1; then
+    MMSG_NEW=1
+else
+    MMSG_NEW=0
+fi
+
 # Get window names on current workspace for filename
 get_workspace_name() {
-    MONITOR=$(mmsg -g -o | grep 'selmon 1' | awk '{print $1}')
-
     BORING_APPIDS="org.gnome.Nautilus|thunar|org.kde.dolphin|pcmanfm|nemo"
 
-    mmsg -g -c 2>/dev/null | awk -v mon="$MONITOR" -v boring="$BORING_APPIDS" '
-        $1 == mon && $2 == "title"  { $1=$2=""; sub(/^ +/,""); title=substr($0,1,30) }
-        $1 == mon && $2 == "appid"  {
-            appid = $3
-            n = split(appid, parts, ".")
-            shortapp = parts[n]
-
-            if (appid ~ boring) print shortapp
-            else print shortapp " " title
-            exit
-        }
-    ' \
+    if (( MMSG_NEW )); then
+        CLIENT=$(mmsg get focusing-client 2>/dev/null)
+        [ -z "$CLIENT" ] && return
+        APPID=$(printf '%s' "$CLIENT" | jq -r '.appid // ""')
+        TITLE=$(printf '%s' "$CLIENT" | jq -r '.title // ""' | cut -c1-30)
+        SHORTAPP=$(printf '%s\n' "$APPID" | awk -F. '{print $NF}')
+        if printf '%s\n' "$APPID" | grep -qE "$BORING_APPIDS"; then
+            printf '%s' "$SHORTAPP"
+        else
+            printf '%s %s' "$SHORTAPP" "$TITLE"
+        fi
+    else
+        MONITOR=$(mmsg -g -o | grep 'selmon 1' | awk '{print $1}')
+        mmsg -g -c 2>/dev/null | awk -v mon="$MONITOR" -v boring="$BORING_APPIDS" '
+            $1 == mon && $2 == "title"  { $1=$2=""; sub(/^ +/,""); title=substr($0,1,30) }
+            $1 == mon && $2 == "appid"  {
+                appid = $3
+                n = split(appid, parts, ".")
+                shortapp = parts[n]
+                if (appid ~ boring) print shortapp
+                else print shortapp " " title
+                exit
+            }
+        '
+    fi \
     | tr -cs 'a-zA-Z0-9-' '_' \
     | sed 's/__*/_/g; s/^_//; s/_$//' \
     | tr '[:upper:]' '[:lower:]'
@@ -75,7 +92,11 @@ fi
 # Start recording
 WORKSPACE_NAME=$(get_workspace_name)
 FILE="$DIR/$(date +'%Y-%m-%d_%H-%M-%S')_${WORKSPACE_NAME}.mp4"
-MONITOR=$(mmsg -g -o | grep 'selmon 1' | awk '{print $1}')
+if (( MMSG_NEW )); then
+    MONITOR=$(mmsg get all-monitors | jq -r '.[] | select(.focused == true) | .name' | head -1)
+else
+    MONITOR=$(mmsg -g -o | grep 'selmon 1' | awk '{print $1}')
+fi
 
 if [ "$MODE" = "select" ]; then
     GEOMETRY=$(slurp -f "%wx%h+%x+%y") || exit 1

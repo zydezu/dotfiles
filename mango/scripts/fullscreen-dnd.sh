@@ -2,13 +2,15 @@
 
 declare -A monitor_state
 
-while IFS= read -r line; do
-    monitor_state[${line%% *}]=${line##* }
-done < <(mmsg -g -m)
+if mmsg get version >/dev/null 2>&1; then
+    MMSG_NEW=1
+else
+    MMSG_NEW=0
+fi
 
 any_fullscreen() {
     for state in "${monitor_state[@]}"; do
-        [[ "$state" == "1" ]] && return 0
+        [[ "$state" == "true" || "$state" == "1" ]] && return 0
     done
     return 1
 }
@@ -20,9 +22,7 @@ is_dnd() {
 dnd_active=0
 was_manual_dnd=0
 
-while IFS= read -r line; do
-    monitor_state[${line%% *}]=${line##* }
-
+handle_state_change() {
     if any_fullscreen; then
         if (( dnd_active == 0 )); then
             if is_dnd; then
@@ -44,4 +44,30 @@ while IFS= read -r line; do
             was_manual_dnd=0
         fi
     fi
-done < <(mmsg -w -m)
+}
+
+if (( MMSG_NEW )); then
+    while IFS= read -r mon; do
+        name=$(printf '%s' "$mon" | jq -r '.name')
+        fs=$(printf '%s' "$mon" | jq -r '.fullscreen // false')
+        monitor_state["$name"]=$fs
+    done < <(mmsg get all-monitors | jq -c '.[]')
+
+    while IFS= read -r line; do
+        while IFS= read -r mon; do
+            name=$(printf '%s' "$mon" | jq -r '.name')
+            fs=$(printf '%s' "$mon" | jq -r '.fullscreen // false')
+            monitor_state["$name"]=$fs
+        done < <(printf '%s' "$line" | jq -c '.[]')
+        handle_state_change
+    done < <(mmsg watch all-monitors)
+else
+    while IFS= read -r line; do
+        monitor_state[${line%% *}]=${line##* }
+    done < <(mmsg -g -m)
+
+    while IFS= read -r line; do
+        monitor_state[${line%% *}]=${line##* }
+        handle_state_change
+    done < <(mmsg -w -m)
+fi
