@@ -1,5 +1,5 @@
-tab = "output"
-tabs = [ "output", "input", "playback", "recording", "configuration" ]
+tab = "playback"
+tabs = [ "playback", "output", "input" , "recording", "configuration" ]
 keybindings = [
     { key = "Esc", action = "Exit" },
 ]
