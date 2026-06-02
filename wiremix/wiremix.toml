@@ -1,0 +1,53 @@
+tab = "playback"
+tabs = [  "playback", "output", "input", "recording", "configuration" ]
+keybindings = [
+    { key = "Esc", action = "Exit" },
+]
+
+theme = "matugen"
+
+[themes.matugen]
+inherit = "default"
+
+# Selection indicators
+selector = { fg = "#8ecdff" }
+
+# Tab styling
+tab = { fg = "#c9c3dc" }
+tab_selected = { fg = "#8ecdff" }
+tab_marker = { fg = "#c9beff" }
+
+# List overflow indicators
+list_more = { fg = "#938ea5" }
+
+# Node info
+node_title = { fg = "#e6e0ef" }
+node_target = { fg = "#c9c3dc" }
+
+# Volume
+volume = { fg = "#e6e0ef" }
+volume_empty = { fg = "#484459" }
+volume_filled = { fg = "#97ccf8" }
+
+# Peak meter
+meter_inactive = { fg = "#484459" }
+meter_active = { fg = "#c9beff" }
+meter_overload = { fg = "#ffb4ab" }
+meter_center_inactive = { fg = "#938ea5" }
+meter_center_active = { fg = "#483f77" }
+
+# Config tab
+config_device = { fg = "#e6e0ef" }
+config_profile = { fg = "#97ccf8" }
+
+# Dropdowns
+dropdown_icon = { fg = "#8ecdff" }
+dropdown_border = { fg = "#938ea5" }
+dropdown_item = { fg = "#e6e0ef" }
+dropdown_selected = { fg = "#00344f", bg = "#8ecdff" }
+dropdown_more = { fg = "#938ea5" }
+
+# Help menu
+help_border = { fg = "#938ea5" }
+help_item = { fg = "#c9c3dc" }
+help_more = { fg = "#938ea5" }
