@@ -111,3 +111,7 @@
 .widget-volume {
     font-size: 14px;
 }
+
+.notification-row .notification-background .notification .notification-default-action .notification-content .text-box .body {
+    -gtk-line-clamp: 3;
+}
