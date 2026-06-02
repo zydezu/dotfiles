@@ -69,7 +69,7 @@ elif [ "$MODE" = "both" ]; then
     grim "$FILE" || { echo "Screenshot failed"; exit 1; }
 else
     if (( MMSG_NEW )); then
-        MONITOR=$(mmsg get all-monitors | jq -r '.[] | select(.focused == true) | .name' | head -1)
+        MONITOR=$(mmsg get all-monitors | jq -r '.monitors[] | select(.active == true) | .name' | head -1)
     else
         MONITOR=$(mmsg -g -o | grep 'selmon 1' | awk '{print $1}')
     fi
