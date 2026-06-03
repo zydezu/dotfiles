@@ -17,7 +17,7 @@
   "terminal": {},
   "ui_font_weight": 400.0,
   "ui_font_family": "Inter",
-  "cli_default_open_behavior": "existing_window",
+  "cli_default_open_behavior": "new_window",
   "outline_panel": {
     "dock": "left"
   },

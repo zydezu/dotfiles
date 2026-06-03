@@ -43,6 +43,8 @@ def is_portable():
     if not os.path.exists(ps):
         return False
     for supply in os.listdir(ps):
+        if supply.startswith(("hid-", "ps-controller-battery-")):
+            continue
         try:
             if open(os.path.join(ps, supply, "type")).read().strip() == "Battery":
                 return True
