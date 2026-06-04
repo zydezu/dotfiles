@@ -6,40 +6,17 @@ DIR="$BASE_DIR/$DATE_DIR"
 mkdir -p "$DIR"
 TMPDIR=$(mktemp -d)
 
-if mmsg get version >/dev/null 2>&1; then
-    MMSG_NEW=1
-else
-    MMSG_NEW=0
-fi
-
 # Get window names on current workspace for filename
 get_workspace_name() {
     BORING_APPIDS="org.gnome.Nautilus|thunar|org.kde.dolphin|pcmanfm|nemo"
-
-    if (( MMSG_NEW )); then
-        CLIENT=$(mmsg get focusing-client 2>/dev/null)
-        [ -z "$CLIENT" ] && return
-        APPID=$(printf '%s' "$CLIENT" | jq -r '.appid // ""')
-        TITLE=$(printf '%s' "$CLIENT" | jq -r '.title // ""' | cut -c1-30)
-        SHORTAPP=$(printf '%s\n' "$APPID" | awk -F. '{print $NF}')
-        if printf '%s\n' "$APPID" | grep -qE "$BORING_APPIDS"; then
-            printf '%s' "$SHORTAPP"
-        else
-            printf '%s %s' "$SHORTAPP" "$TITLE"
-        fi
+    CLIENT=$(mmsg get focusing-client 2>/dev/null)
+    [ -z "$CLIENT" ] && return
+    { read -r APPID; read -r TITLE; } < <(printf '%s' "$CLIENT" | jq -r '.appid // "", (.title // "")[:30]')
+    SHORTAPP=$(printf '%s\n' "$APPID" | awk -F. '{print $NF}')
+    if printf '%s\n' "$APPID" | grep -qE "$BORING_APPIDS"; then
+        printf '%s' "$SHORTAPP"
     else
-        MONITOR=$(mmsg -g -o | grep 'selmon 1' | awk '{print $1}')
-        mmsg -g -c 2>/dev/null | awk -v mon="$MONITOR" -v boring="$BORING_APPIDS" '
-            $1 == mon && $2 == "title"  { $1=$2=""; sub(/^ +/,""); title=substr($0,1,30) }
-            $1 == mon && $2 == "appid"  {
-                appid = $3
-                n = split(appid, parts, ".")
-                shortapp = parts[n]
-                if (appid ~ boring) print shortapp
-                else print shortapp " " title
-                exit
-            }
-        '
+        printf '%s %s' "$SHORTAPP" "$TITLE"
     fi \
     | tr -cs 'a-zA-Z0-9-' '_' \
     | sed 's/__*/_/g; s/^_//; s/_$//' \
@@ -68,11 +45,7 @@ if [ "$MODE" = "select" ]; then
 elif [ "$MODE" = "both" ]; then
     grim "$FILE" || { echo "Screenshot failed"; exit 1; }
 else
-    if (( MMSG_NEW )); then
-        MONITOR=$(mmsg get all-monitors | jq -r '.monitors[] | select(.active == true) | .name' | head -1)
-    else
-        MONITOR=$(mmsg -g -o | grep 'selmon 1' | awk '{print $1}')
-    fi
+    MONITOR=$(mmsg get all-monitors | jq -r '.monitors[] | select(.active == true) | .name' | head -1)
     grim -o "$MONITOR" "$FILE" || { echo "Screenshot failed"; exit 1; }
 fi
 
@@ -82,21 +55,19 @@ if [ ! -f "$FILE" ]; then
     exit 1
 fi
 
-# Copy to clipboard
-wl-copy --type image/png < "$FILE"
+# Copy to clipboard in background while generating thumbnail
+wl-copy --type image/png < "$FILE" &
 
-# Create a temporary 1:1 image for the notification
 CROPPED_FILE="$TMPDIR/cropped.png"
-magick "$FILE" -gravity center -crop '%[fx:min(w,h)]x%[fx:min(w,h)]+0+0' -resize 128x128 +repage "$CROPPED_FILE"
+magick "$FILE" -thumbnail 128x128^ -gravity center -extent 128x128 "$CROPPED_FILE"
 
 if [ ! -f "$CROPPED_FILE" ]; then
-    # Fallback to original file
     CROPPED_FILE="$FILE"
 fi
 
 ACTION=$(dunstify "Screenshot has been saved" \
     -i "$CROPPED_FILE" \
-    -t 4000 \
+    -t 2000 \
     -A view,"View Image" \
     -A edit,"Annotate" \
     -A open,"Open Folder")

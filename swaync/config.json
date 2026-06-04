@@ -65,7 +65,7 @@
         },
         {
           "label": "󰐥",
-          "command": "rofi -show power-menu -modi power-menu:rofi-power-menu"
+          "command": "rofi -show power-menu -modi power-menu:rofi-power-menu -theme ~/.config/rofi/config.rasi"
         }
       ]
     }
