@@ -6,6 +6,9 @@ DIR="$BASE_DIR/$DATE_DIR"
 mkdir -p "$DIR"
 TMPDIR=$(mktemp -d)
 
+tick() { date +%s%3N; }
+tock() { printf '[%s] %dms\n' "$1" "$(($(tick) - $2))"; }
+
 # Get window names on current workspace for filename
 get_workspace_name() {
     BORING_APPIDS="org.gnome.Nautilus|thunar|org.kde.dolphin|pcmanfm|nemo"
@@ -23,7 +26,7 @@ get_workspace_name() {
     | tr '[:upper:]' '[:lower:]'
 }
 
-WORKSPACE_NAME=$(get_workspace_name)
+_t=$(tick); WORKSPACE_NAME=$(get_workspace_name); tock "workspace_name" $_t
 FILE="$DIR/$(date +'%Y-%m-%d_%H-%M-%S')_${WORKSPACE_NAME}.png"
 
 # Take screenshot
@@ -40,13 +43,21 @@ if [ "$MODE" = "select" ]; then
         echo "Selection cancelled"
         exit 1
     fi
+    _t=$(tick)
     grim -g "$GEOMETRY" "$FILE" || { echo "Screenshot failed"; kill "$WAYFREEZE_PID" 2>/dev/null; exit 1; }
+    tock "grim" $_t
     kill "$WAYFREEZE_PID" 2>/dev/null
 elif [ "$MODE" = "both" ]; then
+    _t=$(tick)
     grim "$FILE" || { echo "Screenshot failed"; exit 1; }
+    tock "grim" $_t
 else
+    _t=$(tick)
     MONITOR=$(mmsg get all-monitors | jq -r '.monitors[] | select(.active == true) | .name' | head -1)
+    tock "monitor" $_t
+    _t=$(tick)
     grim -o "$MONITOR" "$FILE" || { echo "Screenshot failed"; exit 1; }
+    tock "grim" $_t
 fi
 
 # Verify screenshot was created
@@ -58,8 +69,10 @@ fi
 # Copy to clipboard in background while generating thumbnail
 wl-copy --type image/png < "$FILE" &
 
+_t=$(tick)
 CROPPED_FILE="$TMPDIR/cropped.png"
 magick "$FILE" -thumbnail 128x128^ -gravity center -extent 128x128 "$CROPPED_FILE"
+tock "magick" $_t
 
 if [ ! -f "$CROPPED_FILE" ]; then
     CROPPED_FILE="$FILE"
