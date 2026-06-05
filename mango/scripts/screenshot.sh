@@ -5,9 +5,13 @@ DATE_DIR="$(date +'%Y-%m-%d')"
 DIR="$BASE_DIR/$DATE_DIR"
 mkdir -p "$DIR"
 TMPDIR=$(mktemp -d)
+TMPFILE="$TMPDIR/screenshot.png"
 
 tick() { date +%s%3N; }
 tock() { printf '[%s] %dms\n' "$1" "$(($(tick) - $2))"; }
+
+_total=$(tick)
+echo "taking screenshot..."
 
 # Get window names on current workspace for filename
 get_workspace_name() {
@@ -26,8 +30,10 @@ get_workspace_name() {
     | tr '[:upper:]' '[:lower:]'
 }
 
-_t=$(tick); WORKSPACE_NAME=$(get_workspace_name); tock "workspace_name" $_t
-FILE="$DIR/$(date +'%Y-%m-%d_%H-%M-%S')_${WORKSPACE_NAME}.png"
+# Start workspace name lookup in background while taking screenshot
+_wn_tmp=$(mktemp)
+get_workspace_name > "$_wn_tmp" &
+_wn_pid=$!
 
 # Take screenshot
 if [ "$MODE" = "select" ]; then
@@ -36,29 +42,39 @@ if [ "$MODE" = "select" ]; then
     wayfreeze --hide-cursor --after-freeze-cmd "echo > $PIPE" & # hide cursor doesn't work
     WAYFREEZE_PID=$!
     read -r < "$PIPE"
-    GEOMETRY=$(slurp) || { kill "$WAYFREEZE_PID" 2>/dev/null; rm -f "$PIPE"; exit 1; }
+    GEOMETRY=$(slurp) || { kill "$WAYFREEZE_PID" 2>/dev/null; rm -f "$PIPE" "$_wn_tmp"; exit 1; }
     rm -f "$PIPE"
     if [ -z "$GEOMETRY" ]; then
         kill "$WAYFREEZE_PID" 2>/dev/null
         echo "Selection cancelled"
+        rm -f "$_wn_tmp"
         exit 1
     fi
     _t=$(tick)
-    grim -g "$GEOMETRY" "$FILE" || { echo "Screenshot failed"; kill "$WAYFREEZE_PID" 2>/dev/null; exit 1; }
+    grim -g "$GEOMETRY" "$TMPFILE" || { echo "Screenshot failed"; kill "$WAYFREEZE_PID" 2>/dev/null; rm -f "$_wn_tmp"; exit 1; }
     tock "grim" $_t
     kill "$WAYFREEZE_PID" 2>/dev/null
 elif [ "$MODE" = "both" ]; then
     _t=$(tick)
-    grim "$FILE" || { echo "Screenshot failed"; exit 1; }
+    grim "$TMPFILE" || { echo "Screenshot failed"; rm -f "$_wn_tmp"; exit 1; }
     tock "grim" $_t
 else
     _t=$(tick)
     MONITOR=$(mmsg get all-monitors | jq -r '.monitors[] | select(.active == true) | .name' | head -1)
     tock "monitor" $_t
     _t=$(tick)
-    grim -o "$MONITOR" "$FILE" || { echo "Screenshot failed"; exit 1; }
+    grim -o "$MONITOR" "$TMPFILE" || { echo "Screenshot failed"; rm -f "$_wn_tmp"; exit 1; }
     tock "grim" $_t
 fi
+
+_t=$(tick)
+wait $_wn_pid
+WORKSPACE_NAME=$(cat "$_wn_tmp")
+rm -f "$_wn_tmp"
+tock "workspace_name" $_t
+
+FILE="$DIR/$(date +'%Y-%m-%d_%H-%M-%S')_${WORKSPACE_NAME}.png"
+mv "$TMPFILE" "$FILE"
 
 # Verify screenshot was created
 if [ ! -f "$FILE" ]; then
@@ -71,12 +87,14 @@ wl-copy --type image/png < "$FILE" &
 
 _t=$(tick)
 CROPPED_FILE="$TMPDIR/cropped.png"
-magick "$FILE" -thumbnail 128x128^ -gravity center -extent 128x128 "$CROPPED_FILE"
+magick "$FILE" -scale 128x128^ -gravity center -extent 128x128 "$CROPPED_FILE"
 tock "magick" $_t
 
 if [ ! -f "$CROPPED_FILE" ]; then
     CROPPED_FILE="$FILE"
 fi
+
+printf 'screenshot taken in %dms\n' "$(($(tick) - _total))"
 
 ACTION=$(dunstify "Screenshot has been saved" \
     -i "$CROPPED_FILE" \
