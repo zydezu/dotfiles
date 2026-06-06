@@ -325,16 +325,5 @@
       "tooltip-spacing": 20,
       "format": "{percentage}"
     }
-  },
-  {
-    "output": "DP-2",
-    "layer": "top",
-    "position": "bottom",
-    "height": 20,
-    "exclusive": false,
-    "modules-right": [
-      "ext/workspaces",
-      "wlr/taskbar"
-    ]
   }
 ]
