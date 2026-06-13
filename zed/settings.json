@@ -16,7 +16,7 @@
   "agent_ui_font_size": 16.0,
   "terminal": {},
   "ui_font_weight": 400.0,
-  "ui_font_family": "Inter",
+  "ui_font_family": "Adwaita Sans",
   "cli_default_open_behavior": "new_window",
   "outline_panel": {
     "dock": "left"
@@ -107,11 +107,14 @@
   "agent_servers": {
     "claude-acp": {
       "default_config_options": {
-        "mode": "acceptEdits"
+        "mode": "bypassPermissions"
       },
       "type": "registry"
     },
     "opencode": {
+      "default_config_options": {
+        "model": "opencode/deepseek-v4-flash-free"
+      },
       "type": "registry",
     },
   },
@@ -131,7 +134,7 @@
   "buffer_font_family": "JetBrainsMono Nerd Font",
   "buffer_font_size": 15.0,
   "theme": {
-    "mode": "system",
+    "mode": "dark",
     "light": "Matugen Light",
     "dark": "Matugen Dark",
   },

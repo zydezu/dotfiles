@@ -20,7 +20,7 @@ get_workspace_name() {
     [ -z "$CLIENT" ] && return
     { read -r APPID; read -r TITLE; } < <(printf '%s' "$CLIENT" | jq -r '.appid // "", (.title // "")[:30]')
     SHORTAPP=$(printf '%s\n' "$APPID" | awk -F. '{print $NF}')
-    if printf '%s\n' "$APPID" | grep -qE "$BORING_APPIDS"; then
+    if printf '%s\n' "$APPID" | grep -qE "                          $BORING_APPIDS"; then
         printf '%s' "$SHORTAPP"
     else
         printf '%s %s' "$SHORTAPP" "$TITLE"

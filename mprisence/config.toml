@@ -5,11 +5,10 @@
 # ------------------
 # Basic Settings
 # ------------------
-# Whether to clear Discord activity when media is paused
-clear_on_pause = true
-
 # How often to update Discord presence (in milliseconds)
-interval = 2000
+event_driven = true
+fallback_poll_interval = 1000
+interval = 1000
 
 # Restrict discovery to specific players (by identity, wildcard, or regex).
 # Matches against player identity or the bus-name "player" part (e.g., "vlc"),

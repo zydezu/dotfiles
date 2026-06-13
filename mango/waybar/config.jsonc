@@ -55,7 +55,7 @@
     "group/tray-group": {
       "orientation": "horizontal",
       "drawer": {
-        "transition-duration": 300,
+        "transition-duration": 200,
         "transition-left-to-right": false
       },
       "modules": [
@@ -74,7 +74,7 @@
     },
     "dwl/window": {
       "format": "{title}",
-      "max-length": 35,
+      "max-length": 45,
       "ellipsis": true,
       "tooltip": true,
       "tooltip-format": "{title}",

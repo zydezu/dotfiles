@@ -2,8 +2,14 @@
 columns = 150
 lines = 35
 
+[window]
+opacity = 0.9
+
 [general]
 import = ["colors.toml"]
+
+[font]
+normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
 
 # Copy
 [keyboard]

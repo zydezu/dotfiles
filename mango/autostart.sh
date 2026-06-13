@@ -1,4 +1,7 @@
 #! /bin/bash
+# https://github.com/mangowm/mango/issues/1043
+exec-once=systemctl --user start xdg-desktop-portal.service --ignore-dependencies &
+
 # Screen locking and sleeping
 hypridle >/dev/null 2>&1 &
 
@@ -41,3 +44,6 @@ for desktop_file in ~/.config/autostart/*.desktop; do
         eval "$clean_exec" &
     fi
 done
+
+# Minimize some apps on startup
+~/.config/mango/scripts/minimizeapps.sh >/dev/null 2>&1 &
