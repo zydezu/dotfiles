@@ -118,7 +118,7 @@
       "type": "registry",
     },
   },
-  "icon_theme": "Catppuccin Frappé",
+  "icon_theme": "Colored Zed Icons Theme Dark",
   "git_panel": {
     "collapse_untracked_diff": false,
     "tree_view": true,
