@@ -21,6 +21,8 @@ allowed_dirs=(
   rofi
   swappy
   swaync
+  qt5ct
+  qt6ct
   waypaper
   wiremix
   wlctl
