@@ -49,7 +49,7 @@ yay -S --needed --noconfirm \
     adw-gtk-theme ttf-jetbrains-mono-nerd noto-fonts adwaita-fonts \
     qt5ct qt6ct qt6-declarative qt6-svg \
     qt5-quickcontrols qt5-quickcontrols2 qt5-declarative qt5-graphicaleffects \
-    sddm
+    sddm baazar baobab
 
 # Install uv
 info "Installing uv..."
@@ -228,6 +228,13 @@ read -rp "Install Discord? [y/N] " _discord
 if [[ "$_discord" =~ ^[Yy]$ ]]; then
     info "Installing Discord..."
     yay -S --needed --noconfirm discord
+fi
+
+# Warp
+read -rp "Install Warp (wgcf)? [y/N] " _warp
+if [[ "$_warp" =~ ^[Yy]$ ]]; then
+    info "Installing Warp..."
+    yay -S --needed --noconfirm wgcf
 fi
 
 # yt-dlp

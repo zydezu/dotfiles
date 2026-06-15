@@ -22,4 +22,7 @@ fi
 info "Cleaning up dotfiles directory..."
 rm -rf "$DOTFILES_DIR"
 
-info "Done."
+echo
+echo -e "${BOLD}Done. Rebooting in 5 seconds... (Ctrl+C to cancel)${NC}"
+sleep 5
+reboot
