@@ -50,6 +50,12 @@ yay -S --needed --noconfirm \
     qt5ct qt6ct qt6-declarative qt6-svg \
     sddm
 
+# Remove Plymouth boot animation
+info "Removing Plymouth boot animation..."
+sudo pacman -Rns --noconfirm plymouth cachyos-plymouth-bootanimation 2>/dev/null || true
+sudo sed -i '/^HOOKS=/s/\bplymouth\b[[:space:]]*//' /etc/mkinitcpio.conf
+sudo mkinitcpio -P
+
 # Install uv
 info "Installing uv..."
 curl -LsSf https://astral.sh/uv/install.sh | sh
@@ -165,8 +171,29 @@ chmod +x "$HOME/Applications/AppManager.AppImage"
 info "Installing SDDM themes..."
 sudo mkdir -p /usr/share/sddm/themes
 sudo cp -r "$DOTFILES_DIR/_setup/sddmthemes/." /usr/share/sddm/themes/
-sudo mkdir -p /etc/sddm.conf.d
-printf '[Theme]\nCurrent=glyph\n' | sudo tee /etc/sddm.conf.d/theme.conf > /dev/null
+sudo rm -f /etc/sddm.conf.d/theme.conf
+if [[ -f /etc/sddm.conf.d/kde_settings.conf ]]; then
+    sudo sed -i 's/^Current=.*/Current=glyph/' /etc/sddm.conf.d/kde_settings.conf
+else
+    sudo mkdir -p /etc/sddm.conf.d
+    sudo tee /etc/sddm.conf.d/kde_settings.conf > /dev/null <<'EOF'
+[Autologin]
+Relogin=false
+Session=
+User=
+
+[General]
+HaltCommand=/usr/bin/systemctl poweroff
+RebootCommand=/usr/bin/systemctl reboot
+
+[Theme]
+Current=glyph
+
+[Users]
+MaximumUid=60513
+MinimumUid=1000
+EOF
+fi
 
 # /etc/environment
 info "Writing /etc/environment..."
