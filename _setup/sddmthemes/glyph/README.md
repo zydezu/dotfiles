@@ -1,0 +1,154 @@
+# ✨ Glyph SDDM
+
+A high-end, minimalist SDDM theme inspired by the **Nothing Phone** aesthetic. Featuring authentic dot-matrix typography, intelligent adaptive coloring, and premium "obsidian glass" interactions.
+
+<div align="center">
+  <img src="screenshots/lock_screen.png" width="45%" alt="Lock Screen" />
+  <img src="screenshots/login_screen.png" width="45%" alt="Login Screen" />
+</div>
+
+<div align="center">
+  <img src="screenshots/lock_screen_2.png" width="22%" />
+  <img src="screenshots/login_screen_2.png" width="22%" />
+  <img src="screenshots/lock_screen_3.png" width="22%" />
+  <img src="screenshots/login_screen_3.png" width="22%" />
+</div>
+
+<div align="center">
+  <img src="screenshots/lock_screen_4.png" width="22%" />
+  <img src="screenshots/login_screen_4.png" width="22%" />
+  <img src="screenshots/lock_screen_5.png" width="22%" />
+  <img src="screenshots/login_screen_5.png" width="22%" />
+</div>
+
+## 🌟 Features
+
+- **True Nothing Typography:** Powered by the `Ndot` font family with an adaptive monospaced grid for a perfectly balanced clock.
+- **Adaptive Monochrome:** The clock automatically switches between **Pure Black** and **Pure White** based on your wallpaper's brightness.
+- **Obsidian Glass UI:** A sleek, 55% translucent dark card with a precision white border and "Material You" red accents.
+- **Cinematic Reveal:** The clock materializes with a smooth, delayed fade-in after the wallpaper is processed.
+- **Crimson Minimalism Switchers:** Fully keyboard-navigable user and session lists with a gliding **Nothing Red** dot indicator.
+- **Pro Interactions:** Snappy slide-up reveal, tactile "⋯" loading states, and a red-flashing error shake for incorrect PINs.
+- **Dynamic Distro Integration:** Automatically detects and displays your OS name and logo (Arch, Nix, Fedora, etc.).
+
+---
+
+## 📦 Prerequisites
+
+Glyph SDDM is now **Universally Compatible** with both **Qt5** and **Qt6** (including Fedora 40+ and Arch Plasma 6). You only need the basic Qt Quick modules which are usually pre-installed with SDDM:
+
+<details>
+<summary><b>Arch Linux / Fedora / openSUSE</b> (Click to expand)</summary>
+
+```bash
+# Most systems already have these, but if the screen is black:
+# Fedora: sudo dnf install qt5-qtquickcontrols2 qt5-qtsvg
+# Arch: sudo pacman -S qt5-quickcontrols2 qt5-svg
+```
+</details>
+
+<details>
+<summary><b>Ubuntu / Debian / Mint</b> (Click to expand)</summary>
+
+```bash
+sudo apt update && sudo apt install qml-module-qtquick-controls2 qml-module-qtquick-layouts libqt5svg5
+```
+</details>
+
+---
+
+## 🚀 Installation
+
+### 1. Automatic Script (Recommended)
+This script handles file copying and provides configuration instructions:
+```bash
+git clone https://github.com/xCaptaiN09/glyph-sddm.git
+cd glyph-sddm
+sudo ./install.sh
+```
+
+### 2. Arch Linux (AUR)
+Glyph SDDM is available on the AUR as `glyph-sddm-git`. You can install it using your favorite AUR helper:
+```bash
+yay -S glyph-sddm-git
+```
+
+### 3. NixOS (Declarative)
+NixOS users should add the following snippet to their `/etc/nixos/configuration.nix`:
+
+```nix
+{ pkgs, ... }: {
+  services.displayManager.sddm = {
+    enable = true;
+    theme = "glyph";
+  };
+
+  environment.systemPackages = [
+    (pkgs.stdenv.mkDerivation {
+      name = "glyph";
+      src = pkgs.fetchFromGitHub {
+        owner = "xCaptaiN09";
+        repo = "glyph-sddm";
+        rev = "main";
+        sha256 = "sha256-0000000000000000000000000000000000000000000="; # Replace with actual hash after first build attempt
+      };
+      installPhase = ''
+        mkdir -p $out/share/sddm/themes/glyph
+        cp -r * $out/share/sddm/themes/glyph/
+      '';
+    })
+    pkgs.libsForQt5.qtquickcontrols2
+    pkgs.libsForQt5.qtsvg
+  ];
+}
+```
+
+After editing, apply the configuration by running:
+```bash
+sudo nixos-rebuild switch
+```
+
+> [!TIP]
+> **First-time build:** Nix will likely report a "hash mismatch" error because of the dummy `sha256` value. Simply copy the **actual hash** from the error message, update it in your config, and run the rebuild command again.
+
+### 4. Manual
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/xCaptaiN09/glyph-sddm.git
+   ```
+2. Copy the folder to SDDM themes directory:
+   ```bash
+   sudo cp -r glyph-sddm /usr/share/sddm/themes/glyph
+   ```
+3. Set the theme in `/etc/sddm.conf`:
+   ```ini
+   [Theme]
+   Current=glyph
+   ```
+
+---
+
+## 🛠 Configuration & Testing
+
+### Preview Without Logging Out
+Run this command to preview the theme:
+```bash
+sddm-greeter --test-mode --theme /usr/share/sddm/themes/glyph
+```
+
+---
+
+## 🎨 Customization
+
+Edit the files inside `/usr/share/sddm/themes/glyph/assets/images/`:
+- **Wallpaper:** Replace `background.jpg` with your own image.
+- **Avatar:** Place your profile picture in `avatar.jpg`.
+
+## 🤝 Credits
+
+- **Author:** [xCaptaiN09](https://github.com/xCaptaiN09)
+- **Design:** Inspired by Nothing Phone (1) & (2).
+- **Font:** Ndot 57 Aligned.
+
+---
+*Made with ❤️ for the Linux community.*

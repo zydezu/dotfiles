@@ -60,7 +60,7 @@ output_path = '~/.local/share/PrismLauncher/themes/Matugen/theme.json'
 
 [templates.obsidian]
 input_path = '~/.config/matugen/templates/obsidian.css'
-output_path = '/home/zy/Documents/obsidian/Vault/.obsidian/snippets/matugen.css'
+output_path = '~/Documents/obsidian/Vault/.obsidian/snippets/matugen.css'
 
 [templates.opencode]
 input_path = '~/.config/matugen/templates/opencode.json'

@@ -10,6 +10,7 @@ Personal dotfiles for mangowc on Arch Linux (my personal system uses CachyOS, wh
 - **Shell**: Fish
 - **Terminal**: Alacritty
 - **Theme**: Material You theme generated via [Matugen](https://github.com/InioX/matugen)
+- **Icons**: [Neuwaita](https://github.com/RusticBard/neuwaita)
 
 ## Structure
 
@@ -40,8 +41,32 @@ Personal dotfiles for mangowc on Arch Linux (my personal system uses CachyOS, wh
 
 ### Installation on Arch
 
-```
-yay -S mangowm waybar matugen xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-wlr swaybg swaync sway-audio-idle-inhibit-git hyprlock hypridle rofi rofi-power-menu waypaper grim slurp wayfreeze-git swappy gpu-screen-recorder alacritty fish zed helium-browser-bin nautilus actions-for-nautilus-git mpv mprisence pipewire wireplumber wiremix clipse cliphist wl-clipboard wl-clip-persist networkmanager dunst brightnessctl fastfetch bluetui wlctl adw-gtk-theme ttf-jetbrains-mono-nerd noto-fonts adwaita-fonts qt5ct qt6ct
+```bash
+yay -S \
+    `# compositor & bar` \
+    mangowm waybar \
+    `# portals` \
+    xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-wlr \
+    `# wallpaper, notifications & lock` \
+    swaybg waypaper swaync sway-audio-idle-inhibit-git hyprlock hypridle xfce-polkit \
+    `# launcher & screenshot` \
+    rofi rofi-power-menu grim slurp wayfreeze-git swappy \
+    `# theming` \
+    matugen adw-gtk-theme adwaita-fonts ttf-jetbrains-mono-nerd noto-fonts qt5ct qt6ct \
+    `# terminal, shell & editors` \
+    alacritty fish zed \
+    `# apps` \
+    helium-browser-bin nautilus actions-for-nautilus-git mpv \
+    `# audio` \
+    pipewire wireplumber wiremix \
+    `# clipboard` \
+    clipse cliphist wl-clipboard wl-clip-persist \
+    `# system utilities` \
+    networkmanager brightnessctl gpu-screen-recorder dunst fastfetch \
+    `# tui tools` \
+    bluetui wlctl \
+    `# misc` \
+    mprisence bazaar
 ```
 
 ### Copy Configs

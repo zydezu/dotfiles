@@ -167,7 +167,7 @@
     },
     "custom/gpu-usage": {
       "format": "󰾲 {text}",
-      "exec": "/home/zy/.cargo/bin/gpu-usage-waybar",
+      "exec": "~/.cargo/bin/gpu-usage-waybar",
       "return-type": "json",
       "on-click": "alacritty --title 'nvtop' -e nvtop",
     },

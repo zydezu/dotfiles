@@ -12,7 +12,6 @@ allowed_dirs=(
   environment.d
   fastfetch
   fish
-  gpu-screen-recorder
   gtk-3.0
   gtk-4.0
   hypr
@@ -32,8 +31,17 @@ allowed_dirs=(
   zed
 )
 
+protected_dirs=(_setup)
+
 for dir in "${allowed_dirs[@]}"; do
     SRC="$CONFIG_DIR/$dir"
+
+    for protected in "${protected_dirs[@]}"; do
+        if [[ "$dir" == "$protected" ]]; then
+            echo "Skipping $dir (protected)"
+            continue 2
+        fi
+    done
 
     if [[ -d "$SRC" ]]; then
         echo "Updating $dir..."

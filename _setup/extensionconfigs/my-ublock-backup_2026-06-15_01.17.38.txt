@@ -1,0 +1,39 @@
+{
+  "timeStamp": 1781482658943,
+  "version": "1.71.0",
+  "userSettings": {
+    "contextMenuEnabled": false,
+    "importedLists": [],
+    "popupPanelSections": 15,
+    "prefetchingDisabled": false,
+    "userFiltersTrusted": true
+  },
+  "selectedFilterLists": [
+    "user-filters",
+    "helium-annoyances",
+    "helium-unbreak",
+    "ublock-filters",
+    "ublock-badware",
+    "ublock-privacy",
+    "ublock-quick-fixes",
+    "ublock-unbreak",
+    "ublock-experimental",
+    "easylist",
+    "easyprivacy",
+    "urlhaus-1",
+    "plowe-0",
+    "ublock-annoyances"
+  ],
+  "hiddenSettings": {},
+  "whitelist": [
+    "archive.org",
+    "chrome-extension-scheme",
+    "lightroom.adobe.com",
+    "moz-extension-scheme",
+    "wonderhoyemu.github.io"
+  ],
+  "dynamicFilteringString": "behind-the-scene * * noop\nbehind-the-scene * inline-script noop\nbehind-the-scene * 1p-script noop\nbehind-the-scene * 3p-script noop\nbehind-the-scene * 3p-frame noop\nbehind-the-scene * image noop\nbehind-the-scene * 3p noop",
+  "urlFilteringString": "",
+  "hostnameSwitchesString": "no-large-media: behind-the-scene false",
+  "userFilters": "! Remove Google AI\nwww.google.*##.YzCcne:not([jscontroller])\nwww.google.*##div[jscontroller=\"LNiNT\"]:has(.YzCcne:not([jscontroller]))\nwww.google.*##.C6AK7c.XVMlrc\nwww.google.*##.hdzaWe\nwww.google.*##.ZpdpPe:empty { padding: 0 !important; }\ndrive.google.com##[data-rp-placement-id=\"gemkick-pep-icon-callout-id\"]\ndrive.google.com##.Iu19ad-OkO9ve-yp5uJf-j\nmail.google.com##.s1rbBe\nmail.google.com##.ADOx3c.r4vW1e\ndocs.google.com###docs-sidekick-gen-ai-promo-button-container\ndocs.google.com##.docsRecommendationsPepPersistentEntryPointContainer\n\n! Remove YouTube junk\n||youtube.com/watch*&start_radio$doc,removeparam=~v\n\nwww.youtube.com##ytd-rich-grid-renderer, html:style(--ytd-rich-grid-items-per-row: 4 !important;)\nwww.youtube.com##ytd-guide-entry-renderer:has(yt-formatted-string:has-text(/^Shorts$/i))\nwww.youtube.com##ytd-mini-guide-entry-renderer:has(a[title=\"Shorts\"])\nwww.youtube.com##ytd-rich-section-renderer:has(#title:has-text(/(^| )Shorts( |$)/i))\nwww.youtube.com##ytd-reel-shelf-renderer:has(.ytd-reel-shelf-renderer:has-text(/(^| )Shorts( |$)/i))\nwww.youtube.com##ytd-reel-shelf-renderer.ytd-structured-description-content-renderer:has-text(/^Shorts remixing this video$/i)\nwww.youtube.com##yt-chip-cloud-chip-renderer:has(yt-formatted-string:has-text(/^Shorts$/i))\nwww.youtube.com##ytd-rich-section-renderer.ytd-rich-grid-renderer.style-scope:nth-of-type(1)\nwww.youtube.com##ytd-statement-banner-renderer\nwww.youtube.com##ytd-brand-video-singleton-renderer\nwww.youtube.com##ytd-brand-video-shelf-renderer\nwww.youtube.com##.ytd-brand-video-shelf-renderer\nwww.youtube.com##.ytp-cairo-refresh-signature-moments div.ytp-play-progress:style(background: var(--yt-spec-static-brand-red,#f03) !important)\nwww.youtube.com##.ytd-thumbnail-overlay-resume-playback-renderer:style(background: var(--yt-spec-static-brand-red,#f03) !important)\nwww.youtube.com##.ytp-suggested-action-badge\nwww.youtube.com##yt-formatted-string>span:has-text(product)\nwww.youtube.com###sponsor-button\nwww.youtube.com##button[aria-label=\"Join this channel\"]\nwww.youtube.com###purchase-button\nwww.youtube.com##ytd-merch-shelf-renderer\nwww.youtube.com###ticket-shelf\nwww.youtube.com##ytd-metadata-row-container-renderer:has(ytd-rich-metadata-renderer[component-style=\"RICH_METADATA_RENDERER_STYLE_SQUARE\"])\nwww.youtube.com##ytd-feed-nudge-renderer\nwww.youtube.com##ytd-engagement-panel-section-list-renderer[target-id^=\"shopping_panel_for_entry_point\"]\nwww.youtube.com##tp-yt-paper-tab:has(> .tab-content:has-text(Store))\nwww.youtube.com##yt-tab-shape[tab-title=\"Store\"]\nwww.youtube.com##.ytd-recognition-shelf-renderer\nwww.youtube.com##ytd-yoodle-renderer > picture\nwww.youtube.com##ytd-yoodle-renderer > ytd-logo:remove-attr(hidden)\nwww.youtube.com##.ytp-free-preview-countdown-timer\nwww.youtube.com##yt-sheet-view-model[style*=\"max-width: 400px\"].ytSheetViewModelContextual.ytSheetViewModelHost:has-text(Save to):style(max-height: 60vh !important; min-height: 60vh !important; height: 60vh !important;)\nwww.youtube.com###shopping-timely-shelf\nwww.youtube.com##yt-notification-action-renderer\n\n! Remove Reddit junk\nreddit.com/media##img[src^=\"https://preview.redd.it\"]:others()\nreddit.com##[noun=\"games_drawer\"], [noun=\"games_drawer\"]+hr\n\n! Remove Google account login prompts on websites\n||accounts.google.com/gsi/iframe/select?client_id=*.apps.googleusercontent.com\n\n! Bypass UK radio restrictions\n||radio.garden/api/geo\n\n! Clean-up Genius\ngenius.com##div[data-exclude-from-selection=\"true\"]:has(div[id*=\"-ad-\"])\ngenius.com##div.bAchPV.RightSidebar__Container-sc-e6620a93-0:nth-of-type(2)\ngenius.com##.bQYiCj.SectionLeaderboard__Container-sc-1f7f30cc-0\ngenius.com##.bCLuZv.sc-c6a1ca7-0.cdqEjN.sc-8f7a798d-0\ngenius.com##.aNChJ.BaseAnnotation-desktop__AdLeaderboard-sc-3b00a087-4\ngenius.com##.cSlWMv.Annotation__Ad-sc-2e9311d8-5 > .ciyKyM.sc-a1c52130-0\n\n! Remove Prime/Bits/Amazon nags\nwww.twitch.tv##.top-bar.dquNzJ.Layout-sc-1xcs6mc-0 > .hDlHnO.Layout-sc-1xcs6mc-0\nwww.twitch.tv##div.VxLcr.Layout-sc-1xcs6mc-0:nth-of-type(6) > .Layout-sc-1xcs6mc-0 > .Layout-sc-1xcs6mc-0 > .iDMNUO.InjectLayout-sc-1i43xsx-0\nwww.twitch.tv##.hiJTwz.Layout-sc-1xcs6mc-0 > .dcNXJO.ScButtonIcon-sc-9yap0r-0.iPkwTD.ScCoreButton-sc-ocjdkq-0\nwww.twitch.tv##.prime-offers.AoXTY.Layout-sc-1xcs6mc-0 > .bkOPih.Layout-sc-1xcs6mc-0 .iDMNUO.InjectLayout-sc-1i43xsx-0 .dcNXJO.ScButtonIcon-sc-9yap0r-0.iPkwTD.ScCoreButton-sc-ocjdkq-0\nwww.twitch.tv##.top-nav__prime\n\n! Remove Wikipedia donation banners\nwikipedia.org##.cn-fundraising\nwikipedia.org##+js(trusted-set-cookie, centralnotice_hide_fundraising, %7B%22v%22%3A1%2C%22created%22%3A1746810754%2C%22reason%22%3A%22close%22%7D, 1year, /, domain, .wikipedia.org, dontOverwrite, 1)\n\n! Remove SteamDB support messages\nsteamdb.info##.calculator-armored-headcrab.span12\nsteamdb.info##.armored-headcrab\n\n! Clean-up DeepL\nwww.deepl.com###product-navigation-sidebar-container\nwww.deepl.com##.z-\\[999\\].top-0.sticky\nwww.deepl.com##.items-center.justify-between.gap-2.py-2.px-3.flex-1.min-w-0.flex.mobile\\:p-0 > .overflow-hidden.gap-1\\.5.items-center.flex\nwww.deepl.com##.dark\\:bg-gray-800.bg-white.border-gray-100.border-s.max-w-\\[400px\\].z-\\[8\\].relative\nwww.deepl.com##.\\[\\.is-home_\\&\\]\\:hidden\nwww.deepl.com##.justify-between.items-center.flex.mobile\\:hidden\nwww.deepl.com##.text-center.py-4.px-6.items-center.flex-col.max-w-\\[1400px\\].w-full.flex.mb-0.mx-auto.dark.lg\\:gap-redesign-4.gap-redesign-8.md\\:pt-redesign-8.md\\:pb-redesign-7.md\\:px-redesign-6"
+}
