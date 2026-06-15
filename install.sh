@@ -50,12 +50,6 @@ yay -S --needed --noconfirm \
     qt5ct qt6ct qt6-declarative qt6-svg \
     sddm
 
-# Remove Plymouth boot animation
-info "Removing Plymouth boot animation..."
-sudo pacman -Rns --noconfirm plymouth cachyos-plymouth-bootanimation 2>/dev/null || true
-sudo sed -i '/^HOOKS=/s/\bplymouth\b[[:space:]]*//' /etc/mkinitcpio.conf
-sudo mkinitcpio -P
-
 # Install uv
 info "Installing uv..."
 curl -LsSf https://astral.sh/uv/install.sh | sh
@@ -237,6 +231,12 @@ fi
 # Enable SDDM
 info "Enabling SDDM..."
 sudo systemctl enable sddm
+
+# Remove Plymouth boot animation
+info "Removing Plymouth boot animation..."
+sudo pacman -Rns --noconfirm plymouth cachyos-plymouth-bootanimation cachyos-plymouth-theme 2>/dev/null || true
+sudo sed -i '/^HOOKS=/s/\bplymouth\b[[:space:]]*//' /etc/mkinitcpio.conf
+sudo mkinitcpio -P
 
 # Rebuild font cache
 info "Rebuilding font cache..."
