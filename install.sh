@@ -47,7 +47,8 @@ yay -S --needed --noconfirm \
     networkmanager dunst brightnessctl \
     fastfetch bluetui wlctl \
     adw-gtk-theme ttf-jetbrains-mono-nerd noto-fonts adwaita-fonts \
-    qt5ct qt6ct qt6-declarative qt6-svg
+    qt5ct qt6ct qt6-declarative qt6-svg \
+    sddm
 
 # Install uv
 info "Installing uv..."
