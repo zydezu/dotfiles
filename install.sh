@@ -112,6 +112,7 @@ info "Generating theme from wallpaper..."
 
 # mpv config
 info "Cloning mpv config..."
+rm -rf "$CONFIG_DIR/mpv"
 git clone --depth 1 https://github.com/zydezu/mpvconfig.git "$CONFIG_DIR/mpv"
 
 # Neuwaita icon theme
