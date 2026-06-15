@@ -1,12 +1,21 @@
 #!/bin/bash
 set -euo pipefail
 
+if [[ "$EUID" -eq 0 ]]; then
+    echo "Do not run this script as root. Run it as your normal user; sudo is called internally."
+    exit 1
+fi
+
 DOTFILES_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
 CONFIG_DIR="$HOME/.config"
 
 RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'; BOLD='\033[1m'; NC='\033[0m'
 info() { echo -e "${GREEN}[+]${NC} $*"; }
 warn() { echo -e "${YELLOW}[!]${NC} $*"; }
+
+# Keep sudo alive for the duration of the script
+sudo -v
+while true; do sudo -n true; sleep 60; kill -0 "$$" 2>/dev/null || exit; done &
 
 # Install yay
 if ! command -v yay &>/dev/null; then
@@ -38,7 +47,7 @@ yay -S --needed --noconfirm \
     networkmanager dunst brightnessctl \
     fastfetch bluetui wlctl \
     adw-gtk-theme ttf-jetbrains-mono-nerd noto-fonts adwaita-fonts \
-    qt5ct qt6ct qt6-declarative qt6-svg qt6-quickcontrols2
+    qt5ct qt6ct qt6-declarative qt6-svg
 
 # Install uv
 info "Installing uv..."
@@ -53,7 +62,7 @@ info "Copying dotfiles to $CONFIG_DIR..."
 mkdir -p "$CONFIG_DIR"
 dirs=(
     actions-for-nautilus alacritty bluetui clipse environment.d fastfetch fish
-    gpu-screen-recorder hypr mango matugen mprisence rofi swappy swaync
+    hypr mango matugen mprisence rofi swappy swaync
     qt5ct qt6ct waypaper wiremix wlctl xdg-desktop-portal zed
 )
 for dir in "${dirs[@]}"; do
@@ -99,7 +108,7 @@ info "Setting wallpaper in waypaper config..."
 sed -i "s|^wallpaper = .*|wallpaper = $WALLPAPER|" "$CONFIG_DIR/waypaper/config.ini"
 
 info "Generating theme from wallpaper..."
-matugen image "$WALLPAPER" -t scheme-fruit-salad --source-color-index 0
+# matugen image "$WALLPAPER" -t scheme-fruit-salad --source-color-index 0 2>/dev/null || true
 
 # mpv config
 info "Cloning mpv config..."
@@ -122,10 +131,10 @@ gsettings set org.gnome.desktop.interface icon-theme 'Neuwaita'
 
 # Enable systemd services
 info "Enabling system services..."
-sudo systemctl enable --now NetworkManager bluetooth
+sudo systemctl enable NetworkManager bluetooth
 
 info "Enabling user audio services..."
-systemctl --user enable --now pipewire pipewire-pulse wireplumber
+systemctl --user enable pipewire pipewire-pulse wireplumber
 
 # XDG user directories
 info "Creating XDG user directories..."
@@ -152,6 +161,7 @@ chmod +x "$HOME/Applications/AppManager.AppImage"
 
 # SDDM themes
 info "Installing SDDM themes..."
+sudo mkdir -p /usr/share/sddm/themes
 sudo cp -r "$DOTFILES_DIR/_setup/sddmthemes/." /usr/share/sddm/themes/
 sudo mkdir -p /etc/sddm.conf.d
 printf '[Theme]\nCurrent=glyph\n' | sudo tee /etc/sddm.conf.d/theme.conf > /dev/null
@@ -175,6 +185,13 @@ read -rp "Install Discord? [y/N] " _discord
 if [[ "$_discord" =~ ^[Yy]$ ]]; then
     info "Installing Discord..."
     yay -S --needed --noconfirm discord
+fi
+
+# yt-dlp
+read -rp "Install yt-dlp? [y/N] " _ytdlp
+if [[ "$_ytdlp" =~ ^[Yy]$ ]]; then
+    info "Installing yt-dlp..."
+    yay -S --needed --noconfirm yt-dlp yt-dlp-ejs deno
 fi
 
 # Tailscale
