@@ -52,11 +52,13 @@ yay -S \
     `# launcher & screenshot` \
     rofi rofi-power-menu grim slurp wayfreeze-git swappy \
     `# theming` \
-    matugen adw-gtk-theme adwaita-fonts ttf-jetbrains-mono-nerd noto-fonts qt5ct qt6ct \
+    matugen adw-gtk-theme adwaita-fonts ttf-jetbrains-mono-nerd noto-fonts \
+    qt5ct qt6ct qt6-declarative qt6-svg \
+    qt5-quickcontrols qt5-quickcontrols2 qt5-declarative qt5-graphicaleffects \
     `# terminal, shell & editors` \
     alacritty fish zed \
     `# apps` \
-    helium-browser-bin nautilus actions-for-nautilus-git mpv \
+    helium-browser-bin nautilus actions-for-nautilus-git mpv mprisence \
     `# audio` \
     pipewire wireplumber wiremix \
     `# clipboard` \
@@ -65,8 +67,8 @@ yay -S \
     networkmanager brightnessctl gpu-screen-recorder dunst fastfetch \
     `# tui tools` \
     bluetui wlctl \
-    `# misc` \
-    mprisence bazaar
+    `# display manager` \
+    sddm xorg-server
 ```
 
 ### Copy Configs

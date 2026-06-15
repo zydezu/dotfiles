@@ -1,0 +1,317 @@
+{
+  "layer": "top",
+  "position": "top",
+  "exclusive": true,
+  "passthrough": false,
+  "gtk-layer-shell": true,
+  "ipc": false,
+  "reload_style_on_change": true,
+  "height": 34,
+  "modules-left": [
+    "ext/workspaces",
+    "wlr/taskbar",
+    "dwl/window"
+  ],
+  "modules-center": [
+    "mpris"
+  ],
+  "modules-right": [
+    "group/tray-group",
+    "group/audio",
+    "group/connectivity",
+    "group/system",
+    "clock",
+    "custom/notifications"
+    // "custom/power"
+  ],
+  "group/audio": {
+    "orientation": "horizontal",
+    "modules": [
+      "pulseaudio",
+      "pulseaudio#microphone"
+    ]
+  },
+  "group/system": {
+    "orientation": "horizontal",
+    "modules": [
+      // "cpu",
+      // "memory",
+      // "custom/gpu-usage",
+      // "power-profiles-daemon",
+      "backlight",
+      "battery"
+    ]
+  },
+  "group/connectivity": {
+    "orientation": "horizontal",
+    "modules": [
+      "network",
+      "bluetooth",
+      "custom/ps_controller"
+    ]
+  },
+  "group/tray-group": {
+    "orientation": "horizontal",
+    "drawer": {
+      "transition-duration": 300,
+      "transition-left-to-right": false
+    },
+    "modules": [
+      "custom/tray-icon",
+      "tray"
+    ]
+  },
+  "ext/workspaces": {
+    "format": "{icon}",
+    "ignore-hidden": true,
+    "on-click": "activate",
+    "on-click-right": "deactivate",
+    "sort-by-id": true,
+    "on-scroll-up": "mmsg -d viewtoright",
+    "on-scroll-down": "mmsg -d viewtoleft"
+  },
+  "dwl/window": {
+    "format": "{title}",
+    "max-length": 35,
+    "ellipsis": true,
+    "tooltip": true,
+    "tooltip-format": "{title}",
+    "on-click": "~/.config/mango/scripts/screenshot.sh",
+    "on-click-right": "~/.config/mango/scripts/screenshot.sh select",
+    "rewrite": {
+      "^(.*)[𐙚](.*)$": "$1✦$2"
+    }
+  },
+  "wlr/taskbar": {
+    "format": "{icon}",
+    "icon-size": 18,
+    "tooltip-format": "{title}",
+    "all-outputs": true,
+    "sort-by-app-id": true,
+    "on-click": "activate",
+    "on-click-middle": "minimize",
+    "on-click-right": "close",
+    "ignore-list": [
+      "Rofi",
+      "wofi"
+    ]
+  },
+  "tray": {
+    "interval": 2,
+    "icon-size": 18,
+    "spacing": 10
+  },
+  "custom/tray-icon": {
+    "format": "󰍜",
+    "tooltip": false
+  },
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": "  ",
+    "format-bluetooth": " {volume}%",
+    "format-bluetooth-muted": " Muted",
+    "tooltip-format": "{desc}",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "on-click-right": "alacritty --title 'wiremix' -e wiremix",
+    "on-scroll-up": "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 2%+",
+    "on-scroll-down": "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 2%-",
+    "scroll-step": 5,
+    "format-icons": {
+      "headphone": "󰋋",
+      "hands-free": "󰋋",
+      "headset": "󰋋",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": [
+        "",
+        "",
+        " "
+      ]
+    },
+    "ignored-sinks": [
+      "Easy Effects Sink"
+    ]
+  },
+  "pulseaudio#microphone": {
+    "format": "{format_source}",
+    "format-source": " {volume}%",
+    "format-source-muted": " ",
+    "tooltip-format": "{desc}",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+    "on-click-right": "alacritty --title 'wiremix' -e wiremix",
+    "on-scroll-up": "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SOURCE@ 2%+",
+    "on-scroll-down": "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SOURCE@ 2%-",
+    "scroll-step": 5
+  },
+  "cpu": {
+    "interval": 2,
+    "format": " {usage}%",
+    "on-click": "alacritty --title 'btop' -e btop"
+  },
+  "memory": {
+    "interval": 2,
+    "format": " {used:0.1f}G",
+    "format-alt": " {percentage}%",
+    "tooltip-format": "RAM: {used:0.1f}G/{total:0.1f}G\nSwap: {swapUsed:0.1f}G/{swapTotal:0.1f}G"
+  },
+  "custom/gpu-usage": {
+    "format": "󰾲 {text}",
+    "exec": "/home/zy/.cargo/bin/gpu-usage-waybar",
+    "return-type": "json",
+    "on-click": "alacritty --title 'nvtop' -e nvtop"
+  },
+  "backlight": {
+    "interval": 2,
+    "format": "{icon} {percent}%",
+    "format-icons": [
+      "󰖔",
+      "󰃞",
+      "󰃟",
+      "󰃝",
+      "󰃠"
+    ],
+    "min-brightness": 1.0,
+    "scroll-step": 5,
+    "smooth-scrolling-threshold": 1,
+    "tooltip": true,
+    "tooltip-format": "Brightness: {percent}%"
+  },
+  "battery": {
+    "interval": 2,
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon} {capacity}%",
+    "format-charging": " {capacity}%",
+    "format-plugged": " {capacity}%",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "format-alt": "{icon} {time}",
+    "format-time": "{H}:{m}",
+    "tooltip-format": "Battery: {capacity}%\nRemaining: {time}\nPower: {power}W\nHealth: {health}%"
+  },
+  "network": {
+    "interval": 2,
+    "format-wifi": "󰖩 {signalStrength}%",
+    "format-ethernet": "󰈀 Wired",
+    "format-linked": " No IP ({ifname})",
+    "format-disconnected": " Disconnected",
+    "format-disabled": "󰖪 Off",
+    "tooltip-format": "{ifname} {ipaddr}/via {gwaddr} ({frequency}GHz)\nBandwidth: ↓{bandwidthDownBits} ↑{bandwidthUpBits}",
+    "on-click": "alacritty --title 'wlctl' -e wlctl"
+  },
+  "bluetooth": {
+    "format": "󰂯 On",
+    "format-disabled": "󰂲 Off",
+    "format-connected": "󰂱 {num_connections}",
+    "format-connected-battery": "󰂱 Connected ({device_battery_percentage}%)",
+    "tooltip-format": "{controller_alias}\t{controller_address}",
+    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+    "on-click": "alacritty --title 'bluetui' -e bluetui"
+  },
+  "custom/ps_controller": {
+    "format": "{}",
+    "tooltip": true,
+    "exec": "~/.config/mango/waybar/scripts/ps_controller_battery.sh",
+    "interval": 30
+  },
+  "clock": {
+    "format": "󱑌 {:%R}",
+    "format-alt": "󰃭 {:%R %F}",
+    "tooltip-format": "{calendar}",
+    "calendar": {
+      "mode": "year",
+      "mode-mon-col": 3,
+      "format": {
+        "months": "<span><b>{}</b></span>",
+        "days": "<span><b>{}</b></span>",
+        "weekdays": "<span color='#6edbaa'><b>{}</b></span>",
+        "today": "<span color='#6edbaa'><b><u>{}</u></b></span>"
+      }
+    }
+  },
+  "custom/notifications": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "󱅫",
+      "none": "󰂚",
+      "dnd-notification": "󰂛",
+      "dnd-none": "󰂛",
+      "inhibited-notification": "󱅫",
+      "inhibited-none": "󰂚",
+      "dnd-inhibited-notification": "󰂛",
+      "dnd-inhibited-none": "󰂛"
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
+  "custom/power": {
+    "format": "",
+    "tooltip": false,
+    "on-click": "rofi -show power-menu -modi power-menu:rofi-power-menu"
+  },
+  "power-profiles-daemon": {
+    "format": "{icon}",
+    "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+    "tooltip": true,
+    "format-icons": {
+      "default": "",
+      "performance": "PERF",
+      "balanced": "BAL",
+      "power-saver": "LOW"
+    }
+  },
+  "mpris": {
+    "format": "{player_icon} {title} - {artist} ({position}/{length})",
+    "format-paused": "{status_icon} {title} - {artist} ({position}/{length})",
+    "format-stopped": "",
+    "max-length": 80,
+    "interval": 1,
+    "ellipsis": true,
+    "tooltip-format": "{title}\n{album}\n{artist}\n{position}/{length}",
+    "player": "strawberry",
+    "expand": true,
+    "player-icons": {
+      "default": "󰎇",
+      "spotify": "",
+      "firefox": "",
+      "chrome": "",
+      "mpv": ""
+    },
+    "status-icons": {
+      "paused": "",
+      "playing": ""
+    },
+    "ignored-players": [
+      "chromium",
+      "chromium.instance",
+      "firefox",
+      "firefox.instance"
+    ],
+    "on-click": "playerctl play-pause -p strawberry",
+    "on-click-right": "playerctl next -p strawberry",
+    "on-click-middle": "playerctl previous -p strawberry",
+    "on-scroll-up": "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 2%+",
+    "on-scroll-down": "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 2%-"
+  },
+  "upower": {
+    "icon-size": 18,
+    "hide-if-empty": true,
+    "tooltip": true,
+    "tooltip-spacing": 20,
+    "format": "{percentage}"
+  }
+}

@@ -48,6 +48,7 @@ yay -S --needed --noconfirm \
     fastfetch bluetui wlctl \
     adw-gtk-theme ttf-jetbrains-mono-nerd noto-fonts adwaita-fonts \
     qt5ct qt6ct qt6-declarative qt6-svg \
+    qt5-quickcontrols qt5-quickcontrols2 qt5-declarative qt5-graphicaleffects \
     sddm
 
 # Install uv
@@ -87,6 +88,24 @@ mkdir -p "$HOME/.local/share/actions-for-nautilus"
 cp "$CONFIG_DIR/actions-for-nautilus/config.json" \
    "$HOME/.local/share/actions-for-nautilus/config.json"
 nautilus -q 2>/dev/null || true
+
+# Nautilus bookmarks
+info "Adding Nautilus bookmarks..."
+mkdir -p "$HOME/.config/gtk-3.0"
+cat > "$HOME/.config/gtk-3.0/bookmarks" <<EOF
+file://$HOME/Documents Documents
+file://$HOME/Downloads Downloads
+file://$HOME/Projects Projects
+file://$HOME/Music Music
+file://$HOME/Pictures Pictures
+file://$HOME/Videos Videos
+EOF
+
+# Laptop waybar config
+if ls /sys/class/power_supply/BAT* &>/dev/null; then
+    info "Laptop detected - using laptop waybar config..."
+    cp "$CONFIG_DIR/mango/waybar/config.laptop.jsonc" "$CONFIG_DIR/mango/waybar/config.jsonc"
+fi
 
 # Strip monitor-specific config lines
 info "Stripping monitor config..."
@@ -238,9 +257,20 @@ sudo pacman -Rns --noconfirm plymouth cachyos-plymouth-bootanimation cachyos-ply
 sudo sed -i '/^HOOKS=/s/\bplymouth\b[[:space:]]*//' /etc/mkinitcpio.conf
 sudo mkinitcpio -P
 
+# Install fonts
+info "Installing fonts..."
+mkdir -p "$HOME/.local/share/fonts"
+cp -r "$DOTFILES_DIR/_setup/fonts/." "$HOME/.local/share/fonts/"
+
 # Rebuild font cache
 info "Rebuilding font cache..."
 fc-cache -fv
+
+# Copy post-install script to home
+info "Copying post-install script..."
+cp "$DOTFILES_DIR/post-install.sh" "$HOME/post-install.sh"
+sed -i "s|DOTFILES_DIR=.*|DOTFILES_DIR=\"$DOTFILES_DIR\"|" "$HOME/post-install.sh"
+chmod +x "$HOME/post-install.sh"
 
 # Reboot
 echo
