@@ -101,10 +101,11 @@ file://$HOME/Pictures Pictures
 file://$HOME/Videos Videos
 EOF
 
-# Laptop waybar config
+# Laptop-specific config
 if ls /sys/class/power_supply/BAT* &>/dev/null; then
-    info "Laptop detected - using laptop waybar config..."
+    info "Laptop detected - applying laptop config..."
     cp "$CONFIG_DIR/mango/waybar/config.laptop.jsonc" "$CONFIG_DIR/mango/waybar/config.jsonc"
+    sed -i 's/^sloppyfocus=.*/sloppyfocus=1/' "$CONFIG_DIR/mango/config.conf"
 fi
 
 # Strip monitor-specific config lines

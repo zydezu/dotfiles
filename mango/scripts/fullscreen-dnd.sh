@@ -1,20 +1,5 @@
 #!/bin/bash
 
-declare -A monitor_state
-
-if mmsg get version >/dev/null 2>&1; then
-    MMSG_NEW=1
-else
-    MMSG_NEW=0
-fi
-
-any_fullscreen() {
-    for state in "${monitor_state[@]}"; do
-        [[ "$state" == "true" || "$state" == "1" ]] && return 0
-    done
-    return 1
-}
-
 is_dnd() {
     [[ "$(swaync-client --get-dnd 2>/dev/null)" == "true" ]]
 }
@@ -22,8 +7,10 @@ is_dnd() {
 dnd_active=0
 was_manual_dnd=0
 
-handle_state_change() {
-    if any_fullscreen; then
+handle_fullscreen() {
+    local is_any_fs=$1  # "true" or "false"
+
+    if [[ "$is_any_fs" == "true" ]]; then
         if (( dnd_active == 0 )); then
             if is_dnd; then
                 was_manual_dnd=1
@@ -46,28 +33,13 @@ handle_state_change() {
     fi
 }
 
-if (( MMSG_NEW )); then
-    while IFS= read -r mon; do
-        name=$(printf '%s' "$mon" | jq -r '.name')
-        fs=$(printf '%s' "$mon" | jq -r '.fullscreen // false')
-        monitor_state["$name"]=$fs
-    done < <(mmsg get all-monitors | jq -c '.[]')
+clients_any_fullscreen() {
+    printf '%s' "$1" | jq -r 'if ([.clients[] | select(.is_fullscreen == true)] | length) > 0 then "true" else "false" end'
+}
 
-    while IFS= read -r line; do
-        while IFS= read -r mon; do
-            name=$(printf '%s' "$mon" | jq -r '.name')
-            fs=$(printf '%s' "$mon" | jq -r '.fullscreen // false')
-            monitor_state["$name"]=$fs
-        done < <(printf '%s' "$line" | jq -c '.[]')
-        handle_state_change
-    done < <(mmsg watch all-monitors)
-else
-    while IFS= read -r line; do
-        monitor_state[${line%% *}]=${line##* }
-    done < <(mmsg -g -m)
+initial=$(mmsg get all-clients 2>/dev/null)
+handle_fullscreen "$(clients_any_fullscreen "$initial")"
 
-    while IFS= read -r line; do
-        monitor_state[${line%% *}]=${line##* }
-        handle_state_change
-    done < <(mmsg -w -m)
-fi
+while IFS= read -r line; do
+    handle_fullscreen "$(clients_any_fullscreen "$line")"
+done < <(mmsg watch all-clients)

@@ -7,7 +7,7 @@
 VALUE="$1"
 TARGET="${2:-all}"
 RETRIES=5
-DELAY=0.5
+DELAY=1
 
 if [[ -z "$VALUE" || ! "$VALUE" =~ ^[0-9]+$ || "$VALUE" -gt 100 ]]; then
     echo "Usage: $0 <value 0-100> [1|2|all]" >&2
@@ -18,7 +18,7 @@ ddc_set() {
     local display="$1"
     local attempt
     for attempt in $(seq 1 "$RETRIES"); do
-        if ddcutil --sleep-multiplier 0.1 setvcp 10 "$VALUE" --display "$display" &>/dev/null; then
+        if ddcutil --sleep-multiplier 0.5 setvcp 10 "$VALUE" --display "$display" &>/dev/null; then
             return 0
         fi
         sleep "$DELAY"
