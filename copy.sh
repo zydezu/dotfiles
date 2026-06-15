@@ -13,6 +13,8 @@ allowed_dirs=(
   fastfetch
   fish
   gpu-screen-recorder
+  gtk-3.0
+  gtk-4.0
   hypr
   mango
   matugen

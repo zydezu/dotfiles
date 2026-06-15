@@ -41,7 +41,7 @@ Personal dotfiles for mangowc on Arch Linux (my personal system uses CachyOS, wh
 ### Installation on Arch
 
 ```
-yay -S mangowm waybar xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-wlr swaybg swaync sway-audio-idle-inhibit-git hyprlock hypridle rofi rofi-power-menu waypaper grim slurp wayfreeze-git swappy gpu-screen-recorder alacritty fish zed nautilus actions-for-nautilus-git mpv mprisence pipewire wireplumber wiremix clipse cliphist wl-clipboard wl-clip-persist networkmanager dunst brightnessctl fastfetch bluetui wlctl matugen ttf-jetbrains-mono-nerd noto-fonts
+yay -S mangowm waybar matugen xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-wlr swaybg swaync sway-audio-idle-inhibit-git hyprlock hypridle rofi rofi-power-menu waypaper grim slurp wayfreeze-git swappy gpu-screen-recorder alacritty fish zed helium-browser-bin nautilus actions-for-nautilus-git mpv mprisence pipewire wireplumber wiremix clipse cliphist wl-clipboard wl-clip-persist networkmanager dunst brightnessctl fastfetch bluetui wlctl adw-gtk-theme ttf-jetbrains-mono-nerd noto-fonts adwaita-fonts qt5ct qt6ct
 ```
 
 ### Copy Configs
@@ -177,4 +177,4 @@ Before starting mangowm, make sure `monitor.conf` is configured for your display
 
 ## Things To Check
 
-When applying these dotfiles and logging into mango from your login manager, it may seem like things are not working. Check the configuration files in `mango/monitor.conf`, `mango/waybar/config.jsonc` and `hypr/hyprlock.conf`  specifically for setting a monitor output (you may need to change or remove lines like `DP-1`).
+When applying these dotfiles and logging into mango from your login manager, it may seem like things are not working. Check the configuration files in `mango/monitor.conf`, `mango/waybar/config.jsonc`, `swaync/config.jsonc`, and `hypr/hyprlock.conf` specifically for setting a monitor output (you may need to change or remove lines like `DP-1`).
