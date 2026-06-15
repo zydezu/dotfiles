@@ -49,7 +49,7 @@ yay -S --needed --noconfirm \
     adw-gtk-theme ttf-jetbrains-mono-nerd noto-fonts adwaita-fonts \
     qt5ct qt6ct qt6-declarative qt6-svg \
     qt5-quickcontrols qt5-quickcontrols2 qt5-declarative qt5-graphicaleffects \
-    sddm baazar baobab
+    sddm baazar baobab file-roller
 
 # Install uv
 info "Installing uv..."
@@ -121,8 +121,15 @@ sed -i '/"output":/d' "$CONFIG_DIR/mango/waybar/config.jsonc"
 sed -i '/"control-center-preferred-output":/d'      "$CONFIG_DIR/swaync/config.json"
 sed -i '/"notification-window-preferred-output":/d' "$CONFIG_DIR/swaync/config.json"
 
-# hypr/hyprlock.conf - remove all "monitor = ..." lines
-sed -i '/[[:space:]]*monitor = /d' "$CONFIG_DIR/hypr/hyprlock.conf"
+# hypr/hyprlock.conf - remove monitor-only background blocks, then strip monitor= lines
+python3 -c "
+import re
+f = '$CONFIG_DIR/hypr/hyprlock.conf'
+t = open(f).read()
+t = re.sub(r'\nbackground \{[^}]*\}', lambda m: '' if 'path =' not in m.group() else m.group(), t)
+t = re.sub(r'[ \t]*monitor = [^\n]*\n', '', t)
+open(f, 'w').write(t)
+"
 
 # Wallpaper + matugen
 info "Setting wallpaper in waypaper config..."
@@ -253,6 +260,7 @@ if [[ "$_ts" =~ ^[Yy]$ ]]; then
     sudo mkdir -p /mnt/tailscale
     echo "http://100.100.100.100:8080 /mnt/tailscale davfs noauto,x-systemd.automount,_netdev,uid=$(id -un),gid=$(id -gn) 0 0" \
         | sudo tee -a /etc/fstab > /dev/null
+    echo "dav://100.100.100.100:8080 Tailscale" >> "$HOME/.config/gtk-3.0/bookmarks"
 fi
 
 # Enable SDDM
@@ -281,6 +289,8 @@ sed -i "s|DOTFILES_DIR=.*|DOTFILES_DIR=\"$DOTFILES_DIR\"|" "$HOME/post-install.s
 chmod +x "$HOME/post-install.sh"
 
 # Reboot
+echo
+echo -e "${YELLOW}[!]${NC} ${BOLD}Run ~/post-install.sh after logging in to generate the theme and finish setup.${NC}"
 echo
 echo -e "${BOLD}Done. Rebooting in 5 seconds... (Ctrl+C to cancel)${NC}"
 sleep 5
