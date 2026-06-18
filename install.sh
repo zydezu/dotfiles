@@ -41,7 +41,7 @@ yay -S --needed --noconfirm \
     gpu-screen-recorder \
     alacritty fish zed helium-browser-bin \
     nautilus actions-for-nautilus-git \~/.config/xdg-terminals.list
-    mpv mprisence \
+    mpv qimgv mprisence \
     pipewire wireplumber wiremix \
     clipse cliphist wl-clipboard wl-clip-persist \
     networkmanager dunst brightnessctl xdg-terminal-exec-git \

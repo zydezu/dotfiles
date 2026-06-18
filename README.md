@@ -58,7 +58,7 @@ yay -S \
     `# terminal, shell & editors` \
     alacritty fish zed \
     `# apps` \
-    helium-browser-bin nautilus actions-for-nautilus-git mpv mprisence \
+    helium-browser-bin nautilus actions-for-nautilus-git mpv qimgv mprisence \
     `# audio` \
     pipewire wireplumber wiremix \
     `# clipboard` \
