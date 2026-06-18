@@ -27,6 +27,14 @@ if command -v tailscale &>/dev/null; then
     xdg-open /mnt/tailscale
 fi
 
+# Cloudflare WARP setup
+if command -v warp-cli &>/dev/null; then
+    info "Setting up Cloudflare WARP..."
+    sudo ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+    sudo systemctl enable --now warp-svc
+    warp-cli registration new
+fi
+
 # Cleanup dotfiles directory
 info "Cleaning up dotfiles directory..."
 rm -rf "$DOTFILES_DIR"

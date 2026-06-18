@@ -44,7 +44,7 @@ yay -S --needed --noconfirm \
     mpv mprisence \
     pipewire wireplumber wiremix \
     clipse cliphist wl-clipboard wl-clip-persist \
-    networkmanager dunst brightnessctl \
+    networkmanager dunst brightnessctl xdg-terminal-exec-git \
     fastfetch bluetui wlctl github-cli \
     adw-gtk-theme ttf-jetbrains-mono-nerd noto-fonts adwaita-fonts \
     qt5ct qt6ct qt6-declarative qt6-svg \
@@ -243,10 +243,10 @@ if [[ "$_discord" =~ ^[Yy]$ ]]; then
 fi
 
 # Warp
-read -rp "Install Warp (wgcf)? [y/N] " _warp
+read -rp "Install Cloudflare Warp? [y/N] " _warp
 if [[ "$_warp" =~ ^[Yy]$ ]]; then
     info "Installing Warp..."
-    yay -S --needed --noconfirm wgcf
+    yay -S --needed --noconfirm warp-cli
 fi
 
 # yt-dlp

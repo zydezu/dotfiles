@@ -1,0 +1,10 @@
+@import url("https://mwittrien.github.io/BetterDiscordAddons/Themes/EmojiReplace/base/Apple.css");
+@import url(https://davart154.github.io/Themes/Snippets/Colored%20Mentions/ColoredMentionsSource.css);
+
+.playPausePop_cf09d8 {
+    opacity: 0!important;
+}
+
+.user-profile-modal {
+    border-radius: 0!important;
+}
