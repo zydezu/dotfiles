@@ -7,8 +7,6 @@ RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'; BOLD='\033[1m'; NC='\
 info() { echo -e "${GREEN}[+]${NC} $*"; }
 
 info "Moving wallpaper to Pictures..."
-mkdir -p "$HOME/Pictures"
-cp "$DOTFILES_DIR/waypaper/default.jpg" "$HOME/Pictures/default.jpg"
 WALLPAPER="$HOME/Pictures/default.jpg"
 
 # Generate theme from wallpaper
@@ -34,4 +32,4 @@ info "Cleaning up dotfiles directory..."
 rm -rf "$DOTFILES_DIR"
 
 echo
-echo -e "${BOLD}Clean up completed.${NC}"
+echo -e "${BOLD}Post install cleanup completed.${NC}"
