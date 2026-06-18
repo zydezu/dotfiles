@@ -4,7 +4,7 @@ version_check = false
 [templates.mango]
 input_path = '~/.config/matugen/templates/mango.conf'
 output_path = '~/.config/mango/mango-colors.conf'
-post_hook = 'mmsg -d reload_config'
+post_hook = 'mmsg dispatch reload_config'
 
 [templates.waybar]
 input_path = "~/.config/matugen/templates/waybar.css"
