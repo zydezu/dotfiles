@@ -40,7 +40,7 @@ yay -S --needed --noconfirm \
     waypaper grim slurp wayfreeze-git swappy \
     gpu-screen-recorder \
     alacritty fish zed helium-browser-bin \
-    nautilus actions-for-nautilus-git \
+    nautilus actions-for-nautilus-git \~/.config/xdg-terminals.list
     mpv mprisence \
     pipewire wireplumber wiremix \
     clipse cliphist wl-clipboard wl-clip-persist \
@@ -77,6 +77,8 @@ for dir in "${dirs[@]}"; do
         warn "  skipping $dir (not found)"
     fi
 done
+
+cp "$DOTFILES_DIR/xdg-terminals.list" "$CONFIG_DIR/xdg-terminals.list"
 
 # Fix hardcoded /home/zy/ references left in copied configs
 find "$CONFIG_DIR" -type f \( -name "*.conf" -o -name "*.ini" -o -name "*.json" -o -name "*.jsonc" \) \
