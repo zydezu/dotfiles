@@ -64,7 +64,7 @@ yay -S \
     `# clipboard` \
     clipse cliphist wl-clipboard wl-clip-persist \
     `# system utilities` \
-    networkmanager brightnessctl gpu-screen-recorder dunst fastfetch \
+    networkmanager brightnessctl gpu-screen-recorder dunst fastfetch github-cli \
     `# tui tools` \
     bluetui wlctl \
     `# display manager` \

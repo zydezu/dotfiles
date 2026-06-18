@@ -45,7 +45,7 @@ yay -S --needed --noconfirm \
     pipewire wireplumber wiremix \
     clipse cliphist wl-clipboard wl-clip-persist \
     networkmanager dunst brightnessctl \
-    fastfetch bluetui wlctl \
+    fastfetch bluetui wlctl github-cli \
     adw-gtk-theme ttf-jetbrains-mono-nerd noto-fonts adwaita-fonts \
     qt5ct qt6ct qt6-declarative qt6-svg \
     qt5-quickcontrols qt5-quickcontrols2 qt5-declarative qt5-graphicaleffects \
@@ -132,6 +132,11 @@ open(f, 'w').write(t)
 "
 
 # Wallpaper + matugen
+info "Moving wallpaper to Pictures..."
+mkdir -p "$HOME/Pictures"
+cp "$WALLPAPER" "$HOME/Pictures/default.jpg"
+WALLPAPER="$HOME/Pictures/default.jpg"
+
 info "Setting wallpaper in waypaper config..."
 sed -i "s|^wallpaper = .*|wallpaper = $WALLPAPER|" "$CONFIG_DIR/waypaper/config.ini"
 
@@ -257,10 +262,10 @@ if [[ "$_ts" =~ ^[Yy]$ ]]; then
     info "Installing Tailscale..."
     yay -S --needed --noconfirm tailscale davfs2
     sudo systemctl enable --now tailscaled
+    sudo tailscale set --operator=$USER
     sudo mkdir -p /mnt/tailscale
     echo "http://100.100.100.100:8080 /mnt/tailscale davfs noauto,x-systemd.automount,_netdev,uid=$(id -un),gid=$(id -gn) 0 0" \
         | sudo tee -a /etc/fstab > /dev/null
-    echo "dav://100.100.100.100:8080 Tailscale" >> "$HOME/.config/gtk-3.0/bookmarks"
 fi
 
 # Enable SDDM
