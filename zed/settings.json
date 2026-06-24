@@ -82,7 +82,7 @@
   "project_panel": {
     "dock": "left",
     "hide_hidden": false,
-    "hide_root": false,
+    "hide_root": true,
     "diagnostic_badges": false,
     "bold_folder_labels": false,
     "entry_spacing": "standard",
