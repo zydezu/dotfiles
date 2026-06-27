@@ -10,44 +10,44 @@ theme = "matugen"
 inherit = "default"
 
 # Selection indicators
-selector = { fg = "#ffade2" }
+selector = { fg = "#4fd8ea" }
 
 # Tab styling
-tab = { fg = "#e7bdb3" }
-tab_selected = { fg = "#ffade2" }
-tab_marker = { fg = "#ffb4a2" }
+tab = { fg = "#bcc7dc" }
+tab_selected = { fg = "#4fd8ea" }
+tab_marker = { fg = "#a5c8ff" }
 
 # List overflow indicators
-list_more = { fg = "#ae887f" }
+list_more = { fg = "#8791a4" }
 
 # Node info
-node_title = { fg = "#f9dcd6" }
-node_target = { fg = "#e7bdb3" }
+node_title = { fg = "#dee2ef" }
+node_target = { fg = "#bcc7dc" }
 
 # Volume
-volume = { fg = "#f9dcd6" }
-volume_empty = { fg = "#5d4038" }
-volume_filled = { fg = "#f7b1de" }
+volume = { fg = "#dee2ef" }
+volume_empty = { fg = "#3d4758" }
+volume_filled = { fg = "#81d3e0" }
 
 # Peak meter
-meter_inactive = { fg = "#5d4038" }
-meter_active = { fg = "#ffb4a2" }
+meter_inactive = { fg = "#3d4758" }
+meter_active = { fg = "#a5c8ff" }
 meter_overload = { fg = "#ffb4ab" }
-meter_center_inactive = { fg = "#ae887f" }
-meter_center_active = { fg = "#723425" }
+meter_center_inactive = { fg = "#8791a4" }
+meter_center_active = { fg = "#214876" }
 
 # Config tab
-config_device = { fg = "#f9dcd6" }
-config_profile = { fg = "#f7b1de" }
+config_device = { fg = "#dee2ef" }
+config_profile = { fg = "#81d3e0" }
 
 # Dropdowns
-dropdown_icon = { fg = "#ffade2" }
-dropdown_border = { fg = "#ae887f" }
-dropdown_item = { fg = "#f9dcd6" }
-dropdown_selected = { fg = "#581149", bg = "#ffade2" }
-dropdown_more = { fg = "#ae887f" }
+dropdown_icon = { fg = "#4fd8ea" }
+dropdown_border = { fg = "#8791a4" }
+dropdown_item = { fg = "#dee2ef" }
+dropdown_selected = { fg = "#00363c", bg = "#4fd8ea" }
+dropdown_more = { fg = "#8791a4" }
 
 # Help menu
-help_border = { fg = "#ae887f" }
-help_item = { fg = "#e7bdb3" }
-help_more = { fg = "#ae887f" }
+help_border = { fg = "#8791a4" }
+help_item = { fg = "#bcc7dc" }
+help_more = { fg = "#8791a4" }

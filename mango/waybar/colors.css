@@ -1,8 +1,8 @@
-@define-color bg_panel rgba(30, 16, 12, 0.9);
+@define-color bg_panel rgba(14, 20, 28, 0.9);
 @define-color bg_base transparent;
-@define-color border_color #ffade2;
-@define-color text_main #ffade2;
-@define-color text_dark #42312c;
+@define-color border_color #4fd8ea;
+@define-color text_main #4fd8ea;
+@define-color text_dark #30353e;
 @define-color alert_urgent #ffb4ab;
 @define-color alert_minimized #93000a;
 @define-color alert_critical #ffdad6;

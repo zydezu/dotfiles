@@ -20,7 +20,7 @@ if [ -z "$EMPTY_TAG" ]; then
     exit 1
 fi
 
-# Switch to the empty tag — OBS will be placed here by the WM
+# Switch to the empty tag for where OBS will go
 mmsg dispatch view,"$EMPTY_TAG",0
 
 obs &
