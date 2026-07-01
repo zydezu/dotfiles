@@ -27,7 +27,6 @@ Personal dotfiles for mangowc on Arch Linux (my personal system uses CachyOS, wh
 | `hypr/` | [Hyprlock & hypridle](https://github.com/hyprwm/hyprlock) |
 | `mango/` | [Wayland compositor](https://github.com/mangowm/mango) |
 | `matugen/` | [Color theming](https://github.com/InioX/matugen) |
-| `mprisence/` | [Discord rich presence](https://github.com/lazykern/mprisence) |
 | `mpv/` | [Video player](https://github.com/mpv-player/mpv) |
 | `rofi/` | [App launcher](https://github.com/davatorium/rofi) |
 | `swappy/` | [Screenshot markup](https://github.com/jtheoof/swappy) |
@@ -58,7 +57,7 @@ yay -S \
     `# terminal, shell & editors` \
     alacritty fish zed \
     `# apps` \
-    helium-browser-bin nautilus actions-for-nautilus-git mpv qimgv mprisence \
+    helium-browser-bin nautilus actions-for-nautilus-git mpv qimgv \
     `# audio` \
     pipewire wireplumber wiremix \
     `# clipboard` \

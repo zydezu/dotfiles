@@ -41,7 +41,7 @@ yay -S --needed --noconfirm \
     gpu-screen-recorder \
     alacritty fish zed helium-browser-bin \
     nautilus actions-for-nautilus-git \~/.config/xdg-terminals.list
-    mpv qimgv mprisence \
+    mpv qimgv \
     pipewire wireplumber wiremix \
     clipse cliphist wl-clipboard wl-clip-persist \
     networkmanager dunst brightnessctl xdg-terminal-exec-git \
@@ -64,7 +64,7 @@ info "Copying dotfiles to $CONFIG_DIR..."
 mkdir -p "$CONFIG_DIR"
 dirs=(
     actions-for-nautilus alacritty bluetui clipse environment.d fastfetch fish
-    hypr mango matugen mprisence rofi swappy swaync
+    hypr mango matugen rofi swappy swaync
     qt5ct qt6ct waypaper wiremix wlctl xdg-desktop-portal zed
 )
 for dir in "${dirs[@]}"; do
