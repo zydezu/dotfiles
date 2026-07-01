@@ -63,4 +63,14 @@
       </metadata>
     </info>
   </bookmark>
+  <bookmark href="smb://cali/alex/" added="2026-07-01T17:57:21.672017Z" modified="2026-07-01T17:57:21.672020Z" visited="2026-07-01T17:57:21.672018Z">
+    <title>alex on cali</title>
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <bookmark:applications>
+          <bookmark:application name="org.gnome.Nautilus" exec="&apos;org.gnome.Nautilus %u&apos;" modified="2026-07-01T17:57:21.672019Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
 </xbel>
