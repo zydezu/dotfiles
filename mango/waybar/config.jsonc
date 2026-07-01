@@ -290,10 +290,10 @@
       "format-paused": "{status_icon} {title} - {artist} ({position}/{length})",
       "format-stopped": "",
       "max-length": 80,
-      "interval": 1,
+      "interval": 0.5,
       "ellipsis": true,
       "tooltip-format": "{title}\n{album}\n{artist}\n{position}/{length}",
-      "player": "strawberry",
+      "player": "Feishin",
       "expand": true,
       "player-icons": {
         "default": "󰎇",
@@ -312,9 +312,9 @@
         "firefox",
         "firefox.instance"
       ],
-      "on-click": "playerctl play-pause -p strawberry",
-      "on-click-right": "playerctl next -p strawberry",
-      "on-click-middle": "playerctl previous -p strawberry",
+      "on-click": "playerctl play-pause -p Feishin",
+      "on-click-right": "playerctl next -p Feishin",
+      "on-click-middle": "playerctl previous -p Feishin",
       "on-scroll-up": "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 2%+",
       "on-scroll-down": "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 2%-"
     },
