@@ -4,6 +4,8 @@ is_dnd() {
     [[ "$(swaync-client --get-dnd 2>/dev/null)" == "true" ]]
 }
 
+MAIN_MON="DP-1"
+
 dnd_active=0
 was_manual_dnd=0
 
@@ -34,7 +36,8 @@ handle_fullscreen() {
 }
 
 clients_any_fullscreen() {
-    printf '%s' "$1" | jq -r 'if ([.clients[] | select(.is_fullscreen == true)] | length) > 0 then "true" else "false" end'
+    printf '%s' "$1" | jq -r --arg mon "$MAIN_MON" \
+        'if ([.clients[] | select(.is_fullscreen == true and .monitor == $mon)] | length) > 0 then "true" else "false" end'
 }
 
 initial=$(mmsg get all-clients 2>/dev/null)

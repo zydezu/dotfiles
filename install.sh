@@ -119,9 +119,12 @@ sed -i '/^monitorrule=/d' "$CONFIG_DIR/mango/monitor.conf"
 # mango/waybar/config.jsonc - remove "output": "..." line
 sed -i '/"output":/d' "$CONFIG_DIR/mango/waybar/config.jsonc"
 
-# swaync/config.json - remove preferred-output lines
+# swaync/config.json - remove pfreferred-output lines
 sed -i '/"control-center-preferred-output":/d'      "$CONFIG_DIR/swaync/config.json"
 sed -i '/"notification-window-preferred-output":/d' "$CONFIG_DIR/swaync/config.json"
+
+# mango/scripts/fullscreen-dnd.sh - remove hardcoded monitor
+sed -i '/^MAIN_MON=/d' "$CONFIG_DIR/mango/scripts/fullscreen-dnd.sh"
 
 # hypr/hyprlock.conf - remove monitor-only background blocks, then strip monitor= lines
 python3 -c "
