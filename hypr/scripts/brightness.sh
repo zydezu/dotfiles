@@ -8,6 +8,9 @@ VALUE="$1"
 TARGET="${2:-all}"
 RETRIES=5
 DELAY=1
+LOG="$HOME/.cache/hypr/brightness.log"
+
+mkdir -p "$(dirname "$LOG")"
 
 if [[ -z "$VALUE" || ! "$VALUE" =~ ^[0-9]+$ || "$VALUE" -gt 100 ]]; then
     echo "Usage: $0 <value 0-100> [1|2|all]" >&2
@@ -16,14 +19,16 @@ fi
 
 ddc_set() {
     local display="$1"
-    local attempt
+    local attempt output
     for attempt in $(seq 1 "$RETRIES"); do
-        if ddcutil --sleep-multiplier 0.5 setvcp 10 "$VALUE" --display "$display" &>/dev/null; then
+        if output=$(ddcutil --sleep-multiplier 0.5 setvcp 10 "$VALUE" --display "$display" 2>&1); then
             return 0
         fi
+        echo "$(date '+%Y-%m-%d %H:%M:%S') display $display attempt $attempt/$RETRIES: $output" >> "$LOG"
         sleep "$DELAY"
     done
-    echo "brightness.sh: failed to set display $display after $RETRIES attempts" >&2
+    echo "brightness.sh: failed to set display $display after $RETRIES attempts (see $LOG)" >&2
+    echo "$(date '+%Y-%m-%d %H:%M:%S') display $display: giving up after $RETRIES attempts" >> "$LOG"
     return 1
 }
 

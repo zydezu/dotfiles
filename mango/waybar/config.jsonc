@@ -21,7 +21,7 @@
       "group/tray-group",
       "group/audio",
       "group/system",
-      "group/connectivity",
+      //"group/connectivity",
       "clock",
       "custom/notifications"
       // "custom/power"
@@ -38,20 +38,21 @@
       "modules": [
         "cpu",
         "memory",
-        "custom/disks",
+        // "custom/disks",
         // "custom/gpu-usage",
         // "power-profiles-daemon",
+        "custom/ps_controller",
+        "custom/ddc-brightness",
         "backlight"
       ]
     },
-    "group/connectivity": {
-      "orientation": "horizontal",
-      "modules": [
-        "network",
-        "bluetooth",
-        "custom/ps_controller"
-      ]
-    },
+    // "group/connectivity": {
+    //   "orientation": "horizontal",
+    //   "modules": [
+    //      "network",
+    //      "bluetooth",
+    //   ]
+    // },
     "group/tray-group": {
       "orientation": "horizontal",
       "drawer": {
@@ -170,6 +171,17 @@
       "exec": "~/.cargo/bin/gpu-usage-waybar",
       "return-type": "json",
       "on-click": "alacritty --title 'nvtop' -e nvtop",
+    },
+    "custom/ddc-brightness": {
+      "format": "󰛨 {}",
+      "return-type": "json",
+      "signal": 8,
+      "exec": "~/.config/mango/waybar/scripts/ddc-brightness.sh get",
+      "on-scroll-up": "~/.config/mango/waybar/scripts/ddc-brightness.sh up",
+      "on-scroll-down": "~/.config/mango/waybar/scripts/ddc-brightness.sh down",
+      "on-click": "~/.config/mango/waybar/scripts/ddc-brightness.sh set 100",
+      "on-click-right": "~/.config/mango/waybar/scripts/ddc-brightness.sh set 10",
+      "tooltip": false
     },
     "backlight": {
       "interval": 2,

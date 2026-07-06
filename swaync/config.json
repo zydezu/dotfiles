@@ -48,20 +48,20 @@
           "command": "alacritty --title bluetui -e bluetui"
         },
         {
+          "label": "󰋊",
+          "command": "baobab"
+        },
+        {
           "label": "󰕾",
-          "command": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+          "command": "alacritty --title 'wiremix' -e wiremix"
         },
         {
           "label": "󰍬",
-          "command": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+          "command": "alacritty --title 'wiremix' -e wiremix"
         },
         {
-          "label": "󰌾",
-          "command": "loginctl lock-session"
-        },
-        {
-          "label": "󰤄",
-          "command": "systemctl suspend"
+          "label": "󰂚",
+          "command": "swaync-client -d -sw"
         },
         {
           "label": "󰐥",
