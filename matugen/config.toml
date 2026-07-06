@@ -33,11 +33,6 @@ output_path = "~/.config/rofi/colors.rasi"
 input_path = "~/.config/matugen/templates/alacritty.toml"
 output_path = "~/.config/alacritty/colors.toml"
 
-[templates.kitty]
-input_path = '~/.config/matugen/templates/kitty.conf'
-output_path = '~/.config/kitty/themes/Matugen.conf'
-post_hook = "kitty +kitten themes --reload-in=all Matugen"
-
 [templates.clipse]
 input_path = '~/.config/matugen/templates/clipse.json'
 output_path = '~/.config/clipse/custom_theme.json'
@@ -87,3 +82,7 @@ post_hook = 'echo "@import url(\"colors.css\");" > ~/.config/gtk-4.0/gtk.css'
 [templates.wiremix]
 input_path = "~/.config/matugen/templates/wiremix.toml"
 output_path = "~/.config/wiremix/wiremix.toml"
+
+[templates.modernx]
+input_path = "~/.config/matugen/templates/modernx.conf"
+output_path = "~/.config/mpv/script-opts/modernx.conf"
