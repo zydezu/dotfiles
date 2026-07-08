@@ -78,59 +78,63 @@ def get_icon(code, is_day):
     }
     icon = day if is_day else night
 
-    if code == 0:
-        return icon["clear"]
-    if code in [1, 2]:
-        return icon["partly"]
-    if code == 3:
-        return icon["cloudy"]
-    if code in [45, 48]:
-        return icon["fog"]
-    if 51 <= code <= 60:
-        return icon["drizzle"]
-    if 61 <= code <= 67:
-        return icon["rain"]
-    if 71 <= code <= 77:
-        return icon["snow"]
-    if 80 <= code <= 82:
-        return icon["shower"]
-    if code >= 95:
-        return icon["storm"]
-    return "?"
+    match code:
+        case 0:
+            return icon["clear"]
+        case 1 | 2:
+            return icon["partly"]
+        case 3:
+            return icon["cloudy"]
+        case 45 | 48:
+            return icon["fog"]
+        case c if 51 <= c <= 60:
+            return icon["drizzle"]
+        case c if 61 <= c <= 67:
+            return icon["rain"]
+        case c if 71 <= c <= 77:
+            return icon["snow"]
+        case c if 80 <= c <= 82:
+            return icon["shower"]
+        case c if c >= 95:
+            return icon["storm"]
+        case _:
+            return "?"
 
 
 def get_description(code):
-    if code == 0:
-        return "Clear sky"
-    if code == 1:
-        return "Mainly clear"
-    if code == 2:
-        return "Partly cloudy"
-    if code == 3:
-        return "Overcast"
-    if code in [45, 48]:
-        return "Fog"
-    if 51 <= code <= 55:
-        return "Drizzle"
-    if code in [56, 57]:
-        return "Freezing drizzle"
-    if 61 <= code <= 65:
-        return "Rain"
-    if code in [66, 67]:
-        return "Freezing rain"
-    if 71 <= code <= 75:
-        return "Snow"
-    if code == 77:
-        return "Snow grains"
-    if 80 <= code <= 82:
-        return "Rain showers"
-    if code in [85, 86]:
-        return "Snow showers"
-    if code == 95:
-        return "Thunderstorm"
-    if code in [96, 99]:
-        return "Thunderstorm with hail"
-    return "Unknown"
+    match code:
+        case 0:
+            return "Clear sky"
+        case 1:
+            return "Mainly clear"
+        case 2:
+            return "Partly cloudy"
+        case 3:
+            return "Overcast"
+        case 45 | 48:
+            return "Fog"
+        case c if 51 <= c <= 55:
+            return "Drizzle"
+        case 56 | 57:
+            return "Freezing drizzle"
+        case c if 61 <= c <= 65:
+            return "Rain"
+        case 66 | 67:
+            return "Freezing rain"
+        case c if 71 <= c <= 75:
+            return "Snow"
+        case 77:
+            return "Snow grains"
+        case c if 80 <= c <= 82:
+            return "Rain showers"
+        case 85 | 86:
+            return "Snow showers"
+        case 95:
+            return "Thunderstorm"
+        case 96 | 99:
+            return "Thunderstorm with hail"
+        case _:
+            return "Unknown"
 
 
 config = os.path.expanduser("~/.config/hypr/location.conf")

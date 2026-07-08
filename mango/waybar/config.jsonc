@@ -176,11 +176,11 @@
       "format": "󰛨 {}",
       "return-type": "json",
       "signal": 8,
-      "exec": "~/.config/mango/waybar/scripts/ddc-brightness.sh get",
-      "on-scroll-up": "~/.config/mango/waybar/scripts/ddc-brightness.sh up",
-      "on-scroll-down": "~/.config/mango/waybar/scripts/ddc-brightness.sh down",
-      "on-click": "~/.config/mango/waybar/scripts/ddc-brightness.sh set 100",
-      "on-click-right": "~/.config/mango/waybar/scripts/ddc-brightness.sh set 10",
+      "exec": "~/.config/mango/waybar/scripts/ddc_brightness.sh get",
+      "on-scroll-up": "~/.config/mango/waybar/scripts/ddc_brightness.sh up",
+      "on-scroll-down": "~/.config/mango/waybar/scripts/ddc_brightness.sh down",
+      "on-click": "~/.config/mango/waybar/scripts/ddc_brightness.sh set 100",
+      "on-click-right": "~/.config/mango/waybar/scripts/ddc_brightness.sh set 10",
       "tooltip": false
     },
     "backlight": {
