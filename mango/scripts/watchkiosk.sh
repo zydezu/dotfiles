@@ -1,6 +1,18 @@
 #!/bin/bash
 exec >> /tmp/watch-kiosk.log 2>&1
-echo "=== started $(date) ==="
+
+if [ "$1" == "esc" ]; then
+  echo "=== esc check $(date) ==="
+  title=$(mmsg get focusing-client | jq -r '.title // empty')
+  echo "focused title: '$title'"
+  if [ "$title" == "Cog" ]; then
+    echo "closing kiosk via escape"
+    mmsg dispatch killclient
+  fi
+  exit 0
+fi
+
+echo "=== watcher started $(date) ==="
 
 cog_id=""
 for i in $(seq 1 20); do
@@ -26,4 +38,4 @@ stdbuf -oL mmsg watch focusing-client | while read -r line; do
     break
   fi
 done
-echo "=== exited $(date) ==="
+echo "=== watcher exited $(date) ==="

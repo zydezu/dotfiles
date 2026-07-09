@@ -176,11 +176,11 @@
       "format": "󰛨 {}",
       "return-type": "json",
       "signal": 8,
-      "exec": "~/.config/mango/waybar/scripts/ddc_brightness.sh get",
-      "on-scroll-up": "~/.config/mango/waybar/scripts/ddc_brightness.sh up",
-      "on-scroll-down": "~/.config/mango/waybar/scripts/ddc_brightness.sh down",
-      "on-click": "~/.config/mango/waybar/scripts/ddc_brightness.sh set 100",
-      "on-click-right": "~/.config/mango/waybar/scripts/ddc_brightness.sh set 10",
+      "exec": "~/.config/mango/waybar/scripts/ddcbrightness.sh get",
+      "on-scroll-up": "~/.config/mango/waybar/scripts/ddcbrightness.sh up",
+      "on-scroll-down": "~/.config/mango/waybar/scripts/ddcbrightness.sh down",
+      "on-click": "~/.config/mango/waybar/scripts/ddcbrightness.sh set 100",
+      "on-click-right": "~/.config/mango/waybar/scripts/ddcbrightness.sh set 10",
       "tooltip": false
     },
     "backlight": {
@@ -243,7 +243,7 @@
     "custom/ps_controller": {
       "format": "{}",
       "tooltip": true,
-      "exec": "~/.config/mango/waybar/scripts/ps_controller_battery.sh",
+      "exec": "~/.config/mango/waybar/scripts/pscontrollerbattery.sh",
       "interval": 30
     },
     "clock": {

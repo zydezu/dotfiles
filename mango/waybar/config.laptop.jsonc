@@ -220,7 +220,7 @@
   "custom/ps_controller": {
     "format": "{}",
     "tooltip": true,
-    "exec": "~/.config/mango/waybar/scripts/ps_controller_battery.sh",
+    "exec": "~/.config/mango/waybar/scripts/pscontrollerbattery.sh",
     "interval": 30
   },
   "clock": {

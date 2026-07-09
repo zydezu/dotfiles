@@ -1,7 +1,7 @@
 #!/bin/bash
 BUSES=(2 4)
 STEP=5
-STATE_FILE="/tmp/waybar_ddc_brightness"
+STATE_FILE="/tmp/waybar_ddcbrightness"
 
 get() {
   if [ ! -f "$STATE_FILE" ]; then

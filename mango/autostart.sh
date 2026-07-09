@@ -27,7 +27,7 @@ wl-paste --type text --watch cliphist store >/dev/null 2>&1 &
 clipse -listen &
 
 # Suppress notifications in fullscreen
-~/.config/mango/scripts/fullscreen-dnd.sh >/dev/null 2>&1 &
+~/.config/mango/scripts/fullscreendnd.sh >/dev/null 2>&1 &
 
 # load autostart programs
 for desktop_file in ~/.config/autostart/*.desktop; do
