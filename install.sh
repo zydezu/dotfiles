@@ -40,7 +40,7 @@ yay -S --needed --noconfirm \
     waypaper grim slurp wayfreeze-git swappy \
     gpu-screen-recorder \
     alacritty fish zed helium-browser-bin \
-    nautilus actions-for-nautilus-git \~/.config/xdg-terminals.list
+    nautilus actions-for-nautilus-git \
     mpv qimgv \
     pipewire wireplumber wiremix \
     clipse cliphist wl-clipboard wl-clip-persist \

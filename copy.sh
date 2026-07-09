@@ -17,7 +17,6 @@ allowed_dirs=(
   hypr
   mango
   matugen
-  mpv
   rofi
   swappy
   swaync
