@@ -43,7 +43,7 @@ Personal dotfiles for mangowc on Arch Linux (my personal system uses CachyOS, wh
 ```bash
 yay -S \
     `# compositor & bar` \
-    mangowm waybar \
+    mangowm waybar-git \
     `# portals` \
     xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-wlr \
     `# wallpaper, notifications & lock` \
