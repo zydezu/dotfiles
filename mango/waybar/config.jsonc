@@ -42,8 +42,8 @@
         // "custom/gpu-usage",
         // "power-profiles-daemon",
         "custom/ps_controller",
-        "custom/ddc-brightness",
-        "backlight"
+        "custom/ddc-brightness"
+        // "backlight"
       ]
     },
     // "group/connectivity": {
