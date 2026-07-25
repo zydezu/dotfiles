@@ -1,4 +1,11 @@
 #! /bin/bash
+# Import session env vars into systemd --user and dbus activation environment.
+# Without this, services with ConditionEnvironment=XDG_SESSION_CLASS=user
+# (e.g. localsearch-3.service, used by Nautilus) fail their condition check
+# and D-Bus callers hang waiting on a timeout before falling back.
+systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE XDG_SESSION_CLASS
+dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE XDG_SESSION_CLASS
+
 # Run the desktop portal (URI/screenshare)
 /usr/lib/xdg-desktop-portal-wlr >/dev/null 2>&1 &
 

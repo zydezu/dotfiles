@@ -3,8 +3,6 @@
     "logo": {
         "type": "file",
         "source": "/home/zy/.config/fastfetch/ascii.txt",
-        "height": 10,
-        "width": 5,
         "padding": {
             "top": 2,
             "left": 5
@@ -12,13 +10,14 @@
     },
     "modules": [
         "break",
+        "break",
         {
             "type": "custom",
             "format": "\u001b[90m┌─────────────────────────Hardware─────────────────────────┐"
         },
         {
             "type": "command",
-            "key": " PC",
+            "key": " ",
             "keyColor": "green",
             "text": "hostname"
         },
@@ -39,7 +38,7 @@
         },
         {
             "type": "disk",
-            "key": "└ └",
+            "key": "│ ├",
             "keyColor": "green"
         },
         {
@@ -53,7 +52,7 @@
         },
         {
             "type": "os",
-            "key": " OS",
+            "key": "",
             "keyColor": "yellow"
         },
         {
@@ -136,6 +135,5 @@
             "paddingLeft": 2,
             "symbol": "circle"
         }
- 
     ]
 }

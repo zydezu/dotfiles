@@ -41,23 +41,23 @@
       "actions": [
         {
           "label": "󰖩",
-          "command": "alacritty --title wlctl -e wlctl"
+          "command": "bash -c 'swaync-client -cp; alacritty --title wlctl -e wlctl'"
         },
         {
           "label": "󰂯",
-          "command": "alacritty --title bluetui -e bluetui"
+          "command": "swaync-client -cp; alacritty --title bluetui -e ~/.config/mango/waybar/scripts/openbluetui.sh"
         },
         {
           "label": "󰋊",
-          "command": "baobab"
+          "command": "bash -c 'swaync-client -cp; baobab'"
         },
         {
           "label": "󰕾",
-          "command": "alacritty --title 'wiremix' -e wiremix"
+          "command": "swaync-client -cp; alacritty --title wiremix -e wiremix"
         },
         {
           "label": "󰍬",
-          "command": "alacritty --title 'wiremix' -e wiremix"
+          "command": "swaync-client -cp; alacritty --title wiremix -e wiremix"
         },
         {
           "label": "󰂚",
@@ -65,7 +65,7 @@
         },
         {
           "label": "󰐥",
-          "command": "rofi -show power-menu -modi power-menu:rofi-power-menu -theme ~/.config/rofi/config.rasi"
+          "command": "bash -c 'swaync-client -cp; rofi -show power-menu -modi power-menu:rofi-power-menu -theme ~/.config/rofi/config.rasi'"
         }
       ]
     }

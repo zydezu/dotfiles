@@ -61,6 +61,10 @@ output_path = '~/Documents/obsidian/Vault/.obsidian/snippets/matugen.css'
 input_path = '~/.config/matugen/templates/opencode.json'
 output_path = '~/.config/opencode/themes/matugen.json'
 
+[templates.obs]
+input_path = '~/.config/matugen/templates/matugen.obt'
+output_path = '~/.config/obs-studio/themes/matugen.obt'
+
 [templates.vscode]
 input_path = '~/.config/matugen/templates/vscode.json'
 output_path = '~/.config/Code/User/settings.json'
