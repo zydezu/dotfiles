@@ -50,3 +50,13 @@ for dir in "${allowed_dirs[@]}"; do
         echo "Skipping $dir (not found in ~/.config)"
     fi
 done
+
+NAUTILUS_CONFIG="$HOME/.local/share/actions-for-nautilus/config.json"
+if [[ -f "$NAUTILUS_CONFIG" ]]; then
+    echo "Updating actions-for-nautilus/config.json..."
+
+    mkdir -p "$DEST/actions-for-nautilus"
+    cp "$NAUTILUS_CONFIG" "$DEST/actions-for-nautilus/config.json"
+else
+    echo "Skipping actions-for-nautilus/config.json (not found in ~/.local/share)"
+fi
