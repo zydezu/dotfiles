@@ -51,19 +51,19 @@ if [ "$MODE" = "select" ]; then
         exit 1
     fi
     _t=$(tick)
-    grim -g "$GEOMETRY" "$TMPFILE" || { echo "Screenshot failed"; kill "$WAYFREEZE_PID" 2>/dev/null; rm -f "$_wn_tmp"; exit 1; }
+    grim -l 1 -g "$GEOMETRY" "$TMPFILE" || { echo "Screenshot failed"; kill "$WAYFREEZE_PID" 2>/dev/null; rm -f "$_wn_tmp"; exit 1; }
     tock "grim" $_t
     kill "$WAYFREEZE_PID" 2>/dev/null
 elif [ "$MODE" = "both" ]; then
     _t=$(tick)
-    grim "$TMPFILE" || { echo "Screenshot failed"; rm -f "$_wn_tmp"; exit 1; }
+    grim -l 1 "$TMPFILE" || { echo "Screenshot failed"; rm -f "$_wn_tmp"; exit 1; }
     tock "grim" $_t
 else
     _t=$(tick)
-    MONITOR=$(mmsg get all-monitors | jq -r '.monitors[] | select(.active == true) | .name' | head -1)
+    MONITOR=$(mmsg get all-monitors | jq -r 'first(.monitors[] | select(.active == true) | .name)')
     tock "monitor" $_t
     _t=$(tick)
-    grim -o "$MONITOR" "$TMPFILE" || { echo "Screenshot failed"; rm -f "$_wn_tmp"; exit 1; }
+    grim -l 1 -o "$MONITOR" "$TMPFILE" || { echo "Screenshot failed"; rm -f "$_wn_tmp"; exit 1; }
     tock "grim" $_t
 fi
 
@@ -82,22 +82,16 @@ if [ ! -f "$FILE" ]; then
     exit 1
 fi
 
-# Copy to clipboard in background while generating thumbnail
-wl-copy --type image/png < "$FILE" &
+CLIPBOARD_FILE="$FILE"
+CLIPBOARD_MIME="image/png"
 
-_t=$(tick)
-CROPPED_FILE="$TMPDIR/cropped.png"
-magick "$FILE" -scale 128x128^ -gravity center -extent 128x128 "$CROPPED_FILE"
-tock "magick" $_t
-
-if [ ! -f "$CROPPED_FILE" ]; then
-    CROPPED_FILE="$FILE"
-fi
+# Copy to clipboard in background
+wl-copy --type "$CLIPBOARD_MIME" < "$CLIPBOARD_FILE" &
 
 printf 'screenshot taken in %dms\n' "$(($(tick) - _total))"
 
 ACTION=$(dunstify "Screenshot has been saved" \
-    -i "$CROPPED_FILE" \
+    -i "$FILE" \
     -t 2000 \
     -A view,"View Image" \
     -A edit,"Annotate" \

@@ -13,3 +13,4 @@ set -x SSH_AUTH_SOCK $XDG_RUNTIME_DIR/ssh-agent.socket
 fnm env --use-on-cd --shell fish | source
 
 fish_add_path ~/go/bin
+fish_add_path /usr/bin/vendor_perl
