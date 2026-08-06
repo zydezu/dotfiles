@@ -49,7 +49,7 @@ yay -S --needed --noconfirm \
     adw-gtk-theme ttf-jetbrains-mono-nerd noto-fonts adwaita-fonts \
     qt5ct qt6ct qt6-declarative qt6-svg \
     qt5-quickcontrols qt5-quickcontrols2 qt5-declarative qt5-graphicaleffects \
-    sddm baazar baobab file-roller
+    sddm baazar baobab file-roller fuse2
 
 # Install uv
 info "Installing uv..."
