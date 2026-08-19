@@ -41,7 +41,7 @@ yay -S --needed --noconfirm \
     networkmanager dunst brightnessctl \
     pipewire wireplumber wiremix \
     alacritty fish zed helium-browser-bin \
-    nautilus actions-for-nautilus-git baazar baobab file-roller fuse2 \
+    nautilus actions-for-nautilus-git baazar gnome-font-viewer baobab file-roller fuse2 p7zip \
     mpv qimgv \
     fastfetch bluetui wlctl github-cli uv \
     adw-gtk-theme ttf-jetbrains-mono-nerd noto-fonts adwaita-fonts \
@@ -251,10 +251,10 @@ if [[ "$_warp" =~ ^[Yy]$ ]]; then
 fi
 
 # yt-dlp
-read -rp "Install yt-dlp? [y/N] " _ytdlp
+read -rp "Install yt-dlp and gallery-dl? [y/N] " _ytdlp
 if [[ "$_ytdlp" =~ ^[Yy]$ ]]; then
     info "Installing yt-dlp..."
-    yay -S --needed --noconfirm yt-dlp yt-dlp-ejs deno
+    yay -S --needed --noconfirm yt-dlp yt-dlp-ejs deno gallery-dl
 fi
 
 # Tailscale
@@ -279,7 +279,9 @@ sudo mkinitcpio -P
 # Install fonts
 info "Installing fonts..."
 mkdir -p "$HOME/.local/share/fonts"
-cp -r "$DOTFILES_DIR/_setup/fonts/." "$HOME/.local/share/fonts/"
+cat "$DOTFILES_DIR"/_setup/fonts.part*.7z > /tmp/fonts.7z
+7z x -y -o"$HOME/.local/share/fonts" /tmp/fonts.7z
+rm /tmp/fonts.7z
 
 # Rebuild font cache
 info "Rebuilding font cache..."
