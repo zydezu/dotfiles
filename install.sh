@@ -268,9 +268,6 @@ if [[ "$_ts" =~ ^[Yy]$ ]]; then
     yay -S --needed --noconfirm tailscale davfs2
     sudo systemctl enable --now tailscaled
     sudo tailscale set --operator=$USER
-    sudo mkdir -p /mnt/tailscale
-    echo "http://100.100.100.100:8080 /mnt/tailscale davfs noauto,x-systemd.automount,_netdev,uid=$(id -un),gid=$(id -gn) 0 0" \
-        | sudo tee -a /etc/fstab > /dev/null
 fi
 
 # Enable SDDM

@@ -21,10 +21,6 @@ if command -v tailscale &>/dev/null; then
     info "Configuring Tailscale..."
     sudo tailscale set --operator="$USER"
     tailscale configure systray --enable-startup=freedesktop
-
-    info "Mounting Tailscale WebDAV share..."
-    sudo mount -t davfs http://100.100.100.100:8080 /mnt/tailscale
-    xdg-open /mnt/tailscale
 fi
 
 # Cloudflare WARP setup

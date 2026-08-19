@@ -90,54 +90,54 @@ rect {
 
     /* text colors */
     --text-0: var(--bg-4);
-    --text-1: #e9dfee;
-    --text-2: #e9dfee;
-    --text-3: #cfc1da;
-    --text-4: #988ca3;
-    --text-5: #4c4357;
+    --text-1: #dbe4ed;
+    --text-2: #dbe4ed;
+    --text-3: #b7c9d8;
+    --text-4: #8193a2;
+    --text-5: #384956;
 
     /* background colors */
-    --bg-1: #4c4357;
-    --bg-2: #2d2833;
-    --bg-3: #1e1a24;
-    --bg-4: #16111b;
+    --bg-1: #384956;
+    --bg-2: #222b32;
+    --bg-3: #141d23;
+    --bg-4: #0c141b;
 
     /* hovers */
-    --hover: #e9dfee1a;
-    --active: #e9dfee33;
-    --active-2: #e9dfee4d;
+    --hover: #dbe4ed1a;
+    --active: #dbe4ed33;
+    --active-2: #dbe4ed4d;
     --message-hover: var(--hover);
 
     /* accent colors */
-    --accent-1: #d8bafa;
-    --accent-2: #a3c9ff;
-    --accent-3: #a3c9ff;
-    --accent-4: #004883;
-    --accent-5: #a3c9ff;
-    --accent-new: #a3c9ff;
+    --accent-1: #94cdf6;
+    --accent-2: #50dbd0;
+    --accent-3: #50dbd0;
+    --accent-4: #00504b;
+    --accent-5: #50dbd0;
+    --accent-new: #50dbd0;
 
     /* gradients */
     --mention: linear-gradient(
         to right,
-        color-mix(in hsl, #a3c9ff, transparent 90%) 40%,
+        color-mix(in hsl, #50dbd0, transparent 90%) 40%,
         transparent
     );
 
     --mention-hover: linear-gradient(
         to right,
-        color-mix(in hsl, #a3c9ff, transparent 95%) 40%,
+        color-mix(in hsl, #50dbd0, transparent 95%) 40%,
         transparent
     );
 
     --reply: linear-gradient(
         to right,
-        color-mix(in hsl, #cfc1da, transparent 90%) 40%,
+        color-mix(in hsl, #b7c9d8, transparent 90%) 40%,
         transparent
     );
 
     --reply-hover: linear-gradient(
         to right,
-        color-mix(in hsl, #cfc1da, transparent 95%) 40%,
+        color-mix(in hsl, #b7c9d8, transparent 95%) 40%,
         transparent
     );
 
@@ -146,11 +146,11 @@ rect {
     --dnd: var(--red-2);
     --idle: var(--yellow-2);
     --streaming: var(--purple-2);
-    --offline: #988ca3;
+    --offline: #8193a2;
 
     /* borders */
     --border-light: var(--hover);
     --border: var(--active);
-    --border-hover: #a3c9ff;
-    --button-border: #e9dfee;
+    --border-hover: #50dbd0;
+    --button-border: #dbe4ed;
 }
