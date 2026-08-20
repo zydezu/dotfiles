@@ -1,12 +1,5 @@
 #!/bin/bash
-# mango only evaluates windowrule appid/title matching once, at map time,
-# and cog never sets WM_CLASS -- so appid-based rules can't single out one
-# cog kiosk from another. The shared title:Cog rule already right-anchors
-# every cog window via offsetx:100 (computed for the rule's default
-# width). resizewin only grows geom.width -- it doesn't recompute x -- so
-# widening the window pushes its right edge further right, potentially
-# off the monitor. Re-anchor x by the same delta after resizing so the
-# right edge stays where offsetx:100 put it.
+# stupid hack stupid hack stupid hack, cant name cog window. stupid hack
 w="$1"
 h="$2"
 
