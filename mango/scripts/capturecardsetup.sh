@@ -2,9 +2,8 @@
 
 SECONDARY="DP-2"
 
-# Switch monitors to HDMI
+# Switch monitor to HDMI
 ddcutil setvcp 60 0x11 --display 1
-ddcutil setvcp 60 0x11 --display 2
 
 # Focus secondary monitor if not already there
 FOCUSED=$(mmsg get all-monitors | jq -r '.monitors[] | select(.active == true) | .name')

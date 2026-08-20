@@ -1,8 +1,5 @@
 #! /bin/bash
-# Import session env vars into systemd --user and dbus activation environment.
-# Without this, services with ConditionEnvironment=XDG_SESSION_CLASS=user
-# (e.g. localsearch-3.service, used by Nautilus) fail their condition check
-# and D-Bus callers hang waiting on a timeout before falling back.
+
 systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE XDG_SESSION_CLASS
 dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE XDG_SESSION_CLASS
 
@@ -37,18 +34,24 @@ clipse -listen &
 ~/.config/mango/scripts/fullscreendnd.sh >/dev/null 2>&1 &
 
 # load autostart programs
-for desktop_file in ~/.config/autostart/*.desktop; do
-    if [ -f "$desktop_file" ]; then
-        # Extract the Exec line
-        exec_line=$(grep -E "^Exec=" "$desktop_file" | head -1 | sed 's/^Exec=//')
+# Delayed and backgrounded as a whole so this doesn't block the rest of
+# startup, and so tray-icon apps (e.g. arch-update-tray) don't race waybar's
+# StatusNotifierWatcher before it's registered on the session bus.
+(
+    sleep 3
+    for desktop_file in ~/.config/autostart/*.desktop; do
+        if [ -f "$desktop_file" ]; then
+            # Extract the Exec line
+            exec_line=$(grep -E "^Exec=" "$desktop_file" | head -1 | sed 's/^Exec=//')
 
-        # Remove field codes like %U
-        clean_exec=$(echo "$exec_line" | sed 's/%[a-zA-Z]//g')
+            # Remove field codes like %U
+            clean_exec=$(echo "$exec_line" | sed 's/%[a-zA-Z]//g')
 
-        # Execute the command in background
-        eval "$clean_exec" &
-    fi
-done
+            # Execute the command in background
+            eval "$clean_exec" &
+        fi
+    done
+) &
 
 # Minimize some apps on startup
 ~/.config/mango/scripts/minimizeapps.sh >/dev/null 2>&1 &

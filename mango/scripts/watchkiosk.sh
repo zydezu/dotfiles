@@ -1,22 +1,16 @@
 #!/bin/bash
+# Closes the Cog kiosk window once focus moves to anything else. Polls
+# instead of using `mmsg watch focusing-client`, since that stream can
+# silently stall forever (found instances still blocked after 12+ hours).
+info=$(~/.config/mango/scripts/findcog.sh) || exit 0
+cog_id=$(echo "$info" | jq -r '.id')
 
-cog_id=""
-for i in $(seq 1 20); do
-  cog_id=$(mmsg get all-clients | jq -r '.clients[] | select(.title=="Cog") | .id' | head -n1)
-  if [ -n "$cog_id" ]; then
-    break
-  fi
+while true; do
   sleep 0.2
-done
-
-if [ -z "$cog_id" ]; then
-  exit 0
-fi
-
-stdbuf -oL mmsg watch focusing-client | while read -r line; do
-  focused_id=$(echo "$line" | jq -r '.id // empty' 2>/dev/null)
-  if [ -n "$focused_id" ] && [ "$focused_id" != "$cog_id" ]; then
-    mmsg dispatch killclient client,"$cog_id"
-    break
+  mmsg get client "$cog_id" 2>/dev/null | jq -e '.error' >/dev/null && exit 0
+  focused_id=$(mmsg get focusing-client 2>/dev/null | jq -r '.id // empty')
+  if [ "$focused_id" != "$cog_id" ]; then
+    mmsg dispatch killclient client,"$cog_id" >/dev/null
+    exit 0
   fi
 done

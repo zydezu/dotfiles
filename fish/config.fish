@@ -10,9 +10,7 @@ source /usr/share/cachyos-fish-config/cachyos-config.fish
 set -x SSH_AUTH_SOCK $XDG_RUNTIME_DIR/ssh-agent.socket
 
 # fnm (nodejs manager)
-if command -q fnm
-    fnm env --use-on-cd --shell fish | source
-end
+fnm env --use-on-cd --shell fish | source
 
 fish_add_path ~/go/bin
 fish_add_path /usr/bin/vendor_perl

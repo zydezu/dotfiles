@@ -243,6 +243,7 @@
       "format": "{}",
       "tooltip": true,
       "exec": "~/.config/mango/waybar/scripts/pscontrollerbattery.sh",
+      "on-click": "~/.config/mango/waybar/scripts/opencontrollerviewer.sh",
       "interval": 30
     },
     "clock": {

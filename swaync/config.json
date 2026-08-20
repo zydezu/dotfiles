@@ -11,6 +11,7 @@
   "fit-to-screen": true,
   "notification-window-width": 480,
   "notification-window-height": 500,
+  "control-center-width": 520,
   "transition-time": 200,
   "script-fail-notify": true,
   "notification-2fa-action": false,

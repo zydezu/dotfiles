@@ -10,7 +10,7 @@ dnd_active=0
 was_manual_dnd=0
 
 handle_fullscreen() {
-    local is_any_fs=$1  # "true" or "false"
+    local is_any_fs=$1
 
     if [[ "$is_any_fs" == "true" ]]; then
         if (( dnd_active == 0 )); then
@@ -40,9 +40,23 @@ clients_any_fullscreen() {
         'if ([.clients[] | select(.is_fullscreen == true and .monitor == $mon)] | length) > 0 then "true" else "false" end'
 }
 
-initial=$(mmsg get all-clients 2>/dev/null)
-handle_fullscreen "$(clients_any_fullscreen "$initial")"
+cleanup() {
+    if (( dnd_active == 1 && was_manual_dnd == 0 )); then
+        swaync-client --inhibitor-remove "fullscreen" >/dev/null 2>&1
+        swaync-client --dnd-off >/dev/null 2>&1
+    fi
+}
+trap cleanup EXIT
 
-while IFS= read -r line; do
-    handle_fullscreen "$(clients_any_fullscreen "$line")"
-done < <(mmsg watch all-clients)
+# mmsg watch can drop (IPC hiccup, monitor hotplug, mango reload); reconnect
+# instead of letting the whole script silently die when the stream ends.
+while true; do
+    initial=$(mmsg get all-clients 2>/dev/null)
+    handle_fullscreen "$(clients_any_fullscreen "$initial")"
+
+    while IFS= read -r line; do
+        handle_fullscreen "$(clients_any_fullscreen "$line")"
+    done < <(mmsg watch all-clients)
+
+    sleep 1
+done

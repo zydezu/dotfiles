@@ -28,12 +28,17 @@
         },
         {
             "type": "gpu",
-            "key": "│ ├󰍛",
+            "key": "│ ├󰢮",
             "keyColor": "green"
         },
         {
             "type": "memory",
             "key": "│ ├󰍛",
+            "keyColor": "green"
+        },
+        {
+            "type": "swap",
+            "key": "│ ├󰓡",
             "keyColor": "green"
         },
         {
