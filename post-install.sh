@@ -31,6 +31,12 @@ if command -v warp-cli &>/dev/null; then
     warp-cli registration new
 fi
 
+# Disable copy-on-write for Steam library (avoids btrfs fragmentation)
+if [[ -d "$HOME/.steam/steam/steamapps" ]]; then
+    info "Disabling CoW for Steam library..."
+    chattr +C "$HOME/.steam/steam/steamapps"
+fi
+
 # Cleanup dotfiles directory
 info "Cleaning up dotfiles directory..."
 rm -rf "$DOTFILES_DIR"
