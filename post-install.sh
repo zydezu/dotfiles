@@ -32,9 +32,20 @@ if command -v warp-cli &>/dev/null; then
 fi
 
 # Disable copy-on-write for Steam library (avoids btrfs fragmentation)
-if [[ -d "$HOME/.steam/steam/steamapps" ]]; then
+STEAMAPPS="$HOME/.local/share/Steam/steamapps"
+
+if [[ "$(findmnt -no FSTYPE -T "$HOME")" != "btrfs" ]]; then
+    info "Not btrfs, skipping CoW setup"
+elif [[ -d "$STEAMAPPS/common" ]] && [[ -n "$(ls -A "$STEAMAPPS/common" 2>/dev/null)" ]]; then
+    warn "steamapps already populated — +C won't apply retroactively, needs manual migration"
+else
     info "Disabling CoW for Steam library..."
-    chattr +C "$HOME/.steam/steam/steamapps"
+    mkdir -p "$STEAMAPPS"
+    chattr +C "$STEAMAPPS"
+
+    # keep proton prefixes and saves CoW so they retain checksums
+    mkdir -p "$STEAMAPPS/compatdata"
+    chattr -C "$STEAMAPPS/compatdata"
 fi
 
 # Cleanup dotfiles directory

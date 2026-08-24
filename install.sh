@@ -32,24 +32,20 @@ WALLPAPER="$DOTFILES_DIR/waypaper/default.jpg"
 # Install packages
 info "Installing packages..."
 yay -S --needed --noconfirm \
-    mangowm waybar matugen \
-    xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-wlr \
-    swaybg swaync sway-audio-idle-inhibit-git xfce-polkit \
-    hyprlock hypridle \
+    mangowm waybar matugen sddm \
+    xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-wlr xdg-terminal-exec-git \
+    xfce-polkit hyprlock hypridle swaync sway-audio-idle-inhibit-git \
     rofi rofi-power-menu \
-    waypaper grim slurp wayfreeze-git swappy \
-    gpu-screen-recorder \
-    alacritty fish zed helium-browser-bin \
-    nautilus actions-for-nautilus-git \
-    mpv qimgv \
-    pipewire wireplumber wiremix \
+    swaybg waypaper grim slurp wayfreeze-git swappy gpu-screen-recorder \
     clipse cliphist wl-clipboard wl-clip-persist \
-    networkmanager dunst brightnessctl xdg-terminal-exec-git \
-    fastfetch bluetui wlctl github-cli \
+    networkmanager dunst brightnessctl \
+    pipewire wireplumber wiremix \
+    alacritty fish zed helium-browser-bin \
+    nautilus actions-for-nautilus-git baazar baobab file-roller fuse2 \
+    mpv qimgv \
+    fastfetch bluetui wlctl github-cli uv \
     adw-gtk-theme ttf-jetbrains-mono-nerd noto-fonts adwaita-fonts \
-    qt5ct qt6ct qt6-declarative qt6-svg \
-    qt5-quickcontrols qt5-quickcontrols2 qt5-declarative qt5-graphicaleffects \
-    sddm baazar baobab file-roller fuse2
+    qt5ct qt6ct qt6-declarative qt6-svg qt5-quickcontrols qt5-quickcontrols2 qt5-declarative qt5-graphicaleffects
 
 # Install uv
 info "Installing uv..."
