@@ -42,7 +42,7 @@ yay -S --needed --noconfirm \
     pipewire wireplumber wiremix \
     alacritty fish zed helium-browser-bin \
     nautilus actions-for-nautilus-git baazar gnome-keyring gnome-font-viewer baobab file-roller fuse2 p7zip \
-    mpv qimgv libheif \
+    mpv qimgv libheif libavif qt5-avif-image-plugin qt6-avif-image-plugin qt5-jpegxl-image-plugin qt6-jpegxl-image-plugin qt-heif-image-plugin qtraw  \
     fastfetch bluetui wlctl github-cli uv \
     adw-gtk-theme ttf-jetbrains-mono-nerd noto-fonts adwaita-fonts \
     qt5ct qt6ct qt6-declarative qt6-svg qt5-quickcontrols qt5-quickcontrols2 qt5-declarative qt5-graphicaleffects
