@@ -20,11 +20,7 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" 2>/dev/null || exit; done &
 # Install yay
 if ! command -v yay &>/dev/null; then
     info "Installing yay..."
-    sudo pacman -S --needed --noconfirm git base-devel
-    tmp=$(mktemp -d)
-    git clone --depth 1 https://aur.archlinux.org/yay.git "$tmp/yay"
-    (cd "$tmp/yay" && makepkg -si --noconfirm)
-    rm -rf "$tmp"
+    sudo pacman -S --needed --noconfirm git go base-devel yay
 fi
 
 WALLPAPER="$DOTFILES_DIR/waypaper/default.jpg"
