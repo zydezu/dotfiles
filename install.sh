@@ -28,7 +28,7 @@ WALLPAPER="$DOTFILES_DIR/waypaper/default.jpg"
 # Install packages
 info "Installing packages..."
 yay -S --needed --noconfirm \
-    mangowm waybar matugen sddm \
+    mangowm waybar-git matugen sddm \
     xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-wlr xdg-terminal-exec-git \
     xfce-polkit hyprlock hypridle swaync sway-audio-idle-inhibit-git \
     rofi rofi-power-menu \
@@ -273,7 +273,7 @@ sudo mkinitcpio -P
 info "Installing fonts..."
 mkdir -p "$HOME/.local/share/fonts"
 cat "$DOTFILES_DIR"/_setup/fonts.part*.7z > /tmp/fonts.7z
-7z x -y -o"$HOME/.local/share/fonts" /tmp/fonts.7z
+7z x -y -o"$HOME/.local/share" /tmp/fonts.7z
 rm /tmp/fonts.7z
 
 # Rebuild font cache

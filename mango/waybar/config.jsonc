@@ -38,7 +38,7 @@
       "modules": [
         "cpu",
         "memory",
-        // "custom/disks",
+        "custom/disks",
         // "custom/gpu-usage",
         // "power-profiles-daemon",
         "custom/ps_controller",
@@ -226,7 +226,7 @@
       "format-disconnected": " Disconnected",
       "format-disabled": "󰖪 Off",
       "tooltip-format": "{ifname} {ipaddr}/via {gwaddr}\nBandwidth: ↓{bandwidthDownBits} ↑{bandwidthUpBits}",
-      "on-click": "alacritty --title 'wlctl' -e sudo wlctl"
+      "on-click": "alacritty --title 'wlctl' -e wlctl"
     },
     "bluetooth": {
       "format": "󰂯 On",
