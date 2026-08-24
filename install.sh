@@ -41,7 +41,7 @@ yay -S --needed --noconfirm \
     networkmanager dunst brightnessctl \
     pipewire wireplumber wiremix \
     alacritty fish zed helium-browser-bin \
-    nautilus actions-for-nautilus-git baazar gnome-font-viewer baobab file-roller fuse2 p7zip \
+    nautilus actions-for-nautilus-git baazar gnome-keyring gnome-font-viewer baobab file-roller fuse2 p7zip \
     mpv qimgv libheif \
     fastfetch bluetui wlctl github-cli uv \
     adw-gtk-theme ttf-jetbrains-mono-nerd noto-fonts adwaita-fonts \
