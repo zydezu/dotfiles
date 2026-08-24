@@ -37,7 +37,7 @@ yay -S --needed --noconfirm \
     networkmanager dunst brightnessctl \
     pipewire wireplumber wiremix \
     alacritty fish zed helium-browser-bin \
-    nautilus actions-for-nautilus-git baazar gnome-keyring gnome-font-viewer baobab file-roller fuse2 p7zip \
+    nautilus actions-for-nautilus-git baazar gnome-keyring gnome-font-viewer baobab file-roller fuse2 p7zip unzip \
     mpv qimgv libheif libavif qt5-avif-image-plugin qt6-avif-image-plugin qt5-jpegxl-image-plugin qt6-jpegxl-image-plugin qt-heif-image-plugin qtraw  \
     fastfetch bluetui wlctl github-cli uv \
     adw-gtk-theme ttf-jetbrains-mono-nerd noto-fonts adwaita-fonts \
@@ -147,11 +147,9 @@ git clone --depth 1 https://github.com/zydezu/mpvconfig.git "$CONFIG_DIR/mpv"
 # Neuwaita icon theme
 info "Installing Neuwaita icon theme..."
 ICONS_DIR="$HOME/.local/share/icons/Neuwaita"
-if [[ -d "$ICONS_DIR/.git" ]]; then
-    git -C "$ICONS_DIR" pull
-else
-    git clone --depth 1 https://github.com/RusticBard/Neuwaita.git "$ICONS_DIR"
-fi
+rm -rf "$ICONS_DIR"
+mkdir -p "$HOME/.local/share/icons"
+unzip -qo "$DOTFILES_DIR/_setup/icons/Neuwaita.zip" -d "$HOME/.local/share/icons"
 
 # GTK dark mode
 info "Setting GTK dark mode..."
