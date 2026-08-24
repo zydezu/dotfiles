@@ -47,10 +47,6 @@ yay -S --needed --noconfirm \
     adw-gtk-theme ttf-jetbrains-mono-nerd noto-fonts adwaita-fonts \
     qt5ct qt6ct qt6-declarative qt6-svg qt5-quickcontrols qt5-quickcontrols2 qt5-declarative qt5-graphicaleffects
 
-# Install uv
-info "Installing uv..."
-curl -LsSf https://astral.sh/uv/install.sh | sh
-
 # Set fish as default shell
 info "Setting fish as default shell..."
 chsh -s /usr/bin/fish
