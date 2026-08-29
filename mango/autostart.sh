@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 
 systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE XDG_SESSION_CLASS
 dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE XDG_SESSION_CLASS
@@ -27,30 +27,17 @@ nautilus --gapplication-service >/dev/null 2>&1 &
 
 # keep clipboard content
 wl-clip-persist --clipboard regular --reconnect-tries 0 >/dev/null 2>&1 &
-wl-paste --type text --watch cliphist store >/dev/null 2>&1 &
+wl-paste --type text --watch clipse store >/dev/null 2>&1 &
+wl-paste --type image --watch clipse store >/dev/null 2>&1 &
 clipse -listen &
 
 # Suppress notifications in fullscreen
 ~/.config/mango/scripts/fullscreendnd.sh >/dev/null 2>&1 &
 
-# load autostart programs
-# Delayed and backgrounded as a whole so this doesn't block the rest of
-# startup, and so tray-icon apps (e.g. arch-update-tray) don't race waybar's
-# StatusNotifierWatcher before it's registered on the session bus.
+# load autostart programs (respects Hidden/NoDisplay/OnlyShowIn/NotShowIn/TryExec)
 (
-    sleep 3
-    for desktop_file in ~/.config/autostart/*.desktop; do
-        if [ -f "$desktop_file" ]; then
-            # Extract the Exec line
-            exec_line=$(grep -E "^Exec=" "$desktop_file" | head -1 | sed 's/^Exec=//')
-
-            # Remove field codes like %U
-            clean_exec=$(echo "$exec_line" | sed 's/%[a-zA-Z]//g')
-
-            # Execute the command in background
-            eval "$clean_exec" &
-        fi
-    done
+    sleep 0.5
+    dex -a -e mango >/dev/null 2>&1
 ) &
 
 # Minimize some apps on startup

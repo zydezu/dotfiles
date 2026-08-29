@@ -50,7 +50,7 @@ info "Installing packages..."
 run "install packages" yay -S --needed --noconfirm \
     mangowm waybar-git matugen sddm \
     xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-wlr xdg-terminal-exec-git \
-    xfce-polkit hyprlock hypridle swaync sway-audio-idle-inhibit-git \
+    xfce-polkit hyprlock hypridle dex swaync sway-audio-idle-inhibit-git \
     rofi rofi-power-menu \
     swaybg waypaper grim slurp wayfreeze-git swappy gpu-screen-recorder \
     clipse wl-clipboard wl-clip-persist \
