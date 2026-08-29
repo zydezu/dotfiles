@@ -371,18 +371,6 @@ EOF
     fi
 fi
 
-# /etc/environment
-info "Writing /etc/environment..."
-if [[ -f "$DOTFILES_DIR/_setup/environment" ]]; then
-    if run "write /etc/environment" sudo cp "$DOTFILES_DIR/_setup/environment" /etc/environment; then
-        if ! lspci | grep -qi nvidia; then
-            run "strip NVIDIA env var" sudo sed -i '/__NV_DISABLE_EXPLICIT_SYNC/d' /etc/environment
-        fi
-    fi
-else
-    warn "_setup/environment not found, skipping"
-fi
-
 # Steam + gamescope
 read -rp "Install Steam and gamescope? [y/N] " _steam
 if [[ "$_steam" =~ ^[Yy]$ ]]; then
