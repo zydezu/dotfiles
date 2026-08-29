@@ -90,3 +90,7 @@ output_path = "~/.config/wiremix/wiremix.toml"
 [templates.modernx]
 input_path = "~/.config/matugen/templates/modernx.conf"
 output_path = "~/.config/mpv/script-opts/modernx.conf"
+
+[templates.webview-generic]
+input_path = "~/.config/matugen/templates/webview-generic.css"
+output_path = "~/.config/matugen/generic-webview.css"

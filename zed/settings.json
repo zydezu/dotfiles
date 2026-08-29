@@ -60,6 +60,9 @@
     },
     "TypeScript": {
       "tab_size": 4,
+    },
+    "C++": {
+      "tab_size": 4,
     }
   },
   "diagnostics": {
@@ -127,6 +130,7 @@
     "dock": "left",
   },
   "git": {
+    "diff_base": "head",
     "inline_blame": {
       "show_commit_summary": true,
     },

@@ -1,0 +1,84 @@
+/* Matugen generic webview theme
+ * Material You colors as CSS custom properties + light-touch base
+ * element styling, meant for pasting into a Stylus userstyle (or an
+ * @import) applied per-site/app for whatever Electron/webview thing
+ * doesn't have its own dedicated matugen template.
+ *
+ * Usage in Stylus: either @import url("file:///home/zy/.config/matugen/generic-webview.css");
+ * at the top of a userstyle, or paste the contents directly.
+ */
+
+:root {
+<* for name, value in colors *>
+    --mat-{{name}}: {{value.default.hex}};
+    --mat-{{name}}-rgb: {{value.default.red}}, {{value.default.green}}, {{value.default.blue}};
+<* endfor *>
+}
+
+/* ── Base page ─────────────────────────────────────────────── */
+html, body {
+    background-color: var(--mat-background) !important;
+    color: var(--mat-on_background) !important;
+}
+
+::selection {
+    background-color: rgba(var(--mat-primary-rgb), 0.35) !important;
+    color: var(--mat-on_primary_container) !important;
+}
+
+/* ── Links ─────────────────────────────────────────────────── */
+a {
+    color: var(--mat-primary) !important;
+}
+a:hover {
+    color: var(--mat-primary_container) !important;
+}
+
+/* ── Inputs & buttons ──────────────────────────────────────── */
+input, textarea, select {
+    background-color: var(--mat-surface_container) !important;
+    color: var(--mat-on_surface) !important;
+    border-color: var(--mat-outline_variant) !important;
+}
+input:focus, textarea:focus, select:focus {
+    border-color: var(--mat-primary) !important;
+    outline-color: var(--mat-primary) !important;
+}
+
+button {
+    background-color: var(--mat-primary_container) !important;
+    color: var(--mat-on_primary_container) !important;
+    border-color: var(--mat-outline_variant) !important;
+}
+button:hover {
+    background-color: var(--mat-primary) !important;
+    color: var(--mat-on_primary) !important;
+}
+
+/* ── Code blocks ───────────────────────────────────────────── */
+code, pre, kbd {
+    background-color: var(--mat-surface_container_high) !important;
+    color: var(--mat-on_surface) !important;
+}
+
+/* ── Scrollbars (WebKit / Blink) ───────────────────────────── */
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+::-webkit-scrollbar-track {
+    background-color: var(--mat-surface) !important;
+}
+::-webkit-scrollbar-thumb {
+    background-color: var(--mat-outline_variant) !important;
+    border-radius: 8px;
+    border: 3px solid var(--mat-surface);
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--mat-outline) !important;
+}
+
+/* Firefox scrollbars (WebKitGTK/Gecko-based webviews) */
+* {
+    scrollbar-color: var(--mat-outline_variant) var(--mat-surface);
+}

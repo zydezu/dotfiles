@@ -20,6 +20,13 @@ run() {
     return 1
 }
 
+# Keep sudo alive for the duration of the script
+if ! sudo -v; then
+    error "sudo authentication failed"
+    exit 1
+fi
+while true; do sudo -n true; sleep 60; kill -0 "$$" 2>/dev/null || exit; done &
+
 info "Installing scripts to ~/.local/bin..."
 mkdir -p "$HOME/.local/bin"
 if [[ -f "$DOTFILES_DIR/_setup/bin/changelogs" ]]; then

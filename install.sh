@@ -53,7 +53,7 @@ run "install packages" yay -S --needed --noconfirm \
     xfce-polkit hyprlock hypridle swaync sway-audio-idle-inhibit-git \
     rofi rofi-power-menu \
     swaybg waypaper grim slurp wayfreeze-git swappy gpu-screen-recorder \
-    clipse cliphist wl-clipboard wl-clip-persist \
+    clipse wl-clipboard wl-clip-persist \
     networkmanager dunst brightnessctl \
     pipewire wireplumber wiremix \
     alacritty fish zed helium-browser-bin \
@@ -103,6 +103,37 @@ fi
 # Fix hardcoded /home/zy/ references left in copied configs
 run "fix hardcoded home paths" find "$CONFIG_DIR" -type f \( -name "*.conf" -o -name "*.ini" -o -name "*.json" -o -name "*.jsonc" \) \
     -exec sed -i "s|/home/zy/|$HOME/|g" {} +
+
+# Guard optional dev-tool sourcing in fish config (tool may not be installed on this machine)
+info "Guarding optional tool sourcing in fish config..."
+if [[ -f "$CONFIG_DIR/fish/config.fish" ]]; then
+    run "guard fnm sourcing" sed -i \
+        's/^fnm env --use-on-cd --shell fish | source$/if type -q fnm\n    fnm env --use-on-cd --shell fish | source\nend/' \
+        "$CONFIG_DIR/fish/config.fish"
+else
+    warn "fish/config.fish not found, skipping fnm guard"
+fi
+if [[ -f "$CONFIG_DIR/fish/conf.d/deno.fish" ]]; then
+    run "guard deno.fish sourcing" sed -i \
+        's|^source "/home/zy/\.deno/env\.fish"$|test -f "$HOME/.deno/env.fish"; and source "$HOME/.deno/env.fish"|' \
+        "$CONFIG_DIR/fish/conf.d/deno.fish"
+else
+    warn "fish/conf.d/deno.fish not found, skipping deno guard"
+fi
+if [[ -f "$CONFIG_DIR/fish/conf.d/rustup.fish" ]]; then
+    run "guard rustup.fish sourcing" sed -i \
+        's|^source "$HOME/\.cargo/env\.fish"$|test -f "$HOME/.cargo/env.fish"; and source "$HOME/.cargo/env.fish"|' \
+        "$CONFIG_DIR/fish/conf.d/rustup.fish"
+else
+    warn "fish/conf.d/rustup.fish not found, skipping rustup guard"
+fi
+if [[ -f "$CONFIG_DIR/fish/conf.d/uv.env.fish" ]]; then
+    run "guard uv.env.fish sourcing" sed -i \
+        's|^source "$HOME/\.local/bin/env\.fish"$|test -f "$HOME/.local/bin/env.fish"; and source "$HOME/.local/bin/env.fish"|' \
+        "$CONFIG_DIR/fish/conf.d/uv.env.fish"
+else
+    warn "fish/conf.d/uv.env.fish not found, skipping uv guard"
+fi
 
 # Configure actions-for-nautilus
 info "Configuring actions-for-nautilus..."
@@ -170,6 +201,7 @@ else
     warn "swaync/config.json not found, skipping"
 fi
 
+# Strip scripts
 if [[ -f "$CONFIG_DIR/mango/scripts/fullscreendnd.sh" ]]; then
     run "strip hardcoded monitor" sed -i '/^MAIN_MON=/d' "$CONFIG_DIR/mango/scripts/fullscreendnd.sh"
 else
@@ -180,6 +212,27 @@ if [[ -f "$CONFIG_DIR/mango/binds.conf" ]]; then
     run "strip capture/kiosk binds" sed -i '/^# Capture\/Kiosk$/,/^$/d' "$CONFIG_DIR/mango/binds.conf"
 else
     warn "mango/binds.conf not found, skipping"
+fi
+
+# Remove machine-specific kiosk/capture-card scripts
+machine_scripts=(
+    statuskiosk.sh tplinkstatskiosk.sh watchkiosk.sh
+    findcog.sh movecogwin.sh minimizeapps.sh
+    capturecardsetup.sh webview-css-inject.py
+)
+for script in "${machine_scripts[@]}"; do
+    if [[ -f "$CONFIG_DIR/mango/scripts/$script" ]]; then
+        run "remove mango/scripts/$script" rm -f "$CONFIG_DIR/mango/scripts/$script"
+    fi
+done
+
+if [[ -f "$CONFIG_DIR/mango/autostart.sh" ]]; then
+    run "strip minimizeapps autostart" sed -i \
+        -e '/^# Minimize some apps on startup$/d' \
+        -e '/minimizeapps\.sh/d' \
+        "$CONFIG_DIR/mango/autostart.sh"
+else
+    warn "mango/autostart.sh not found, skipping"
 fi
 
 # hypr/hyprlock.conf - remove monitor-only background blocks, then strip monitor= lines
@@ -349,6 +402,16 @@ read -rp "Install Cloudflare Warp? [y/N] " _warp
 if [[ "$_warp" =~ ^[Yy]$ ]]; then
     info "Installing Warp..."
     run "install Cloudflare Warp" yay -S --needed --noconfirm warp-cli
+fi
+
+if ! command -v warp-cli &>/dev/null; then
+    info "Cloudflare Warp not installed - removing warptoggle bind..."
+    if [[ -f "$CONFIG_DIR/mango/scripts/warptoggle.sh" ]]; then
+        run "remove mango/scripts/warptoggle.sh" rm -f "$CONFIG_DIR/mango/scripts/warptoggle.sh"
+    fi
+    if [[ -f "$CONFIG_DIR/mango/binds.conf" ]]; then
+        run "strip warptoggle bind" sed -i '/warptoggle\.sh/d' "$CONFIG_DIR/mango/binds.conf"
+    fi
 fi
 
 # yt-dlp
