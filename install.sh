@@ -94,6 +94,12 @@ for dir in "${dirs[@]}"; do
     fi
 done
 
+# Override fish config with guarded versions from _setup
+if [[ -d "$DOTFILES_DIR/_setup/fish" ]]; then
+    info "Applying fish overrides from _setup/fish..."
+    cp -r "$DOTFILES_DIR/_setup/fish/." "$CONFIG_DIR/fish/"
+fi
+
 if [[ -f "$DOTFILES_DIR/xdg-terminals.list" ]]; then
     run "copy xdg-terminals.list" cp "$DOTFILES_DIR/xdg-terminals.list" "$CONFIG_DIR/xdg-terminals.list"
 else
@@ -103,37 +109,6 @@ fi
 # Fix hardcoded /home/zy/ references left in copied configs
 run "fix hardcoded home paths" find "$CONFIG_DIR" -type f \( -name "*.conf" -o -name "*.ini" -o -name "*.json" -o -name "*.jsonc" \) \
     -exec sed -i "s|/home/zy/|$HOME/|g" {} +
-
-# Guard optional dev-tool sourcing in fish config (tool may not be installed on this machine)
-info "Guarding optional tool sourcing in fish config..."
-if [[ -f "$CONFIG_DIR/fish/config.fish" ]]; then
-    run "guard fnm sourcing" sed -i \
-        's/^fnm env --use-on-cd --shell fish | source$/if type -q fnm\n    fnm env --use-on-cd --shell fish | source\nend/' \
-        "$CONFIG_DIR/fish/config.fish"
-else
-    warn "fish/config.fish not found, skipping fnm guard"
-fi
-if [[ -f "$CONFIG_DIR/fish/conf.d/deno.fish" ]]; then
-    run "guard deno.fish sourcing" sed -i \
-        's|^source "/home/zy/\.deno/env\.fish"$|test -f "$HOME/.deno/env.fish"; and source "$HOME/.deno/env.fish"|' \
-        "$CONFIG_DIR/fish/conf.d/deno.fish"
-else
-    warn "fish/conf.d/deno.fish not found, skipping deno guard"
-fi
-if [[ -f "$CONFIG_DIR/fish/conf.d/rustup.fish" ]]; then
-    run "guard rustup.fish sourcing" sed -i \
-        's|^source "$HOME/\.cargo/env\.fish"$|test -f "$HOME/.cargo/env.fish"; and source "$HOME/.cargo/env.fish"|' \
-        "$CONFIG_DIR/fish/conf.d/rustup.fish"
-else
-    warn "fish/conf.d/rustup.fish not found, skipping rustup guard"
-fi
-if [[ -f "$CONFIG_DIR/fish/conf.d/uv.env.fish" ]]; then
-    run "guard uv.env.fish sourcing" sed -i \
-        's|^source "$HOME/\.local/bin/env\.fish"$|test -f "$HOME/.local/bin/env.fish"; and source "$HOME/.local/bin/env.fish"|' \
-        "$CONFIG_DIR/fish/conf.d/uv.env.fish"
-else
-    warn "fish/conf.d/uv.env.fish not found, skipping uv guard"
-fi
 
 # Configure actions-for-nautilus
 info "Configuring actions-for-nautilus..."
