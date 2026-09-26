@@ -92,7 +92,8 @@
     "on-click-right": "close",
     "ignore-list": [
       "Rofi",
-      "wofi"
+      "wofi",
+      "broken"
     ]
   },
   "tray": {

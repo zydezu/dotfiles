@@ -1,7 +1,5 @@
 #!/bin/bash
-# Closes the Cog kiosk window once focus moves to anything else. Polls
-# instead of using `mmsg watch focusing-client`, since that stream can
-# silently stall forever (found instances still blocked after 12+ hours).
+# Closes the Cog kiosk window once focus moves to anything else
 info=$(~/.config/mango/scripts/findcog.sh) || exit 0
 cog_id=$(echo "$info" | jq -r '.id')
 

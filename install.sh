@@ -54,7 +54,7 @@ run "install packages" yay -S --needed --noconfirm \
     rofi rofi-power-menu \
     swaybg waypaper grim slurp wayfreeze-git swappy gpu-screen-recorder \
     clipse wl-clipboard wl-clip-persist \
-    networkmanager dunst brightnessctl \
+    samba networkmanager dunst brightnessctl \
     pipewire wireplumber wiremix \
     alacritty fish zed helium-browser-bin \
     nautilus actions-for-nautilus-git baazar gnome-keyring gnome-font-viewer baobab file-roller fuse2 p7zip unzip \
@@ -390,6 +390,11 @@ if [[ "$_ts" =~ ^[Yy]$ ]]; then
     info "Installing Tailscale..."
     if run "install Tailscale" yay -S --needed --noconfirm tailscale davfs2; then
         run "enable tailscaled" sudo systemctl enable --now tailscaled
+        info "Waiting for tailscaled to be ready..."
+        for _ in {1..10}; do
+            sudo tailscaled status &>/dev/null && break
+            sleep 1
+        done
         run "set tailscale operator" sudo tailscale set --operator="$USER"
     fi
 fi
@@ -408,6 +413,20 @@ if [[ -f /etc/mkinitcpio.conf ]]; then
 else
     warn "/etc/mkinitcpio.conf not found, skipping Plymouth hook removal"
 fi
+
+# Clipse uinput access (for auto-paste on Wayland)
+info "Setting up clipse uinput access..."
+if ! getent group input &>/dev/null; then
+    run "create input group" sudo groupadd input
+fi
+run "add $USER to input group" sudo usermod -aG input "$USER"
+if [[ ! -f /etc/udev/rules.d/99-uinput.rules ]]; then
+    run "create uinput udev rule" sudo bash -c 'echo "KERNEL==\"uinput\", GROUP=\"input\", MODE=\"0660\"" > /etc/udev/rules.d/99-uinput.rules'
+else
+    info "  uinput udev rule already exists"
+fi
+run "reload udev rules" sudo udevadm control --reload-rules
+run "trigger udev" sudo udevadm trigger
 
 # Install fonts
 info "Installing fonts..."

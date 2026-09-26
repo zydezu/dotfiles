@@ -55,6 +55,12 @@
     "center_on_match": true
   },
   "languages": {
+    "JSON": {
+      "tab_size": 4,
+    },
+    "JSONC": {
+      "tab_size": 4,
+    },
     "JavaScript": {
       "tab_size": 4,
     },
@@ -117,7 +123,8 @@
     },
     "opencode": {
       "default_config_options": {
-        "model": "opencode/deepseek-v4-flash-free"
+        "effort": "medium",
+        "model": "opencode/ling-3.0-flash-fin-free"
       },
       "type": "registry",
     },
@@ -126,7 +133,6 @@
   "git_panel": {
     "collapse_untracked_diff": false,
     "tree_view": true,
-    "sort_by_path": false,
     "dock": "left",
   },
   "git": {
@@ -143,4 +149,51 @@
     "light": "Matugen Light",
     "dark": "Matugen Dark",
   },
+  "theme_overrides": {
+    "Matugen Dark": {
+      "syntax": {
+        "constant.comment.todo": {
+          "color": "#16161eff",
+          "background_color": "#ffcc00ff",
+          "font_weight": 700
+        },
+        "constant.comment.todo.text": {
+          "color": "#16161eff",
+          "background_color": "#ffcc00ff"
+        },
+        "string.comment.info": {
+          "color": "#16161eff",
+          "background_color": "#4dd6ffff",
+          "font_weight": 700
+        },
+        "string.comment.info.text": {
+          "color": "#16161eff",
+          "background_color": "#4dd6ffff"
+        },
+        "property.comment.error": {
+          "color": "#16161eff",
+          "background_color": "#ff4d5eff",
+          "font_weight": 700
+        },
+        "property.comment.error.text": {
+          "color": "#16161eff",
+          "background_color": "#ff4d5eff"
+        },
+        "keyword.comment.warn": {
+          "color": "#16161eff",
+          "background_color": "#ff9e2cff",
+          "font_weight": 700
+        },
+        "keyword.comment.warn.text": {
+          "color": "#16161eff",
+          "background_color": "#ff9e2cff"
+        },
+        "emphasis.comment.user": {
+          "color": "#16161eff",
+          "font_weight": 700,
+          "font_style": "italic"
+        }
+      }
+    }
+  }
 }

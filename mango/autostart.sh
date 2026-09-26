@@ -1,15 +1,7 @@
 #!/bin/bash
 
-systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE XDG_SESSION_CLASS
-dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE XDG_SESSION_CLASS
-
 # Run the desktop portal (URI/screenshare)
 /usr/lib/xdg-desktop-portal-wlr >/dev/null 2>&1 &
-
-# Permission authentication
-/usr/lib/xfce-polkit/xfce-polkit >/dev/null 2>&1 &
-
-fc-cache -f >/dev/null 2>&1 &
 
 # Screen locking and sleeping
 hypridle >/dev/null 2>&1 &
@@ -27,8 +19,6 @@ nautilus --gapplication-service >/dev/null 2>&1 &
 
 # keep clipboard content
 wl-clip-persist --clipboard regular --reconnect-tries 0 >/dev/null 2>&1 &
-wl-paste --type text --watch clipse store >/dev/null 2>&1 &
-wl-paste --type image --watch clipse store >/dev/null 2>&1 &
 clipse -listen &
 
 # Suppress notifications in fullscreen
@@ -40,5 +30,5 @@ clipse -listen &
     dex -a -e mango >/dev/null 2>&1
 ) &
 
-# Minimize some apps on startup
-~/.config/mango/scripts/minimizeapps.sh >/dev/null 2>&1 &
+# Close some app windows on startup (they stay in the tray)
+~/.config/mango/scripts/closeapps.sh >/dev/null 2>&1 &

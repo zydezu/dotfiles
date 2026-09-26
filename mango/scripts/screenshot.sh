@@ -37,6 +37,9 @@ _wn_pid=$!
 
 # Take screenshot
 if [ "$MODE" = "select" ]; then
+    LOCKFILE="/tmp/screenshot-select.lock"
+    exec 200>"$LOCKFILE"
+    flock -n 200 || { echo "Selection already in progress"; rm -f "$_wn_tmp"; exit 1; }
     PIPE=$(mktemp -u)
     mkfifo "$PIPE"
     wayfreeze --hide-cursor --after-freeze-cmd "echo > $PIPE" & # hide cursor doesn't work
@@ -54,6 +57,7 @@ if [ "$MODE" = "select" ]; then
     grim -l 1 -g "$GEOMETRY" "$TMPFILE" || { echo "Screenshot failed"; kill "$WAYFREEZE_PID" 2>/dev/null; rm -f "$_wn_tmp"; exit 1; }
     tock "grim" $_t
     kill "$WAYFREEZE_PID" 2>/dev/null
+    flock -u 200
 elif [ "$MODE" = "both" ]; then
     _t=$(tick)
     grim -l 1 "$TMPFILE" || { echo "Screenshot failed"; rm -f "$_wn_tmp"; exit 1; }
