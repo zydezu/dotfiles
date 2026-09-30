@@ -10,8 +10,8 @@
 
 :root {
 
-    --mat-background: #0d150d;
-    --mat-background-rgb: 13, 21, 13;
+    --mat-background: #14121c;
+    --mat-background-rgb: 20, 18, 28;
 
     --mat-error: #ffb4ab;
     --mat-error-rgb: 255, 180, 171;
@@ -19,17 +19,17 @@
     --mat-error_container: #93000a;
     --mat-error_container-rgb: 147, 0, 10;
 
-    --mat-inverse_on_surface: #2a3329;
-    --mat-inverse_on_surface-rgb: 42, 51, 41;
+    --mat-inverse_on_surface: #312f3a;
+    --mat-inverse_on_surface-rgb: 49, 47, 58;
 
-    --mat-inverse_primary: #006e23;
-    --mat-inverse_primary-rgb: 0, 110, 35;
+    --mat-inverse_primary: #5e2aff;
+    --mat-inverse_primary-rgb: 94, 42, 255;
 
-    --mat-inverse_surface: #dce5d6;
-    --mat-inverse_surface-rgb: 220, 229, 214;
+    --mat-inverse_surface: #e6e0ef;
+    --mat-inverse_surface-rgb: 230, 224, 239;
 
-    --mat-on_background: #dce5d6;
-    --mat-on_background-rgb: 220, 229, 214;
+    --mat-on_background: #e6e0ef;
+    --mat-on_background-rgb: 230, 224, 239;
 
     --mat-on_error: #690005;
     --mat-on_error-rgb: 105, 0, 5;
@@ -37,128 +37,128 @@
     --mat-on_error_container: #ffdad6;
     --mat-on_error_container-rgb: 255, 218, 214;
 
-    --mat-on_primary: #00390e;
-    --mat-on_primary-rgb: 0, 57, 14;
+    --mat-on_primary: #2f009b;
+    --mat-on_primary-rgb: 47, 0, 155;
 
-    --mat-on_primary_container: #6dff7e;
-    --mat-on_primary_container-rgb: 109, 255, 126;
+    --mat-on_primary_container: #e6deff;
+    --mat-on_primary_container-rgb: 230, 222, 255;
 
-    --mat-on_primary_fixed: #002105;
-    --mat-on_primary_fixed-rgb: 0, 33, 5;
+    --mat-on_primary_fixed: #1b0063;
+    --mat-on_primary_fixed-rgb: 27, 0, 99;
 
-    --mat-on_primary_fixed_variant: #005318;
-    --mat-on_primary_fixed_variant-rgb: 0, 83, 24;
+    --mat-on_primary_fixed_variant: #4500d8;
+    --mat-on_primary_fixed_variant-rgb: 69, 0, 216;
 
-    --mat-on_secondary: #113725;
-    --mat-on_secondary-rgb: 17, 55, 37;
+    --mat-on_secondary: #382a49;
+    --mat-on_secondary-rgb: 56, 42, 73;
 
-    --mat-on_secondary_container: #c3ecd1;
-    --mat-on_secondary_container-rgb: 195, 236, 209;
+    --mat-on_secondary_container: #eedbff;
+    --mat-on_secondary_container-rgb: 238, 219, 255;
 
-    --mat-on_secondary_fixed: #002112;
-    --mat-on_secondary_fixed-rgb: 0, 33, 18;
+    --mat-on_secondary_fixed: #231533;
+    --mat-on_secondary_fixed-rgb: 35, 21, 51;
 
-    --mat-on_secondary_fixed_variant: #294e3a;
-    --mat-on_secondary_fixed_variant-rgb: 41, 78, 58;
+    --mat-on_secondary_fixed_variant: #504061;
+    --mat-on_secondary_fixed_variant-rgb: 80, 64, 97;
 
-    --mat-on_surface: #dce5d6;
-    --mat-on_surface-rgb: 220, 229, 214;
+    --mat-on_surface: #e6e0ef;
+    --mat-on_surface-rgb: 230, 224, 239;
 
-    --mat-on_surface_variant: #c0c9bb;
-    --mat-on_surface_variant-rgb: 192, 201, 187;
+    --mat-on_surface_variant: #c9c4d3;
+    --mat-on_surface_variant-rgb: 201, 196, 211;
 
-    --mat-on_tertiary: #00382d;
-    --mat-on_tertiary-rgb: 0, 56, 45;
+    --mat-on_tertiary: #44244d;
+    --mat-on_tertiary-rgb: 68, 36, 77;
 
-    --mat-on_tertiary_container: #acf0dc;
-    --mat-on_tertiary_container-rgb: 172, 240, 220;
+    --mat-on_tertiary_container: #fbd7ff;
+    --mat-on_tertiary_container-rgb: 251, 215, 255;
 
-    --mat-on_tertiary_fixed: #002019;
-    --mat-on_tertiary_fixed-rgb: 0, 32, 25;
+    --mat-on_tertiary_fixed: #2d0e36;
+    --mat-on_tertiary_fixed-rgb: 45, 14, 54;
 
-    --mat-on_tertiary_fixed_variant: #005142;
-    --mat-on_tertiary_fixed_variant-rgb: 0, 81, 66;
+    --mat-on_tertiary_fixed_variant: #5c3a65;
+    --mat-on_tertiary_fixed_variant-rgb: 92, 58, 101;
 
-    --mat-outline: #8a9386;
-    --mat-outline-rgb: 138, 147, 134;
+    --mat-outline: #938f9c;
+    --mat-outline-rgb: 147, 143, 156;
 
-    --mat-outline_variant: #40493e;
-    --mat-outline_variant-rgb: 64, 73, 62;
+    --mat-outline_variant: #484551;
+    --mat-outline_variant-rgb: 72, 69, 81;
 
-    --mat-primary: #00e552;
-    --mat-primary-rgb: 0, 229, 82;
+    --mat-primary: #c9beff;
+    --mat-primary-rgb: 201, 190, 255;
 
-    --mat-primary_container: #005318;
-    --mat-primary_container-rgb: 0, 83, 24;
+    --mat-primary_container: #4500d8;
+    --mat-primary_container-rgb: 69, 0, 216;
 
-    --mat-primary_fixed: #6dff7e;
-    --mat-primary_fixed-rgb: 109, 255, 126;
+    --mat-primary_fixed: #e6deff;
+    --mat-primary_fixed-rgb: 230, 222, 255;
 
-    --mat-primary_fixed_dim: #00e552;
-    --mat-primary_fixed_dim-rgb: 0, 229, 82;
+    --mat-primary_fixed_dim: #c9beff;
+    --mat-primary_fixed_dim-rgb: 201, 190, 255;
 
     --mat-scrim: #000000;
     --mat-scrim-rgb: 0, 0, 0;
 
-    --mat-secondary: #a7d0b6;
-    --mat-secondary-rgb: 167, 208, 182;
+    --mat-secondary: #d3bfe6;
+    --mat-secondary-rgb: 211, 191, 230;
 
-    --mat-secondary_container: #294e3a;
-    --mat-secondary_container-rgb: 41, 78, 58;
+    --mat-secondary_container: #504061;
+    --mat-secondary_container-rgb: 80, 64, 97;
 
-    --mat-secondary_fixed: #c3ecd1;
-    --mat-secondary_fixed-rgb: 195, 236, 209;
+    --mat-secondary_fixed: #eedbff;
+    --mat-secondary_fixed-rgb: 238, 219, 255;
 
-    --mat-secondary_fixed_dim: #a7d0b6;
-    --mat-secondary_fixed_dim-rgb: 167, 208, 182;
+    --mat-secondary_fixed_dim: #d3bfe6;
+    --mat-secondary_fixed_dim-rgb: 211, 191, 230;
 
     --mat-shadow: #000000;
     --mat-shadow-rgb: 0, 0, 0;
 
-    --mat-source_color: #4caa55;
-    --mat-source_color-rgb: 76, 170, 85;
+    --mat-source_color: #7a72a4;
+    --mat-source_color-rgb: 122, 114, 164;
 
-    --mat-surface: #0d150d;
-    --mat-surface-rgb: 13, 21, 13;
+    --mat-surface: #14121c;
+    --mat-surface-rgb: 20, 18, 28;
 
-    --mat-surface_bright: #333c31;
-    --mat-surface_bright-rgb: 51, 60, 49;
+    --mat-surface_bright: #3a3843;
+    --mat-surface_bright-rgb: 58, 56, 67;
 
-    --mat-surface_container: #192218;
-    --mat-surface_container-rgb: 25, 34, 24;
+    --mat-surface_container: #201e29;
+    --mat-surface_container-rgb: 32, 30, 41;
 
-    --mat-surface_container_high: #242c22;
-    --mat-surface_container_high-rgb: 36, 44, 34;
+    --mat-surface_container_high: #2b2933;
+    --mat-surface_container_high-rgb: 43, 41, 51;
 
-    --mat-surface_container_highest: #2e372d;
-    --mat-surface_container_highest-rgb: 46, 55, 45;
+    --mat-surface_container_highest: #36333e;
+    --mat-surface_container_highest-rgb: 54, 51, 62;
 
-    --mat-surface_container_low: #151e15;
-    --mat-surface_container_low-rgb: 21, 30, 21;
+    --mat-surface_container_low: #1c1a25;
+    --mat-surface_container_low-rgb: 28, 26, 37;
 
-    --mat-surface_container_lowest: #081008;
-    --mat-surface_container_lowest-rgb: 8, 16, 8;
+    --mat-surface_container_lowest: #0e0d17;
+    --mat-surface_container_lowest-rgb: 14, 13, 23;
 
-    --mat-surface_dim: #0d150d;
-    --mat-surface_dim-rgb: 13, 21, 13;
+    --mat-surface_dim: #14121c;
+    --mat-surface_dim-rgb: 20, 18, 28;
 
-    --mat-surface_tint: #00e552;
-    --mat-surface_tint-rgb: 0, 229, 82;
+    --mat-surface_tint: #c9beff;
+    --mat-surface_tint-rgb: 201, 190, 255;
 
-    --mat-surface_variant: #40493e;
-    --mat-surface_variant-rgb: 64, 73, 62;
+    --mat-surface_variant: #484551;
+    --mat-surface_variant-rgb: 72, 69, 81;
 
-    --mat-tertiary: #90d4c0;
-    --mat-tertiary-rgb: 144, 212, 192;
+    --mat-tertiary: #e4b8eb;
+    --mat-tertiary-rgb: 228, 184, 235;
 
-    --mat-tertiary_container: #005142;
-    --mat-tertiary_container-rgb: 0, 81, 66;
+    --mat-tertiary_container: #5c3a65;
+    --mat-tertiary_container-rgb: 92, 58, 101;
 
-    --mat-tertiary_fixed: #acf0dc;
-    --mat-tertiary_fixed-rgb: 172, 240, 220;
+    --mat-tertiary_fixed: #fbd7ff;
+    --mat-tertiary_fixed-rgb: 251, 215, 255;
 
-    --mat-tertiary_fixed_dim: #90d4c0;
-    --mat-tertiary_fixed_dim-rgb: 144, 212, 192;
+    --mat-tertiary_fixed_dim: #e4b8eb;
+    --mat-tertiary_fixed_dim-rgb: 228, 184, 235;
 
 }
 

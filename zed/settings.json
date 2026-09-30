@@ -124,7 +124,7 @@
     "opencode": {
       "default_config_options": {
         "effort": "medium",
-        "model": "opencode/ling-3.0-flash-fin-free"
+        "model": "opencode/longcat-2.5-preview-free"
       },
       "type": "registry",
     },
