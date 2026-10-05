@@ -21,7 +21,7 @@ nautilus --gapplication-service >/dev/null 2>&1 &
 wl-clip-persist --clipboard regular --reconnect-tries 0 >/dev/null 2>&1 &
 clipse -listen &
 
-# Suppress notifications in fullscreen
+# suppress notifications in fullscreen
 ~/.config/mango/scripts/fullscreendnd.sh >/dev/null 2>&1 &
 
 # load autostart programs (respects Hidden/NoDisplay/OnlyShowIn/NotShowIn/TryExec)
@@ -30,5 +30,11 @@ clipse -listen &
     dex -a -e mango >/dev/null 2>&1
 ) &
 
-# Close some app windows on startup (they stay in the tray)
+# close some app windows on startup (they stay in the tray)
 ~/.config/mango/scripts/closeapps.sh >/dev/null 2>&1 &
+
+# virtual monitor on startup sunshine
+(
+    sleep 1
+    ~/.config/sunshine/setup-virtual-monitor.sh
+) &

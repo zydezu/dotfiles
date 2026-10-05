@@ -9,5 +9,4 @@ for i in $(seq 1 20); do
 done
 
 cog --platform=x11 "http://127.0.0.1:$PORT/?kiosk=1" &
-~/.config/mango/scripts/movecogwin.sh 720 765
 ~/.config/mango/scripts/watchkiosk.sh
