@@ -18,7 +18,7 @@ get_workspace_name() {
     BORING_APPIDS="org.gnome.Nautilus|thunar|org.kde.dolphin|pcmanfm|nemo"
     CLIENT=$(mmsg get focusing-client 2>/dev/null)
     [ -z "$CLIENT" ] && return
-    { read -r APPID; read -r TITLE; } < <(printf '%s' "$CLIENT" | jq -r '.appid // "", (.title // "")[:30]')
+    { read -r APPID; read -r TITLE; } < <(printf '%s' "$CLIENT" | jq -r '.app_id // "", (.title // "")[:30]')
     SHORTAPP=$(printf '%s\n' "$APPID" | awk -F. '{print $NF}')
     if printf '%s\n' "$APPID" | grep -qE "$BORING_APPIDS"; then
         printf '%s' "$SHORTAPP"

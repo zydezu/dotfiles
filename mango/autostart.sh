@@ -33,8 +33,5 @@ clipse -listen &
 # close some app windows on startup (they stay in the tray)
 ~/.config/mango/scripts/closeapps.sh >/dev/null 2>&1 &
 
-# virtual monitor on startup sunshine
-(
-    sleep 1
-    ~/.config/sunshine/setup-virtual-monitor.sh
-) &
+# Virtual monitor is created/destroyed automatically by Sunshine
+# (ensure-virtual-monitor.sh / destroy-virtual-monitor.sh) only while streaming.

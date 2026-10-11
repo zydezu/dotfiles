@@ -67,6 +67,9 @@
     "TypeScript": {
       "tab_size": 4,
     },
+    "TSX": {
+      "tab_size": 4,
+    },
     "C++": {
       "tab_size": 4,
     }
