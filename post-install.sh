@@ -43,7 +43,7 @@ WALLPAPER="$HOME/Pictures/default.jpg"
 # Generate theme from wallpaper
 info "Generating theme from wallpaper..."
 if [[ -f "$WALLPAPER" ]]; then
-    run "generate theme from wallpaper" matugen image "$WALLPAPER" -t scheme-fruit-salad --source-color-index 0
+    run "generate theme from wallpaper" matugen image "$WALLPAPER" -t vibrant --source-color-index 0
 else
     warn "wallpaper not found at $WALLPAPER, skipping theme generation"
 fi
