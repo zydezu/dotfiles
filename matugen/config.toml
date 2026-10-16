@@ -44,6 +44,14 @@ output_path = '~/.config/Equicord/themes/midnight-discord.css'
 input_path = '~/.config/matugen/templates/midnight-discord.css'
 output_path = '~/.config/equibop/themes/midnight-discord.css'
 
+[templates.discord-compact]
+input_path = '~/.config/matugen/templates/matugen-discord.css'
+output_path = '~/.config/Equicord/themes/matugen-discord.css'
+
+[templates.equibop-compact]
+input_path = '~/.config/matugen/templates/matugen-discord.css'
+output_path = '~/.config/equibop/themes/matugen-discord.css'
+
 [templates.steam]
 input_path = '~/.config/matugen/templates/steam.css'
 output_path = '~/.config/AdwSteamGtk/custom.css'

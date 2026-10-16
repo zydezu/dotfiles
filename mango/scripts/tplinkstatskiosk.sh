@@ -8,5 +8,5 @@ for i in $(seq 1 20); do
   curl -s -o /dev/null "http://127.0.0.1:$PORT/" && break
 done
 
-cog --platform=x11 "http://127.0.0.1:$PORT/?kiosk=1" &
+cog "http://127.0.0.1:$PORT/?kiosk=1" &
 ~/.config/mango/scripts/watchkiosk.sh

@@ -14,3 +14,9 @@ fnm env --use-on-cd --shell fish | source
 
 fish_add_path ~/go/bin
 fish_add_path /usr/bin/vendor_perl
+
+# Picard's native Wayland backend hangs on Qt 6.12 + MangoDE (wl_shm buffers fail to
+# allocate, so the window never paints). Force it onto XWayland instead.
+function picard
+    env QT_QPA_PLATFORM=xcb /usr/bin/picard $argv
+end

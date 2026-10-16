@@ -405,7 +405,17 @@
                             ],
                             "label": "extract audio",
                             "type": "command",
-                            "command_line": "ffmpeg -i \"%f\" -vn -c:a copy \"%d/%w_audio.mka\"",
+                            "command_line": "extract-audio.sh \"%f\" 0",
+                            "cwd": "%d",
+                            "use_v1_interpolation": false
+                        },
+                        {
+                            "mimetypes": [
+                                "video/*"
+                            ],
+                            "label": "extract all audio tracks",
+                            "type": "command",
+                            "command_line": "extract-audio.sh \"%f\"",
                             "cwd": "%d",
                             "use_v1_interpolation": false
                         }
