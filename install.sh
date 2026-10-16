@@ -149,9 +149,9 @@ if ls /sys/class/power_supply/BAT* &>/dev/null; then
         warn "laptop waybar config not found, skipping"
     fi
     if [[ -f "$CONFIG_DIR/mango/config.conf" ]]; then
-        run "set sloppyfocus" sed -i 's/^sloppyfocus=.*/sloppyfocus=1/' "$CONFIG_DIR/mango/config.conf"
+        run "set sloppy_focus" sed -i 's/^sloppy_focus=.*/sloppy_focus=1/' "$CONFIG_DIR/mango/config.conf"
     else
-        warn "mango/config.conf not found, skipping sloppyfocus"
+        warn "mango/config.conf not found, skipping sloppy_focus"
     fi
 fi
 
