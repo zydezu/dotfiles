@@ -96,6 +96,18 @@ for dir in "${dirs[@]}"; do
     fi
 done
 
+# copy ~/.config/starship.toml
+if [[ -f "$DOTFILES_DIR/starship/starship.toml" ]]; then
+    if cp "$DOTFILES_DIR/starship/starship.toml" "$CONFIG_DIR/starship.toml"; then
+        info "  starship.toml"
+    else
+        error "  failed to copy starship.toml"
+        FAILURES+=("copy starship.toml to $CONFIG_DIR")
+    fi
+else
+    warn "  skipping starship.toml (not found)"
+fi
+
 # Override fish config with guarded versions from _setup
 if [[ -d "$DOTFILES_DIR/_setup/fish" ]]; then
     info "Applying fish overrides from _setup/fish..."
