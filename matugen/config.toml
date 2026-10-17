@@ -72,10 +72,6 @@ output_path = '~/.config/opencode/themes/matugen.json'
 input_path = '~/.config/matugen/templates/matugen.obt'
 output_path = '~/.config/obs-studio/themes/matugen.obt'
 
-[templates.vscode]
-input_path = '~/.config/matugen/templates/vscode.json'
-output_path = '~/.config/Code/User/settings.json'
-
 [templates.zed]
 input_path = '~/.config/matugen/templates/zed.json'
 output_path = '~/.config/zed/themes/matugen.json'

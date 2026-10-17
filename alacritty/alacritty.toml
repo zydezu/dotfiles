@@ -3,7 +3,7 @@ columns = 150
 lines = 35
 
 [window]
-opacity = 0.8
+opacity = 0.9
 
 [general]
 import = ["colors.toml"]

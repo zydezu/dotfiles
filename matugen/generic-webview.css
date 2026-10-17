@@ -1,8 +1,4 @@
 /* Matugen generic webview theme
- * Material You colors as CSS custom properties + light-touch base
- * element styling, meant for pasting into a Stylus userstyle (or an
- * @import) applied per-site/app for whatever Electron/webview thing
- * doesn't have its own dedicated matugen template.
  *
  * Usage in Stylus: either @import url("file:///home/zy/.config/matugen/generic-webview.css");
  * at the top of a userstyle, or paste the contents directly.
