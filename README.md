@@ -23,11 +23,9 @@ Personal dotfiles for mangowc on Arch Linux (my personal system uses CachyOS, wh
 | `environment.d/` | Environment variables |
 | `fastfetch/` | [System info](https://github.com/fastfetch-cli/fastfetch) |
 | `fish/` | [Shell](https://github.com/fish-shell/fish-shell) |
-| `gpu-screen-recorder/` | [Screen recording](https://github.com/BrycensRanch/gpu-screen-recorder-git-copr) |
 | `hypr/` | [Hyprlock & hypridle](https://github.com/hyprwm/hyprlock) |
 | `mango/` | [Wayland compositor](https://github.com/mangowm/mango) |
 | `matugen/` | [Color theming](https://github.com/InioX/matugen) |
-| `mpv/` | [Video player](https://github.com/mpv-player/mpv) |
 | `rofi/` | [App launcher](https://github.com/davatorium/rofi) |
 | `swappy/` | [Screenshot markup](https://github.com/jtheoof/swappy) |
 | `swaync/` | [Notification center](https://github.com/ErikReider/SwayNotificationCenter) |
@@ -35,6 +33,10 @@ Personal dotfiles for mangowc on Arch Linux (my personal system uses CachyOS, wh
 | `wlctl/` | [TUI Wi-Fi manager](https://github.com/aashish-thapa/wlctl) |
 | `xdg-desktop-portal/` | [Portal config](https://github.com/flatpak/xdg-desktop-portal) |
 | `zed/` | [Code editor](https://github.com/zed-industries/zed) |
+
+Config not in this repo - `mpv/` is cloned from
+[zydezu/mpvconfig](https://github.com/zydezu/mpvconfig) at install time, and
+`gpu-screen-recorder` has no config to keep.
 
 ## Installation
 
@@ -94,11 +96,15 @@ Binds to launch various applications.
 | <kbd>Super</kbd> + <kbd>Space</kbd> | Launch rofi (app launcher) |
 | <kbd>Super</kbd> + <kbd>l</kbd> | Lock session |
 | <kbd>Super</kbd> + <kbd>b</kbd> | Launch Helium browser |
+| <kbd>Super</kbd> + <kbd>d</kbd> | Launch Discord |
 | <kbd>Super</kbd> + <kbd>e</kbd> | Launch Nautilus |
-| <kbd>Super</kbd> + <kbd>z</kbd> | Launch Zeditor |
+| <kbd>Super</kbd> + <kbd>z</kbd> | Launch Zed |
 | <kbd>Super</kbd> + <kbd>v</kbd> | Launch clipse |
+| <kbd>Super</kbd> + <kbd>s</kbd> | Launch wiremix (audio mixer) |
+| <kbd>Super</kbd> + <kbd>w</kbd> | Toggle Cloudflare WARP |
 | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Esc</kbd> | Launch btop |
 | <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>c</kbd> | Launch color picker |
+| <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>n</kbd> | Toggle do-not-disturb |
 
 ### Screenshotting
 
@@ -123,30 +129,35 @@ Tags are numbered from 1 to 9, they act like separate workspaces.
 | <kbd>Super</kbd> + <kbd>Ctrl</kbd> + <kbd>Left</kbd> | Move window to the left tag |
 | <kbd>Super</kbd> + <kbd>Ctrl</kbd> + <kbd>Right</kbd> | Move window to the right tag |
 | <kbd>Super</kbd> + <kbd>1-9</kbd> | Switch to numbered tag (follow the window) |
-| <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>1-9</kbd> | Send window to numbered tag (don't follow the window) |
+| <kbd>Super</kbd> + <kbd>Ctrl</kbd> + <kbd>1-9</kbd> | Send window to numbered tag (follow it) |
+| <kbd>Super</kbd> + <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>1-9</kbd> | Send window to numbered tag (stay put) |
 
 ### Window Management
 
 | Key | Action |
 |-----|--------|
 | <kbd>Super</kbd> + <kbd>q</kbd> | Kill focused client |
-| <kbd>Alt</kbd> + <kbd>Tab</kbd> | Toggle overview |
-| <kbd>Super</kbd> + <kbd>Tab</kbd> | Focus next window |
-| <kbd>Super</kbd> + <kbd>g</kbd> | Toggle global |
-| <kbd>Super</kbd> + <kbd>o</kbd> | Toggle overlay |
+| <kbd>Super</kbd> + <kbd>Tab</kbd> | Toggle overview |
+| <kbd>Alt</kbd> + <kbd>Tab</kbd> | Cycle windows within the overview |
+| <kbd>Super</kbd> + <kbd>g</kbd> | Toggle global, then overlay |
 | <kbd>Super</kbd> + <kbd>f</kbd> | Toggle floating |
 | <kbd>Super</kbd> + <kbd>t</kbd> | Switch layout |
 | <kbd>Super</kbd> + <kbd>m</kbd> | Minimize window |
-| <kbd>Super</kbd> + <kbd>Ctrl</kbd> + <kbd>m</kbd> | Restore minimized |
+| <kbd>Super</kbd> + <kbd>n</kbd> | Restore minimized |
 | <kbd>Super</kbd> + <kbd>Alt</kbd> + <kbd>m</kbd> | Toggle scratchpad |
+
+`Super+g` is bound twice — `toggleglobal` then `toggleoverlay` — so the first
+press toggles global and the second toggles the overlay.
 
 ### Window Movement / Swap
 
 | Key | Action |
 |-----|--------|
 | <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>←↑↓→</kbd> | Exchange client with neighbour |
-| <kbd>Super</kbd> + <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Left</kbd> | Send window to left monitor |
-| <kbd>Super</kbd> + <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Right</kbd> | Send window to right monitor |
+| <kbd>Super</kbd> + <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Left</kbd> | Move current tag to left monitor |
+| <kbd>Super</kbd> + <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Right</kbd> | Move current tag to right monitor |
+| <kbd>Super</kbd> + <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>Left</kbd> | Focus left monitor |
+| <kbd>Super</kbd> + <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>Right</kbd> | Focus right monitor |
 | <kbd>Super</kbd> + <kbd>Left click</kbd> | Move window |
 | <kbd>Super</kbd> + <kbd>Right click</kbd> | Resize window |
 

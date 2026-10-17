@@ -29,17 +29,11 @@ allowed_dirs=(
   zed
 )
 
-protected_dirs=(_setup)
+# Note: _setup/ is deliberately absent from allowed_dirs above, which is what
+# keeps it out of this loop. An explicit deny-list would be redundant.
 
 for dir in "${allowed_dirs[@]}"; do
     SRC="$CONFIG_DIR/$dir"
-
-    for protected in "${protected_dirs[@]}"; do
-        if [[ "$dir" == "$protected" ]]; then
-            echo "Skipping $dir (protected)"
-            continue 2
-        fi
-    done
 
     if [[ -d "$SRC" ]]; then
         echo "Updating $dir..."
