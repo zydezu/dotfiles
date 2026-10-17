@@ -188,6 +188,13 @@ fi
 
 if [[ -f "$CONFIG_DIR/mango/binds.conf" ]]; then
     run "strip capture/kiosk binds" sed -i '/^# Capture\/Kiosk$/,/^$/d' "$CONFIG_DIR/mango/binds.conf"
+
+    # drop the block unless the script is actually present
+    if [[ -d "$HOME/Tools/ytdlp" ]]; then
+        info "  keeping personal script binds (found $HOME/Tools/ytdlp)"
+    else
+        run "strip personal script binds" sed -i '/^# Scripts$/,/^$/d' "$CONFIG_DIR/mango/binds.conf"
+    fi
 else
     warn "mango/binds.conf not found, skipping"
 fi
