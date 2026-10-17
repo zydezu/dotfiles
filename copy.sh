@@ -45,6 +45,17 @@ for dir in "${allowed_dirs[@]}"; do
     fi
 done
 
+# starship.toml lives directly in ~/.config
+STARSHIP_CONFIG="$CONFIG_DIR/starship.toml"
+if [[ -f "$STARSHIP_CONFIG" ]]; then
+    echo "Updating starship/starship.toml..."
+
+    mkdir -p "$DEST/starship"
+    cp "$STARSHIP_CONFIG" "$DEST/starship/starship.toml"
+else
+    echo "Skipping starship/starship.toml (not found in ~/.config)"
+fi
+
 NAUTILUS_CONFIG="$HOME/.local/share/actions-for-nautilus/config.json"
 if [[ -f "$NAUTILUS_CONFIG" ]]; then
     echo "Updating actions-for-nautilus/config.json..."
