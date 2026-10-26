@@ -74,7 +74,7 @@
                 {
                     "type": "command",
                     "label": "to h265",
-                    "command_line": "ffmpeg -i \"%f\" -c:v libx265 -vtag hvc1 -profile:v main -pix_fmt yuv420p -crf 35 -c:a copy \"%d/%w_h265.mp4\"",
+                    "command_line": "ffmpeg -i \"%f\" -c:v libx265 -vtag hvc1 -profile:v main -pix_fmt yuv420p -crf 32 -c:a copy \"%d/%w_h265.mp4\"",
                     "cwd": "%d",
                     "use_v1_interpolation": false,
                     "mimetypes": [
@@ -84,7 +84,7 @@
                 {
                     "type": "command",
                     "label": "to av1",
-                    "command_line": "ffmpeg -i \"%f\" -c:v libsvtav1 -crf 54 -preset 6 -c:a copy \"%d/%w_av1.mp4\"",
+                    "command_line": "ffmpeg -i \"%f\" -c:v libsvtav1 -crf 38 -preset 6 -c:a copy \"%d/%w_av1.mp4\"",
                     "cwd": "%d",
                     "use_v1_interpolation": false,
                     "mimetypes": [
@@ -94,7 +94,7 @@
                 {
                     "type": "command",
                     "label": "autocrop black bars",
-                    "command_line": "sh -c 'f=\"$1\"; d=$(dirname \"$f\"); b=$(basename \"$f\" | sed \"s/\\.[^.]*$//\"); c=$(ffmpeg -hide_banner -i \"$f\" -vf cropdetect=24:2:0 -t 300 -f null - 2>&1 | grep -o \"crop=[0-9:]*\" | sort | uniq -c | sort -rn | head -n1 | grep -o \"crop=[0-9:]*\"); [ -n \"$c\" ] && ffmpeg -i \"$f\" -vf \"$c\" -c:v libx264 -crf 18 -preset medium -c:a copy \"$d/${b}_cropped.mp4\"' _ \"%f\"",
+                    "command_line": "sh -c 'f=\"$1\"; d=$(dirname \"$f\"); b=$(basename \"$f\" | sed \"s/\\.[^.]*$//\"); c=$(ffmpeg -hide_banner -i \"$f\" -vf cropdetect=24:2:0 -t 300 -f null - 2>&1 | grep -o \"crop=[0-9:]*\" | sort | uniq -c | sort -rn | head -n1 | grep -o \"crop=[0-9:]*\"); [ -n \"$c\" ] && ffmpeg -i \"$f\" -vf \"$c\" -c:v libx265 -vtag hvc1 -crf 32 -c:a copy \"$d/${b}_cropped.mp4\"' _ \"%f\"",
                     "cwd": "%d",
                     "use_v1_interpolation": false,
                     "mimetypes": [
@@ -565,6 +565,27 @@
                                 "audio/x-ogg",
                                 "audio/matroska"
                             ]
+                        },
+                        {
+                            "type": "command",
+                            "label": "remove from flac",
+                            "command_line": "metaflac --remove --block-type=PICTURE \"%f\"",
+                            "cwd": "%d",
+                            "use_v1_interpolation": false,
+                            "mimetypes": [
+                                "audio/flac",
+                                "audio/x-flac"
+                            ]
+                        },
+                        {
+                            "type": "command",
+                            "label": "remove from mp3",
+                            "command_line": "mid3v2 --delete-frames APIC \"%f\"",
+                            "cwd": "%d",
+                            "use_v1_interpolation": false,
+                            "mimetypes": [
+                                "audio/mpeg"
+                            ]
                         }
                     ]
                 },
@@ -615,7 +636,7 @@
                 {
                     "type": "command",
                     "label": "image to jpeg-xl (lossless)",
-                    "command_line": "cjxl \"%f\" \"%d/%w.lossless.jxl\" -d 0 -e 9",
+                    "command_line": "sh -c 'b=$(basename \"$1\" | sed \"s/\\.[^.]*$//\"); d=$(dirname \"$1\"); magick \"$1\" \"$d/${b}.png\" && cjxl \"$d/${b}.png\" \"$d/${b}.lossless.jxl\" -d 0 -e 9; rm -f \"$d/${b}.png\"' _ \"%f\"",
                     "cwd": "%d",
                     "use_v1_interpolation": false,
                     "mimetypes": [
@@ -626,7 +647,7 @@
                 {
                     "type": "command",
                     "label": "image to webp (lossless)",
-                    "command_line": "cwebp -lossless -z 9 -metadata icc -exact \"%f\" -o \"%d/%w.lossless.webp\"",
+                    "command_line": "sh -c 'b=$(basename \"$1\" | sed \"s/\\.[^.]*$//\"); d=$(dirname \"$1\"); magick \"$1\" \"$d/${b}.png\" && cwebp -lossless -z 9 -metadata icc -exact \"$d/${b}.png\" -o \"$d/${b}.lossless.webp\"; rm -f \"$d/${b}.png\"' _ \"%f\"",
                     "cwd": "%d",
                     "use_v1_interpolation": false,
                     "mimetypes": [
@@ -658,16 +679,6 @@
                 },
                 {
                     "type": "command",
-                    "label": "gif to avif",
-                    "command_line": "ffmpeg -i \"%f\" -c:v libsvtav1 -crf 42 -preset 6 \"%d/%w.avif\"",
-                    "cwd": "%d",
-                    "use_v1_interpolation": false,
-                    "mimetypes": [
-                        "image/gif"
-                    ]
-                },
-                {
-                    "type": "command",
                     "label": "gif to webp",
                     "command_line": "ffmpeg -i \"%f\" -loop 0 -c:v libwebp -lossless 0 -q:v 75 -compression_level 6 \"%d/%w.webp\"",
                     "cwd": "%d",
@@ -688,8 +699,8 @@
                 },
                 {
                     "type": "command",
-                    "label": "gif to avif (transparent)",
-                    "command_line": "ffmpeg -i \"%f\" -filter_complex \"[0]format=yuva444p,split[c][a];[a]alphaextract[a]\" -map \"[c]\" -map \"[a]\" -c:v libaom-av1 -crf 30 -cpu-used 6 -row-mt 1 \"%d/%w.avif\"",
+                    "label": "gif to avif",
+                    "command_line": "ffmpeg -i \"%f\" -filter_complex \"[0]format=yuva444p,geq=lum='lum(X,Y)*alpha(X,Y)/255':cb='(cb(X,Y)-128)*alpha(X,Y)/255+128':cr='(cr(X,Y)-128)*alpha(X,Y)/255+128':a='alpha(X,Y)',split[c][a];[a]alphaextract[a]\" -map \"[c]\" -map \"[a]\" -c:v libaom-av1 -crf 40 -cpu-used 6 -row-mt 1 \"%d/%w.avif\"",
                     "cwd": "%d",
                     "use_v1_interpolation": false,
                     "mimetypes": [

@@ -1,5 +1,4 @@
 import json
-import os
 import urllib.request
 
 
@@ -36,21 +35,6 @@ def get_location_from_ip():
         except Exception:
             continue
     raise RuntimeError("All IP geolocation services failed")
-
-
-def is_portable():
-    ps = "/sys/class/power_supply"
-    if not os.path.exists(ps):
-        return False
-    for supply in os.listdir(ps):
-        if supply.startswith(("hid-", "ps-controller-battery-")):
-            continue
-        try:
-            if open(os.path.join(ps, supply, "type")).read().strip() == "Battery":
-                return True
-        except OSError:
-            continue
-    return False
 
 
 def get_icon(code, is_day):
@@ -137,16 +121,7 @@ def get_description(code):
             return "Unknown"
 
 
-config = os.path.expanduser("~/.config/hypr/location.conf")
-portable = is_portable()
-if os.path.exists(config):
-    with open(config) as f:
-        parts = [x.strip() for x in f.read().strip().split(",")]
-        lat, lon = parts[0], parts[1]
-        city = parts[2] if len(parts) > 2 else None
-else:
-    lat, lon, city = get_location_from_ip()
-
+lat, lon, city = get_location_from_ip()
 
 url = (
     f"https://api.open-meteo.com/v1/forecast"
@@ -162,5 +137,4 @@ unit = data["current_units"]["temperature_2m"]
 icon = get_icon(code, is_day)
 desc = get_description(code)
 
-location_str = f"{city} · " if (city and portable) else ""
-print(f"{location_str}{icon} {temp}{unit} · {desc}")
+print(f"{icon} {temp}{unit} · {desc}")
