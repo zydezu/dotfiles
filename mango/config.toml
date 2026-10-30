@@ -1,0 +1,27 @@
+[global]
+# misc
+sync_obj_enable = 1
+sloppy_focus = 0
+warp_cursor = 1
+allow_tearing = 2
+drag_tile_to_tile = 1
+auto_reload_config = 1
+idle_inhibit_when_fullscreen = 1
+
+# load configs
+source = [
+    "./vars.toml",
+    "./env.toml",
+    "./input.toml",
+    "./binds.toml",
+    "./monitor.toml",
+    "./visuals.toml",
+    "./windowrules.toml",
+]
+
+# run autostart
+exec_once = [
+    "~/.config/mango/autostart.sh",
+    # https://github.com/mangowm/mango/issues/1043
+    "systemctl --user start xdg-desktop-portal.service --ignore-dependencies &",
+]

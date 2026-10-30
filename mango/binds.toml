@@ -1,0 +1,134 @@
+[mousebind.default]
+"SUPER+btn_left" = "moveresize,curmove"
+"SUPER+btn_right" = "moveresize,curresize"
+
+[gesturebind.default]
+"none+right+3" = "viewtoleft"
+"none+left+3" = "viewtoright"
+"none+up+3" = "toggleoverview"
+"none+down+3" = "toggleoverview"
+
+[axisbind.default]
+"SUPER+UP" = "viewtoleft_have_client"
+"SUPER+DOWN" = "viewtoright_have_client"
+
+[bind.default]
+"SUPER+SHIFT+r" = "reload_config"
+"SUPER+l" = "spawn,loginctl lock-session"
+"SUPER+SHIFT+w" = "spawn,killall -SIGUSR2 waybar"
+
+# Launchers
+"SUPER+Return" = "spawn,$term_bin"
+# https://github.com/mangowm/mango/pull/918
+"SUPER+space" = 'spawn,rofi -modes "drun" -show "drun" -theme ~/.config/rofi/config.rasi'
+
+# Apps
+"SUPER+b" = "spawn,helium-browser --enable-features=VaapiOnNvidiaGPUs,AcceleratedVideoDecodeLinuxGL,AcceleratedVideoDecodeLinuxZeroCopyGL --ignore-gpu-blocklist --ozone-platform=wayland"
+"SUPER+d" = "spawn,discord --enable-features=VaapiOnNvidiaGPUs,VaapiVideoDecoder,VaapiIgnoreDriverChecks,AcceleratedVideoDecodeLinuxGL"
+"SUPER+e" = "spawn,nautilus --new-window"
+"SUPER+z" = "spawn,zeditor"
+
+# Utilities
+"SUPER+v" = "spawn,$term_bin --title 'clipse' -e clipse"
+"SUPER+s" = "spawn,$term_bin --title 'wiremix' -e wiremix"
+"SUPER+w" = "spawn,$script_dir/warptoggle.sh"
+"SUPER+SHIFT+c" = "spawn,$script_dir/colorpicker.sh"
+"CTRL+SHIFT+escape" = "spawn,$term_bin --title 'btop' -e btop"
+"SUPER+SHIFT+n" = "spawn,swaync-client --toggle-dnd"
+
+# Capture/Kiosk
+"SUPER+SHIFT+o" = "spawn,$script_dir/capturecardsetup.sh"
+"SUPER+SHIFT+s" = "spawn,$script_dir/statuskiosk.sh"
+"SUPER+SHIFT+d" = "spawn,$script_dir/tplinkstatskiosk.sh"
+"SUPER+SHIFT+e" = "spawn,$script_dir/capturekiosk.sh"
+
+# Scripts
+"SUPER+y" = "spawn,$term_bin --title 'Media Downloader' -e bash -lc \"uv run --directory '/home/zy/Tools/ytdlp' 'Auto Determine.py'\""
+"SUPER+SHIFT+y" = "spawn,$term_bin --title 'YouTube Video Archiver' -e bash -lc \"uv run --directory '/mnt/b27299bf-cb8e-44de-a901-039f69aa5feb/archive/internet/youtubepagegenerator' 'generatepage.py'\""
+
+# Screenshotting
+"Print" = 'spawn,$script_dir/screenshot.sh "" avif'
+"ALT+Print" = "spawn,$script_dir/screenshot.sh both avif"
+"CTRL+Print" = "spawn,$script_dir/screenshot.sh select avif"
+"Shift+Print" = "spawn,$script_dir/screenrecord.sh"
+"CTRL+SHIFT+Print" = "spawn,$script_dir/screenrecord.sh select"
+
+# Tags (Workspaces)
+"SUPER+Left" = "viewtoleft,0"
+"SUPER+Right" = "viewtoright,0"
+"SUPER+CTRL+Left" = "tagtoleft,0"
+"SUPER+CTRL+Right" = "tagtoright,0"
+
+"SUPER+1" = "view,1,0"
+"SUPER+2" = "view,2,0"
+"SUPER+3" = "view,3,0"
+"SUPER+4" = "view,4,0"
+"SUPER+5" = "view,5,0"
+"SUPER+6" = "view,6,0"
+"SUPER+7" = "view,7,0"
+"SUPER+8" = "view,8,0"
+"SUPER+9" = "view,9,0"
+
+"SUPER+CTRL+1" = "tag,1"
+"SUPER+CTRL+2" = "tag,2"
+"SUPER+CTRL+3" = "tag,3"
+"SUPER+CTRL+4" = "tag,4"
+"SUPER+CTRL+5" = "tag,5"
+"SUPER+CTRL+6" = "tag,6"
+"SUPER+CTRL+7" = "tag,7"
+"SUPER+CTRL+8" = "tag,8"
+"SUPER+CTRL+9" = "tag,9"
+
+"SUPER+CTRL+SHIFT+1" = "tagsilent,1"
+"SUPER+CTRL+SHIFT+2" = "tagsilent,2"
+"SUPER+CTRL+SHIFT+3" = "tagsilent,3"
+"SUPER+CTRL+SHIFT+4" = "tagsilent,4"
+"SUPER+CTRL+SHIFT+5" = "tagsilent,5"
+"SUPER+CTRL+SHIFT+6" = "tagsilent,6"
+"SUPER+CTRL+SHIFT+7" = "tagsilent,7"
+"SUPER+CTRL+SHIFT+8" = "tagsilent,8"
+"SUPER+CTRL+SHIFT+9" = "tagsilent,9"
+
+"SUPER+CTRL+SHIFT+Left" = "tagmon,left"
+"SUPER+CTRL+SHIFT+Right" = "tagmon,right"
+
+# Window Focus
+"SUPER+SHIFT+Left" = "focusdir,left"
+"SUPER+SHIFT+Right" = "focusdir,right"
+"SUPER+CTRL+ALT+Left" = "focusmon,left"
+"SUPER+CTRL+ALT+Right" = "focusmon,right"
+
+# Swap Window
+"SUPER+ALT+left" = "exchange_client,left"
+"SUPER+ALT+right" = "exchange_client,right"
+"SUPER+ALT+up" = "exchange_client,up"
+"SUPER+ALT+down" = "exchange_client,down"
+
+# Window Management
+"SUPER+q" = "killclient"
+"SUPER+Tab" = "toggleoverview"
+"ALT+Tab" = "overcircle,next"
+"SUPER+f" = "togglefloating"
+"SUPER+t" = "switch_layout"
+"SUPER+m" = "minimized"
+"SUPER+n" = "restore_minimized"
+"SUPER+ALT+m" = "toggle_scratchpad"
+
+# Gaps
+"ALT+SHIFT+x" = "incgaps,1"
+"ALT+SHIFT+z" = "incgaps,-1"
+"ALT+SHIFT+r" = "togglegaps"
+
+# Media/Volume Keys
+"XF86AudioRaiseVolume" = "spawn,pactl set-sink-volume @DEFAULT_SINK@ +5%"
+"XF86AudioLowerVolume" = "spawn,pactl set-sink-volume @DEFAULT_SINK@ -5%"
+"XF86AudioMute" = "spawn,pactl set-sink-mute @DEFAULT_SINK@ toggle"
+"XF86AudioPlay" = "spawn,playerctl play-pause"
+"XF86AudioNext" = "spawn,playerctl next"
+"XF86AudioPrev" = "spawn,playerctl previous"
+"XF86AudioStop" = "spawn,playerctl stop"
+"XF86MonBrightnessUp" = "spawn,brightnessctl set +5%"
+"XF86MonBrightnessDown" = "spawn,brightnessctl set 5%-"
+
+[bind.default.conflict]
+"SUPER+g" = ["toggleglobal", "toggleoverlay"]

@@ -1,0 +1,4 @@
+[var]
+term_bin = "alacritty"
+script_dir = "~/.config/mango/scripts"
+term_appid = "Alacritty"
