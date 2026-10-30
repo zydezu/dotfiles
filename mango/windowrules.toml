@@ -1,0 +1,174 @@
+# Float by default
+[[rule.window_rule]]
+is_floating = 1
+app_id = "^(.*)$"
+
+# Tiled apps
+[[rule.window_rule]]
+is_floating = 0
+app_id = "zed"
+
+[[rule.window_rule]]
+is_floating = 0
+app_id = "helium"
+
+[[rule.window_rule]]
+is_floating = 0
+app_id = "md.obsidian.Obsidian"
+
+[[rule.window_rule]]
+is_floating = 0
+app_id = "com.obsproject.Studio"
+title = "^OBS [0-9].*$"
+
+# Picture-in-picture
+[[rule.window_rule]]
+is_floating = 1
+is_overlay = 1
+is_global = 1
+ignore_maximize = 1
+ignore_minimize = 1
+width = 410
+height = 232
+offset_x = 95
+offset_y = 95
+title = "Picture-in-picture"
+
+# File dialogs/managers
+[[rule.window_rule]]
+is_floating = 1
+width = 1360
+height = 765
+app_id = "org.gnome.Nautilus"
+
+[[rule.window_rule]]
+is_floating = 1
+width = 1360
+height = 765
+app_id = "org.gnome.FileRoller"
+
+[[rule.window_rule]]
+is_floating = 1
+width = 1360
+height = 765
+app_id = "xdg-desktop-portal-gtk"
+
+# TUI popups
+[[rule.window_rule]]
+is_floating = 1
+width = 600
+height = 650
+offset_x = 100
+offset_y = -100
+animation_type_open = "slide"
+animation_type_close = "none"
+title = "clipse"
+app_id = "$term_appid"
+
+[[rule.window_rule]]
+is_floating = 1
+width = 720
+height = 800
+offset_x = 100
+offset_y = -100
+animation_type_open = "slide"
+animation_type_close = "none"
+title = "wlctl"
+app_id = "$term_appid"
+
+[[rule.window_rule]]
+is_floating = 1
+width = 600
+height = 650
+offset_x = 100
+offset_y = -100
+animation_type_open = "slide"
+animation_type_close = "none"
+title = "bluetui"
+app_id = "$term_appid"
+
+[[rule.window_rule]]
+is_floating = 1
+width = 600
+height = 650
+offset_x = 100
+offset_y = -100
+animation_type_open = "slide"
+animation_type_close = "none"
+title = "wiremix"
+app_id = "$term_appid"
+
+[[rule.window_rule]]
+is_floating = 1
+width = 600
+height = 650
+offset_x = 100
+offset_y = -100
+animation_type_open = "slide"
+animation_type_close = "none"
+app_id = "controller_viewer.py"
+
+[[rule.window_rule]]
+is_floating = 1
+width = 630
+height = 800
+offset_x = 100
+offset_y = -100
+animation_type_open = "slide"
+animation_type_close = "none"
+title = "storagetui"
+app_id = "$term_appid"
+
+[[rule.window_rule]]
+is_floating = 1
+width = 630
+height = 800
+offset_x = 100
+offset_y = -100
+animation_type_open = "slide"
+animation_type_close = "none"
+title = "Cog"
+
+[[rule.window_rule]]
+is_floating = 1
+width = 960
+height = 540
+offset_x = 100
+offset_y = -100
+animation_type_open = "slide"
+animation_type_close = "none"
+title = "video0"
+app_id = "mpv"
+
+# Video
+[[rule.window_rule]]
+force_tearing = 0
+app_id = "mpv"
+vrr_only_fullscreen = 0
+
+# Steam/Games
+[[rule.window_rule]]
+is_floating = 1
+app_id = "steam"
+
+[[rule.window_rule]]
+is_floating = 0
+app_id = "steam"
+title = "^Steam Big Picture Mode$"
+
+[[rule.window_rule]]
+idle_inhibit_when_focus = 1
+no_animation = 1
+no_border = 1
+no_shadow = 1
+no_blur = 1
+app_id = "^steam_app_.*$"
+
+[[rule.window_rule]]
+idle_inhibit_when_focus = 1
+no_animation = 1
+no_border = 1
+no_shadow = 1
+no_blur = 1
+title = "^broken$"
+app_id = "^steam_app_.*$"

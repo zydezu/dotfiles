@@ -1,6 +1,6 @@
 #!/bin/bash
 PORT=47822
-~/.config/mango/scripts/webview-css-inject.py http://sunny:8090 ~/.config/matugen/generic-webview.css "$PORT" &
+~/.config/mango/scripts/webview-css-inject.py http://sunny.uaru-fort.ts.net:8090/ ~/.config/matugen/generic-webview.css "$PORT" &
 proxy_pid=$!
 trap 'kill "$proxy_pid" 2>/dev/null' EXIT
 

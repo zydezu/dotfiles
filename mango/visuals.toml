@@ -1,0 +1,47 @@
+[global]
+source = ["~/.config/mango/colors.toml"]
+
+# Theming
+gap_inner_horizontal = 5
+gap_inner_vertical = 5
+gap_outer_horizontal = 5
+gap_outer_vertical = 5
+border_px = 2
+cursor_size = 24
+cursor_theme = "Adwaita"
+
+# Window effects
+blur = 1
+blur_layer = 0
+blur_optimized = 1
+blur_params_num_passes = 2
+blur_params_radius = 5
+shadows = 1
+layer_shadows = 1
+shadow_only_floating = 1
+shadows_size = 8
+shadows_position_x = 0
+shadows_position_y = 0
+border_radius = 0
+no_radius_when_single = 0
+
+# Animations
+animations = 1
+layer_animations = 1
+animation_type_open = "zoom"
+animation_type_close = "zoom"
+animation_fade_in = 1
+animation_fade_out = 1
+tag_animation_direction = 1
+animation_duration_move = 300
+animation_duration_open = 250
+animation_duration_tag = 300
+animation_duration_close = 250
+animation_duration_focus = 0
+animation_curve_move = [0.16, 1.0, 0.3, 1.0]
+animation_curve_open = [0.16, 1.0, 0.3, 1.0]
+animation_curve_tag = [0.16, 1.0, 0.3, 1.0]
+animation_curve_close = [0.16, 1.0, 0.3, 1.0]
+animation_curve_focus = [0.16, 1.0, 0.3, 1.0]
+animation_curve_opacity_fade_in = [0.05, 0.9, 0.1, 1.0]
+animation_curve_opacity_fade_out = [0.05, 0.9, 0.1, 1.0]

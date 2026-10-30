@@ -636,7 +636,7 @@
                 {
                     "type": "command",
                     "label": "image to jpeg-xl (lossless)",
-                    "command_line": "sh -c 'b=$(basename \"$1\" | sed \"s/\\.[^.]*$//\"); d=$(dirname \"$1\"); magick \"$1\" \"$d/${b}.png\" && cjxl \"$d/${b}.png\" \"$d/${b}.lossless.jxl\" -d 0 -e 9; rm -f \"$d/${b}.png\"' _ \"%f\"",
+                    "command_line": "sh -c 'd=$(dirname \"$1\"); b=$(basename \"$1\"); b=${b%.*}; t=$(mktemp \"$d/.jxl-src-XXXXXX.png\"); magick \"$1\" \"$t\" && cjxl \"$t\" \"$d/${b}.lossless.jxl\" -d 0 -e 9; rm -f \"$t\"' _ \"%f\"",
                     "cwd": "%d",
                     "use_v1_interpolation": false,
                     "mimetypes": [
@@ -647,7 +647,7 @@
                 {
                     "type": "command",
                     "label": "image to webp (lossless)",
-                    "command_line": "sh -c 'b=$(basename \"$1\" | sed \"s/\\.[^.]*$//\"); d=$(dirname \"$1\"); magick \"$1\" \"$d/${b}.png\" && cwebp -lossless -z 9 -metadata icc -exact \"$d/${b}.png\" -o \"$d/${b}.lossless.webp\"; rm -f \"$d/${b}.png\"' _ \"%f\"",
+                    "command_line": "sh -c 'd=$(dirname \"$1\"); b=$(basename \"$1\"); b=${b%.*}; t=$(mktemp \"$d/.webp-src-XXXXXX.png\"); magick \"$1\" \"$t\" && cwebp -lossless -z 9 -metadata icc -exact \"$t\" -o \"$d/${b}.lossless.webp\"; rm -f \"$t\"' _ \"%f\"",
                     "cwd": "%d",
                     "use_v1_interpolation": false,
                     "mimetypes": [
@@ -710,7 +710,7 @@
                 {
                     "type": "command",
                     "label": "avif to gif",
-                    "command_line": "ffmpeg -i \"%f\" -map 0:v:1 -vf \"split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse\" -loop 0 \"%d/%w.gif\"",
+                    "command_line": "sh -c 'f=\"$1\"; b=${f##*/}; b=${b%.*}; s=$(ffprobe -v error -select_streams v -show_entries stream=index,nb_frames -of csv=p=0 \"$f\" | sort -t, -k2,2nr | head -1 | cut -d, -f1); ffmpeg -i \"$f\" -map \"0:v:$s\" -vf \"split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse\" -loop 0 \"$(dirname \"$f\")/${b}.gif\"' _ \"%f\"",
                     "cwd": "%d",
                     "use_v1_interpolation": false,
                     "mimetypes": [
@@ -720,7 +720,7 @@
                 {
                     "type": "command",
                     "label": "avif to webp",
-                    "command_line": "ffmpeg -i \"%f\" -map 0:v:1 -loop 0 -c:v libwebp -lossless 0 -q:v 75 -compression_level 6 \"%d/%w.webp\"",
+                    "command_line": "sh -c 'f=\"$1\"; b=${f##*/}; b=${b%.*}; s=$(ffprobe -v error -select_streams v -show_entries stream=index,nb_frames -of csv=p=0 \"$f\" | sort -t, -k2,2nr | head -1 | cut -d, -f1); ffmpeg -i \"$f\" -map \"0:v:$s\" -loop 0 -c:v libwebp -lossless 0 -q:v 75 -compression_level 6 \"$(dirname \"$f\")/${b}.webp\"' _ \"%f\"",
                     "cwd": "%d",
                     "use_v1_interpolation": false,
                     "mimetypes": [
@@ -730,7 +730,7 @@
                 {
                     "type": "command",
                     "label": "avif to mp4",
-                    "command_line": "ffmpeg -i \"%f\" -map 0:v:1 -c:v libx264 -pix_fmt yuv420p -vf \"scale=trunc(iw/2)*2:trunc(ih/2)*2\" \"%d/%w.mp4\"",
+                    "command_line": "sh -c 'f=\"$1\"; b=${f##*/}; b=${b%.*}; s=$(ffprobe -v error -select_streams v -show_entries stream=index,nb_frames -of csv=p=0 \"$f\" | sort -t, -k2,2nr | head -1 | cut -d, -f1); ffmpeg -i \"$f\" -map \"0:v:$s\" -c:v libsvtav1 -crf 38 -preset 6 -vf \"scale=trunc(iw/2)*2:trunc(ih/2)*2\" \"$(dirname \"$f\")/${b}.mp4\"' _ \"%f\"",
                     "cwd": "%d",
                     "use_v1_interpolation": false,
                     "mimetypes": [
