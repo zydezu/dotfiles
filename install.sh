@@ -54,11 +54,13 @@ run "install packages" yay -S --needed --noconfirm \
     rofi rofi-power-menu \
     swaybg waypaper grim slurp wayfreeze-git swappy gpu-screen-recorder \
     clipse wl-clipboard wl-clip-persist \
-    samba networkmanager dunst brightnessctl \
+    samba networkmanager dunst brightnessctl exfatprogs xfsprogs ntfsprogs \
+    btrfs-progs dosfstools e2fsprogs f2fs-tools jfsutils squashfs-tools \
+    cifs-utils fuse3 nfs-utils sshfs \
     pipewire wireplumber wiremix \
     alacritty fish zed helium-browser-bin \
     nautilus actions-for-nautilus-git baazar gnome-keyring gnome-font-viewer baobab file-roller unrar unzip fuse2 p7zip \
-    mpv qimgv libheif libavif qt5-avif-image-plugin qt6-avif-image-plugin qt5-jpegxl-image-plugin qt6-jpegxl-image-plugin qt-heif-image-plugin qtraw  \
+    mpv qimgv libheif libavif qt5-avif-image-plugin qt6-avif-image-plugin qt5-jpegxl-image-plugin qt6-jpegxl-image-plugin qt-jpegxl qt-heif-image-plugin qtraw exiftool kimageformats  \
     fastfetch bluetui wlctl github-cli uv \
     `# shell tooling (see fish/conf.d, starship/starship.toml)` \
     starship fd eza bat \
@@ -369,10 +371,10 @@ EOF
 fi
 
 # Steam + gamescope
-read -rp "Install Steam and gamescope? [y/N] " _steam
+read -rp "Install Steam, proton-cachyos-slr and gamescope? [y/N] " _steam
 if [[ "$_steam" =~ ^[Yy]$ ]]; then
-    info "Installing Steam and gamescope..."
-    run "install Steam/gamescope" yay -S --needed --noconfirm steam gamescope
+    info "Installing Steam, proton-cachyos-slr and gamescope..."
+    run "install Steam/gamescope" yay -S --needed --noconfirm steam proton-cachyos-slr gamescope
 fi
 
 # Discord
