@@ -57,7 +57,7 @@ run "install packages" yay -S --needed --noconfirm \
     samba networkmanager dunst brightnessctl \
     pipewire wireplumber wiremix \
     alacritty fish zed helium-browser-bin \
-    nautilus actions-for-nautilus-git baazar gnome-keyring gnome-font-viewer baobab file-roller fuse2 p7zip unzip \
+    nautilus actions-for-nautilus-git baazar gnome-keyring gnome-font-viewer baobab file-roller unrar unzip fuse2 p7zip \
     mpv qimgv libheif libavif qt5-avif-image-plugin qt6-avif-image-plugin qt5-jpegxl-image-plugin qt6-jpegxl-image-plugin qt-heif-image-plugin qtraw  \
     fastfetch bluetui wlctl github-cli uv \
     `# shell tooling (see fish/conf.d, starship/starship.toml)` \
