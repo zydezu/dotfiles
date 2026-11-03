@@ -1,0 +1,44 @@
+#!/bin/bash
+PROTON_RUNNER="/usr/share/steam/compatibilitytools.d/proton-cachyos-native/proton"
+PREFIX_DIR="$HOME/.protonprefix/pfx"
+WINE_PREFIX="$PREFIX_DIR/pfx"
+FAKE_STEAM="$HOME/.protonprefix/fake-steam"
+LOCKFILE="$HOME/.protonprefix/winrun.lock"
+
+export STEAM_COMPAT_DATA_PATH="$PREFIX_DIR"
+export STEAM_COMPAT_CLIENT_INSTALL_PATH="$FAKE_STEAM"
+export STEAM_COMPAT_MEDIA_PATH="$HOME/.protonprefix/media"
+export STEAM_COMPAT_TRANSCODED_MEDIA_PATH="$HOME/.protonprefix/media_transcoded"
+export WINEDLLOVERRIDES="version=n,b${WINEDLLOVERRIDES:+;$WINEDLLOVERRIDES}"
+export DISPLAY="${DISPLAY:-:0}"
+export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
+
+mkdir -p "$STEAM_COMPAT_MEDIA_PATH" "$STEAM_COMPAT_TRANSCODED_MEDIA_PATH"
+
+# find wineserver bundled inside the proton dist
+WINESERVER=$(find "$(dirname "$PROTON_RUNNER")" -type f -name wineserver 2>/dev/null | head -n1)
+
+# single instance lock
+exec 200>"$LOCKFILE"
+if ! flock -n 200; then
+    notify-send "Windows App" "Program is already running! Please close it first." 2>/dev/null
+    exit 1
+fi
+notify-send "Windows App" "Loading program, please wait..."
+
+# clean up any stale wineserver from a previous crash
+if [ -n "$WINESERVER" ]; then
+    WINEPREFIX="$WINE_PREFIX" "$WINESERVER" -k -w >/dev/null 2>&1
+fi
+
+FILEPATH=$(realpath "$1")
+cd "$(dirname "$FILEPATH")" || exit 1
+
+"$PROTON_RUNNER" run "$FILEPATH"
+
+# make sure it's fully dead after close/crash too
+if [ -n "$WINESERVER" ]; then
+    WINEPREFIX="$WINE_PREFIX" "$WINESERVER" -k -w >/dev/null 2>&1
+fi
+
+flock -u 200
