@@ -56,6 +56,14 @@ else
     echo "Skipping starship/starship.toml (not found in ~/.config)"
 fi
 
+MIMEAPPS="$CONFIG_DIR/mimeapps.list"
+if [[ -f "$MIMEAPPS" ]]; then
+    echo "Updating mimeapps.list..."
+    cp "$MIMEAPPS" "$DEST/mimeapps.list"
+else
+    echo "Skipping mimeapps.list (not found in ~/.config)"
+fi
+
 NAUTILUS_CONFIG="$HOME/.local/share/actions-for-nautilus/config.json"
 if [[ -f "$NAUTILUS_CONFIG" ]]; then
     echo "Updating actions-for-nautilus/config.json..."

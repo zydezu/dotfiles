@@ -33,6 +33,8 @@ Personal dotfiles for mangowc on Arch Linux (my personal system uses CachyOS, wh
 | `wlctl/` | [TUI Wi-Fi manager](https://github.com/aashish-thapa/wlctl) |
 | `xdg-desktop-portal/` | [Portal config](https://github.com/flatpak/xdg-desktop-portal) |
 | `zed/` | [Code editor](https://github.com/zed-industries/zed) |
+| `mimeapps.list` | Default mimetype associations, including Windows `.exe` via `winrun` |
+| `_setup/` | Installer assets, including `bin/` scripts and `applications/` desktop entries |
 
 Config not in this repo - `mpv/` is cloned from
 [zydezu/mpvconfig](https://github.com/zydezu/mpvconfig) at install time, and

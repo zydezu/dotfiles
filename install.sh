@@ -122,6 +122,43 @@ else
     warn "xdg-terminals.list not found, skipping"
 fi
 
+if [[ -f "$DOTFILES_DIR/mimeapps.list" ]]; then
+    run "copy mimeapps.list" cp "$DOTFILES_DIR/mimeapps.list" "$CONFIG_DIR/mimeapps.list"
+else
+    warn "mimeapps.list not found, skipping"
+fi
+
+# Local scripts
+if [[ -d "$DOTFILES_DIR/_setup/bin" ]]; then
+    info "Installing local scripts to ~/.local/bin..."
+    mkdir -p "$HOME/.local/bin"
+    for script in "$DOTFILES_DIR/_setup/bin"/*; do
+        [[ -f "$script" ]] || continue
+        run "install $(basename "$script")" cp "$script" "$HOME/.local/bin/"
+        run "chmod $(basename "$script")" chmod +x "$HOME/.local/bin/$(basename "$script")"
+    done
+else
+    warn "_setup/bin not found, skipping"
+fi
+
+# Desktop entries
+if [[ -d "$DOTFILES_DIR/_setup/applications" ]]; then
+    info "Installing desktop entries..."
+    mkdir -p "$HOME/.local/share/applications"
+    for entry in "$DOTFILES_DIR/_setup/applications"/*.desktop; do
+        [[ -f "$entry" ]] || continue
+        run "install $(basename "$entry")" sed "s|/home/zy/|$HOME/|g" "$entry" \
+            > "$HOME/.local/share/applications/$(basename "$entry")"
+        run "chmod $(basename "$entry")" chmod +x "$HOME/.local/share/applications/$(basename "$entry")"
+    done
+else
+    warn "_setup/applications not found, skipping"
+fi
+
+if command -v update-desktop-database &>/dev/null; then
+    run "refresh desktop database" update-desktop-database "$HOME/.local/share/applications"
+fi
+
 # Fix hardcoded /home/zy/ references left in copied configs
 run "fix hardcoded home paths" find "$CONFIG_DIR" -type f \( -name "*.conf" -o -name "*.ini" -o -name "*.json" -o -name "*.jsonc" \) \
     -exec sed -i "s|/home/zy/|$HOME/|g" {} +

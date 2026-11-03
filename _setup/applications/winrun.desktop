@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Windows Application (Proton)
+Comment=Run .exe via CachyOS Proton
+Exec=/home/zy/.local/bin/winrun %f
+Type=Application
+MimeType=application/x-ms-dos-executable;application/x-msdownload;
+Icon=application-x-msdownload
+Terminal=false
+NoDisplay=true
+Categories=Utility;
