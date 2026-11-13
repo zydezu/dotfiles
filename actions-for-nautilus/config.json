@@ -635,6 +635,18 @@
                 },
                 {
                     "type": "command",
+                    "label": "image to jpeg-xl",
+                    "command_line": "cjxl \"%f\" \"%d/%w.jxl\" -e 9",
+                    "cwd": "%d",
+                    "use_v1_interpolation": false,
+                    "mimetypes": [
+                        "image/*",
+                        "!image/gif",
+                        "!image/jxl"
+                    ]
+                },
+                {
+                    "type": "command",
                     "label": "image to jpeg-xl (lossless)",
                     "command_line": "sh -c 'd=$(dirname \"$1\"); b=$(basename \"$1\"); b=${b%.*}; t=$(mktemp \"$d/.jxl-src-XXXXXX.png\"); magick \"$1\" \"$t\" && cjxl \"$t\" \"$d/${b}.lossless.jxl\" -d 0 -e 9; rm -f \"$t\"' _ \"%f\"",
                     "cwd": "%d",

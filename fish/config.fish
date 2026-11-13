@@ -20,3 +20,6 @@ fish_add_path /usr/bin/vendor_perl
 function picard
     env QT_QPA_PLATFORM=xcb /usr/bin/picard $argv
 end
+
+# opencode
+fish_add_path /home/zy/.opencode/bin
