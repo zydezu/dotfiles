@@ -14,8 +14,8 @@ normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
 # Copy
 [keyboard]
 bindings = [
-    { key = "C", mods = "Control", action = "Copy"},
-    { key = "V", mods = "Control", action = "Paste"},
-    { key = "C", mods = "Control|Shift", chars = "\u0003"},
-    { key = "Return", mods = "Shift", chars = "\u001B\r"}
+    { key = "C", mods = "Control", action = "Copy" },
+    { key = "V", mods = "Control", action = "Paste" },
+    { key = "C", mods = "Control|Shift", chars = "\u0003" },
+    { key = "Return", mods = "Shift", chars = "\u001B\r" },
 ]

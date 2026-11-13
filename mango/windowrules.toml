@@ -3,6 +3,13 @@
 is_floating = 1
 app_id = "^(.*)$"
 
+# Main terminal: match alacritty's 150x35 (150*9 x 35*21 = 1350x735) + 2px border each side
+[[rule.window_rule]]
+is_floating = 1
+width = 1280
+height = 720
+app_id = "Alacritty"
+
 # Tiled apps
 [[rule.window_rule]]
 is_floating = 0

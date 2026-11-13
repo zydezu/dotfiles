@@ -3,6 +3,7 @@
 sync_obj_enable = 1
 sloppy_focus = 0
 warp_cursor = 1
+cursor_hide_timeout = 30
 allow_tearing = 2
 drag_tile_to_tile = 1
 auto_reload_config = 1
