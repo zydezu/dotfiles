@@ -2,8 +2,8 @@
 version_check = false
 
 [templates.mango]
-input_path = '~/.config/matugen/templates/mango.conf'
-output_path = '~/.config/mango/colors.conf'
+input_path = '~/.config/matugen/templates/mango.toml'
+output_path = '~/.config/mango/colors.toml'
 
 [templates.waybar]
 input_path = "~/.config/matugen/templates/waybar.css"

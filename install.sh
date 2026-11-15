@@ -56,13 +56,12 @@ run "install packages" yay -S --needed --noconfirm \
     clipse wl-clipboard wl-clip-persist \
     samba networkmanager dunst brightnessctl exfatprogs xfsprogs ntfsprogs \
     btrfs-progs dosfstools e2fsprogs f2fs-tools jfsutils squashfs-tools \
-    cifs-utils fuse3 nfs-utils sshfs \
+    cifs-utils fuse3 nfs-utils sshfs davfs2 gvfs-smb gvfs-dnssd gvfs-wsdd gvfs-nfs gvfs-mtp gvfs-gphoto2 gvfs-afc \
     pipewire wireplumber wiremix \
     alacritty fish zed helium-browser-bin \
     nautilus actions-for-nautilus-git baazar gnome-keyring gnome-font-viewer baobab file-roller unrar unzip fuse2 p7zip \
     mpv qimgv libheif libavif qt5-avif-image-plugin qt6-avif-image-plugin qt5-jpegxl-image-plugin qt6-jpegxl-image-plugin qt-jpegxl qt-heif-image-plugin qtraw exiftool kimageformats  \
     fastfetch bluetui wlctl github-cli uv \
-    `# shell tooling (see fish/conf.d, starship/starship.toml)` \
     starship fd eza bat \
     adw-gtk-theme ttf-jetbrains-mono-nerd noto-fonts adwaita-fonts \
     qt5ct qt6ct qt6-declarative qt6-svg qt5-quickcontrols qt5-quickcontrols2 qt5-declarative qt5-graphicaleffects
@@ -423,9 +422,10 @@ fi
 
 # Warp
 read -rp "Install Cloudflare Warp? [y/N] " _warp
-if [[ "$_warp" =~ ^[Yy]$ ]]; then
+if [[ $_warp =~ ^[Yy]$ ]]; then
     info "Installing Warp..."
-    run "install Cloudflare Warp" yay -S --needed --noconfirm warp-cli
+    run "install Cloudflare Warp" yay -S --needed --noconfirm aur/warp-cli
+    run "enable Warp daemon" sudo systemctl enable --now warp-svc.service
 fi
 
 if ! command -v warp-cli &>/dev/null; then
@@ -449,7 +449,7 @@ fi
 read -rp "Install Tailscale? [y/N] " _ts
 if [[ "$_ts" =~ ^[Yy]$ ]]; then
     info "Installing Tailscale..."
-    if run "install Tailscale" yay -S --needed --noconfirm tailscale davfs2; then
+    if run "install Tailscale" yay -S --needed --noconfirm tailscale; then
         run "enable tailscaled" sudo systemctl enable --now tailscaled
         info "Waiting for tailscaled to be ready..."
         for _ in {1..10}; do
