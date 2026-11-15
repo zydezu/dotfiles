@@ -48,7 +48,7 @@ WALLPAPER="$DOTFILES_DIR/waypaper/default.jpg"
 # Install packages
 info "Installing packages..."
 run "install packages" yay -S --needed --noconfirm \
-    mangowm waybar-git matugen sddm \
+    mangowm waybar-git matugen sddm cachy-update \
     xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-wlr xdg-terminal-exec-git \
     xfce-polkit hyprlock hypridle dex swaync sway-audio-idle-inhibit-git \
     rofi rofi-power-menu \
@@ -77,6 +77,8 @@ if command -v fish &>/dev/null; then
 else
     warn "fish not found, skipping default shell change"
 fi
+
+run "activating cachy-update" cachy-update --tray --enable
 
 # Copy dotfiles
 info "Copying dotfiles to $CONFIG_DIR..."
