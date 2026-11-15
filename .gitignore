@@ -4,8 +4,8 @@ tmp_files/
 restore_token
 location.conf
 config-laptop.jsonc
-colors.toml
 custom_theme.json
+colors.toml
 colors.conf
 mango-colors.conf
 matugen.json
