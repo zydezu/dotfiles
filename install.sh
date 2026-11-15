@@ -68,6 +68,7 @@ run "install packages" yay -S --needed --noconfirm \
 
 # Remove shelly because I don't like it
 run "removing smelly" yay -R --noconfirm shelly
+run "removing firefox" yay -R --noconfirm firefox
 
 # Set fish as default shell
 info "Setting fish as default shell..."
