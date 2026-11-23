@@ -66,7 +66,7 @@ run "install packages" yay -S --needed --noconfirm \
     cifs-utils fuse3 nfs-utils sshfs davfs2 gvfs-smb gvfs-dnssd gvfs-wsdd gvfs-nfs gvfs-mtp gvfs-gphoto2 gvfs-afc \
     pipewire wireplumber wiremix \
     alacritty fish zed helium-browser-bin \
-    nautilus actions-for-nautilus-git bazaar gnome-keyring gnome-font-viewer baobab file-roller unrar unzip fuse2 p7zip \
+    nautilus actions-for-nautilus-git warehouse gnome-keyring gnome-font-viewer baobab file-roller unrar unzip fuse2 p7zip \
     mpv qimgv libheif libavif qt5-avif-image-plugin qt6-avif-image-plugin qt5-jpegxl-image-plugin qt6-jpegxl-image-plugin qt-jpegxl qt-heif-image-plugin qtraw exiftool kimageformats  \
     fastfetch bluetui wlctl github-cli uv \
     starship fd eza bat \
