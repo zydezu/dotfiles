@@ -59,7 +59,7 @@ run "install packages" yay -S --needed --noconfirm \
     cifs-utils fuse3 nfs-utils sshfs davfs2 gvfs-smb gvfs-dnssd gvfs-wsdd gvfs-nfs gvfs-mtp gvfs-gphoto2 gvfs-afc \
     pipewire wireplumber wiremix \
     alacritty fish zed helium-browser-bin \
-    nautilus actions-for-nautilus-git baazar gnome-keyring gnome-font-viewer baobab file-roller unrar unzip fuse2 p7zip \
+    nautilus actions-for-nautilus-git bazaar gnome-keyring gnome-font-viewer baobab file-roller unrar unzip fuse2 p7zip \
     mpv qimgv libheif libavif qt5-avif-image-plugin qt6-avif-image-plugin qt5-jpegxl-image-plugin qt6-jpegxl-image-plugin qt-jpegxl qt-heif-image-plugin qtraw exiftool kimageformats  \
     fastfetch bluetui wlctl github-cli uv \
     starship fd eza bat \
@@ -67,8 +67,8 @@ run "install packages" yay -S --needed --noconfirm \
     qt5ct qt6ct qt6-declarative qt6-svg qt5-quickcontrols qt5-quickcontrols2 qt5-declarative qt5-graphicaleffects
 
 # Remove shelly because I don't like it
-run "removing smelly" yay -R --noconfirm shelly
-run "removing firefox" yay -R --noconfirm firefox
+run "removing smelly" pacman -Qq shelly && yay -Rns --noconfirm shelly
+run "removing firefox" pacman -Qq firefox && yay -Rns --noconfirm firefox
 
 # Set fish as default shell
 info "Setting fish as default shell..."
