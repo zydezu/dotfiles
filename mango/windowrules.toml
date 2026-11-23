@@ -3,7 +3,7 @@
 is_floating = 1
 app_id = "^(.*)$"
 
-# Main terminal: match alacritty's 150x35 (150*9 x 35*21 = 1350x735) + 2px border each side
+# Terminal
 [[rule.window_rule]]
 is_floating = 1
 width = 1280
@@ -27,6 +27,17 @@ app_id = "md.obsidian.Obsidian"
 is_floating = 0
 app_id = "com.obsproject.Studio"
 title = "^OBS [0-9].*$"
+
+# OBS hotkeys delivered even while OBS is unfocused
+[[rule.window_rule]]
+app_id = "com.obsproject.Studio"
+title = "^OBS [0-9].*$"
+global_key_binding = "ctrl-F2"
+
+[[rule.window_rule]]
+app_id = "com.obsproject.Studio"
+title = "^OBS [0-9].*$"
+global_key_binding = "ctrl-F11"
 
 # Picture-in-picture
 [[rule.window_rule]]
@@ -63,14 +74,13 @@ app_id = "xdg-desktop-portal-gtk"
 # TUI popups
 [[rule.window_rule]]
 is_floating = 1
+is_named_scratchpad = 1
+no_animation = 1
 width = 600
 height = 650
 offset_x = 100
 offset_y = -100
-animation_type_open = "slide"
-animation_type_close = "none"
-title = "clipse"
-app_id = "$term_appid"
+app_id = "clipse"
 
 [[rule.window_rule]]
 is_floating = 1
@@ -96,14 +106,23 @@ app_id = "$term_appid"
 
 [[rule.window_rule]]
 is_floating = 1
+is_named_scratchpad = 1
+no_animation = 1
 width = 600
 height = 650
 offset_x = 100
 offset_y = -100
-animation_type_open = "slide"
-animation_type_close = "none"
-title = "wiremix"
-app_id = "$term_appid"
+app_id = "wiremix"
+
+[[rule.window_rule]]
+is_floating = 1
+is_named_scratchpad = 1
+no_animation = 1
+width = 900
+height = 700
+offset_x = 100
+offset_y = -100
+app_id = "btop"
 
 [[rule.window_rule]]
 is_floating = 1

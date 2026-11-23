@@ -29,8 +29,8 @@
 "SUPER+z" = "spawn,zeditor"
 
 # Utilities
-"SUPER+v" = "spawn,$term_bin --title 'clipse' -e clipse"
-"SUPER+s" = "spawn,$term_bin --title 'wiremix' -e wiremix"
+"SUPER+v" = "toggle_named_scratchpad,clipse,none,$term_bin --class clipse --title 'clipse' -e clipse"
+"SUPER+s" = "toggle_named_scratchpad,wiremix,none,$term_bin --class wiremix --title 'wiremix' -e wiremix"
 "SUPER+w" = "spawn,$script_dir/warptoggle.sh"
 "SUPER+SHIFT+c" = "spawn,$script_dir/colorpicker.sh"
 "CTRL+SHIFT+escape" = "spawn,$term_bin --title 'btop' -e btop"
