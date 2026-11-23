@@ -42,7 +42,28 @@ Config not in this repo - `mpv/` is cloned from
 
 ## Installation
 
-### Installation on Arch
+### Automated install
+
+On a fresh CachyOS/Arch install:
+
+```bash
+git clone https://github.com/zydezu/dotfiles.git
+cd dotfiles
+./install.sh
+```
+
+This installs the packages below, copies configs into `~/.config`, and downloads the
+font and icon archives from the
+[Assets release](https://github.com/zydezu/dotfiles/releases/tag/Assets)
+(checksum-verified). It reboots at the end - run `~/post-install.sh` after logging in to
+generate the theme and finish setup.
+
+> **Warning:** `install.sh` replaces existing files in `~/.config` without backing them up.
+> Review the script, and back up your configs first if this is not a fresh system.
+
+### Packages (manual)
+
+If you prefer to install packages yourself, or want to see what `install.sh` pulls in:
 
 ```bash
 yay -S \

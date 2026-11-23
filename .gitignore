@@ -11,3 +11,9 @@ mango-colors.conf
 matugen.json
 bookmarks
 opencode-warp.fish
+
+# Large assets live on the GitHub "Assets" release, not in git
+_setup/fonts.part*.7z
+_setup/fonts.7z
+_setup/icons/Neuwaita.zip
+_setup/icons/*.7z

@@ -13,6 +13,13 @@ if [[ -z "$DOTFILES_DIR" ]]; then
 fi
 CONFIG_DIR="$HOME/.config"
 
+# Large assets are published on the GitHub release
+ASSETS_URL="https://github.com/zydezu/dotfiles/releases/download/Assets"
+FONTS_URL="$ASSETS_URL/fonts.7z"
+FONTS_SHA256="71cad5cdd0be523ccfc6babce8f61d7f35537d5d6f6d233954e568bb126d7b30"
+ICONS_URL="$ASSETS_URL/Neuwaita.7z"
+ICONS_SHA256="e14c33fbaacb0ba7a5818474d40140bc734a89a691dacdcc67645d20e53ff7a3"
+
 RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'; BOLD='\033[1m'; NC='\033[0m'
 info() { echo -e "${GREEN}[+]${NC} $*"; }
 warn() { echo -e "${YELLOW}[!]${NC} $*"; }
@@ -318,12 +325,25 @@ run "clone mpv config" git clone --depth 1 https://github.com/zydezu/mpvconfig.g
 # Neuwaita icon theme
 info "Installing Neuwaita icon theme..."
 ICONS_DIR="$HOME/.local/share/icons/Neuwaita"
-rm -rf "$ICONS_DIR"
-mkdir -p "$HOME/.local/share/icons"
-if [[ -f "$DOTFILES_DIR/_setup/icons/Neuwaita.zip" ]]; then
-    run "extract Neuwaita icon theme" unzip -qo "$DOTFILES_DIR/_setup/icons/Neuwaita.zip" -d "$HOME/.local/share/icons"
+mkdir -p "$(dirname "$ICONS_DIR")"
+
+if ! command -v 7z &>/dev/null; then
+    warn "7z not found, skipping icon theme install (install p7zip)"
 else
-    warn "Neuwaita.zip not found, skipping icon theme install"
+    icons_archive="$(mktemp /tmp/Neuwaita.7z.XXXXXX)"
+    info "  downloading Neuwaita.7z (~17 MiB)..."
+    if run "download icon theme" curl -fL --retry 3 --connect-timeout 15 --progress-bar \
+        "$ICONS_URL" -o "$icons_archive"; then
+        if printf '%s  %s\n' "$ICONS_SHA256" "$icons_archive" | sha256sum -c --status -; then
+            rm -rf "$ICONS_DIR"
+            mkdir -p "$ICONS_DIR"
+            run "extract icon theme" 7z x -y -o"$ICONS_DIR" "$icons_archive"
+        else
+            error "icon theme checksum mismatch"
+            FAILURES+=("verify icon theme archive checksum")
+        fi
+    fi
+    rm -f "$icons_archive"
 fi
 
 # GTK dark mode
@@ -497,13 +517,24 @@ run "trigger udev" sudo udevadm trigger
 
 # Install fonts
 info "Installing fonts..."
-mkdir -p "$HOME/.local/share/fonts"
-if compgen -G "$DOTFILES_DIR/_setup/fonts.part*.7z" > /dev/null; then
-    cat "$DOTFILES_DIR"/_setup/fonts.part*.7z > /tmp/fonts.7z
-    run "extract fonts" 7z x -y -o"$HOME/.local/share" /tmp/fonts.7z
-    rm -f /tmp/fonts.7z
+FONTS_DIR="$HOME/.local/share/fonts"
+mkdir -p "$FONTS_DIR"
+
+if ! command -v 7z &>/dev/null; then
+    warn "7z not found, skipping font install (install p7zip)"
 else
-    warn "fonts archive parts not found, skipping font install"
+    fonts_archive="$(mktemp /tmp/fonts.7z.XXXXXX)"
+    info "  downloading fonts.7z (~159 MiB)..."
+    if run "download fonts" curl -fL --retry 3 --connect-timeout 15 --progress-bar \
+        "$FONTS_URL" -o "$fonts_archive"; then
+        if printf '%s  %s\n' "$FONTS_SHA256" "$fonts_archive" | sha256sum -c --status -; then
+            run "extract fonts" 7z x -y -o"$FONTS_DIR" "$fonts_archive"
+        else
+            error "fonts checksum mismatch"
+            FAILURES+=("verify fonts archive checksum")
+        fi
+    fi
+    rm -f "$fonts_archive"
 fi
 
 # Rebuild font cache
