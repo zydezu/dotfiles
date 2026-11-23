@@ -29,9 +29,6 @@ allowed_dirs=(
   zed
 )
 
-# Note: _setup/ is deliberately absent from allowed_dirs above, which is what
-# keeps it out of this loop. An explicit deny-list would be redundant.
-
 for dir in "${allowed_dirs[@]}"; do
     SRC="$CONFIG_DIR/$dir"
 
