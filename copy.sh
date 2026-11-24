@@ -15,6 +15,7 @@ allowed_dirs=(
   gtk-3.0
   gtk-4.0
   hypr
+  mako
   mango
   matugen
   rofi
