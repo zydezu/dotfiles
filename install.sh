@@ -55,11 +55,11 @@ WALLPAPER="$DOTFILES_DIR/waypaper/default.jpg"
 # Install packages
 info "Installing packages..."
 run "install packages" yay -S --needed --noconfirm \
-    mangowm waybar-git matugen sddm cachy-update \
+    mangowm waybar matugen sddm cachy-update \
     xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-wlr xdg-terminal-exec-git \
     xfce-polkit hyprlock hypridle dex mako sway-audio-idle-inhibit-git \
     rofi rofi-power-menu \
-    swaybg waypaper grim slurp wayfreeze-git swappy gpu-screen-recorder \
+    swaybg waypaper grim slurp wayfreeze swappy gpu-screen-recorder \
     clipse wl-clipboard wl-clip-persist \
     samba networkmanager dunst brightnessctl exfatprogs xfsprogs ntfsprogs \
     btrfs-progs dosfstools e2fsprogs f2fs-tools jfsutils squashfs-tools \
