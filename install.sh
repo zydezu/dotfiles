@@ -211,20 +211,20 @@ if ls /sys/class/power_supply/BAT* &>/dev/null; then
     else
         warn "laptop waybar config not found, skipping"
     fi
-    if [[ -f "$CONFIG_DIR/mango/config.conf" ]]; then
-        run "set sloppy_focus" sed -i 's/^sloppy_focus=.*/sloppy_focus=1/' "$CONFIG_DIR/mango/config.conf"
+    if [[ -f "$CONFIG_DIR/mango/config.toml" ]]; then
+        run "set sloppy_focus" sed -i 's/^sloppy_focus[[:space:]]*=.*/sloppy_focus = 1/' "$CONFIG_DIR/mango/config.toml"
     else
-        warn "mango/config.conf not found, skipping sloppy_focus"
+        warn "mango/config.toml not found, skipping sloppy_focus"
     fi
 fi
 
 # Strip monitor-specific config lines
 info "Stripping monitor config..."
 
-if [[ -f "$CONFIG_DIR/mango/monitor.conf" ]]; then
-    run "strip monitorrule lines" sed -i '/^monitorrule=/d' "$CONFIG_DIR/mango/monitor.conf"
+if [[ -f "$CONFIG_DIR/mango/monitor.toml" ]]; then
+    run "strip monitor_rule blocks" sed -i '/^\[\[rule\.monitor_rule\]\]$/,/^$/d' "$CONFIG_DIR/mango/monitor.toml"
 else
-    warn "mango/monitor.conf not found, skipping"
+    warn "mango/monitor.toml not found, skipping"
 fi
 
 if [[ -f "$CONFIG_DIR/mango/waybar/config.jsonc" ]]; then
@@ -233,13 +233,10 @@ else
     warn "mango/waybar/config.jsonc not found, skipping"
 fi
 
-if [[ -f "$CONFIG_DIR/swaync/config.json" ]]; then
-    run "strip swaync preferred-output lines" sed -i \
-        -e '/"control-center-preferred-output":/d' \
-        -e '/"notification-window-preferred-output":/d' \
-        "$CONFIG_DIR/swaync/config.json"
+if [[ -f "$CONFIG_DIR/mako/config" ]]; then
+    run "strip mako output line" sed -i '/^output=/d' "$CONFIG_DIR/mako/config"
 else
-    warn "swaync/config.json not found, skipping"
+    warn "mako/config not found, skipping"
 fi
 
 # Strip scripts
@@ -249,17 +246,17 @@ else
     warn "mango/scripts/fullscreendnd.sh not found, skipping"
 fi
 
-if [[ -f "$CONFIG_DIR/mango/binds.conf" ]]; then
-    run "strip capture/kiosk binds" sed -i '/^# Capture\/Kiosk$/,/^$/d' "$CONFIG_DIR/mango/binds.conf"
+if [[ -f "$CONFIG_DIR/mango/binds.toml" ]]; then
+    run "strip capture/kiosk binds" sed -i '/^# Capture\/Kiosk$/,/^$/d' "$CONFIG_DIR/mango/binds.toml"
 
     # drop the block unless the script is actually present
     if [[ -d "$HOME/Tools/ytdlp" ]]; then
         info "  keeping personal script binds (found $HOME/Tools/ytdlp)"
     else
-        run "strip personal script binds" sed -i '/^# Scripts$/,/^$/d' "$CONFIG_DIR/mango/binds.conf"
+        run "strip personal script binds" sed -i '/^# Scripts$/,/^$/d' "$CONFIG_DIR/mango/binds.toml"
     fi
 else
-    warn "mango/binds.conf not found, skipping"
+    warn "mango/binds.toml not found, skipping"
 fi
 
 # Remove machine-specific kiosk/capture-card scripts
@@ -459,8 +456,8 @@ if ! command -v warp-cli &>/dev/null; then
     if [[ -f "$CONFIG_DIR/mango/scripts/warptoggle.sh" ]]; then
         run "remove mango/scripts/warptoggle.sh" rm -f "$CONFIG_DIR/mango/scripts/warptoggle.sh"
     fi
-    if [[ -f "$CONFIG_DIR/mango/binds.conf" ]]; then
-        run "strip warptoggle bind" sed -i '/warptoggle\.sh/d' "$CONFIG_DIR/mango/binds.conf"
+    if [[ -f "$CONFIG_DIR/mango/binds.toml" ]]; then
+        run "strip warptoggle bind" sed -i '/warptoggle\.sh/d' "$CONFIG_DIR/mango/binds.toml"
     fi
 fi
 
