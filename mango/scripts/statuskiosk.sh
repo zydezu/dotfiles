@@ -10,11 +10,11 @@ backend_pid=$!
 proxy_pid=$!
 trap 'kill "$proxy_pid" "$backend_pid" 2>/dev/null' EXIT
 
-for i in $(seq 1 20); do
+for _ in {1..20}; do
   curl -s -o /dev/null "http://127.0.0.1:$SERVERSTATUS_PORT/" && break
 done
 
-for i in $(seq 1 20); do
+for _ in {1..20}; do
   curl -s -o /dev/null "http://127.0.0.1:$PORT/" && break
 done
 

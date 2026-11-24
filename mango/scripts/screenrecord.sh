@@ -11,7 +11,11 @@ DIR="$BASE_DIR/$DATE_DIR"
 mkdir -p "$DIR"
 PIDFILE="/tmp/gpu-screen-recorder.pid"
 
-tick() { date +%s%3N; }
+tick() {
+    local s=${EPOCHREALTIME%%.*} f=${EPOCHREALTIME#*.}
+    f="${f}000"
+    printf '%s%s' "$s" "${f:0:3}"
+}
 tock() { printf '[%s] %dms\n' "$1" "$(($(tick) - $2))"; }
 
 # Convert a recording into an animated AVIF next to it, the original is kept
@@ -67,9 +71,11 @@ get_workspace_name() {
 
 # Stop and save recording
 if [ -f "$PIDFILE" ]; then
-    PID=$(sed -n 1p "$PIDFILE")
-    FILE=$(sed -n 2p "$PIDFILE")
-    REC_MODE=$(sed -n 3p "$PIDFILE") # mode used at start time, empty for pidfiles written by older versions
+    # Third field is empty in pidfiles written by older versions.
+    mapfile -t _pidfile < "$PIDFILE"
+    PID=${_pidfile[0]}
+    FILE=${_pidfile[1]}
+    REC_MODE=${_pidfile[2]:-}
     if kill -0 "$PID" 2>/dev/null; then
         _total=$(tick)
         echo "stopping recording..."
@@ -147,7 +153,7 @@ else
 
     _t=$(tick)
     wait $_wn_pid
-    WORKSPACE_NAME=$(cat "$_wn_tmp")
+    WORKSPACE_NAME=$(<"$_wn_tmp")
     rm -f "$_wn_tmp"
     tock "workspace_name" $_t
 
@@ -165,4 +171,4 @@ fi
 
 PID=$!
 printf 'recording started in %dms\n' "$(($(tick) - _total))"
-echo -e "$PID\n$FILE\n$MODE" > "$PIDFILE"
+printf '%s\n%s\n%s\n' "$PID" "$FILE" "$MODE" > "$PIDFILE"

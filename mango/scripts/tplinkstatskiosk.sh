@@ -4,7 +4,7 @@ PORT=47822
 proxy_pid=$!
 trap 'kill "$proxy_pid" 2>/dev/null' EXIT
 
-for i in $(seq 1 20); do
+for _ in {1..20}; do
   curl -s -o /dev/null "http://127.0.0.1:$PORT/" && break
 done
 

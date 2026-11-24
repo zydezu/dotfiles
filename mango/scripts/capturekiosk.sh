@@ -4,7 +4,7 @@ export CAPTURE_TITLE="video0"
 
 capture --input-commands="keybind ESC quit" &
 
-for i in $(seq 1 20); do
+for _ in {1..20}; do
   win_id=$(mmsg get all-clients 2>/dev/null | jq -r '.clients[] | select(.title=="video0") | .id' | head -n1)
   [ -n "$win_id" ] && break
   sleep 0.2

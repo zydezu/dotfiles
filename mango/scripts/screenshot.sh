@@ -7,7 +7,11 @@ mkdir -p "$DIR"
 TMPDIR=$(mktemp -d)
 TMPFILE="$TMPDIR/screenshot.png"
 
-tick() { date +%s%3N; }
+tick() {
+    local s=${EPOCHREALTIME%%.*} f=${EPOCHREALTIME#*.}
+    f="${f}000"
+    printf '%s%s' "$s" "${f:0:3}"
+}
 tock() { printf '[%s] %dms\n' "$1" "$(($(tick) - $2))"; }
 
 _total=$(tick)
@@ -73,7 +77,7 @@ fi
 
 _t=$(tick)
 wait $_wn_pid
-WORKSPACE_NAME=$(cat "$_wn_tmp")
+WORKSPACE_NAME=$(<"$_wn_tmp")
 rm -f "$_wn_tmp"
 tock "workspace_name" $_t
 

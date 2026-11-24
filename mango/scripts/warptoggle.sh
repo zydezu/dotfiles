@@ -12,7 +12,7 @@ warp_ip() {
         sed -n 's/.*WarpProxy on port \([0-9][0-9]*\).*/\1/p' |
         head -n 1)
 
-    for _ in $(seq 1 20); do
+    for _ in {1..20}; do
         if [ "$(warp-cli status 2>/dev/null | grep -oP '(?<=Status update: )\S+')" = "Connected" ]; then
             if [ -n "$port" ]; then
                 ip=$(curl -s --max-time 4 -x "http://127.0.0.1:$port" \
