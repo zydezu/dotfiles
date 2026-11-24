@@ -17,10 +17,8 @@
 "SUPER+l" = "spawn,loginctl lock-session"
 "SUPER+SHIFT+w" = "spawn,killall -SIGUSR2 waybar"
 
-# Launchers
+# Terminal
 "SUPER+Return" = "spawn,$term_bin"
-# https://github.com/mangowm/mango/pull/918
-"SUPER+space" = 'spawn,rofi -modes "drun" -show "drun" -theme ~/.config/rofi/config.rasi'
 
 # Apps
 "SUPER+b" = "spawn,helium-browser --enable-features=VaapiOnNvidiaGPUs,AcceleratedVideoDecodeLinuxGL,AcceleratedVideoDecodeLinuxZeroCopyGL --ignore-gpu-blocklist --ozone-platform=wayland"
@@ -132,3 +130,6 @@
 
 [bind.default.conflict]
 "SUPER+g" = ["toggleglobal", "toggleoverlay"]
+
+[bind.default.release]
+"SUPER+SUPER_L" = "spawn,$script_dir/rofi-toggle.sh"
