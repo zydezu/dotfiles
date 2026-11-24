@@ -74,12 +74,12 @@ app_id = "xdg-desktop-portal-gtk"
 # TUI popups
 [[rule.window_rule]]
 is_floating = 1
-is_named_scratchpad = 1
-no_animation = 1
 width = 600
 height = 650
 offset_x = 100
 offset_y = -100
+animation_type_open = "slide"
+animation_type_close = "none"
 app_id = "clipse"
 
 [[rule.window_rule]]
@@ -106,23 +106,13 @@ app_id = "$term_appid"
 
 [[rule.window_rule]]
 is_floating = 1
-is_named_scratchpad = 1
-no_animation = 1
 width = 600
 height = 650
 offset_x = 100
 offset_y = -100
+animation_type_open = "slide"
+animation_type_close = "none"
 app_id = "wiremix"
-
-[[rule.window_rule]]
-is_floating = 1
-is_named_scratchpad = 1
-no_animation = 1
-width = 900
-height = 700
-offset_x = 100
-offset_y = -100
-app_id = "btop"
 
 [[rule.window_rule]]
 is_floating = 1
@@ -184,7 +174,6 @@ title = "^Steam Big Picture Mode$"
 
 [[rule.window_rule]]
 idle_inhibit_when_focus = 1
-no_animation = 1
 no_border = 1
 no_shadow = 1
 no_blur = 1
@@ -192,7 +181,6 @@ app_id = "^steam_app_.*$"
 
 [[rule.window_rule]]
 idle_inhibit_when_focus = 1
-no_animation = 1
 no_border = 1
 no_shadow = 1
 no_blur = 1

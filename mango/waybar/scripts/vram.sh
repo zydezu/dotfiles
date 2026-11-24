@@ -7,16 +7,18 @@ if [ -z "$out" ]; then
     exit 0
 fi
 
-used=$(echo "$out" | awk -F, '{gsub(/ /,"",$1); print $1}')
-total=$(echo "$out" | awk -F, '{gsub(/ /,"",$2); print $2}')
+# One awk pass instead of five: parse the two fields and compute all values.
+read -r used total used_g total_g pct < <(
+    awk -F, '{
+        gsub(/ /, "", $1); gsub(/ /, "", $2)
+        if ($2 + 0 == 0) { printf "%s %s 0 0 0\n", $1, $2; next }
+        printf "%s %s %.1f %.1f %.0f\n", $1, $2, $1/1024, $2/1024, $1/$2*100
+    }' <<<"$out"
+)
 
 if [ -z "$used" ] || [ -z "$total" ] || [ "$total" = "0" ]; then
     printf '{"text":"N/A","tooltip":"GPU query failed"}'
     exit 0
 fi
-
-used_g=$(awk "BEGIN{printf \"%.1f\", $used/1024}")
-total_g=$(awk "BEGIN{printf \"%.1f\", $total/1024}")
-pct=$(awk "BEGIN{printf \"%.0f\", $used/$total*100}")
 
 printf '{"text":"%sG","tooltip":"VRAM: %s / %s MiB (%s%%)"}' "$used_g" "$used" "$total" "$pct"

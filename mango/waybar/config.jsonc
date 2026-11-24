@@ -115,7 +115,7 @@
             "format-bluetooth": "{icon} {volume}%",
             "tooltip-format": "{desc}",
             "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-            "on-click-right": "alacritty --title 'wiremix' -e wiremix",
+            "on-click-right": "~/.config/mango/scripts/popup-toggle.sh wiremix",
             "on-scroll-up": "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 2%+",
             "on-scroll-down": "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 2%-",
             "max-volume": 150,
@@ -143,7 +143,7 @@
             "format-source-muted": " ",
             "tooltip-format": "{desc}",
             "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
-            "on-click-right": "alacritty --title 'wiremix' -e wiremix",
+            "on-click-right": "~/.config/mango/scripts/popup-toggle.sh wiremix",
             "on-scroll-up": "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SOURCE@ 2%+",
             "on-scroll-down": "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SOURCE@ 2%-",
             "scroll-step": 5
@@ -151,7 +151,7 @@
         "cpu": {
             "interval": 2,
             "format": " {usage}%",
-            "on-click": "alacritty --title 'btop' -e btop"
+            "on-click": "~/.config/mango/scripts/popup-toggle.sh btop"
         },
         "memory": {
             "interval": 2,
@@ -172,7 +172,7 @@
             "format": "{}",
             "return-type": "json",
             "exec": "~/.config/mango/waybar/scripts/disks.sh",
-            "on-click": "alacritty --title 'storagetui' -e ~/.config/mango/waybar/scripts/openstoragetui.sh",
+            "on-click": "~/.config/mango/scripts/popup-toggle.sh storagetui",
             "on-click-right": "baobab",
             "tooltip": true
         },
@@ -237,7 +237,7 @@
             "format-disconnected": " Disconnected",
             "format-disabled": "󰖪 Off",
             "tooltip-format": "{ifname} {ipaddr}/via {gwaddr}\nBandwidth: ↓{bandwidthDownBits} ↑{bandwidthUpBits}",
-            "on-click": "alacritty --title 'wlctl' -e wlctl"
+            "on-click": "~/.config/mango/scripts/popup-toggle.sh wlctl"
         },
         "bluetooth": {
             "format": "󰂯 On",
@@ -248,13 +248,13 @@
             "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
             "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
             "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}",
-            "on-click": "alacritty --title 'bluetui' -e ~/.config/mango/waybar/scripts/openbluetui.sh"
+            "on-click": "~/.config/mango/scripts/popup-toggle.sh bluetui"
         },
         "custom/ps_controller": {
             "format": "{}",
             "tooltip": true,
             "exec": "~/.config/mango/waybar/scripts/pscontrollerbattery.sh",
-            "on-click": "~/.config/mango/waybar/scripts/opencontrollerviewer.sh",
+            "on-click": "~/.config/mango/scripts/popup-toggle.sh controller_viewer.py",
             "interval": 30
         },
         "clock": {

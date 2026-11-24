@@ -42,11 +42,11 @@
       "actions": [
         {
           "label": "󰖩",
-          "command": "bash -c 'swaync-client -cp; alacritty --title wlctl -e wlctl'"
+          "command": "swaync-client -cp; ~/.config/mango/scripts/popup-toggle.sh wlctl"
         },
         {
           "label": "󰂯",
-          "command": "swaync-client -cp; alacritty --title bluetui -e ~/.config/mango/waybar/scripts/openbluetui.sh"
+          "command": "swaync-client -cp; ~/.config/mango/scripts/popup-toggle.sh bluetui"
         },
         {
           "label": "󰋊",
@@ -54,11 +54,11 @@
         },
         {
           "label": "󰕾",
-          "command": "swaync-client -cp; alacritty --title wiremix -e wiremix"
+          "command": "swaync-client -cp; ~/.config/mango/scripts/popup-toggle.sh wiremix"
         },
         {
           "label": "󰍬",
-          "command": "swaync-client -cp; alacritty --title wiremix -e wiremix"
+          "command": "swaync-client -cp; ~/.config/mango/scripts/popup-toggle.sh wiremix"
         },
         {
           "label": "󰂚",

@@ -50,8 +50,8 @@ read_brightness() {
 # Print the current brightness, preferring the cache while it is fresh.
 current_value() {
   local cur
-  if [ -f "$STATE_FILE" ] && [ $(( $(date +%s) - $(stat -c %Y "$STATE_FILE") )) -lt $CACHE_TTL ]; then
-    cat "$STATE_FILE"
+  if [ -f "$STATE_FILE" ] && (( ${EPOCHREALTIME%%.*} - $(stat -c %Y "$STATE_FILE") < CACHE_TTL )); then
+    printf '%s\n' "$(<"$STATE_FILE")"
     return
   fi
 

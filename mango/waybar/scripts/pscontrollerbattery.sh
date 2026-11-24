@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DEVICE=$(upower -e | grep 'battery_ps_controller' | head -n1)
+DEVICE=$(upower -e | grep -m1 'battery_ps_controller')
 
 if [ -z "$DEVICE" ]; then
     echo ""
@@ -9,8 +9,7 @@ if [ -z "$DEVICE" ]; then
 fi
 
 INFO=$(upower -i "$DEVICE")
-BAT=$(echo "$INFO" | awk '/percentage/ {print $2}')
-NAME=$(echo "$INFO" | awk -F': *' '/model/ {print $2}')
+read -r BAT NAME < <(awk -F': *' '/percentage/{b=$2} /model/{n=$2} END{print b, n}' <<<"$INFO")
 
 echo "󰊴 $BAT"
 echo "$NAME"

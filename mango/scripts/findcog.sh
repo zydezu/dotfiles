@@ -1,7 +1,7 @@
 #!/bin/bash
 # Prints the mmsg JSON for the "Cog" client, waiting up to ~4s for it to
 # map. Prints nothing (and exits 1) if it never appears. Shared by
-# watchkiosk.sh and movecogwin.sh so both target the same window.
+# watchkiosk.sh so both target the same window.
 for _ in {1..20}; do
   info=$(mmsg get all-clients | jq -c '.clients[] | select(.title=="Cog")' | head -n1)
   if [ -n "$info" ]; then

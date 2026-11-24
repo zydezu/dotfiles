@@ -10,11 +10,9 @@ disks=$(df -x tmpfs -x devtmpfs -x squashfs -x efivarfs -x overlay \
 
 tooltip=""
 while IFS= read -r entry; do
-  dev=$(jq -r '.dev'   <<< "$entry")
-  used_raw=$(jq -r '.used'  <<< "$entry")
-  total_raw=$(jq -r '.total' <<< "$entry")
-  pct=$(jq -r '.pct'   <<< "$entry")
-  mount=$(jq -r '.mount' <<< "$entry")
+  IFS=$'\t' read -r dev used_raw total_raw pct mount < <(
+    jq -r '[.dev,.used,.total,.pct,.mount] | @tsv' <<<"$entry"
+  )
 
   used_h=$(numfmt --to=iec --from-unit=1024 "$used_raw")
   total_h=$(numfmt --to=iec --from-unit=1024 "$total_raw")
