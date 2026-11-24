@@ -19,7 +19,6 @@ allowed_dirs=(
   matugen
   rofi
   swappy
-  swaync
   qt5ct
   qt6ct
   waypaper

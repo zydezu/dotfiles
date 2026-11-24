@@ -2,7 +2,7 @@
 version_check = false
 
 [templates.mango]
-input_path = '~/.config/matugen/templates/mango.toml'
+input_path = '~/.config/matugen/templates/mango.conf'
 output_path = '~/.config/mango/colors.toml'
 
 [templates.waybar]
@@ -15,10 +15,10 @@ input_path = "~/.config/matugen/templates/btop.theme"
 output_path = '~/.config/btop/themes/matugen.theme'
 post_hook = 'pkill -USR2 btop || true'
 
-[templates.swaync]
-input_path = "~/.config/matugen/templates/swaync.css"
-output_path = "~/.config/swaync/colors.css"
-post_hook = "swaync-client -rs"
+[templates.mako]
+input_path = "~/.config/matugen/templates/mako"
+output_path = "~/.config/mako/mako-colors"
+post_hook = "makoctl reload"
 
 [templates.hyprlock]
 input_path = '~/.config/matugen/templates/hyprlock.conf'

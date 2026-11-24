@@ -25,7 +25,7 @@ convert_to_avif() {
     _avif="${_src%.mp4}.avif"
     _t=$(tick)
 
-    # AVIFs capped at 60fps/540p
+    # AVIFs capped at 540p60
     ffmpeg -y -i "$_src" \
         -vf "fps='min(source_fps,60)',scale='if(gt(iw,ih),min(960,iw),min(540,iw))':'if(gt(iw,ih),min(540,ih),min(960,ih))':force_original_aspect_ratio=decrease:force_divisible_by=2" \
         -an \
@@ -102,11 +102,11 @@ if [ -f "$PIDFILE" ]; then
         if [ -f "$THUMB_FILE" ]; then
             ACTION=$(dunstify "Screen recording has been saved" \
                 -i "$THUMB_FILE" \
-                -t 4000 \
+                -t 6000 \
                 "${ACTIONS[@]}")
         else
             ACTION=$(dunstify "Screen recording has been saved" \
-                -t 4000 \
+                -t 6000 \
                 "${ACTIONS[@]}")
         fi
 

@@ -100,7 +100,7 @@ printf 'screenshot taken in %dms\n' "$(($(tick) - _total))"
 
 ACTION=$(dunstify "Screenshot has been saved" \
     -i "$FILE" \
-    -t 4000 \
+    -t 6000 \
     -A view,"View Image" \
     -A edit,"Annotate" \
     -A open,"Open Folder")

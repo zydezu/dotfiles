@@ -57,7 +57,7 @@ info "Installing packages..."
 run "install packages" yay -S --needed --noconfirm \
     mangowm waybar-git matugen sddm cachy-update \
     xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-wlr xdg-terminal-exec-git \
-    xfce-polkit hyprlock hypridle dex swaync sway-audio-idle-inhibit-git \
+    xfce-polkit hyprlock hypridle dex mako sway-audio-idle-inhibit-git \
     rofi rofi-power-menu \
     swaybg waypaper grim slurp wayfreeze-git swappy gpu-screen-recorder \
     clipse wl-clipboard wl-clip-persist \
@@ -92,7 +92,7 @@ info "Copying dotfiles to $CONFIG_DIR..."
 mkdir -p "$CONFIG_DIR"
 dirs=(
     actions-for-nautilus alacritty bluetui clipse environment.d fastfetch fish
-    hypr mango matugen rofi swappy swaync
+    hypr mango matugen rofi swappy mako
     qt5ct qt6ct waypaper wiremix wlctl xdg-desktop-portal zed
 )
 for dir in "${dirs[@]}"; do

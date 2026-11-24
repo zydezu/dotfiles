@@ -21,8 +21,8 @@
         "group/connectivity",
         "group/system",
         "clock",
-        "custom/notifications"
-        // "custom/power"
+        "custom/notifications",
+        "custom/power"
     ],
     "group/audio": {
         "orientation": "horizontal",
@@ -253,16 +253,18 @@
             "dnd-inhibited-none": "󰂛"
         },
         "return-type": "json",
-        "exec-if": "which swaync-client",
-        "exec": "swaync-client -swb",
-        "on-click": "swaync-client -t -sw",
-        "on-click-right": "swaync-client -d -sw",
+        "interval": 2,
+        "exec-if": "which makoctl",
+        "exec": "~/.config/mango/scripts/mako-status.sh",
+        "on-click": "makoctl dismiss -a",
+        "on-click-right": "makoctl mode -t dnd",
+        "on-scroll-up": "makoctl dismiss",
         "escape": true
     },
     "custom/power": {
         "format": "",
         "tooltip": false,
-        "on-click": "rofi -show power-menu -modi power-menu:rofi-power-menu"
+        "on-click": "rofi -show power-menu -modi power-menu:rofi-power-menu -theme ~/.config/rofi/config.rasi"
     },
     "power-profiles-daemon": {
         "format": "{icon}",

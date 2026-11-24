@@ -72,7 +72,7 @@ yay -S \
     `# portals` \
     xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-wlr \
     `# wallpaper, notifications & lock` \
-    swaybg waypaper swaync sway-audio-idle-inhibit-git hyprlock hypridle xfce-polkit \
+    swaybg waypaper mako sway-audio-idle-inhibit-git hyprlock hypridle xfce-polkit \
     `# launcher & screenshot` \
     rofi rofi-power-menu grim slurp wayfreeze-git swappy \
     `# theming` \

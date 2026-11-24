@@ -32,7 +32,7 @@
 "SUPER+w" = "spawn,$script_dir/warptoggle.sh"
 "SUPER+SHIFT+c" = "spawn,$script_dir/colorpicker.sh"
 "CTRL+SHIFT+escape" = "spawn,$term_bin --title 'btop' -e btop"
-"SUPER+SHIFT+n" = "spawn,swaync-client --toggle-dnd"
+"SUPER+SHIFT+n" = "spawn,makoctl mode -t dnd"
 
 # Capture/Kiosk
 "SUPER+SHIFT+o" = "spawn,$script_dir/capturecardsetup.sh"

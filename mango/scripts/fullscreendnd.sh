@@ -1,7 +1,7 @@
 #!/bin/bash
 
 is_dnd() {
-    [[ "$(swaync-client --get-dnd 2>/dev/null)" == "true" ]]
+    [[ "$(makoctl mode 2>/dev/null)" == *dnd* ]]
 }
 
 MAIN_MON="DP-1"
@@ -17,17 +17,14 @@ handle_fullscreen() {
             if is_dnd; then
                 was_manual_dnd=1
             else
-                was_manual_dnd=0
-                swaync-client --inhibitor-add "fullscreen"
-                swaync-client --dnd-on
+                makoctl mode -t dnd >/dev/null 2>&1
             fi
             dnd_active=1
         fi
     else
         if (( dnd_active == 1 )); then
             if (( was_manual_dnd == 0 )); then
-                swaync-client --inhibitor-remove "fullscreen"
-                swaync-client --dnd-off
+                makoctl mode -t dnd >/dev/null 2>&1
             fi
             dnd_active=0
             was_manual_dnd=0
@@ -42,8 +39,7 @@ clients_any_fullscreen() {
 
 cleanup() {
     if (( dnd_active == 1 && was_manual_dnd == 0 )); then
-        swaync-client --inhibitor-remove "fullscreen" >/dev/null 2>&1
-        swaync-client --dnd-off >/dev/null 2>&1
+        makoctl mode -t dnd >/dev/null 2>&1
     fi
 }
 trap cleanup EXIT
