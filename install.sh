@@ -521,6 +521,60 @@ if ! command -v warp-cli &>/dev/null; then
     fi
 fi
 
+# Low end mode
+read -rp "Enable low end mode (disable shadows and animations in mangowm)? [y/N] " _lowend
+if [[ "$_lowend" =~ ^[Yy]$ ]]; then
+    info "Enabling low end mode..."
+
+    # Compositor: no blur, shadows or animations
+    if [[ -f "$CONFIG_DIR/mango/visuals.toml" ]]; then
+        run "disable mango effects and animations" sed -i \
+            -e 's/^blur[[:space:]]*=.*/blur = 0/' \
+            -e 's/^blur_optimized[[:space:]]*=.*/blur_optimized = 0/' \
+            -e 's/^shadows[[:space:]]*=.*/shadows = 0/' \
+            -e 's/^layer_shadows[[:space:]]*=.*/layer_shadows = 0/' \
+            -e 's/^animations[[:space:]]*=.*/animations = 0/' \
+            -e 's/^layer_animations[[:space:]]*=.*/layer_animations = 0/' \
+            "$CONFIG_DIR/mango/visuals.toml"
+    else
+        warn "mango/visuals.toml not found, skipping compositor tweaks"
+    fi
+
+    # GTK animations (config files for apps, gsettings for the session)
+    for gtk_settings in "$CONFIG_DIR/gtk-3.0/settings.ini" "$CONFIG_DIR/gtk-4.0/settings.ini"; do
+        if [[ -f "$gtk_settings" ]]; then
+            run "disable GTK animations in $gtk_settings" sed -i \
+                's/^gtk-enable-animations[[:space:]]*=.*/gtk-enable-animations=false/' "$gtk_settings"
+        fi
+    done
+    run "disable GTK animations (gsettings)" gsettings set org.gnome.desktop.interface enable-animations false
+
+    # Lock screen
+    if [[ -f "$CONFIG_DIR/hypr/hyprlock.conf" ]]; then
+        run "disable hyprlock blur and animations" sed -i \
+            -e 's/^[[:space:]]*blur_passes[[:space:]]*=.*/    blur_passes = 0/' \
+            -e 's/^[[:space:]]*enabled[[:space:]]*=.*/    enabled = false/' \
+            "$CONFIG_DIR/hypr/hyprlock.conf"
+    else
+        warn "hypr/hyprlock.conf not found, skipping lock screen tweaks"
+    fi
+
+    # Waybar: poll less often and drop the modules that shell out
+    if [[ -f "$CONFIG_DIR/mango/waybar/config.jsonc" ]]; then
+        run "reduce waybar polling" sed -i \
+            -e 's/"interval": 0\.5/"interval": 1/g' \
+            -e 's/"interval": 2/"interval": 5/g' \
+            -e 's/"interval": 30/"interval": 60/g' \
+            "$CONFIG_DIR/mango/waybar/config.jsonc"
+        run "drop heavier waybar modules" sed -i \
+            -e '/^[[:space:]]*"custom\/vram",\{0,1\}$/d' \
+            -e '/^[[:space:]]*"custom\/ps_controller",\{0,1\}$/d' \
+            "$CONFIG_DIR/mango/waybar/config.jsonc"
+    else
+        warn "mango/waybar/config.jsonc not found, skipping waybar tweaks"
+    fi
+fi
+
 # yt-dlp
 read -rp "Install yt-dlp and gallery-dl? [y/N] " _ytdlp
 if [[ "$_ytdlp" =~ ^[Yy]$ ]]; then
