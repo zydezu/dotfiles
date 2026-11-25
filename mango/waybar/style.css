@@ -1,0 +1,262 @@
+@import url("colors.css");
+
+* {
+    border: none;
+    font-family: "JetBrainsMono Nerd Font", "Hiragino Kaku Gothic Pro W3", monospace;
+    min-height: 0;
+}
+
+window#waybar {
+    background: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+tooltip {
+    background: @bg_panel;
+    border-radius: 0px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: @border_color;
+    color: @text_main;
+}
+
+menu {
+    background: @bg_panel;
+    color: @text_main;
+    border: 1px solid @accent;
+    border-radius: 0;
+}
+
+menu menuitem {
+    border-radius: 0;
+}
+
+menu menuitem:hover {
+    background: @border_color;
+    color: @text_on_accent;
+}
+
+menu separator {
+    background: @border_color;
+    margin: 4px 0;
+    min-height: 1px;
+}
+
+menu menuitem:disabled {
+    opacity: 0.5;
+    color: @text_disabled;
+}
+
+#window,
+#taskbar,
+#tags,
+#workspaces,
+#mpris,
+#clock,
+#upower,
+#tray,
+#cava,
+#system,
+#audio,
+#connectivity,
+#custom-tray-icon,
+#custom-updates,
+#custom-weather,
+#custom-notifications,
+#custom-power,
+#hardware {
+    background: @bg_panel;
+    color: @text_main;
+    padding: 0px 8px;
+    margin: 0px;
+    margin-top: 1px;
+    margin-bottom: 0px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: @border_color;
+    border-radius: 0;
+}
+
+#workspaces button,
+#tags button,
+#taskbar button {
+    border: none;
+    background: none;
+    border-radius: 0;
+    box-shadow: inherit;
+    text-shadow: inherit;
+    padding: 1px;
+}
+
+#workspaces button:hover,
+#tags button:hover {
+    color: @text_main;
+}
+
+#workspaces button.active,
+#tags button.focused,
+#taskbar button.active {
+    background-color: @text_main;
+}
+
+#taskbar button:hover {
+    background-color: @text_main;
+}
+
+#workspaces button.urgent,
+#tags button.urgent {
+    background-color: @alert_urgent;
+}
+
+#taskbar button.urgent {
+    background-color: @alert_critical;
+}
+
+#taskbar button.minimized {
+    background-color: @text_dark;
+}
+
+#taskbar button.active,
+#taskbar button.urgent,
+#taskbar button.minimized {
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+#system,
+#audio,
+#connectivity {
+    padding: 0px;
+    margin-right: 4px;
+}
+
+#system>widget>*,
+#audio>widget>*,
+#connectivity>widget>* {
+    padding: 0px 8px;
+}
+
+#workspaces button {
+    color: @text_main;
+    margin-right: 2px;
+    margin-left: 2px;
+}
+
+#workspaces button.hidden {
+    color: @text_main;
+    background-color: transparent;
+}
+
+#workspaces button.visible {
+    color: @text_main;
+}
+
+#tags,
+#workspaces {
+    margin-left: 5px;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+#taskbar button {
+    color: @text_main;
+    margin: 0px;
+    padding: 0px 3px;
+    background: transparent;
+}
+
+#tags button:not(.occupied):not(.focused):not(.overview):not(.urgent) {
+    font-size: 0;
+    min-width: 0;
+    min-height: 0;
+    margin: -17px;
+    padding: 0;
+    color: transparent;
+    background-color: transparent;
+}
+
+#tags button.occupied,
+#tags button.overview {
+    color: @text_main;
+}
+
+#tray {
+    margin-right: 4px;
+    margin-left: 4px;
+    padding: 0px 9px 0px 9px;
+}
+
+#window {
+    margin-right: 10px;
+}
+
+#taskbar {
+    margin-left: 4px;
+    margin-right: 4px;
+    padding-right: 4px;
+}
+
+#taskbar.empty {
+    margin: 0px;
+    padding-left: 10px;
+    padding-right: 0px;
+    border-color: transparent;
+    border: none;
+    background-color: transparent;
+}
+
+#taskbar button {
+    margin-right: 4px;
+}
+
+#clock,
+#upower {
+    margin-right: 4px;
+}
+
+#custom-notifications,
+#custom-updates,
+#custom-weather,
+#custom-power,
+#custom-tray-icon {
+    margin-right: 4px;
+    padding-left: 8px;
+    padding-right: 12px;
+}
+
+#custom-notifications {
+    padding-left: 10px;
+    margin-right: 5px;
+}
+
+#custom-power {
+    margin-right: 5px;
+}
+
+#custom-tray-icon {
+    padding-right: 10px;
+}
+
+#workspaces button.active,
+#workspaces button.urgent,
+#tags button.focused,
+#tags button.urgent,
+#taskbar button.active,
+#taskbar button.urgent,
+#taskbar button.minimized {
+    color: @text_dark;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    border-radius: 0px;
+}
+
+#battery.warning {
+    color: @alert_critical;
+}
+
+#battery.critical {
+    color: @alert_urgent;
+}

@@ -1,0 +1,202 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "format_on_save": "on",
+  "language_models": {
+    "opencode": {
+      "show_go_models": false,
+      "show_zen_models": false
+    }
+  },
+  "agent_ui_font_size": 16.0,
+  "terminal": {},
+  "ui_font_weight": 400.0,
+  "ui_font_family": "Adwaita Sans",
+  "cli_default_open_behavior": "new_window",
+  "outline_panel": {
+    "dock": "left"
+  },
+  "collaboration_panel": {
+    "dock": "left"
+  },
+  "agent": {
+    "default_model": {
+      "provider": "opencode",
+      "model": "free/big-pickle",
+      "enable_thinking": false
+    },
+    "sidebar_side": "right",
+    "dock": "right",
+    "favorite_models": [],
+    "model_parameters": []
+  },
+  "ui_font_size": 16.0,
+  "scrollbar": {
+    "axes": {
+      "vertical": true
+    },
+    "diagnostics": "all",
+    "selected_symbol": true,
+    "selected_text": true,
+    "search_results": true,
+    "cursors": true,
+    "git_diff": true
+  },
+  "edit_predictions": {
+    "provider": "zed"
+  },
+  "search": {
+    "center_on_match": true
+  },
+  "languages": {
+    "JSON": {
+      "tab_size": 4,
+    },
+    "JSONC": {
+      "tab_size": 4,
+    },
+    "JavaScript": {
+      "tab_size": 4,
+    },
+    "TypeScript": {
+      "tab_size": 4,
+    },
+    "TSX": {
+      "tab_size": 4,
+    },
+    "C++": {
+      "tab_size": 4,
+    }
+  },
+  "diagnostics": {
+    "inline": {
+      "enabled": false,
+    },
+  },
+  "prettier": {
+    "allowed": false,
+  },
+  "tab_bar": {
+    "show": true,
+  },
+  "tabs": {
+    "file_icons": false,
+    "git_status": true,
+  },
+  "title_bar": {
+    "show_menus": false,
+  },
+  "project_panel": {
+    "dock": "left",
+    "hide_hidden": false,
+    "hide_root": true,
+    "diagnostic_badges": false,
+    "bold_folder_labels": false,
+    "entry_spacing": "standard",
+  },
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false,
+  },
+  "session": {
+    "trust_all_worktrees": true,
+  },
+  "toolbar": {
+    "code_actions": false,
+  },
+  "minimap": {
+    "thumb_border": "left_open",
+    "show": "never",
+  },
+  "sticky_scroll": {
+    "enabled": true,
+  },
+  "agent_servers": {
+    "claude-acp": {
+      "default_config_options": {
+        "mode": "auto"
+      },
+      "type": "registry"
+    },
+    "opencode": {
+      "default_config_options": {
+        "effort": "medium",
+        "model": "opencode/longcat-2.5-preview-free"
+      },
+      "type": "registry",
+    },
+  },
+  "icon_theme": "Colored Zed Icons Theme Dark",
+  "git_panel": {
+    "collapse_untracked_diff": false,
+    "tree_view": true,
+    "dock": "left",
+  },
+  "git": {
+    "diff_base": "head",
+    "inline_blame": {
+      "show_commit_summary": true,
+    },
+  },
+  "autosave": "off",
+  "buffer_font_family": "JetBrainsMono Nerd Font",
+  "buffer_font_size": 15.0,
+  "theme": {
+    "mode": "dark",
+    "light": "Matugen Light",
+    "dark": "Matugen Dark",
+  },
+  "theme_overrides": {
+    "Matugen Dark": {
+      "syntax": {
+        "constant.comment.todo": {
+          "color": "#16161eff",
+          "background_color": "#ffcc00ff",
+          "font_weight": 700
+        },
+        "constant.comment.todo.text": {
+          "color": "#16161eff",
+          "background_color": "#ffcc00ff"
+        },
+        "string.comment.info": {
+          "color": "#16161eff",
+          "background_color": "#4dd6ffff",
+          "font_weight": 700
+        },
+        "string.comment.info.text": {
+          "color": "#16161eff",
+          "background_color": "#4dd6ffff"
+        },
+        "property.comment.error": {
+          "color": "#16161eff",
+          "background_color": "#ff4d5eff",
+          "font_weight": 700
+        },
+        "property.comment.error.text": {
+          "color": "#16161eff",
+          "background_color": "#ff4d5eff"
+        },
+        "keyword.comment.warn": {
+          "color": "#16161eff",
+          "background_color": "#ff9e2cff",
+          "font_weight": 700
+        },
+        "keyword.comment.warn.text": {
+          "color": "#16161eff",
+          "background_color": "#ff9e2cff"
+        },
+        "emphasis.comment.user": {
+          "color": "#16161eff",
+          "font_weight": 700,
+          "font_style": "italic"
+        }
+      }
+    }
+  }
+}

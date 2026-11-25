@@ -1,0 +1,74 @@
+{
+  "$schema": "/etc/xdg/swaync/configSchema.json",
+  "positionX": "right",
+  "positionY": "top",
+  "control-center-preferred-output": "DP-1",
+  "notification-window-preferred-output": "DP-1",
+  "notification-grouping": true,
+  "timeout": 5,
+  "timeout-low": 4,
+  "timeout-critical": 0,
+  "fit-to-screen": true,
+  "notification-window-width": 480,
+  "notification-window-height": 500,
+  "control-center-width": 520,
+  "transition-time": 200,
+  "script-fail-notify": true,
+  "notification-2fa-action": false,
+  "widgets": [
+    "title",
+    "dnd",
+    "notifications",
+    "buttons-grid"
+  ],
+  "widget-config": {
+    "title": {
+      "text": "Notifications",
+      "clear-all-button": true,
+      "button-text": "Clear all"
+    },
+    "dnd": {
+      "text": "Do Not Disturb"
+    },
+    "label": {
+      "max-lines": 1,
+      "text": "Notifications"
+    },
+    "volume": {
+      "label": "󰕾",
+      "show-per-app": true
+    },
+    "buttons-grid": {
+      "actions": [
+        {
+          "label": "󰖩",
+          "command": "bash -c 'swaync-client -cp; alacritty --title wlctl -e wlctl'"
+        },
+        {
+          "label": "󰂯",
+          "command": "swaync-client -cp; alacritty --title bluetui -e ~/.config/mango/waybar/scripts/openbluetui.sh"
+        },
+        {
+          "label": "󰋊",
+          "command": "bash -c 'swaync-client -cp; baobab'"
+        },
+        {
+          "label": "󰕾",
+          "command": "swaync-client -cp; alacritty --title wiremix -e wiremix"
+        },
+        {
+          "label": "󰍬",
+          "command": "swaync-client -cp; alacritty --title wiremix -e wiremix"
+        },
+        {
+          "label": "󰂚",
+          "command": "swaync-client -d -sw"
+        },
+        {
+          "label": "󰐥",
+          "command": "bash -c 'swaync-client -cp; rofi -show power-menu -modi power-menu:rofi-power-menu -theme ~/.config/rofi/config.rasi'"
+        }
+      ]
+    }
+  }
+}

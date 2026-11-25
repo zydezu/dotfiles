@@ -1,0 +1,310 @@
+{
+  "actuallySubmitKeybind": {
+    "ctrl": true,
+    "key": "'"
+  },
+  "allowExpirements": true,
+  "allowScrollingToEdit": false,
+  "audioNotificationOnSkip": false,
+  "autoHideInfoButton": false,
+  "autoSkipOnMusicVideos": false,
+  "autoSkipOnMusicVideosUpdate": true,
+  "barTypes": {
+    "chapter": {
+      "color": "#ffd983",
+      "opacity": "0"
+    },
+    "exclusive_access": {
+      "color": "#008a5c",
+      "opacity": "0.7"
+    },
+    "filler": {
+      "color": "#7300FF",
+      "opacity": "0.9"
+    },
+    "hook": {
+      "color": "#395699",
+      "opacity": "0.8"
+    },
+    "interaction": {
+      "color": "#cc00ff",
+      "opacity": "0.7"
+    },
+    "intro": {
+      "color": "#00ffff",
+      "opacity": "0.7"
+    },
+    "music_offtopic": {
+      "color": "#ff9900",
+      "opacity": "0.7"
+    },
+    "outro": {
+      "color": "#0202ed",
+      "opacity": "0.7"
+    },
+    "poi_highlight": {
+      "color": "#ff1684",
+      "opacity": "0.7"
+    },
+    "preview": {
+      "color": "#008fd6",
+      "opacity": "0.7"
+    },
+    "preview-chooseACategory": {
+      "color": "#ffffff",
+      "opacity": "0.7"
+    },
+    "preview-filler": {
+      "color": "#2E0066",
+      "opacity": "0.7"
+    },
+    "preview-hook": {
+      "color": "#273963",
+      "opacity": "0.7"
+    },
+    "preview-interaction": {
+      "color": "#6c0087",
+      "opacity": "0.7"
+    },
+    "preview-intro": {
+      "color": "#008080",
+      "opacity": "0.7"
+    },
+    "preview-music_offtopic": {
+      "color": "#a6634a",
+      "opacity": "0.7"
+    },
+    "preview-outro": {
+      "color": "#000070",
+      "opacity": "0.7"
+    },
+    "preview-poi_highlight": {
+      "color": "#9b044c",
+      "opacity": "0.7"
+    },
+    "preview-preview": {
+      "color": "#005799",
+      "opacity": "0.7"
+    },
+    "preview-selfpromo": {
+      "color": "#bfbf35",
+      "opacity": "0.7"
+    },
+    "preview-sponsor": {
+      "color": "#007800",
+      "opacity": "0.7"
+    },
+    "selfpromo": {
+      "color": "#ffff00",
+      "opacity": "0.7"
+    },
+    "sponsor": {
+      "color": "#00d400",
+      "opacity": "0.7"
+    }
+  },
+  "categoryPillColors": {},
+  "categoryPillUpdate": true,
+  "categorySelections": [
+    {
+      "name": "poi_highlight",
+      "option": 0
+    },
+    {
+      "name": "exclusive_access",
+      "option": 0
+    },
+    {
+      "name": "selfpromo",
+      "option": 0
+    },
+    {
+      "name": "interaction",
+      "option": 0
+    },
+    {
+      "name": "intro",
+      "option": 0
+    },
+    {
+      "name": "outro",
+      "option": 0
+    },
+    {
+      "name": "preview",
+      "option": 0
+    },
+    {
+      "name": "filler",
+      "option": 0
+    },
+    {
+      "name": "music_offtopic",
+      "option": 0
+    },
+    {
+      "name": "sponsor",
+      "option": 2
+    }
+  ],
+  "changeChapterColor": true,
+  "chapterCategoryAdded": true,
+  "checkForUnlistedVideos": false,
+  "cleanPopup": false,
+  "closeSkipNoticeKeybind": {
+    "key": "Backspace"
+  },
+  "colorPalette": {
+    "locked": "#ffc83d",
+    "red": "#780303",
+    "white": "#ffffff"
+  },
+  "darkMode": true,
+  "deArrowInstalled": false,
+  "defaultCategory": "chooseACategory",
+  "disableSkipping": false,
+  "donateClicked": 0,
+  "dontShowNotice": true,
+  "downvoteKeybind": {
+    "key": "h",
+    "shift": true
+  },
+  "forceChannelCheck": false,
+  "fullVideoLabelsOnThumbnails": false,
+  "fullVideoSegments": false,
+  "hideDeleteButtonPlayerControls": false,
+  "hideDiscordLaunches": 0,
+  "hideDiscordLink": false,
+  "hideInfoButtonPlayerControls": true,
+  "hideSegmentCreationInPopup": false,
+  "hideSkipButtonPlayerControls": true,
+  "hideUploadButtonPlayerControls": false,
+  "hideVideoPlayerControls": true,
+  "hookUpdate": false,
+  "invidiousInstances": [
+    "www.youtubekids.com",
+    "anontube.lvkaszus.pl",
+    "inv.citw.lgbt",
+    "inv.in.projectsegfau.lt",
+    "inv.tux.pizza",
+    "inv.zzls.xyz",
+    "invidious.asir.dev",
+    "invidious.drgns.space",
+    "invidious.fdn.fr",
+    "invidious.flokinet.to",
+    "invidious.io.lol",
+    "invidious.lunar.icu",
+    "invidious.nerdvpn.de",
+    "invidious.no-logs.com",
+    "invidious.perennialte.ch",
+    "invidious.privacydev.net",
+    "invidious.private.coffee",
+    "invidious.projectsegfau.lt",
+    "invidious.protokolla.fi",
+    "invidious.slipfox.xyz",
+    "iv.datura.network",
+    "iv.ggtyler.dev",
+    "iv.melmac.space",
+    "iv.nboeck.de",
+    "onion.tube",
+    "vid.priv.au",
+    "vid.puffyan.us",
+    "yewtu.be",
+    "yt.artemislena.eu",
+    "yt.cdaut.de",
+    "yt.drgnz.club",
+    "yt.oelrichsgarcia.de",
+    "invidious.snopyta.org"
+  ],
+  "isVip": false,
+  "manualSkipOnFullVideo": false,
+  "minDuration": 0,
+  "minutesSaved": 1640.2715647500017,
+  "muteSegments": true,
+  "nextChapterKeybind": {
+    "ctrl": true,
+    "key": "ArrowRight"
+  },
+  "noticeVisibilityMode": 3,
+  "payments": {
+    "chaptersAllowed": false,
+    "freeAccess": false,
+    "lastCheck": 0,
+    "lastFreeCheck": 0,
+    "licenseKey": null
+  },
+  "permissions": {
+    "chapter": true,
+    "exclusive_access": true,
+    "filler": true,
+    "hook": true,
+    "interaction": true,
+    "intro": true,
+    "music_offtopic": true,
+    "outro": true,
+    "poi_highlight": true,
+    "preview": true,
+    "selfpromo": true,
+    "sponsor": true
+  },
+  "previewKeybind": {
+    "ctrl": true,
+    "key": ";"
+  },
+  "previousChapterKeybind": {
+    "ctrl": true,
+    "key": "ArrowLeft"
+  },
+  "prideTheme": false,
+  "renderSegmentsAsChapters": false,
+  "scrollToEditTimeUpdate": false,
+  "segmentListDefaultTab": 0,
+  "serverAddress": "https://sponsor.ajay.app",
+  "showAutogeneratedChapters": true,
+  "showCategoryGuidelines": false,
+  "showCategoryWithoutPermission": false,
+  "showChapterInfoMessage": true,
+  "showDeArrowInSettings": true,
+  "showDeArrowPromotion": true,
+  "showDonationLink": false,
+  "showNewFeaturePopups": true,
+  "showPopupDonationCount": 5,
+  "showSegmentFailedToFetchWarning": true,
+  "showSegmentNameInChapterBar": false,
+  "showTimeWithSkips": true,
+  "showUpcomingNotice": false,
+  "showUpsells": false,
+  "showZoomToFillError2": false,
+  "shownDeArrowPromotion": false,
+  "skipCount": 2220,
+  "skipKeybind": {
+    "key": "Enter"
+  },
+  "skipNonMusicOnlyOnYoutubeMusic": true,
+  "skipNoticeDuration": 4,
+  "skipToHighlightKeybind": {
+    "ctrl": true,
+    "key": "Enter"
+  },
+  "sponsorTimesContributed": 1,
+  "startSponsorKeybind": {
+    "key": ";"
+  },
+  "submissionCountSinceCategories": 1,
+  "submitKeybind": {
+    "key": "'"
+  },
+  "supportInvidious": false,
+  "testingServer": false,
+  "trackDownvotes": true,
+  "trackDownvotesInPrivate": false,
+  "trackViewCount": true,
+  "trackViewCountInPrivate": true,
+  "upvoteKeybind": {
+    "key": "g",
+    "shift": true
+  },
+  "useVirtualTime": true,
+  "userID": "zvdKpZrchS80MtrDiD1d3uNpbdOex2PKzd57",
+  "ytInfoPermissionGranted": false
+}

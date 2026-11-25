@@ -1,0 +1,320 @@
+#!/usr/bin/env bash
+# Show upstream changelogs/release notes for pending pacman + AUR + Flatpak updates
+
+# Usage: pkg-changelogs
+# Optional: export GITHUB_TOKEN=... to raise the GitHub API rate limit (from 60/hr to 5000/hr)
+
+set -uo pipefail
+
+CHECKUPDATES_DB="${TMPDIR:-/tmp}/checkup-db-${UID}"
+GITHUB_TOKEN="${GITHUB_TOKEN:-}"
+
+if [[ -t 1 && -z "${NO_COLOR:-}" ]]; then
+    C_BOLD=$'\e[1m'; C_DIM=$'\e[2m'; C_RESET=$'\e[0m'
+    C_SEP=$'\e[38;5;238m'        # muted grey              - separator rules
+    C_HEADER=$'\e[1;97m'         # bold bright white        - structural headers (section titles, final summary)
+    C_TITLE=$'\e[1;93m'          # bold highlighter-yellow  - package name (the title)
+    C_OLD=$'\e[31m'              # red                      - old version
+    C_NEW=$'\e[1;32m'            # bold green               - new version
+    C_ARROW=$'\e[2m'             # dim                      - ->
+    C_SRC_OFFICIAL=$'\e[1;34m'   # bold blue                - [official]
+    C_SRC_AUR=$'\e[1;35m'        # bold magenta             - [aur]
+    C_SRC_FLATPAK=$'\e[1;38;5;33m' # bold azure             - [flatpak]
+    C_WARN=$'\e[38;5;208m'       # orange                   - warnings
+    C_URL=$'\e[1;4;96m'          # bold underline bright cyan - links
+    C_BODY=""                    # terminal default (white) - release note text
+    C_COUNT=$'\e[1;93m'          # bold highlighter-yellow  - numbers/counts
+    C_PROMPT=$'\e[1;96m'         # bold bright cyan          - interactive prompts (same family as links: "click/act here")
+else
+    C_BOLD=""; C_DIM=""; C_RESET=""
+    C_SEP=""; C_HEADER=""; C_TITLE=""; C_OLD=""; C_NEW=""; C_ARROW=""
+    C_SRC_OFFICIAL=""; C_SRC_AUR=""; C_SRC_FLATPAK=""; C_WARN=""; C_URL=""; C_BODY=""
+    C_COUNT=""; C_PROMPT=""
+fi
+
+TERM_WIDTH=$(tput cols 2>/dev/null)
+[[ "$TERM_WIDTH" =~ ^[0-9]+$ ]] || TERM_WIDTH=80
+SEP_LINE=$(printf '─%.0s' $(seq 1 "$TERM_WIDTH"))
+
+TOTAL_PACKAGES=0
+declare -a DEFERRED=()
+declare -a PACKAGING_ONLY=()
+
+strip_pkgver() {
+    local v="$1"
+    v="${v#*:}"   # drop epoch
+    v="${v%-*}"   # drop pkgrel
+    printf '%s' "$v"
+}
+
+pkgrel_only_bump() {
+    [[ "$(strip_pkgver "$1")" == "$(strip_pkgver "$2")" ]]
+}
+
+get_official_url() {
+    local pkg="$1" url=""
+    if [[ -d "$CHECKUPDATES_DB" ]]; then
+        url=$(pacman -Si --dbpath "$CHECKUPDATES_DB" "$pkg" 2>/dev/null | awk -F': ' '/^URL/{print $2; exit}')
+    fi
+    if [[ -z "$url" ]]; then
+        url=$(pacman -Si "$pkg" 2>/dev/null | awk -F': ' '/^URL/{print $2; exit}')
+    fi
+    printf '%s' "$url"
+}
+
+get_aur_url() {
+    curl -sL "https://aur.archlinux.org/rpc/v5/info?arg[]=$1" | jq -r '.results[0].URL // empty'
+}
+
+# fall back to the actual PKGBUILD in Arch's packaging repo, which references the real source
+get_repo_url_from_pkgbuild() {
+    local pkg="$1" match content_type
+    # gitlab.archlinux.org 302s missing/private projects to the sign-in page (HTML)
+    # instead of 404ing, so only proceed if we actually got the raw text file.
+    content_type=$(curl -sL -o /dev/null -w '%{content_type}' "https://gitlab.archlinux.org/archlinux/packaging/packages/$pkg/-/raw/main/PKGBUILD")
+    [[ "$content_type" == text/plain* ]] || return
+    match=$(curl -sL "https://gitlab.archlinux.org/archlinux/packaging/packages/$pkg/-/raw/main/PKGBUILD" \
+        | grep -m1 -oE '(github|gitlab)\.[a-zA-Z0-9.-]+/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+')
+    [[ -n "$match" ]] && printf 'https://%s\n' "${match%.git}"
+}
+
+github_release_notes() {
+    local owner="$1" repo="$2" ver="$3"
+    local -a auth=()
+    [[ -n "$GITHUB_TOKEN" ]] && auth=(-H "Authorization: Bearer $GITHUB_TOKEN")
+    local releases body=""
+    releases=$(curl -sL "${auth[@]}" "https://api.github.com/repos/$owner/$repo/releases?per_page=40")
+    [[ "$(jq -r 'type' <<<"$releases" 2>/dev/null)" == "array" ]] || return
+
+    for tag in "$ver" "v$ver" "V$ver" "release-$ver" "$repo-$ver"; do
+        body=$(jq -r --arg tag "$tag" '.[]? | select(.tag_name == $tag) | .body' <<<"$releases")
+        [[ -n "$body" && "$body" != "null" ]] && break
+        body=""
+    done
+
+    if [[ -z "$body" ]]; then
+        body=$(jq -r --arg v "$ver" '[.[]? | select(.tag_name | test($v; "i"))][0].body // empty' <<<"$releases")
+    fi
+    printf '%s' "$body"
+}
+
+gitlab_release_notes() {
+    local host="$1" path="$2" ver="$3"
+    local enc releases
+    enc=$(jq -rn --arg p "$path" '$p|@uri')
+    releases=$(curl -sL "https://$host/api/v4/projects/$enc/releases")
+    [[ "$(jq -r 'type' <<<"$releases" 2>/dev/null)" == "array" ]] || return
+    jq -r --arg v "$ver" '[.[]? | select(.tag_name == $v or .tag_name == "v"+$v)][0].description // empty' <<<"$releases" 2>/dev/null
+}
+
+# Flathub's AppStream mirror ships per-version release notes directly (HTML),
+# so unlike the pacman/AUR paths there's no need to go hunt down an upstream
+# repo first. Sets FLATPAK_BODY/FLATPAK_URL rather than printing, since a
+# single lookup yields both the notes and the link to show alongside them.
+flatpak_release_notes() {
+    local appid="$1" ver="$2" json
+    FLATPAK_BODY=""; FLATPAK_URL=""
+    json=$(curl -sL "https://flathub.org/api/v2/appstream/$appid" 2>/dev/null)
+    [[ "$(jq -r 'type' <<<"$json" 2>/dev/null)" == "object" ]] || return
+    FLATPAK_URL=$(jq -r '.urls.vcs_browser // .urls.homepage // empty' <<<"$json")
+    FLATPAK_BODY=$(jq -r --arg v "$ver" '
+        (.releases // []) as $r
+        | (($r | map(select(.version == $v))) + $r)[0].description // empty
+    ' <<<"$json")
+}
+
+clean_body() {
+    local body="$1"
+    printf '%s\n' "$body" \
+        | grep -vE '^(\[!\[[^]]*\]\([^)]*\)\]\([^)]*\)[[:space:]]*)+$' \
+        | sed -e 's/<li[^>]*>/\n- /g' -e 's/<\/p>/\n/g' -e 's/<br[^>]*>/\n/g' \
+              -e 's/<[^>]*>//g' \
+              -e 's/&nbsp;/ /g' -e 's/&amp;/\&/g' -e 's/&lt;/</g' \
+              -e 's/&gt;/>/g' -e 's/&quot;/"/g' -e "s/&#0*39;/'/g" \
+              -e 's/^[[:space:]]*//;s/[[:space:]]*$//' \
+        | cat -s
+}
+
+# Reject bodies that are empty or amount to nothing more than a bare version
+# string (some GitHub releases only carry that as the "body"), since those
+# aren't actually useful release notes.
+is_useful_body() {
+    local cleaned="$1" trimmed compact
+    trimmed=$(printf '%s' "$cleaned" | sed '/^[[:space:]]*$/d')
+    [[ -z "$trimmed" ]] && return 1
+    compact=$(printf '%s' "$trimmed" | tr -d '[:space:]')
+    [[ "$compact" =~ ^[vV]?[0-9]+([.-][0-9A-Za-z]+)*$ ]] && return 1
+    [[ ${#trimmed} -ge 15 ]]
+}
+
+pkg_label() {
+    local pkg="$1" old="$2" new="$3" source="$4" src_color
+    case "$source" in
+        aur) src_color="$C_SRC_AUR" ;;
+        flatpak) src_color="$C_SRC_FLATPAK" ;;
+        *) src_color="$C_SRC_OFFICIAL" ;;
+    esac
+    printf '%s' "${C_TITLE}${pkg}${C_RESET} ${C_DIM}(${C_RESET}${C_OLD}${old}${C_RESET} ${C_ARROW}->${C_RESET} ${C_NEW}${new}${C_RESET}${C_DIM})${C_RESET} ${src_color}[${source}]${C_RESET}"
+}
+
+pkg_header() {
+    echo "${C_SEP}${SEP_LINE}${C_RESET}"
+    pkg_label "$@"
+    echo
+}
+
+# Prints the release notes (truncated) if $body is useful, otherwise queues
+# a one-line deferred entry with just the link. Shared by the pacman/AUR path
+# (which has to hunt for $body/$url across a few APIs) and the Flatpak path
+# (which gets both directly from a single Flathub lookup).
+render_or_defer() {
+    local pkg="$1" old="$2" new="$3" source="$4" body="$5" url="$6"
+    local cleaned=""
+    [[ -n "$body" ]] && cleaned=$(clean_body "$body")
+
+    if is_useful_body "$cleaned"; then
+        pkg_header "$pkg" "$old" "$new" "$source"
+        local total_lines truncated
+        total_lines=$(printf '%s\n' "$cleaned" | wc -l)
+        truncated=$(printf '%s\n' "$cleaned" | head -n 8)
+        printf '%s\n' "$truncated" | sed "s/^/  ${C_BODY}/;s/\$/${C_RESET}/"
+        if ((total_lines > 8)); then
+            echo "  ${C_DIM}...${C_RESET}"
+            echo
+        fi
+        echo "  ${C_DIM}View more:${C_RESET} ${C_URL}${url}${C_RESET}"
+        echo
+    else
+        DEFERRED+=("$(pkg_label "$pkg" "$old" "$new" "$source") ${C_DIM}—${C_RESET} ${C_URL}${url}${C_RESET}")
+    fi
+}
+
+handle_package() {
+    local pkg="$1" old="$2" new="$3" source="$4"
+    ((TOTAL_PACKAGES++))
+
+    if [[ "$source" == "flatpak" ]]; then
+        flatpak_release_notes "$pkg" "$new"
+        render_or_defer "$pkg" "$old" "$new" "$source" "$FLATPAK_BODY" "${FLATPAK_URL:-https://flathub.org/apps/$pkg}"
+        return
+    fi
+
+    if pkgrel_only_bump "$old" "$new"; then
+        PACKAGING_ONLY+=("$(pkg_label "$pkg" "$old" "$new" "$source")")
+        return
+    fi
+
+    local url=""
+    if [[ "$source" == "aur" ]]; then
+        url=$(get_aur_url "$pkg")
+    else
+        url=$(get_official_url "$pkg")
+    fi
+
+    if [[ -z "$url" ]]; then
+        DEFERRED+=("$(pkg_label "$pkg" "$old" "$new" "$source") ${C_DIM}—${C_RESET} ${C_WARN}no upstream URL found in package metadata${C_RESET}")
+        return
+    fi
+
+    local ver
+    ver=$(strip_pkgver "$new")
+
+    if ! [[ "$url" =~ github\.com|gitlab ]]; then
+        local repo_url
+        repo_url=$(get_repo_url_from_pkgbuild "$pkg")
+        [[ -n "$repo_url" ]] && url="$repo_url"
+    fi
+
+    local body="" more_url="$url"
+    if [[ "$url" =~ github\.com/([^/]+)/([^/.]+) ]]; then
+        local owner="${BASH_REMATCH[1]}" repo="${BASH_REMATCH[2]%.git}"
+        body=$(github_release_notes "$owner" "$repo" "$ver")
+        more_url="https://github.com/$owner/$repo/releases"
+    elif [[ "$url" =~ ^https?://([^/]*gitlab[^/]*)/(.+)$ ]]; then
+        local host="${BASH_REMATCH[1]}" path="${BASH_REMATCH[2]%.git}"
+        body=$(gitlab_release_notes "$host" "$path" "$ver")
+        more_url="$url"
+    fi
+
+    render_or_defer "$pkg" "$old" "$new" "$source" "$body" "$more_url"
+}
+
+parse_and_run() {
+    local source="$1"
+    while read -r pkg old arrow new; do
+        [[ -z "$pkg" || "$arrow" != "->" ]] && continue
+        handle_package "$pkg" "$old" "$new" "$source"
+    done
+}
+
+# Emits "appid old -> new" lines in the same shape checkupdates/yay produce,
+# so parse_and_run can drive Flatpak updates through the same pipeline.
+collect_flatpak_updates() {
+    command -v flatpak >/dev/null 2>&1 || return
+
+    local scope remote appid ver branch
+    for scope in --system --user; do
+        [[ -n "$(flatpak $scope remotes --columns=name 2>/dev/null)" ]] || continue
+
+        local -A oldvers=()
+        while IFS=$'\t' read -r appid ver branch; do
+            [[ -z "$appid" ]] && continue
+            oldvers["$appid"]="${ver:-unknown}"
+        done < <(flatpak $scope list --app --columns=application,version,branch 2>/dev/null)
+
+        while IFS=$'\t' read -r remote; do
+            [[ -z "$remote" ]] && continue
+            while IFS=$'\t' read -r appid ver branch; do
+                [[ -z "$appid" ]] && continue
+                echo "$appid ${oldvers[$appid]:-unknown} -> ${ver:-unknown}"
+            done < <(flatpak $scope remote-ls "$remote" --updates --app --columns=application,version,branch 2>/dev/null)
+        done < <(flatpak $scope remotes --columns=name 2>/dev/null)
+    done
+}
+
+[[ -t 1 ]] && echo "${C_DIM}Downloading changelogs...${C_RESET}"
+
+official_updates=$(checkupdates 2>/dev/null)
+aur_updates=$(yay -Qua --color=never 2>/dev/null)
+flatpak_updates=$(collect_flatpak_updates)
+
+if [[ -z "$official_updates" && -z "$aur_updates" && -z "$flatpak_updates" ]]; then
+    echo "No pending updates."
+    exit 0
+fi
+
+# use herestrings (not pipes) so parse_and_run runs in the current shell and
+# TOTAL_PACKAGES/DEFERRED/PACKAGING_ONLY updates aren't lost in a subshell
+[[ -n "$official_updates" ]] && parse_and_run "official" <<< "$official_updates"
+[[ -n "$aur_updates" ]] && parse_and_run "aur" <<< "$aur_updates"
+[[ -n "$flatpak_updates" ]] && parse_and_run "flatpak" <<< "$flatpak_updates"
+
+if ((${#DEFERRED[@]})); then
+    echo "${C_SEP}${SEP_LINE}${C_RESET}"
+    echo "${C_HEADER}No release notes found automatically${C_RESET} ${C_DIM}(${C_RESET}${C_COUNT}${#DEFERRED[@]}${C_RESET}${C_DIM})${C_RESET}"
+    for line in "${DEFERRED[@]}"; do
+        echo "  $line"
+    done
+    echo
+fi
+
+if ((${#PACKAGING_ONLY[@]})); then
+    echo "${C_SEP}${SEP_LINE}${C_RESET}"
+    echo "${C_HEADER}Packaging-only updates${C_RESET} ${C_DIM}(no upstream version change,${C_RESET} ${C_COUNT}${#PACKAGING_ONLY[@]}${C_RESET}${C_DIM})${C_RESET}"
+    for line in "${PACKAGING_ONLY[@]}"; do
+        echo "  $line"
+    done
+    echo
+fi
+
+echo "${C_SEP}${SEP_LINE}${C_RESET}"
+echo "${C_HEADER}Total updates:${C_RESET} ${C_COUNT}${TOTAL_PACKAGES}${C_RESET}"
+
+if [[ -t 0 && -t 1 ]]; then
+    read -r -p "${C_PROMPT}Would you like to run arch-update now? ${C_BOLD}[y/N]${C_RESET} " reply
+    if [[ "$reply" =~ ^[Yy]$ ]]; then
+        arch-update
+    fi
+fi
+
+exit 0

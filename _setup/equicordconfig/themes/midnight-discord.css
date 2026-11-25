@@ -1,0 +1,156 @@
+/* import theme modules */
+@import url("https://refact0r.github.io/system24/build/system24.css");
+
+body {
+    /* font options */
+    --font: "Hiragino Kaku Gothic Pro W3";
+    --code-font: "JetBrainsMono Nerd Font";
+    font-weight: 300;
+
+    /* sizes */
+    --gap: 12px;
+    --divider-thickness: 4px;
+    --border-thickness: 2px;
+    --border-hover-transition: 0.2s ease;
+
+    /* animation/transition options */
+    --animations: off;
+    --list-item-transition: 0.2s ease;
+    --dms-icon-svg-transition: 0.4s ease;
+
+    /* top bar options */
+    --top-bar-height: var(--gap);
+    --top-bar-button-position: titlebar;
+    --top-bar-title-position: off;
+    --subtle-top-bar-title: off;
+
+    /* window controls */
+    --custom-window-controls: off;
+    --window-control-size: 16px;
+
+    /* dms button options */
+    --custom-dms-icon: off;
+    --dms-icon-svg-url: url("");
+    --dms-icon-svg-size: 90%;
+    --dms-icon-color-before: var(--icon-subtle);
+    --dms-icon-color-after: var(--white);
+    --custom-dms-background: off;
+    --dms-background-image-url: url("");
+    --dms-background-image-size: cover;
+    --dms-background-color: linear-gradient(70deg, var(--blue-2), var(--purple-2), var(--red-2));
+
+    /* background image options */
+    --background-image: off;
+    --background-image-url: url("");
+
+    /* transparency/blur options */
+    --transparency-tweaks: off;
+    --remove-bg-layer: off;
+    --panel-blur: off;
+    --blur-amount: 12px;
+    --bg-floating: var(--bg-3);
+
+    /* other options */
+    --small-user-panel: on;
+
+    /* unrounding options */
+    --unrounding: on;
+
+    /* styling options */
+    --custom-spotify-bar: on;
+    --ascii-titles: on;
+    --ascii-loader: system24;
+
+    /* panel labels */
+    --panel-labels: on;
+    --label-color: var(--text-muted);
+    --label-font-weight: 300;
+}
+
+.custom-user-profile-theme,
+.user-profile-popout,
+.content_f75fb0>aside>.outer_c0bea0,
+.user-profile-modal-v2 {
+    border-radius: 0px !important;
+}
+
+.lookFilled__201d5 .contents__201d5 {
+    overflow: unset;
+}
+
+rect {
+    rx: 0 !important;
+}
+
+:root {
+    --server-tabs: true;
+    --dms-tabs: true;
+    
+    --colors: on;
+
+    /* text colors */
+    --text-0: var(--bg-4);
+    --text-1: #dbe4ed;
+    --text-2: #dbe4ed;
+    --text-3: #b7c9d8;
+    --text-4: #8193a2;
+    --text-5: #384956;
+
+    /* background colors */
+    --bg-1: #384956;
+    --bg-2: #222b32;
+    --bg-3: #141d23;
+    --bg-4: #0c141b;
+
+    /* hovers */
+    --hover: #dbe4ed1a;
+    --active: #dbe4ed33;
+    --active-2: #dbe4ed4d;
+    --message-hover: var(--hover);
+
+    /* accent colors */
+    --accent-1: #94cdf6;
+    --accent-2: #50dbd0;
+    --accent-3: #50dbd0;
+    --accent-4: #00504b;
+    --accent-5: #50dbd0;
+    --accent-new: #50dbd0;
+
+    /* gradients */
+    --mention: linear-gradient(
+        to right,
+        color-mix(in hsl, #50dbd0, transparent 90%) 40%,
+        transparent
+    );
+
+    --mention-hover: linear-gradient(
+        to right,
+        color-mix(in hsl, #50dbd0, transparent 95%) 40%,
+        transparent
+    );
+
+    --reply: linear-gradient(
+        to right,
+        color-mix(in hsl, #b7c9d8, transparent 90%) 40%,
+        transparent
+    );
+
+    --reply-hover: linear-gradient(
+        to right,
+        color-mix(in hsl, #b7c9d8, transparent 95%) 40%,
+        transparent
+    );
+
+    /* status indicator colors */
+    --online: var(--green-2);
+    --dnd: var(--red-2);
+    --idle: var(--yellow-2);
+    --streaming: var(--purple-2);
+    --offline: #8193a2;
+
+    /* borders */
+    --border-light: var(--hover);
+    --border: var(--active);
+    --border-hover: #50dbd0;
+    --button-border: #dbe4ed;
+}

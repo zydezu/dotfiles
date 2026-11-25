@@ -1,0 +1,103 @@
+[config]
+version_check = false
+
+[templates.mango]
+input_path = '~/.config/matugen/templates/mango.conf'
+output_path = '~/.config/mango/colors.conf'
+
+[templates.waybar]
+input_path = "~/.config/matugen/templates/waybar.css"
+output_path = "~/.config/mango/waybar/colors.css"
+post_hook = "pkill -SIGUSR2 waybar"
+
+[templates.btop]
+input_path = "~/.config/matugen/templates/btop.theme"
+output_path = '~/.config/btop/themes/matugen.theme'
+post_hook = 'pkill -USR2 btop || true'
+
+[templates.swaync]
+input_path = "~/.config/matugen/templates/swaync.css"
+output_path = "~/.config/swaync/colors.css"
+post_hook = "swaync-client -rs"
+
+[templates.hyprlock]
+input_path = '~/.config/matugen/templates/hyprlock.conf'
+output_path = '~/.config/hypr/colors.conf'
+
+[templates.rofi]
+input_path = "~/.config/matugen/templates/rofi.rasi"
+output_path = "~/.config/rofi/colors.rasi"
+
+[templates.alacritty]
+input_path = "~/.config/matugen/templates/alacritty.toml"
+output_path = "~/.config/alacritty/colors.toml"
+
+[templates.clipse]
+input_path = '~/.config/matugen/templates/clipse.json'
+output_path = '~/.config/clipse/custom_theme.json'
+
+[templates.discord]
+input_path = '~/.config/matugen/templates/midnight-discord.css'
+output_path = '~/.config/Equicord/themes/midnight-discord.css'
+
+[templates.equibop]
+input_path = '~/.config/matugen/templates/midnight-discord.css'
+output_path = '~/.config/equibop/themes/midnight-discord.css'
+
+[templates.discord-compact]
+input_path = '~/.config/matugen/templates/matugen-discord.css'
+output_path = '~/.config/Equicord/themes/matugen-discord.css'
+
+[templates.equibop-compact]
+input_path = '~/.config/matugen/templates/matugen-discord.css'
+output_path = '~/.config/equibop/themes/matugen-discord.css'
+
+[templates.steam]
+input_path = '~/.config/matugen/templates/steam.css'
+output_path = '~/.config/AdwSteamGtk/custom.css'
+
+[templates.prismlauncher]
+input_path = '~/.config/matugen/templates/prismlauncher.json'
+output_path = '~/.local/share/PrismLauncher/themes/Matugen/theme.json'
+
+[templates.obsidian]
+input_path = '~/.config/matugen/templates/obsidian.css'
+output_path = '~/Documents/obsidian/Vault/.obsidian/snippets/matugen.css'
+
+[templates.opencode]
+input_path = '~/.config/matugen/templates/opencode.json'
+output_path = '~/.config/opencode/themes/matugen.json'
+
+[templates.obs]
+input_path = '~/.config/matugen/templates/matugen.obt'
+output_path = '~/.config/obs-studio/themes/matugen.obt'
+
+[templates.vscode]
+input_path = '~/.config/matugen/templates/vscode.json'
+output_path = '~/.config/Code/User/settings.json'
+
+[templates.zed]
+input_path = '~/.config/matugen/templates/zed.json'
+output_path = '~/.config/zed/themes/matugen.json'
+
+[templates.gtk3]
+input_path = "~/.config/matugen/templates/gtk.css"
+output_path = "~/.config/gtk-3.0/colors.css"
+post_hook = 'echo "@import url(\"colors.css\");" > ~/.config/gtk-3.0/gtk.css; gsettings set org.gnome.desktop.interface gtk-theme ""; gsettings set org.gnome.desktop.interface gtk-theme adw-gtk3-{{mode}}; bash ~/.config/matugen/update_gtkcolors.sh'
+
+[templates.gtk4]
+input_path = "~/.config/matugen/templates/gtk.css"
+output_path = "~/.config/gtk-4.0/colors.css"
+post_hook = 'echo "@import url(\"colors.css\");" > ~/.config/gtk-4.0/gtk.css'
+
+[templates.wiremix]
+input_path = "~/.config/matugen/templates/wiremix.toml"
+output_path = "~/.config/wiremix/wiremix.toml"
+
+[templates.modernx]
+input_path = "~/.config/matugen/templates/modernx.conf"
+output_path = "~/.config/mpv/script-opts/modernx.conf"
+
+[templates.webview-generic]
+input_path = "~/.config/matugen/templates/webview-generic.css"
+output_path = "~/.config/matugen/generic-webview.css"
