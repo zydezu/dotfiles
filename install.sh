@@ -190,6 +190,16 @@ run "fix hardcoded home paths" find "$CONFIG_DIR" -type f \( -name "*.conf" -o -
 info "Configuring actions-for-nautilus..."
 mkdir -p "$HOME/.local/share/actions-for-nautilus"
 if [[ -f "$CONFIG_DIR/actions-for-nautilus/config.json" ]]; then
+    # Drop the Opencode action before installing the config
+    run "remove Opencode action from actions-for-nautilus config" python3 -c "
+import json
+path = '$CONFIG_DIR/actions-for-nautilus/config.json'
+with open(path) as f:
+    data = json.load(f)
+data['actions'] = [a for a in data['actions'] if a.get('label') != 'Open in Opencode']
+with open(path, 'w') as f:
+    json.dump(data, f)
+"
     run "copy actions-for-nautilus config" cp "$CONFIG_DIR/actions-for-nautilus/config.json" \
        "$HOME/.local/share/actions-for-nautilus/config.json"
 else
