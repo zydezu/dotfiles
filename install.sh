@@ -1,6 +1,16 @@
 #!/bin/bash
 set -uo pipefail
 
+# Logging
+LOG_FILE="${DOTFILES_INSTALL_LOG:-$HOME/install-$(date '+%Y%m%d-%H%M%S').log}"
+mkdir -p -- "$(dirname -- "$LOG_FILE")"
+exec > >(tee >(sed 's/\x1B\[[0-9;]*m//g' > "$LOG_FILE")) 2>&1
+
+timestamp() { date '+%Y-%m-%d %H:%M:%S'; }
+log() { printf '[%s] %s\n' "$(timestamp)" "$*"; }
+log "=== dotfiles install started ==="
+log "Log file: $LOG_FILE"
+
 if [[ "$EUID" -eq 0 ]]; then
     echo "Do not run this script as root. Run it as your normal user; sudo is called internally."
     exit 1
@@ -21,14 +31,15 @@ ICONS_URL="$ASSETS_URL/Neuwaita.7z"
 ICONS_SHA256="e14c33fbaacb0ba7a5818474d40140bc734a89a691dacdcc67645d20e53ff7a3"
 
 RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'; BOLD='\033[1m'; NC='\033[0m'
-info() { echo -e "${GREEN}[+]${NC} $*"; }
-warn() { echo -e "${YELLOW}[!]${NC} $*"; }
-error() { echo -e "${RED}[x]${NC} $*"; }
+info() { echo -e "$(timestamp) ${GREEN}[+]${NC} $*"; }
+warn() { echo -e "$(timestamp) ${YELLOW}[!]${NC} $*"; }
+error() { echo -e "$(timestamp) ${RED}[x]${NC} $*"; }
 
 # Track failed steps instead of aborting the whole script on the first error
 FAILURES=()
 run() {
     local desc="$1"; shift
+    log "RUN: $desc -- $*"
     if "$@"; then
         return 0
     fi
@@ -381,16 +392,40 @@ fi
 # AppManager
 info "Installing AppManager..."
 mkdir -p "$HOME/Applications"
-appmanager_url=$(curl -fsSL https://api.github.com/repos/kem-a/AppManager/releases/latest \
-    | grep browser_download_url \
-    | grep "x86_64.AppImage\"" \
-    | head -1 \
-    | sed 's/.*"\(https[^"]*\)".*/\1/')
-if [[ -z "$appmanager_url" ]]; then
-    error "Could not determine AppManager download URL"
-    FAILURES+=("resolve AppManager download URL")
-elif run "download AppManager" curl -fL "$appmanager_url" -o "$HOME/Applications/AppManager.AppImage"; then
-    run "make AppManager executable" chmod +x "$HOME/Applications/AppManager.AppImage"
+
+case "$(uname -m)" in
+    x86_64|amd64) appmanager_arch="x86_64" ;;
+    aarch64|arm64) appmanager_arch="aarch64" ;;
+    *)
+        warn "Unsupported architecture for AppManager, skipping"
+        appmanager_arch=""
+        ;;
+esac
+
+if [[ -n "$appmanager_arch" ]]; then
+    appmanager_url=$(curl -fsSL --retry 3 --connect-timeout 15 \
+        https://api.github.com/repos/kem-a/AppManager/releases/latest \
+        | grep browser_download_url \
+        | grep "${appmanager_arch}\.AppImage\"" \
+        | head -1 \
+        | sed 's/.*"\(https[^"]*\)".*/\1/' || true)
+
+    if [[ -z "$appmanager_url" ]]; then
+        appmanager_tag=$(curl -fsSL -o /dev/null -w '%{url_effective}' --retry 3 --connect-timeout 15 \
+            https://github.com/kem-a/AppManager/releases/latest | sed 's|.*/||' || true)
+        if [[ -n "$appmanager_tag" ]]; then
+            appmanager_version="${appmanager_tag#v}"
+            appmanager_url="https://github.com/kem-a/AppManager/releases/download/$appmanager_tag/AppManager-${appmanager_version}-anylinux-${appmanager_arch}.AppImage"
+        fi
+    fi
+
+    if [[ -z "$appmanager_url" ]]; then
+        error "Could not determine AppManager download URL"
+        FAILURES+=("resolve AppManager download URL")
+    elif run "download AppManager" curl -fL --retry 3 --connect-timeout 15 --progress-bar \
+            "$appmanager_url" -o "$HOME/Applications/AppManager.AppImage"; then
+        run "make AppManager executable" chmod +x "$HOME/Applications/AppManager.AppImage"
+    fi
 fi
 
 # SDDM themes
@@ -558,7 +593,10 @@ if ((${#FAILURES[@]} > 0)); then
         echo -e "  ${RED}-${NC} $f"
     done
     echo
+else
+    info "All steps completed successfully"
 fi
+log "=== dotfiles install finished ($(timestamp)) -- log: $LOG_FILE ==="
 
 # Reboot
 echo -e "${YELLOW}[!]${NC} ${BOLD}Run ~/post-install.sh after logging in to generate the theme and finish setup.${NC}"
