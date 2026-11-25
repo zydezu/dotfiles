@@ -48,6 +48,29 @@ run() {
     return 1
 }
 
+# True when a discrete GPU is present (the VRAM module is powered by nvidia-smi)
+has_dedicated_gpu() {
+    if command -v nvidia-smi &>/dev/null && [[ -n "$(nvidia-smi -L 2>/dev/null)" ]]; then
+        return 0
+    fi
+    [[ -d /proc/driver/nvidia/gpus ]] && return 0
+
+    # Without a usable nvidia-smi, fall back to lspci: more than one display
+    # controller means at least one of them is discrete.
+    if command -v lspci &>/dev/null; then
+        local displays
+        displays=$(lspci 2>/dev/null | grep -cE 'VGA compatible controller|3D controller' || true)
+        ((displays > 1)) && return 0
+    fi
+    return 1
+}
+
+# True when ddcutil can see a DDC/CI capable display
+has_ddc_display() {
+    command -v ddcutil &>/dev/null || return 1
+    ddcutil detect 2>/dev/null | grep -q '^Display [0-9]'
+}
+
 # Keep sudo alive for the duration of the script
 if ! sudo -v; then
     error "sudo authentication failed"
@@ -258,6 +281,37 @@ if [[ -f "$CONFIG_DIR/mako/config" ]]; then
     run "strip mako output line" sed -i '/^output=/d' "$CONFIG_DIR/mako/config"
 else
     warn "mako/config not found, skipping"
+fi
+
+# Hardware-dependent waybar modules
+info "Tailoring waybar modules to detected hardware..."
+WAYBAR_CONFIG="$CONFIG_DIR/mango/waybar/config.jsonc"
+if [[ -f "$WAYBAR_CONFIG" ]]; then
+    if ! has_dedicated_gpu; then
+        info "  no dedicated GPU detected - hiding VRAM module"
+        run "hide waybar VRAM module" sed -i \
+            '/^[[:space:]]*"custom\/vram",\{0,1\}$/d' \
+            "$WAYBAR_CONFIG"
+    else
+        info "  dedicated GPU detected - keeping VRAM module"
+    fi
+
+    if ! has_ddc_display; then
+        info "  no DDC/CI display detected - hiding monitor backlight module"
+        run "hide waybar DDC brightness module" sed -i \
+            '/^[[:space:]]*"custom\/ddc-brightness",\{0,1\}$/d' \
+            "$WAYBAR_CONFIG"
+    else
+        info "  DDC/CI display detected - keeping monitor backlight module"
+    fi
+
+    info "  opening disk usage in baobab"
+    run "set waybar disks on-click to baobab" sed -i \
+        -e 's|"on-click": "~/.config/mango/scripts/popup-toggle.sh storagetui"|"on-click": "baobab"|' \
+        -e '/^[[:space:]]*"on-click-right": "baobab",\{0,1\}$/d' \
+        "$WAYBAR_CONFIG"
+else
+    warn "mango/waybar/config.jsonc not found, skipping hardware-specific waybar tweaks"
 fi
 
 # Strip scripts
@@ -664,6 +718,37 @@ else
     FAILURES+=("copy post-install.sh")
 fi
 
+# Run post-install.sh once on the first login after the reboot
+info "Setting up one-time post-install autostart..."
+mkdir -p "$HOME/.local/bin" "$CONFIG_DIR/autostart"
+rm -f "$HOME/.local/state/dotfiles/post-install.done"
+if ! cat > "$HOME/.local/bin/post-install-once" <<'EOF'
+#!/bin/bash
+# Run post-install.sh in a terminal so sudo/interactive prompts work.
+# post-install.sh writes the stamp file when it finishes.
+stamp="$HOME/.local/state/dotfiles/post-install.done"
+[[ -f "$stamp" ]] && exit 0
+exec alacritty --title 'Dotfiles post-install' -e bash -lc "$HOME/post-install.sh"
+EOF
+then
+    error "Failed to write post-install-once wrapper"
+    FAILURES+=("write post-install-once wrapper")
+else
+    run "make post-install-once executable" chmod +x "$HOME/.local/bin/post-install-once"
+fi
+
+if ! cat > "$CONFIG_DIR/autostart/post-install.desktop" <<EOF
+[Desktop Entry]
+Type=Application
+Name=Dotfiles post-install
+Exec=$HOME/.local/bin/post-install-once
+Terminal=false
+EOF
+then
+    error "Failed to write post-install autostart entry"
+    FAILURES+=("write post-install autostart entry")
+fi
+
 # Summary
 echo
 if ((${#FAILURES[@]} > 0)); then
@@ -678,7 +763,7 @@ fi
 log "=== dotfiles install finished ($(timestamp)) -- log: $LOG_FILE ==="
 
 # Reboot
-echo -e "${YELLOW}[!]${NC} ${BOLD}Run ~/post-install.sh after logging in to generate the theme and finish setup.${NC}"
+echo -e "${YELLOW}[!]${NC} ${BOLD}post-install.sh will run automatically once after you log in to generate the theme and finish setup.${NC}"
 echo
 echo -e "${BOLD}Done. Rebooting in 5 seconds... (Ctrl+C to cancel)${NC}"
 sleep 5
