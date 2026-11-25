@@ -7,10 +7,11 @@ Personal dotfiles for mangowc on Arch Linux (my personal system uses CachyOS, wh
 ## Overview
 
 - **WM**: mangowc (Wayland)
-- **Shell**: Fish
+- **Shell**: Fish with [Starship](https://starship.rs)
 - **Terminal**: Alacritty
 - **Theme**: Material You theme generated via [Matugen](https://github.com/InioX/matugen)
 - **Icons**: [Neuwaita](https://github.com/RusticBard/neuwaita)
+- **Notifications**: [mako](https://github.com/emersion/mako)
 
 ## Structure
 
@@ -23,18 +24,23 @@ Personal dotfiles for mangowc on Arch Linux (my personal system uses CachyOS, wh
 | `environment.d/` | Environment variables |
 | `fastfetch/` | [System info](https://github.com/fastfetch-cli/fastfetch) |
 | `fish/` | [Shell](https://github.com/fish-shell/fish-shell) |
+| `gtk-3.0/`, `gtk-4.0/` | GTK settings and theme |
 | `hypr/` | [Hyprlock & hypridle](https://github.com/hyprwm/hyprlock) |
+| `mako/` | [Notification daemon](https://github.com/emersion/mako) config and colors |
 | `mango/` | [Wayland compositor](https://github.com/mangowm/mango) |
 | `matugen/` | [Color theming](https://github.com/InioX/matugen) |
+| `qt5ct/`, `qt6ct/` | Qt theming |
 | `rofi/` | [App launcher](https://github.com/davatorium/rofi) |
+| `starship/` | Shell prompt |
 | `swappy/` | [Screenshot markup](https://github.com/jtheoof/swappy) |
-| `swaync/` | [Notification center](https://github.com/ErikReider/SwayNotificationCenter) |
 | `waypaper/` | [Wallpaper](https://github.com/anufrievroman/waypaper) |
+| `wiremix/` | PipeWire audio mixer TUI |
 | `wlctl/` | [TUI Wi-Fi manager](https://github.com/aashish-thapa/wlctl) |
 | `xdg-desktop-portal/` | [Portal config](https://github.com/flatpak/xdg-desktop-portal) |
 | `zed/` | [Code editor](https://github.com/zed-industries/zed) |
 | `mimeapps.list` | Default mimetype associations, including Windows `.exe` via `winrun` |
-| `_setup/` | Installer assets, including `bin/` scripts and `applications/` desktop entries |
+| `xdg-terminals.list` | Default terminal for `xdg-terminal-exec` |
+| `_setup/` | Installer assets: local scripts, desktop entries, fish overrides, SDDM themes, templates and extension configs |
 
 Config not in this repo - `mpv/` is cloned from
 [zydezu/mpvconfig](https://github.com/zydezu/mpvconfig) at install time, and
@@ -55,8 +61,14 @@ cd dotfiles
 This installs the packages below, copies configs into `~/.config`, and downloads the
 font and icon archives from the
 [Assets release](https://github.com/zydezu/dotfiles/releases/tag/Assets)
-(checksum-verified). It reboots at the end - run `~/post-install.sh` after logging in to
-generate the theme and finish setup.
+(checksum-verified). It prompts for Steam/gamescope, Discord, Cloudflare Warp,
+yt-dlp/gallery-dl and Tailscale, and offers a **low end mode** (off by default) that
+disables mango blur/shadows/animations, GTK and hyprlock animations, hyprlock blur, and
+slows waybar polling while dropping its VRAM and gamepad modules.
+
+The installer reboots at the end. After logging in, run `~/post-install.sh` to generate
+the theme, finish Tailscale/Warp setup, disable copy-on-write for the Steam library on
+btrfs, and remove the cloned dotfiles directory.
 
 > **Warning:** `install.sh` replaces existing files in `~/.config` without backing them up.
 > Review the script, and back up your configs first if this is not a fresh system.
@@ -68,32 +80,44 @@ If you prefer to install packages yourself, or want to see what `install.sh` pul
 ```bash
 yay -S \
     `# compositor & bar` \
-    mangowm waybar-git \
-    `# portals` \
+    mangowm waybar \
+    `# portals & session` \
     xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-wlr \
+    xdg-terminal-exec-git xfce-polkit dex \
     `# wallpaper, notifications & lock` \
-    swaybg waypaper mako sway-audio-idle-inhibit-git hyprlock hypridle xfce-polkit \
+    swaybg waypaper mako sway-audio-idle-inhibit-git hyprlock hypridle dunst \
     `# launcher & screenshot` \
-    rofi rofi-power-menu grim slurp wayfreeze-git swappy \
+    rofi rofi-power-menu grim slurp wayfreeze swappy gpu-screen-recorder \
     `# theming` \
     matugen adw-gtk-theme adwaita-fonts ttf-jetbrains-mono-nerd noto-fonts \
     qt5ct qt6ct qt6-declarative qt6-svg \
     qt5-quickcontrols qt5-quickcontrols2 qt5-declarative qt5-graphicaleffects \
     `# terminal, shell & editors` \
-    alacritty fish zed \
+    alacritty fish zed starship fd eza bat \
     `# apps` \
-    helium-browser-bin nautilus actions-for-nautilus-git mpv qimgv \
+    helium-browser-bin nautilus actions-for-nautilus-git warehouse \
+    gnome-keyring gnome-font-viewer baobab file-roller unrar unzip fuse2 p7zip \
+    mpv qimgv exiftool \
+    `# image format support` \
+    libheif libavif qt5-avif-image-plugin qt6-avif-image-plugin \
+    qt5-jpegxl-image-plugin qt6-jpegxl-image-plugin qt-jpegxl qt-heif-image-plugin kimageformats \
     `# audio` \
     pipewire wireplumber wiremix \
     `# clipboard` \
-    clipse cliphist wl-clipboard wl-clip-persist \
+    clipse wl-clipboard wl-clip-persist \
     `# system utilities` \
-    networkmanager brightnessctl gpu-screen-recorder dunst fastfetch github-cli xdg-terminal-exec-git \
+    networkmanager brightnessctl cachy-update fastfetch github-cli uv sddm \
+    `# filesystems & network shares` \
+    samba exfatprogs xfsprogs ntfsprogs btrfs-progs dosfstools e2fsprogs \
+    f2fs-tools jfsutils squashfs-tools cifs-utils fuse3 nfs-utils sshfs davfs2 \
+    gvfs-smb gvfs-dnssd gvfs-wsdd gvfs-nfs gvfs-mtp gvfs-gphoto2 gvfs-afc \
     `# tui tools` \
-    bluetui wlctl \
-    `# display manager` \
-    sddm xorg-server
+    bluetui wlctl
 ```
+
+`install.sh` also installs `yay` if missing. Steam, proton-cachyos-slr, gamescope,
+Discord, `aur/warp-cli`, yt-dlp/gallery-dl and Tailscale are only installed if you
+answer yes to their prompts.
 
 ### Copy Configs
 
@@ -116,15 +140,15 @@ Binds to launch various applications.
 | Key | Action |
 |-----|--------|
 | <kbd>Super</kbd> + <kbd>Return</kbd> | Launch alacritty |
-| <kbd>Super</kbd> + <kbd>Space</kbd> | Launch rofi (app launcher) |
+| Release <kbd>Super</kbd> | Toggle rofi (app launcher) |
 | <kbd>Super</kbd> + <kbd>l</kbd> | Lock session |
 | <kbd>Super</kbd> + <kbd>b</kbd> | Launch Helium browser |
-| <kbd>Super</kbd> + <kbd>d</kbd> | Launch Discord |
+| <kbd>Super</kbd> + <kbd>d</kbd> | Launch Discord (if installed) |
 | <kbd>Super</kbd> + <kbd>e</kbd> | Launch Nautilus |
 | <kbd>Super</kbd> + <kbd>z</kbd> | Launch Zed |
 | <kbd>Super</kbd> + <kbd>v</kbd> | Launch clipse |
 | <kbd>Super</kbd> + <kbd>s</kbd> | Launch wiremix (audio mixer) |
-| <kbd>Super</kbd> + <kbd>w</kbd> | Toggle Cloudflare WARP |
+| <kbd>Super</kbd> + <kbd>w</kbd> | Toggle Cloudflare WARP (if installed) |
 | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Esc</kbd> | Launch btop |
 | <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>c</kbd> | Launch color picker |
 | <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>n</kbd> | Toggle do-not-disturb |
@@ -176,11 +200,10 @@ press toggles global and the second toggles the overlay.
 
 | Key | Action |
 |-----|--------|
-| <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>←↑↓→</kbd> | Exchange client with neighbour |
-| <kbd>Super</kbd> + <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Left</kbd> | Move current tag to left monitor |
-| <kbd>Super</kbd> + <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Right</kbd> | Move current tag to right monitor |
-| <kbd>Super</kbd> + <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>Left</kbd> | Focus left monitor |
-| <kbd>Super</kbd> + <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>Right</kbd> | Focus right monitor |
+| <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>Left/Right</kbd> | Focus left/right client |
+| <kbd>Super</kbd> + <kbd>Alt</kbd> + <kbd>←↑↓→</kbd> | Exchange client with neighbour |
+| <kbd>Super</kbd> + <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Left/Right</kbd> | Move current tag to left/right monitor |
+| <kbd>Super</kbd> + <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>Left/Right</kbd> | Focus left/right monitor |
 | <kbd>Super</kbd> + <kbd>Left click</kbd> | Move window |
 | <kbd>Super</kbd> + <kbd>Right click</kbd> | Resize window |
 
@@ -231,10 +254,10 @@ press toggles global and the second toggles the overlay.
 | Trackpad natural scroll | On |
 | Disable while typing | Off |
 
-See `mango/binds.conf` for the full list.
+See `mango/binds.toml` for the full list.
 
-Before starting mangowm, make sure `monitor.conf` is configured for your display setup to ensure the desktop loads correctly.
+Before starting mangowm, make sure `mango/monitor.toml` matches your display setup so the desktop loads correctly.
 
 ## Things To Check
 
-When applying these dotfiles and logging into mango from your login manager, it may seem like things are not working. Check the configuration files in `mango/monitor.conf`, `mango/waybar/config.jsonc`, `swaync/config.jsonc`, and `hypr/hyprlock.conf` specifically for setting a monitor output (you may need to change or remove lines like `DP-1`).
+When applying these dotfiles and logging into mango from your login manager, it may seem like things are not working. Check `mango/monitor.toml`, `mango/waybar/config.jsonc` and `hypr/hyprlock.conf` for hardcoded monitor outputs like `DP-1`; remove or change them as needed. `install.sh` strips monitor-specific lines automatically.
