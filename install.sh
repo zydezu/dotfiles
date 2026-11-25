@@ -432,9 +432,24 @@ if [[ -n "$appmanager_arch" ]]; then
     if [[ -z "$appmanager_url" ]]; then
         error "Could not determine AppManager download URL"
         FAILURES+=("resolve AppManager download URL")
-    elif run "download AppManager" curl -fL --retry 3 --connect-timeout 15 --progress-bar \
-            "$appmanager_url" -o "$HOME/Applications/AppManager.AppImage"; then
-        run "make AppManager executable" chmod +x "$HOME/Applications/AppManager.AppImage"
+    elif appmanager_tmpdir="$(mktemp -d)"; then
+        appmanager_stage="$appmanager_tmpdir/AppManager.AppImage"
+        if run "download AppManager" curl -fL --retry 3 --connect-timeout 15 --progress-bar \
+                "$appmanager_url" -o "$appmanager_stage"; then
+            run "make AppManager executable" chmod +x "$appmanager_stage"
+            # Use AppManager's own CLI installer
+            if run "install AppManager" "$appmanager_stage" install "$appmanager_stage"; then
+                info "  AppManager registered"
+            else
+                warn "AppManager CLI install failed; dropping AppImage into ~/Applications - complete the drag-to-install on first launch"
+                run "stage AppManager fallback" cp "$appmanager_stage" "$HOME/Applications/AppManager.AppImage"
+                run "make AppManager executable" chmod +x "$HOME/Applications/AppManager.AppImage"
+            fi
+        fi
+        rm -rf "$appmanager_tmpdir"
+    else
+        error "Could not create temporary directory for AppManager"
+        FAILURES+=("create temp dir for AppManager")
     fi
 fi
 
