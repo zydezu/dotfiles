@@ -91,6 +91,10 @@ else
     warn "DOTFILES_DIR not set or missing, skipping cleanup"
 fi
 
+# Remove the one-shot autostart so it does not run again
+info "Removing one-time post-install autostart..."
+rm -f "$HOME/.config/autostart/post-install.desktop" "$HOME/.local/bin/post-install-once"
+
 # Summary
 echo
 if ((${#FAILURES[@]} > 0)); then
@@ -101,8 +105,3 @@ if ((${#FAILURES[@]} > 0)); then
     echo
 fi
 echo -e "${BOLD}Post install cleanup completed.${NC}"
-
-# Mark this as done so the autostart entry does not run it again after future logins
-mkdir -p "$HOME/.local/state/dotfiles"
-: > "$HOME/.local/state/dotfiles/post-install.done"
-info "Marked post-install as complete"

@@ -69,8 +69,8 @@ slows waybar polling while dropping its VRAM and gamepad modules.
 The installer reboots at the end. After logging in, `post-install.sh` runs
 automatically once in a terminal to generate the theme, finish Tailscale/Warp setup,
 disable copy-on-write for the Steam library on btrfs, and remove the cloned dotfiles
-directory. A stamp file keeps it from running on later logins; run `~/post-install.sh`
-manually if you need it again.
+directory. It removes its own autostart entry when done, so it won't run on later
+logins; run `~/post-install.sh` manually if you need it again.
 
 > **Warning:** `install.sh` replaces existing files in `~/.config` without backing them up.
 > Review the script, and back up your configs first if this is not a fresh system.

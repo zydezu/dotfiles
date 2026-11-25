@@ -721,13 +721,10 @@ fi
 # Run post-install.sh once on the first login after the reboot
 info "Setting up one-time post-install autostart..."
 mkdir -p "$HOME/.local/bin" "$CONFIG_DIR/autostart"
-rm -f "$HOME/.local/state/dotfiles/post-install.done"
 if ! cat > "$HOME/.local/bin/post-install-once" <<'EOF'
 #!/bin/bash
 # Run post-install.sh in a terminal so sudo/interactive prompts work.
-# post-install.sh writes the stamp file when it finishes.
-stamp="$HOME/.local/state/dotfiles/post-install.done"
-[[ -f "$stamp" ]] && exit 0
+# post-install.sh removes this wrapper and its autostart entry when done.
 exec alacritty --title 'Dotfiles post-install' -e bash -lc "$HOME/post-install.sh"
 EOF
 then
