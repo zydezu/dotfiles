@@ -71,6 +71,54 @@ has_ddc_display() {
     ddcutil detect 2>/dev/null | grep -q '^Display [0-9]'
 }
 
+# Height of the primary connected display in pixels (falls back to 1440)
+primary_display_height() {
+    local height="" mode_file mode
+
+    # sysfs lists each connected output's preferred mode first - no session needed
+    for mode_file in /sys/class/drm/card*-DP-1/modes /sys/class/drm/card*-eDP-1/modes /sys/class/drm/card*-*/modes; do
+        [[ -f "$mode_file" ]] || continue
+        [[ "$(cat "${mode_file%/modes}/status" 2>/dev/null)" == "connected" ]] || continue
+        IFS=x read -r _ mode < "$mode_file"
+        if [[ "$mode" =~ ^[0-9]+$ ]]; then
+            height="$mode"
+            break
+        fi
+    done
+
+    # If sysfs had nothing, ask a running compositor (if there is one)
+    if [[ -z "$height" ]] && command -v mmsg &>/dev/null; then
+        height=$(mmsg get all-monitors 2>/dev/null | python3 -c '
+import json, sys
+try:
+    for mon in json.load(sys.stdin).get("monitors", []):
+        if mon.get("active", True):
+            h = mon.get("height") or mon.get("size", {}).get("height")
+            if isinstance(h, int) and h > 0:
+                print(h)
+                break
+except Exception:
+    pass
+' 2>/dev/null || true)
+    fi
+
+    if [[ -z "$height" ]] && command -v hyprctl &>/dev/null; then
+        height=$(hyprctl monitors -j 2>/dev/null | python3 -c '
+import json, sys
+try:
+    for mon in json.load(sys.stdin):
+        if not mon.get("disabled", False):
+            print(mon["height"])
+            break
+except Exception:
+    pass
+' 2>/dev/null || true)
+    fi
+
+    [[ "$height" =~ ^[0-9]+$ ]] && ((height > 0)) || height=1440
+    printf '%s\n' "$height"
+}
+
 # Keep sudo alive for the duration of the script
 if ! sudo -v; then
     error "sudo authentication failed"
@@ -93,7 +141,7 @@ run "install packages" yay -S --needed --noconfirm \
     xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-wlr xdg-terminal-exec-git \
     xfce-polkit hyprlock hypridle dex mako sway-audio-idle-inhibit-git \
     rofi rofi-power-menu \
-    swaybg waypaper grim slurp wayfreeze swappy gpu-screen-recorder \
+    swaybg waypaper grim slurp wayfreeze swappy wtype gpu-screen-recorder \
     clipse wl-clipboard wl-clip-persist \
     samba networkmanager dunst brightnessctl exfatprogs xfsprogs ntfsprogs \
     btrfs-progs dosfstools e2fsprogs f2fs-tools jfsutils squashfs-tools \
@@ -365,6 +413,50 @@ t = re.sub(r'\nbackground \{[^}]*\}', lambda m: '' if 'path =' not in m.group() 
 t = re.sub(r'[ \t]*monitor = [^\n]*\n', '', t)
 open(f, 'w').write(t)
 "
+
+    # The layout is tuned for 1440p - scale the pixel values to the real display height
+    HYPRLOCK_HEIGHT="$(primary_display_height)"
+    if [[ "$HYPRLOCK_HEIGHT" != "1440" ]]; then
+        info "Scaling hyprlock layout from 1440p to ${HYPRLOCK_HEIGHT}p..."
+        run "scale hyprlock elements" env \
+            HYPRLOCK_CONFIG="$CONFIG_DIR/hypr/hyprlock.conf" \
+            HYPRLOCK_HEIGHT="$HYPRLOCK_HEIGHT" python3 - <<'PY'
+import os
+import re
+
+path = os.environ["HYPRLOCK_CONFIG"]
+scale = int(os.environ["HYPRLOCK_HEIGHT"]) / 1440
+scalable = ("font_size", "position", "size")
+key_re = re.compile(r"^(\s*(?:%s)\s*=\s*)(.*?)(\s*)$" % "|".join(scalable))
+block_re = re.compile(r"(label|input-field|background|animations|shape|image)\s*\{")
+
+lines = []
+block = ""
+for line in open(path):
+    stripped = line.strip()
+    match = block_re.match(stripped)
+    if match:
+        block = match.group(1)
+    elif stripped == "}":
+        block = ""
+
+    if block in ("label", "input-field"):
+        match = key_re.match(line.rstrip("\n"))
+        if match and re.search(r"-?\d", match.group(2)):
+            values = re.sub(
+                r"-?\d+(?:\.\d+)?",
+                lambda n: str(round(float(n.group()) * scale)),
+                match.group(2),
+            )
+            line = match.group(1) + values + match.group(3) + "\n"
+    lines.append(line)
+
+with open(path, "w") as f:
+    f.writelines(lines)
+PY
+    else
+        info "  display is 1440p - hyprlock layout left unchanged"
+    fi
 else
     warn "hypr/hyprlock.conf not found, skipping"
 fi
