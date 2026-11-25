@@ -13,8 +13,7 @@ sway-audio-idle-inhibit >/dev/null 2>&1 &
 waypaper --restore >/dev/null 2>&1 &
 
 # top bar
-# keep taskbar icons matching app_ids (steam_app_<id>, WM_CLASS aliases)
-python3 ~/.config/mango/waybar/scripts/taskbar-icon-aliases.py >/dev/null 2>&1
+python3 ~/.config/mango/waybar/scripts/taskbar-icon-aliases.py >/dev/null 2>&1 # taskbar icon help
 waybar -c ~/.config/mango/waybar/config.jsonc -s ~/.config/mango/waybar/style.css >/dev/null 2>&1 &
 
 nautilus --gapplication-service >/dev/null 2>&1 &

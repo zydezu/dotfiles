@@ -219,7 +219,7 @@ import json
 path = '$CONFIG_DIR/actions-for-nautilus/config.json'
 with open(path) as f:
     data = json.load(f)
-data['actions'] = [a for a in data['actions'] if a.get('label') != 'Open in Opencode']
+data['actions'] = [a for a in data['actions'] if a.get('label') != 'Open in OpenCode']
 with open(path, 'w') as f:
     json.dump(data, f)
 "
