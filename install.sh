@@ -65,6 +65,28 @@ has_dedicated_gpu() {
     return 1
 }
 
+gpu_supports_h265() {
+    # VAAPI exposes supported encode entrypoints through vainfo (libva-utils)
+    if command -v vainfo &>/dev/null; then
+        if vainfo 2>/dev/null | grep -A1 -E 'VAProfileHEVCMain(10)?[[:space:]]*:' \
+            | grep -qE 'VAEntrypointEncSlice(LP)?'; then
+            return 0
+        fi
+    fi
+
+    # NVIDIA NVENC codec support can be queried directly from the driver
+    if command -v nvidia-smi &>/dev/null; then
+        local encoders
+        encoders=$(nvidia-smi --query-supported-codecs=encoder 2>/dev/null || true)
+        if printf '%s\n' "$encoders" | grep -qiE 'HEVC|H[[:space:]]*265'; then
+            return 0
+        fi
+    fi
+
+    # Fallback to h264, which every GPU supports
+    return 1
+}
+
 # True when ddcutil can see a DDC/CI capable display
 has_ddc_display() {
     command -v ddcutil &>/dev/null || return 1
@@ -367,6 +389,20 @@ if [[ -f "$CONFIG_DIR/mango/scripts/fullscreendnd.sh" ]]; then
     run "strip hardcoded monitor" sed -i '/^MAIN_MON=/d' "$CONFIG_DIR/mango/scripts/fullscreendnd.sh"
 else
     warn "mango/scripts/fullscreendnd.sh not found, skipping"
+fi
+
+# gpu-screen-recorder defaults to HEVC, check GPU support
+if [[ -f "$CONFIG_DIR/mango/scripts/screenrecord.sh" ]]; then
+    if gpu_supports_h265; then
+        info "  GPU supports H.265 encoding - keeping HEVC recording codec"
+    else
+        info "  GPU lacks H.265 encoding - switching screenrecord.sh to H.264"
+        run "use h264 in screenrecord.sh" sed -i \
+            's/^VIDEO_CODEC="hevc"/VIDEO_CODEC="h264"/' \
+            "$CONFIG_DIR/mango/scripts/screenrecord.sh"
+    fi
+else
+    warn "mango/scripts/screenrecord.sh not found, skipping codec tweak"
 fi
 
 if [[ -f "$CONFIG_DIR/mango/binds.toml" ]]; then
