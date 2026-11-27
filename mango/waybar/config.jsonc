@@ -297,7 +297,7 @@
         "custom/power": {
             "format": "",
             "tooltip": false,
-            "on-click": "rofi -show power-menu -modi power-menu:rofi-power-menu -theme ~/.config/rofi/config.rasi"
+            "on-click": "rofi -show power-menu -modi \"power-menu:rofi-power-menu --choices=shutdown/reboot/suspend/logout/lockscreen\" -theme ~/.config/rofi/config.rasi"
         },
         "power-profiles-daemon": {
             "format": "{icon}",
